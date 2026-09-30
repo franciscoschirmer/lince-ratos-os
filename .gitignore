@@ -3,3 +3,6 @@
 .agents/
 .env
 .env.*
+
+# conversas exportadas (dados de clientes, nunca no GitHub)
+operacao/conversas/

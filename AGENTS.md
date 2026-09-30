@@ -60,6 +60,7 @@ diário de outra origem, avisa se o `agora.md` está velho.
 | recado deixado por um robô ou por outra pessoa | `_memoria/recados/` |
 | de um contato ou fornecedor recorrente (não é cliente, não é time) | `_contexto/pessoas/<nome>.md` |
 | de um projeto ou cliente, pra trabalhar nele | a pasta dele: `AGENTS.md` + `contexto.md` + `andamento.md` |
+| o que foi combinado no WhatsApp com a Vic, as lideranças ou a Átria | `operacao/conversas/` (limpas, fora do git) |
 | que modelos e scripts o kit traz (perfis, skills prontas, catálogos, ponte) | `sistema/templates/` e `sistema/scripts/` |
 
 Este mapa é a única fonte de caminho do sistema. **Skill nunca escreve caminho de marca, de script ou

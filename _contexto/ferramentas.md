@@ -9,9 +9,9 @@
 | ferramenta | pra quê | como o agente alcança | estado | última checagem |
 |---|---|---|---|---|
 | ClickUp | tarefas, prazos, rotinas das lideranças, espaços de cliente | MCP (conector do claude.ai) | ligada | 2026-09-29 |
-| Gmail | email (conta operacional@brio-lab.com) | MCP (conector do claude.ai) | ligada | 2026-09-29 |
-| Google Agenda | agenda e reuniões | MCP (conector do claude.ai) | ligada | 2026-09-29 |
-| Google Drive (Docs, Sheets) | ficha do cliente, materiais, planilhas, drives compartilhados com clientes | MCP (conector do claude.ai) | ligada | 2026-09-29 |
+| Gmail | email (conta operacional@brio-lab.com) | MCP (conector do claude.ai) | ligada no claude.ai, não chega ao Claude Code; ligar via `/mcp` com a conta operacional | 2026-09-30 |
+| Google Agenda | agenda e reuniões | MCP (conector do claude.ai) | ligada no claude.ai, não chega ao Claude Code (testado); ligar via `/mcp` com a conta operacional | 2026-09-30 |
+| Google Drive (Docs, Sheets) | ficha do cliente, materiais, planilhas, drives compartilhados com clientes | MCP (conector do claude.ai) | ligada no claude.ai, não chega ao Claude Code (testado); ligar via `/mcp` com a conta operacional | 2026-09-30 |
 | Meta Ads (Gerenciador) | campanhas dos clientes, análises e criativos | skill `/meta-ads-ratos` + `/ads-ratos` (token no `.env`) | não ligada | 2026-09-29 |
 | WhatsApp | grupos com os clientes | só você, na mão (exportar conversa e trazer) | não ligada | 2026-09-29 |
 | Google Meet | reuniões | transcrição do Meet cai no Drive, lida por lá | não ligada | 2026-09-29 |
@@ -33,4 +33,6 @@
 | reunião | Google Meet |
 
 ## Notas de uso
+- Doc do Google com link aberto: o agente lê pelo export em txt (`/export?format=txt`), mas não escreve nele (2026-09-30)
+- O modo automático do Claude Code bloqueia gravar arquivo com senhas ou CPFs de terceiros; nesses casos o Francisco roda o script à mão (2026-09-30)
 - ClickUp, IDs de usuário (resolver por nome é instável): Francisco `158419961` · Ivan `112000442` · Júlia `82001470` · Pâmela `284651027`
