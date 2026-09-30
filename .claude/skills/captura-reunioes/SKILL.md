@@ -1,6 +1,6 @@
 ---
 name: captura-reunioes
-description: Lê as Anotações do Gemini das reuniões da equipe Lince (via Google Agenda + Drive), extrai as demandas no padrão da casa e cria as subtarefas no container semanal da Planning no ClickUp, com a tag captura-ia. Roda sozinha uma vez por dia (rotina na nuvem) e também à mão. Use quando o usuário chamar /captura-reunioes, disser "processa as reuniões", "joga as reuniões no ClickUp", "atualiza o container da semana", "captura as pendências das reuniões". Com o argumento "rascunho", só devolve a lista, sem criar nada.
+description: Lê as Anotações do Gemini das reuniões da equipe Lince (via Google Agenda + Drive), extrai as demandas no padrão da casa e cria as subtarefas no container semanal da Planning no ClickUp e conclui as demandas que a reunião disse que foram feitas (com comentário de quem, onde e quando), sempre com a tag captura-ia. Roda sozinha uma vez por dia (rotina na nuvem) e também à mão. Use quando o usuário chamar /captura-reunioes, disser "processa as reuniões", "joga as reuniões no ClickUp", "atualiza o container da semana", "captura as pendências das reuniões". Com o argumento "rascunho", só devolve a lista, sem criar nada.
 ---
 
 # /captura-reunioes · reunião vira subtarefa
@@ -83,6 +83,11 @@ Cristiano Cruz · Otorrinos POA · Fazenda do Rosa · Gabi Castello · Karinna M
 Pamela Dal Canton · Simone Austgulen · Hospital Piltcher · RACLINIC · Atria · DOCTOR ELITE · Gabriel Parede · Urocenter ·
 Walter Pinto · Diprohl. Lead ou parceiro sem cliente cadastrado: `[Comercial]`.
 
+**c) Conclusões:** toda demanda que alguém disse na reunião que **já foi feita** ("subi a aula", "o distrato foi
+assinado", "já mandei a proposta"). Guardar: o que foi concluído, quem disse, e o trecho da transcrição.
+Só conta como concluído o que foi dito no passado e sem ressalva. "Quase pronto", "falta só", "mando hoje",
+"em revisão" não é conclusão; nesses casos, se a tarefa existe, só comentar o andamento (passo 4b).
+
 Não vira demanda: compromisso do cliente (fica na ATA como "compromissos do cliente, cobrar no próximo alinhamento"),
 opinião sem ação, coisa já concluída na própria reunião.
 
@@ -93,6 +98,27 @@ reunião de cliente da lista Rituais.
 - Já existe aberta e a reunião só confirmou: não cria; anota na ATA "segue em <link>".
 - Já existe e mudou prazo ou dono: não altera sozinho; lista em "Divergências" no relatório final.
 - Duas reuniões do mesmo período geraram a mesma demanda: cria uma só, com as duas fontes.
+
+### 4b. Concluir o que a reunião disse que foi feito
+Aprovado pelo Francisco em 2026-09-30. Para cada conclusão do passo 3c, achar a tarefa aberta correspondente
+(mesma busca do passo 4). Todo comentário do robô diz **quem falou, em qual reunião e quando**:
+
+- **Uma tarefa só, sem dúvida:** comentar
+  ```
+  🤖 Concluída
+  Quem: <pessoa que disse>
+  Onde: <nome da reunião>
+  Quando: DD/MM/AAAA
+  Fala: "<trecho curto da transcrição>"
+  Status: <status anterior> → <status de concluído>
+  ```
+  depois pôr a tag `captura-ia` e mudar o status para o de concluído daquela lista (`expand_statuses` mostra os
+  válidos; em geral `concluido`, em lista de conteúdo `postado/subido`).
+  Tarefa com subtarefas abertas não se fecha: só comenta, com `Status: mantido (subtarefas abertas)`.
+- **Correspondência duvidosa ou mais de uma candidata:** mesmo comentário com o título `🤖 Possivelmente concluída, confirmar`
+  e `Status: mantido`; listar em "Conclusões a confirmar" no relatório.
+- **Andamento sem conclusão** ("falta só a assinatura"): comentário com o título `🤖 Andamento` e `Status: mantido`.
+- **Sem tarefa correspondente:** só registrar na ATA; não criar tarefa pra fechar em seguida.
 
 ### 5. Escrever no ClickUp (pular no modo rascunho)
 1. Container da semana: criar se não existe (lista `901325858557`, parent `86ahaqpwn`).
@@ -111,7 +137,8 @@ reunião de cliente da lista Rituais.
 
 ### 6. Relatório
 Rodando com gente na frente: resumo de até 15 linhas no chat, por categoria:
-reuniões processadas · sem acesso · subtarefas criadas (por responsável) · já existiam · divergências · sem dono.
+reuniões processadas · subtarefas criadas (por responsável) · concluídas (com link) · conclusões a confirmar ·
+já existiam · divergências · sem dono.
 O detalhe completo (ATA + tabela) vai para `operacao/captura-reunioes/AAAA-MM-DD.md`.
 
 Rodando sozinha (rotina na nuvem): o relatório vira um **comentário no container da semana** no ClickUp,
@@ -119,6 +146,7 @@ começando com `🤖 Captura DD/MM`. A rotina não escreve nada no repositório 
 reunião nova, não comenta nada.
 
 ## Regras
-- Nunca fechar, apagar, reatribuir ou mudar prazo de tarefa existente. Só cria e acrescenta.
+- Em tarefa existente, a skill só faz três coisas: comentar, pôr a tag `captura-ia` e mudar para concluído
+  (regras do passo 4b). Nunca apagar, reatribuir, mudar prazo ou reabrir.
 - Nunca mexer nos docs do Drive (existe outra automação que marca a descrição deles com "Resumo enviado ao WhatsApp").
 - Dúvida sobre se algo é demanda: criar com prioridade normal e `(validar na Planning)` na descrição. A tag captura-ia existe pra isso.
