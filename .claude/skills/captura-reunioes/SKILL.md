@@ -114,8 +114,9 @@ Rodando com gente na frente: resumo de até 15 linhas no chat, por categoria:
 reuniões processadas · sem acesso · subtarefas criadas (por responsável) · já existiam · divergências · sem dono.
 O detalhe completo (ATA + tabela) vai para `operacao/captura-reunioes/AAAA-MM-DD.md`.
 
-Rodando sozinha (rotina): escrever o mesmo relatório como recado no sistema, conforme o contrato do robô
-do AGENTS.md (a rotina não edita `_contexto/`). Se não houve reunião nova, não escrever nada.
+Rodando sozinha (rotina na nuvem): o relatório vira um **comentário no container da semana** no ClickUp,
+começando com `🤖 Captura DD/MM`. A rotina não escreve nada no repositório (não faz commit). Se não houve
+reunião nova, não comenta nada.
 
 ## Regras
 - Nunca fechar, apagar, reatribuir ou mudar prazo de tarefa existente. Só cria e acrescenta.
