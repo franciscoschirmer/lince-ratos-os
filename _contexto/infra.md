@@ -13,4 +13,6 @@
 | apresentação comercial | provável Lovable | comercial.lince.company | a confirmar | deck comercial em página |
 | manual do cliente | a confirmar | lince.company/?s=welcome | a confirmar | enviado no onboarding |
 | email | Google Workspace | brio-lab.com | equipe | ainda no domínio antigo |
-| sistema RatosOS | GitHub (repositório privado) | github.com/franciscoschirmer/lince-ratos-os | Francisco | primeiro envio pendente |
+| sistema RatosOS | GitHub (repositório privado) | github.com/franciscoschirmer/lince-ratos-os | Francisco | sincronizado desde 2026-09-30 |
+| banco de produtividade | Supabase, projeto "Lince" (axilzquaqtppqjkbqqca), schema `produtividade` | – | Francisco e rotinas via conector | o schema `public` (tabela employees) é do Cláudio; não mexer (2026-09-30) |
+| Painel de Produção | artefato privado no claude.ai | claude.ai/artifact/REKkC48cBCum7vLvXgDZv6 | só o Francisco | fonte em operacao/produtividade/painel-producao.html; custos guardados só nele (2026-09-30) |

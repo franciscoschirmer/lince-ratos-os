@@ -25,3 +25,8 @@ regra de trabalho. O que não entra: tarefa feita (isso é o diário).
 - **2026-09-30** (Francisco): o robô conclui tarefa quando a reunião diz que foi feita, com comentário Quem/Onde/Quando/Fala/Status; na dúvida, só comenta. Por quê: a equipe ter as conclusões automáticas e rastreáveis.
 - **2026-09-30** (Francisco): todo comentário do robô no ClickUp marca os responsáveis com @. Por quê: cair na caixa de entrada deles e cobrar de novo.
 - **2026-09-30** (Francisco): o controle da rotina é pelo ClickUp (comentário marcando o Francisco), sem aviso no WhatsApp. Por quê: centralizar no ClickUp.
+- **2026-09-30** (Francisco): medir semanalmente a produção da Pâmela, do Mateus e do Victor (entregas, retrabalho, aprovação de primeira pela Marina e pelo cliente, custo por peça). Por quê: são os principais que precisam produzir para se pagar.
+- **2026-09-30** (Francisco): "alteração necessária" será separada em "alteração interna" (Marina pediu) e "alteração do cliente". Por quê: a taxa de erro do profissional não pode misturar mudança de gosto do cliente.
+- **2026-09-30** (Francisco): o retrabalho é contado exato a partir de 2026-09-30 por foto diária no Supabase (schema produtividade); antes disso fica aproximado. Por quê: o ClickUp não guarda cada ida e volta.
+- **2026-09-30** (Francisco): sem campo "Produtor" no ClickUp; o produtor é deduzido pelos watchers (Pâmela/Mateus) e pelo comentário "Repassado VH" (Victor, que não tem ClickUp e não é o usuário "victor logan"). Por quê: evitar mais um campo manual.
+- **2026-09-30** (Francisco): o valor pago a cada profissional fica só no Painel de Produção (privado), nunca no GitHub, no Supabase, no chat ou no ClickUp. Por quê: dado financeiro confidencial.

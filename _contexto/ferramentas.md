@@ -12,6 +12,7 @@
 | Gmail | email (conta operacional@brio-lab.com) | MCP (conector do claude.ai) | ligada, chega ao Claude Code (testado) | 2026-09-30 |
 | Google Agenda | agenda e reuniões | MCP (conector do claude.ai), conta admin@linceco.com.br, que vê todas as reuniões da equipe | ligada, chega ao Claude Code e à rotina na nuvem (testado) | 2026-09-30 |
 | Google Drive (Docs, Sheets) | ficha do cliente, materiais, planilhas, drives compartilhados com clientes; Anotações do Gemini (dono operacional@linceco.com.br) | MCP (conector do claude.ai) | ligada, chega ao Claude Code e à rotina na nuvem (testado) | 2026-09-30 |
+| Supabase | banco do log de produtividade (e do portal do Cláudio) | MCP (conector do claude.ai), chega ao Claude Code, às rotinas e ao Painel de Produção | ligada | 2026-09-30 |
 | Granola | notas de reunião | MCP (conector do claude.ai), conta operacional@brio-lab.com | ligada, vazia, sem uso | 2026-09-30 |
 | Meta Ads (Gerenciador) | campanhas dos clientes, análises e criativos | skill `/meta-ads-ratos` + `/ads-ratos` (token no `.env`) | não ligada | 2026-09-29 |
 | WhatsApp | grupos com os clientes | só você, na mão (exportar conversa e trazer) | não ligada | 2026-09-29 |

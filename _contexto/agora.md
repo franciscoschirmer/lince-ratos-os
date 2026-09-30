@@ -6,9 +6,15 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
-2026-09-30: /captura-reunioes no ar como rotina diária (seg-sex 18h, nuvem). Semana 28/09 processada no ClickUp (container 86akrae7r). Primeira execução automática em 2026-10-01.
+2026-09-30: Painel de Produção (claude.ai/artifact/REKkC48cBCum7vLvXgDZv6) publicado, mas aparecia zerado para o Francisco. Versão 2 tem botão "Permitir acesso ao Supabase" e linha de diagnóstico ("código: ..."). Os dados estão no Supabase (279 peças, 814 eventos). Também no ar: /captura-reunioes diária 18h.
 
 ## Pendências
+- Abrir o painel no navegador, permitir o Supabase e, se seguir zerado, trazer a linha "código:" do diagnóstico (2026-09-30)
+- Decidir 3 casos da atribuição: vídeo enviado pelo cliente conta como Victor? caixinha com "Repassado" é do Victor? destaques/fixados só com a Pâmela são dela? (2026-09-30)
+- Digitar o valor mensal de cada profissional no painel (2026-09-30)
+- Criar os status "alteração interna" e "alteração do cliente" nas 3 listas de conteúdo e orientar a Marina (2026-09-30)
+- Avisar o Cláudio do schema `produtividade` no Supabase "Lince" (2026-09-30)
+- Conferir o primeiro fechamento semanal de produtividade na Review/Retro, quinta 2026-10-01 18h (2026-09-30)
 - Conferir o comentário "🤖 Captura 01/10" no container da semana: primeira execução automática (2026-10-01)
 - Na Planning de 2026-10-05, revisar as tarefas com a tag captura-ia e as 7 divergências do relatório de 30/09 (2026-09-30)
 - Mapear os próximos processos (o primeiro, Reunião para ClickUp, virou /captura-reunioes) (2026-09-29)
@@ -26,3 +32,4 @@
 ## Quente agora
 - Fechamento de setembro e Health Score de outubro
 - Estreia da captura automática de reuniões no ClickUp
+- Painel de produtividade da equipe de conteúdo
