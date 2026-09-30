@@ -8,13 +8,14 @@
 
 | ferramenta | pra quê | como o agente alcança | estado | última checagem |
 |---|---|---|---|---|
-| ClickUp | tarefas, prazos, rotinas das lideranças, espaços de cliente | MCP (conector do claude.ai) | ligada | 2026-09-29 |
-| Gmail | email (conta operacional@brio-lab.com) | MCP (conector do claude.ai) | ligada no claude.ai, não chega ao Claude Code; ligar via `/mcp` com a conta operacional | 2026-09-30 |
-| Google Agenda | agenda e reuniões | MCP (conector do claude.ai) | ligada no claude.ai, não chega ao Claude Code (testado); ligar via `/mcp` com a conta operacional | 2026-09-30 |
-| Google Drive (Docs, Sheets) | ficha do cliente, materiais, planilhas, drives compartilhados com clientes | MCP (conector do claude.ai) | ligada no claude.ai, não chega ao Claude Code (testado); ligar via `/mcp` com a conta operacional | 2026-09-30 |
+| ClickUp | tarefas, prazos, rotinas das lideranças, espaços de cliente | MCP (conector do claude.ai) | ligada, liberada em definitivo no `.claude/settings.local.json` | 2026-09-30 |
+| Gmail | email (conta operacional@brio-lab.com) | MCP (conector do claude.ai) | ligada, chega ao Claude Code (testado) | 2026-09-30 |
+| Google Agenda | agenda e reuniões | MCP (conector do claude.ai), conta admin@linceco.com.br, que vê todas as reuniões da equipe | ligada, chega ao Claude Code e à rotina na nuvem (testado) | 2026-09-30 |
+| Google Drive (Docs, Sheets) | ficha do cliente, materiais, planilhas, drives compartilhados com clientes; Anotações do Gemini (dono operacional@linceco.com.br) | MCP (conector do claude.ai) | ligada, chega ao Claude Code e à rotina na nuvem (testado) | 2026-09-30 |
+| Granola | notas de reunião | MCP (conector do claude.ai), conta operacional@brio-lab.com | ligada, vazia, sem uso | 2026-09-30 |
 | Meta Ads (Gerenciador) | campanhas dos clientes, análises e criativos | skill `/meta-ads-ratos` + `/ads-ratos` (token no `.env`) | não ligada | 2026-09-29 |
 | WhatsApp | grupos com os clientes | só você, na mão (exportar conversa e trazer) | não ligada | 2026-09-29 |
-| Google Meet | reuniões | transcrição do Meet cai no Drive, lida por lá | não ligada | 2026-09-29 |
+| Google Meet | reuniões | transcrição do Gemini cai no Drive e é lida pela `/captura-reunioes` | ligada via Drive | 2026-09-30 |
 | Claude web | projetos e agentes da equipe (conta compartilhada) | só você, na mão (export em Configurações > Privacidade) | não ligada | 2026-09-29 |
 | ChatGPT | apoio | só você, na mão | não ligada | 2026-09-29 |
 | Canva · Figma | design | MCP (conector do claude.ai) | ligada, sem uso ainda | 2026-09-29 |
@@ -35,4 +36,4 @@
 ## Notas de uso
 - Doc do Google com link aberto: o agente lê pelo export em txt (`/export?format=txt`), mas não escreve nele (2026-09-30)
 - O modo automático do Claude Code bloqueia gravar arquivo com senhas ou CPFs de terceiros; nesses casos o Francisco roda o script à mão (2026-09-30)
-- ClickUp, IDs de usuário (resolver por nome é instável): Francisco `158419961` · Ivan `112000442` · Júlia `82001470` · Pâmela `284651027`
+- ClickUp, IDs de usuário (resolver por nome é instável): Francisco `158419961` · Ivan `112000442` · Júlia `82001470` · Pâmela `284651027` · Victoria `48777424` · Marina `81994084` · Jenifer `49036032` · Henri `164678340` · Cláudio `118092849` · Mateus `118126212` · Giovanna `284462463` (2026-09-30)

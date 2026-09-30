@@ -16,6 +16,7 @@
 - Henri Oyama · analista de CS e atendimento (fala nos grupos como "Suporte Briolab")
 - Jenifer Engelmann · gestora de tráfego (Meta e Google Ads, dashboards e relatórios)
 - Pâmela Marasca · designer · Mateus · editor de vídeo · Cláudio · desenvolvedor e automação
+- Giovanna Campelo · design (conduz o rebranding da BTS, 2026-09-30)
 
 ## Produtos (a esteira)
 - Editorial Lince · R$ 997/mês, direção editorial remota. Estruturado, ainda sem primeira venda

@@ -6,15 +6,15 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
-2026-09-30: rotina da CEO arquivada em operacao/, conversas de WhatsApp (Vic, Lideranças, Átria) arquivadas e limpas em operacao/conversas/. /mapear pela metade: falta escolher o primeiro processo (recomendado: Reunião para ClickUp).
+2026-09-30: /captura-reunioes no ar como rotina diária (seg-sex 18h, nuvem). Semana 28/09 processada no ClickUp (container 86akrae7r). Primeira execução automática em 2026-10-01.
 
 ## Pendências
-- Terminar o /mapear e anotar aqui os processos não mapeados (2026-09-29)
+- Conferir o comentário "🤖 Captura 01/10" no container da semana: primeira execução automática (2026-10-01)
+- Na Planning de 2026-10-05, revisar as tarefas com a tag captura-ia e as 7 divergências do relatório de 30/09 (2026-09-30)
+- Mapear os próximos processos (o primeiro, Reunião para ClickUp, virou /captura-reunioes) (2026-09-29)
 - Troca geral de senhas expostas nos grupos: Karina (Registro.br, Hostgator, wp-admin), e-mails operacional e criativos, Simone no doc aberto (2026-09-30)
 - Restringir o doc de acessos e colar nele os acessos da Átria e dos sócios (2026-09-30)
 - Pedir à Jenifer os acessos da Urocenter (2026-09-30)
-- Ligar Drive e Agenda no Claude Code via /mcp com a conta operacional (2026-09-30)
-- Processar a transcrição da reunião com o Cláudio de 2026-09-30, 11h (2026-09-30)
 - Base de contratado versus entregue de setembro para a Júlia (2026-09-30)
 - Health Score dos clientes até 2026-10-05 (2026-09-30)
 - Conferir a cópia duplicada do kit em .claude/skills/ratos-os/ (rodar /faxina) (2026-09-29)
@@ -25,3 +25,4 @@
 
 ## Quente agora
 - Fechamento de setembro e Health Score de outubro
+- Estreia da captura automática de reuniões no ClickUp

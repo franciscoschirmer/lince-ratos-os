@@ -20,3 +20,8 @@ regra de trabalho. O que não entra: tarefa feita (isso é o diário).
 - **2026-09-29** (Francisco): toda pasta de cliente em clientes/ leva a subpasta conteudos/ pros conteúdos do médico. Por quê: os conteúdos de cada médico da carteira precisam de lugar próprio dentro da pasta dele.
 - **2026-09-29** (Francisco): ligar o Meta Ads depois, junto com a Jenifer, e não no setup. Por quê: o token da conta de anúncios passa por ela.
 - **2026-09-30** (Francisco): conversas de WhatsApp exportadas ficam em operacao/conversas/, com credenciais e CPFs removidos e fora do git. Por quê: as conversas têm senhas de clientes e dados pessoais, e o sistema vai para o GitHub.
+- **2026-09-30** (Francisco): reunião vira subtarefa no container semanal por rotina diária na nuvem (/captura-reunioes), criação direta com a tag captura-ia. Por quê: não depender da revisão semanal manual; a tag permite revisar na Planning.
+- **2026-09-30** (Francisco): reunião organizada pela Victoria que não abre para a conta conectada é privada e a rotina pula em silêncio. Por quê: acesso bloqueado é intencional.
+- **2026-09-30** (Francisco): o robô conclui tarefa quando a reunião diz que foi feita, com comentário Quem/Onde/Quando/Fala/Status; na dúvida, só comenta. Por quê: a equipe ter as conclusões automáticas e rastreáveis.
+- **2026-09-30** (Francisco): todo comentário do robô no ClickUp marca os responsáveis com @. Por quê: cair na caixa de entrada deles e cobrar de novo.
+- **2026-09-30** (Francisco): o controle da rotina é pelo ClickUp (comentário marcando o Francisco), sem aviso no WhatsApp. Por quê: centralizar no ClickUp.
