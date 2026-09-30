@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}}</title>
+  <link href="{{FONT_IMPORT_URL}}" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: {{BG}};
+      --color-surface: {{SURFACE}};
+      --color-text: {{TEXT}};
+      --color-text-soft: {{TEXT_SOFT}};
+      --color-text-mute: {{TEXT_MUTE}};
+      --color-border: {{BORDER}};
+      --color-accent: {{ACCENT}};
+      --color-accent-text: {{ACCENT_TEXT}};
+      --color-accent-soft: {{ACCENT_SOFT}};
+      --color-accent-border: {{ACCENT_BORDER}};
+      --color-card-strong: {{CARD_STRONG}};
+      --color-card-strong-text: {{CARD_STRONG_TEXT}};
+      --color-card-soft: {{CARD_SOFT}};
+      --color-card-dark: {{CARD_DARK}};
+      --font-main: {{FONT_MAIN}};
+      --font-accent: {{FONT_ACCENT}};
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      background: var(--color-bg);
+      overflow: hidden;
+      font-family: var(--font-main);
+    }
+    .slide-container {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide-wrapper {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .slide-container iframe {
+      border: none;
+      width: 1280px;
+      height: 720px;
+      transform-origin: top left;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .slide-container.hidden { display: none; }
+    .slide-container.active { display: flex; }
+    .counter {
+      position: fixed;
+      bottom: 16px;
+      left: 20px;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(0,0,0,0.25);
+      z-index: 100;
+      user-select: none;
+      pointer-events: none;
+    }
+    .hint {
+      position: fixed;
+      bottom: 16px;
+      right: 20px;
+      font-family: var(--font-main);
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(0,0,0,0.15);
+      z-index: 100;
+      user-select: none;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+
+    /* Print/PDF: elimina bordas brancas, esconde contador e hint, e faz cada slide virar uma página inteira de 1280x720. Ativado automaticamente quando o navegador exporta o deck como PDF. */
+    @media print {
+      @page { size: 1280px 720px; margin: 0; }
+      html, body {
+        width: 1280px !important;
+        height: auto !important;
+        background: transparent !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .counter, .hint, .rotate-hint { display: none !important; }
+      .slide-container {
+        position: relative !important;
+        inset: auto !important;
+        display: block !important;
+        width: 1280px !important;
+        height: 720px !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        overflow: hidden !important;
+      }
+      .slide-container.hidden { display: block !important; }
+      .slide-container:last-child {
+        page-break-after: auto !important;
+        break-after: auto !important;
+      }
+      .slide-wrapper {
+        width: 1280px !important;
+        height: 720px !important;
+        position: static !important;
+        overflow: visible !important;
+      }
+      .slide-container iframe {
+        transform: none !important;
+        width: 1280px !important;
+        height: 720px !important;
+        display: block !important;
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+      }
+    }
+
+    /* Mobile portrait: esconde counter/hint (slide rotacionado ocupa a tela toda) */
+    @media (orientation: portrait) and (max-width: 900px) {
+      .counter, .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="counter" id="counter">1/{{TOTAL}}</div>
+<div class="hint" id="hint">← → navegar · F fullscreen</div>
+
+<script>
+const TOTAL = {{TOTAL}};
+let current = 0;
+
+const slides = [
+  // {{SLIDES_ARRAY}} — cada slide é uma string HTML completa
+];
+
+const body = document.body;
+const containers = [];
+
+let touchStartX = 0, touchStartY = 0;
+
+function handleSwipeEnd(dx, dy) {
+  const isPortraitMobile = window.innerHeight > window.innerWidth && window.innerWidth < 900;
+  if (isPortraitMobile) {
+    if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 50) {
+      if (dy < 0) { next(); } else { prev(); }
+    }
+  } else {
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (dx < 0) { next(); } else { prev(); }
+    }
+  }
+}
+
+slides.forEach((html, i) => {
+  const container = document.createElement('div');
+  container.className = 'slide-container' + (i === 0 ? ' active' : ' hidden');
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'slide-wrapper';
+
+  const iframe = document.createElement('iframe');
+  iframe.srcdoc = html;
+  iframe.setAttribute('scrolling', 'no');
+  iframe.style.overflow = 'hidden';
+
+  iframe.addEventListener('load', () => {
+    try {
+      const doc = iframe.contentDocument;
+      try {
+        const bg = getComputedStyle(doc.body).backgroundColor;
+        container.dataset.bg = bg;
+        if (i === current) applyActiveBg();
+      } catch(e) {}
+      doc.addEventListener('keydown', (e) => {
+        document.dispatchEvent(new KeyboardEvent('keydown', {
+          key: e.key, code: e.code, bubbles: true
+        }));
+      });
+      doc.addEventListener('click', (e) => {
+        document.dispatchEvent(new MouseEvent('click', {
+          clientX: e.clientX,
+          clientY: e.clientY,
+          bubbles: true
+        }));
+      });
+      doc.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+      doc.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].screenX - touchStartX;
+        const dy = e.changedTouches[0].screenY - touchStartY;
+        handleSwipeEnd(dx, dy);
+      }, { passive: true });
+    } catch(err) {}
+  });
+
+  wrapper.appendChild(iframe);
+  container.appendChild(wrapper);
+  body.appendChild(container);
+  containers.push(container);
+});
+
+function scaleIframes() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const isMobile = vw < 900 || vh < 500;
+  const isPortrait = vh > vw;
+
+  let scale, rotate = false;
+  if (isMobile && isPortrait) {
+    scale = Math.min(vh / 1280, vw / 720);
+    rotate = true;
+  } else if (isMobile) {
+    scale = Math.min(vw / 1280, vh / 720);
+  } else {
+    scale = Math.min(vw / 1280, vh / 720);
+  }
+
+  const slideW = 1280 * scale;
+  const slideH = 720 * scale;
+
+  containers.forEach(c => {
+    const wrapper = c.querySelector('.slide-wrapper');
+    const iframe = c.querySelector('iframe');
+    if (rotate) {
+      wrapper.style.width = slideH + 'px';
+      wrapper.style.height = slideW + 'px';
+      iframe.style.transform = `translate(${slideH}px, 0) rotate(90deg) scale(${scale})`;
+    } else {
+      wrapper.style.width = slideW + 'px';
+      wrapper.style.height = slideH + 'px';
+      iframe.style.transform = `scale(${scale})`;
+    }
+  });
+}
+
+function isDarkBg(color) {
+  const match = color && color.match(/\d+/g);
+  if (!match || match.length < 3) return false;
+  const [r, g, b] = match.map(Number);
+  return (r*0.299 + g*0.587 + b*0.114) < 128;
+}
+
+function applyActiveBg() {
+  const bg = containers[current] && containers[current].dataset.bg;
+  if (!bg) return;
+  document.documentElement.style.background = bg;
+  document.body.style.background = bg;
+  const dark = isDarkBg(bg);
+  const counter = document.getElementById('counter');
+  const hint = document.getElementById('hint');
+  if (counter) counter.style.color = dark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.25)';
+  if (hint) hint.style.color = dark ? 'rgba(255,255,255,0.22)' : 'rgba(0,0,0,0.15)';
+}
+
+function showSlide(index) {
+  if (index < 0 || index >= TOTAL) return;
+  containers[current].className = 'slide-container hidden';
+  current = index;
+  containers[current].className = 'slide-container active';
+  document.getElementById('counter').textContent = (current + 1) + '/' + TOTAL;
+  applyActiveBg();
+}
+
+function next() { showSlide(current + 1); }
+function prev() { showSlide(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault(); next();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault(); prev();
+  } else if (e.key === 'f' || e.key === 'F') {
+    e.preventDefault();
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else { document.exitFullscreen(); }
+  } else if (e.key === 'Home') {
+    e.preventDefault(); showSlide(0);
+  } else if (e.key === 'End') {
+    e.preventDefault(); showSlide(TOTAL - 1);
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.counter, .hint')) return;
+  const x = e.clientX / window.innerWidth;
+  if (x < 0.33) { prev(); } else { next(); }
+});
+
+document.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+document.addEventListener('touchend', (e) => {
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  const dy = e.changedTouches[0].screenY - touchStartY;
+  handleSwipeEnd(dx, dy);
+}, { passive: true });
+
+scaleIframes();
+applyActiveBg();
+window.addEventListener('resize', scaleIframes);
+window.addEventListener('orientationchange', () => setTimeout(scaleIframes, 200));
+
+setTimeout(() => {
+  document.getElementById('hint').style.opacity = '0';
+}, 5000);
+</script>
+</body>
+</html>

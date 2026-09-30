@@ -1,0 +1,36 @@
+{
+  "_comentario": "Copia esse arquivo pra config.json e edita. A skill cria ele sozinha no primeiro setup se nao existir.",
+
+  "marcadores": [
+    { "frase": "pato amarelo", "rollback": "curto" },
+    { "frase": "pato vermelho", "rollback": "longo" }
+  ],
+
+  "_marcadores_ajuda": "A frase que tu FALA na gravacao quando erra e vai refazer. Escolhe algo que tu nunca falaria por acaso no teu conteudo (por isso 'pato amarelo' funciona: e absurdo). rollback 'curto' = volta uma frase. rollback 'longo' = volta mais, as vezes o bloco inteiro. Podes usar 1 so, ou 3+, e nao precisa ser pato.",
+
+  "silencio": {
+    "ativo": true,
+    "limiar_s": 0.6,
+    "merge_gap_s": 0.15,
+    "noise_db": -30,
+    "dur_min_s": 0.35,
+    "respiro_head_frames": 4,
+    "respiro_tail_frames": 5
+  },
+
+  "_silencio_ajuda": "limiar_s: so apara pausa MAIOR que isso. 0.5 agressivo, 0.6 equilibrado, 0.8 conservador. O respiro deixa uns frames de pausa pra emenda nao ficar robotica.",
+
+  "_merge_gap_ajuda": "junta silencios que o ffmpeg fragmentou por causa de estalo/respiracao no meio da pausa. CUIDADO ao subir: o script nao ve o audio, so os timestamps, entao fundir por cima de fala APAGA a palavra sem avisar. Estalo dura ~50-150ms, palavra nao. Medido em video real de 12min: 0.7 comia 21 palavras, 0.3 comia 3, 0.15 nao comeu nenhuma.",
+
+  "redundancia": "nao",
+  "_redundancia_ajuda": "'nao' = so corta o que tem marcador falado (recomendado: o que tu quer fora, tu marca). 'perguntar' = varre repeticao semantica e te mostra pra decidir.",
+
+  "backend": "auto",
+  "_backend_ajuda": "'auto' detecta o que tu tem instalado. 'palmier' forca o Palmier Pro (Mac, GUI). 'video-use' forca o video-use (ffmpeg, headless).",
+
+  "transcricao": "auto",
+  "_transcricao_ajuda": "'auto' usa a melhor disponivel. 'whisper' local (gratis, sem chave). 'assemblyai' ou 'elevenlabs' se tu tiver chave no .env (timestamp mais preciso).",
+
+  "fps": 30,
+  "_fps_ajuda": "fps da tua fonte. A skill confere e corrige se divergir."
+}

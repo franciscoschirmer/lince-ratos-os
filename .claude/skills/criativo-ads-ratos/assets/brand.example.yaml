@@ -1,0 +1,46 @@
+# brand.yaml — a marca do anúncio. Gerado no setup (Fase 0) e revisado por quem manda.
+# Depois de editar, rodar: node assets/theme.mjs
+# Só isso separa um anúncio da tua marca de um anúncio de qualquer outra.
+
+marca: Nome da Marca
+handle: "@nomedamarca"
+site: nomedamarca.com.br
+
+cores:
+  # fundo escuro e o texto que vai em cima dele
+  dark: "#1C1917"
+  dark_fg: "#FAF7F2"
+  dark_muted: "#A8A29E"
+  # fundo claro e o texto que vai em cima dele
+  light: "#FAF7F2"
+  light_fg: "#1C1917"
+  light_muted: "#57534E"
+  # a cor de destaque (badge, CTA, palavra grifada, preço)
+  accent: "#C96442"
+  accent_dark: "#E0906B"   # versão clareada, usada quando o fundo é escuro
+  accent_fg: "#FFFFFF"     # texto que vai EM CIMA do accent
+  accent_dark_fg: "#FFFFFF" # texto que vai EM CIMA do accent_dark. accent claro pede texto escuro aqui
+
+fontes:
+  display: Instrument Serif        # títulos com personalidade, preço, número grande
+  display_weights: "400"
+  display_peso: 400                # peso usado nos títulos display, preço e número grande
+  display_tipo: serif              # serif | sans (só pro fallback)
+  italic: true                     # carrega o itálico do display
+  body: Bricolage Grotesque        # headline, corpo, CTA
+  body_weights: "400;500;700;800"
+  local: false                     # true = fonte proprietária, não busca no Google Fonts
+
+forma:
+  radius: 20px                     # cantos de card e imagem
+  cta_radius: 14px                 # cantos do botão
+  badge: pill                      # pill | reto
+
+logo:
+  arquivo: assets/logo.png         # PNG com fundo transparente
+  arquivo_claro: ""                # versão pra fundo escuro (se houver)
+
+tom:
+  pronome: tu                      # tu | você
+  registro: direto e informal, sem jargão
+  evitar: promessa exagerada, escassez falsa, travessão

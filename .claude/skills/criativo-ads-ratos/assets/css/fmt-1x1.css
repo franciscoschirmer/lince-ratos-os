@@ -1,0 +1,9 @@
+/* fmt-1x1.css — 1080x1080 (feed quadrado). Sem danger zone. */
+:root{
+  --w:1080px; --h:1080px;
+  --pad:64px; --pad-top:64px; --pad-bottom:64px; --gap:26px;
+  --fs-h-xl:94px; --fs-h-l:76px; --fs-h-m:60px; --fs-h-s:46px;
+  --fs-sub:34px; --fs-body:30px; --fs-badge:21px; --fs-cta:31px; --fs-foot:22px;
+  --fs-price:150px; --fs-stat:210px; --fs-aspas:150px;
+  --brand-h:46px; --card-h:520px; --split-h:460px;
+}

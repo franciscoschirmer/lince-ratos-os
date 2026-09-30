@@ -1,0 +1,27 @@
+/* fmt-9x16.css — 1080x1920 (Story / Reels).
+ * DANGER ZONES da Meta, já embutidas no padding:
+ *   topo  ~250px (13%)   -> foto de perfil, nome, "patrocinado"
+ *   base   672px (35%)   -> no REELS: legenda, @, áudio, botões. É o corte mais agressivo.
+ *   base   330px (17%)   -> só STORIES: CTA, "enviar mensagem", barra de progresso
+ * O default é o SEGURO (672px), porque conjunto de anúncio quase sempre inclui Reels.
+ * Peça que roda só em Stories: <body class="... story-only"> libera até 330px.
+ */
+:root{
+  --w:1080px; --h:1920px;
+  --pad:80px; --pad-top:250px; --pad-bottom:672px; --gap:34px;
+  --fs-h-xl:112px; --fs-h-l:92px; --fs-h-m:72px; --fs-h-s:54px;
+  --fs-sub:42px; --fs-body:34px; --fs-badge:25px; --fs-cta:37px; --fs-foot:26px;
+  --fs-price:190px; --fs-stat:280px; --fs-aspas:186px;
+  --brand-h:56px; --card-h:820px; --split-h:640px;
+}
+body.story-only{--pad-bottom:330px}
+
+/* guias de revisão: <body class="... guias"> mostra as danger zones no render.
+   vermelho = zona morta · amarelo = corte do Reels (35%). tirar antes de entregar. */
+body.guias::after{
+  content:'';position:absolute;inset:0;z-index:99;pointer-events:none;
+  background:
+    linear-gradient(to bottom,rgba(255,0,0,.16) 0 250px,transparent 250px 1920px),
+    linear-gradient(to bottom,transparent 0 1590px,rgba(255,0,0,.16) 1590px 1920px),
+    linear-gradient(to bottom,transparent 0 1244px,rgba(255,230,0,.7) 1244px 1252px,transparent 1252px 1920px);
+}

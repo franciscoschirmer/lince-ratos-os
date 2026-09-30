@@ -1,0 +1,5 @@
+# fora do git: cada máquina tem o seu
+.origem
+.agents/
+.env
+.env.*

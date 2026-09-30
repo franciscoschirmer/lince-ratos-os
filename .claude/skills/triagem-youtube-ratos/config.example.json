@@ -1,0 +1,14 @@
+{
+  "nicho": "descreva o tema/nicho do teu canal em uma frase",
+  "publico": "descreva teu público em 1-2 frases: quem assiste, o que fazem, nível de conhecimento",
+  "language_code": "pt",
+  "location_code": 2076,
+  "output_path": "./triagens/",
+  "budget_alert_usd": 0.50,
+  "score_weights": {
+    "busca": 30,
+    "youtube": 30,
+    "frescor": 20,
+    "publico": 20
+  }
+}

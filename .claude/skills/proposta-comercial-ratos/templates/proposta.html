@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<!--
+  Scaffold da proposta. Copiar, trocar os {{CAMPOS}} e apagar as seções que não
+  se aplicam. Os valores do :root vêm do design.md do usuário; o que está aqui é
+  o fallback neutro (funciona sem configuração nenhuma).
+
+  Regras:
+  - arquivo único, CSS inline. Só o logo pode ser externo.
+  - nenhuma cor hardcodada fora do :root.
+  - nada de gate de senha em JavaScript.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposta · {{CLIENTE}}</title>
+<!-- trocar pela fonte do design.md; sem design.md, deixar a Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --surface: #F7F7F7;
+  --surface-2: #F2F2F2;
+  --border: #DDDDDD;
+  --border-strong: #BBBBBB;
+  --card-border-style: solid;
+
+  --text: #111111;
+  --text-dim: #555555;
+  --text-muted: #999999;
+
+  --accent: #111111;
+  --accent-text: #111111;
+  --accent-soft: #F2F2F2;
+  --accent-border: #CCCCCC;
+  --accent-contrast: #FFFFFF;
+
+  --ok: #00875A;
+  --ok-soft: rgba(0, 135, 90, 0.08);
+  --ok-border: rgba(0, 135, 90, 0.25);
+  --no: #C0392B;
+  --info: #2B6CB0;
+  --info-soft: rgba(43, 108, 176, 0.06);
+  --info-border: rgba(43, 108, 176, 0.18);
+
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+
+  --w-bold: 800;
+  --w-semi: 600;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 56px 32px 80px; }
+
+h1 {
+  font-size: clamp(28px, 4.5vw, 40px);
+  font-weight: var(--w-bold);
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+  color: var(--text);
+}
+h1 .accent { color: var(--accent-contrast); background: var(--accent); padding: 0 8px; border-radius: 4px; }
+
+.section { margin-top: 56px; }
+.section-title {
+  font-size: clamp(22px, 3.5vw, 30px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+p, .body-text { font-size: 15px; color: var(--text-dim); line-height: 1.75; }
+p + p { margin-top: 14px; }
+.highlight { background: var(--accent-soft); padding: 0 6px; border-radius: 4px; color: var(--accent-text); font-weight: var(--w-semi); }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 16px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.card { border: 1.5px var(--card-border-style) var(--border-strong); border-radius: 14px; padding: 28px 32px; background: var(--bg); }
+.card-filled { background: var(--accent-soft); border: 1.5px var(--card-border-style) var(--accent-border); border-radius: 14px; padding: 28px 32px; }
+.card-ok { background: var(--ok-soft); border: 1.5px solid var(--ok-border); border-radius: 14px; padding: 28px 32px; }
+.card-info { background: var(--info-soft); border: 1.5px solid var(--info-border); border-radius: 14px; padding: 28px 32px; }
+
+.pill {
+  display: inline-block; background: var(--text); color: var(--bg);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  border-radius: 999px; padding: 5px 14px; font-family: var(--font-mono);
+}
+.pill-accent { background: var(--accent); color: var(--accent-contrast); }
+.pill-outline { background: transparent; color: var(--text-dim); border: 1.5px solid var(--border); }
+
+.quote-block {
+  border-left: 3px solid var(--accent);
+  padding: 20px 28px;
+  background: var(--surface);
+  border-radius: 0 14px 14px 0;
+  margin: 24px 0;
+}
+.quote-block p { font-size: 15px; font-style: italic; color: var(--text-dim); line-height: 1.7; }
+.quote-block .quote-author { font-style: normal; font-size: 13px; color: var(--text-muted); margin-top: 8px; font-weight: 500; }
+
+.feature-list { list-style: none; margin-top: 16px; }
+.feature-list li { font-size: 14px; color: var(--text-dim); line-height: 1.6; padding: 6px 0 6px 20px; position: relative; }
+.feature-list li::before { content: ''; position: absolute; left: 0; top: 13px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+.briefing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+.briefing-item { padding: 20px 24px; }
+.briefing-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.briefing-value { font-size: 15px; font-weight: 500; color: var(--text); line-height: 1.5; }
+
+.entrega { margin-top: 28px; }
+.entrega-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.entrega-num {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+  color: var(--accent-contrast); background: var(--accent);
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; flex-shrink: 0;
+}
+.entrega-title { font-size: 20px; font-weight: 700; color: var(--text); }
+.entrega-subtitle { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+
+.includes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+.include-list { list-style: none; }
+.include-list li { font-size: 14px; color: var(--text-dim); padding: 8px 0 8px 24px; position: relative; line-height: 1.5; }
+.include-list.yes li::before { content: '\2713'; position: absolute; left: 0; color: var(--ok); font-weight: 700; font-size: 14px; }
+.include-list.no li::before { content: '\2717'; position: absolute; left: 0; color: var(--no); font-weight: 700; font-size: 14px; }
+
+.price-card { padding: 32px; text-align: center; }
+.price-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+.price-value { font-size: 36px; font-weight: var(--w-bold); color: var(--ok); margin-bottom: 4px; }
+.price-desc { font-size: 13px; color: var(--text-dim); }
+
+.payment-item { display: flex; gap: 16px; align-items: center; padding: 14px 0; }
+.payment-item:not(:last-child) { border-bottom: 1px solid var(--surface-2); }
+.payment-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); min-width: 110px; flex-shrink: 0; }
+.payment-text { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+.payment-text strong { color: var(--text); font-weight: var(--w-semi); }
+
+.timeline { margin-top: 24px; }
+.timeline-item { display: flex; gap: 20px; padding: 20px 0; align-items: flex-start; }
+.timeline-item:not(:last-child) { border-bottom: 1px solid var(--surface-2); }
+.timeline-date { font-family: var(--font-mono); font-size: 12px; font-weight: var(--w-semi); color: var(--text); min-width: 120px; flex-shrink: 0; }
+.timeline-content { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+.timeline-content strong { color: var(--text); font-weight: var(--w-semi); }
+
+.cta {
+  margin-top: 56px; padding: 36px 32px;
+  background: var(--accent-soft);
+  border: 1.5px var(--card-border-style) var(--accent-border);
+  border-radius: 14px; text-align: center;
+}
+.cta-title { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.cta-text { font-size: 15px; color: var(--text-dim); line-height: 1.7; }
+.cta-action {
+  display: inline-block; margin-top: 20px; padding: 13px 28px;
+  background: var(--accent); color: var(--accent-contrast);
+  border-radius: 999px; font-weight: var(--w-semi); font-size: 15px; text-decoration: none;
+}
+
+.footer { margin-top: 56px; text-align: center; padding-top: 28px; border-top: 1px solid var(--border); }
+.footer-logo img { height: 24px; width: auto; display: inline-block; margin-bottom: 8px; }
+.footer-wordmark { font-size: 16px; font-weight: 700; letter-spacing: -0.5px; color: var(--text); margin-bottom: 8px; }
+.footer-sub { font-size: 12px; color: var(--text-muted); }
+.footer-contact { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+.pendente { color: var(--text-muted); font-style: italic; }
+
+@media (max-width: 768px) {
+  .container { padding: 36px 16px 56px; }
+  .grid-2, .grid-3, .briefing-grid, .includes-grid { grid-template-columns: 1fr; }
+  .card, .card-filled, .card-ok, .card-info { padding: 22px 20px; }
+  .timeline-item { flex-direction: column; gap: 6px; }
+  .payment-item { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+
+@media print {
+  body { background: #FFFFFF; }
+  .container { max-width: 100%; padding: 0 24px; }
+  .section { break-inside: avoid; margin-top: 32px; }
+  .card, .card-filled, .card-ok, .price-card, .cta { break-inside: avoid; }
+  .cta-action { border: 1.5px solid var(--text); }
+  a { text-decoration: none; color: var(--text); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ============ 1. CAPA ============ -->
+  <div class="badge">proposta comercial</div>
+  <h1 style="margin-top:20px">{{TITULO_DO_PROJETO}}<br>para <span class="accent">{{CLIENTE}}</span></h1>
+
+  <div class="briefing-grid">
+    <div class="briefing-item card">
+      <div class="briefing-label">cliente</div>
+      <div class="briefing-value">{{CLIENTE}}</div>
+    </div>
+    <div class="briefing-item card">
+      <div class="briefing-label">preparada por</div>
+      <div class="briefing-value">{{EMPRESA}}</div>
+    </div>
+    <div class="briefing-item card">
+      <div class="briefing-label">data</div>
+      <div class="briefing-value">{{DATA}}</div>
+    </div>
+    <div class="briefing-item card">
+      <div class="briefing-label">válida até</div>
+      <div class="briefing-value">{{VALIDADE}}</div>
+    </div>
+  </div>
+
+  <!-- ============ 2. ENTENDIMENTO ============ -->
+  <div class="section">
+    <div class="section-label">01 · entendimento</div>
+    <h2 class="section-title">{{TITULO_ENTENDIMENTO}}</h2>
+    <p>{{SITUACAO_HOJE}}</p>
+    <p>{{POR_QUE_CUSTA_CARO}}</p>
+
+    <!-- a frase literal do cliente, tirada da transcrição -->
+    <div class="quote-block">
+      <p>"{{FRASE_DO_CLIENTE}}"</p>
+      <div class="quote-author">{{NOME_DE_QUEM_FALOU}}, na reunião de {{DATA_DA_REUNIAO}}</div>
+    </div>
+
+    <p>{{O_QUE_JA_TENTOU}}</p>
+  </div>
+
+  <!-- ============ 3. OBJETIVO ============ -->
+  <div class="section">
+    <div class="section-label">02 · objetivo</div>
+    <h2 class="section-title">{{ESTADO_FINAL_EM_UMA_FRASE}}</h2>
+    <div class="card-filled">
+      <p style="color:var(--text)"><strong>como a gente vai saber que deu certo</strong></p>
+      <ul class="feature-list">
+        <li>{{CRITERIO_1}}</li>
+        <li>{{CRITERIO_2}}</li>
+        <li>{{CRITERIO_3}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============ 4. ESCOPO ============ -->
+  <!-- formato varia por tipo de venda: ver references/estrutura-proposta.md -->
+  <div class="section">
+    <div class="section-label">03 · escopo</div>
+    <h2 class="section-title">{{TITULO_ESCOPO}}</h2>
+    <p>{{RESUMO_DO_ESCOPO}}</p>
+
+    <div class="entrega card">
+      <div class="entrega-header">
+        <div class="entrega-num">1</div>
+        <div>
+          <div class="entrega-title">{{FASE_1_NOME}}</div>
+          <div class="entrega-subtitle">{{FASE_1_DURACAO}}</div>
+        </div>
+      </div>
+      <p>{{FASE_1_DESCRICAO}}</p>
+      <ul class="feature-list">
+        <li>{{FASE_1_ENTREGA_1}}</li>
+        <li>{{FASE_1_ENTREGA_2}}</li>
+      </ul>
+    </div>
+
+    <div class="entrega card">
+      <div class="entrega-header">
+        <div class="entrega-num">2</div>
+        <div>
+          <div class="entrega-title">{{FASE_2_NOME}}</div>
+          <div class="entrega-subtitle">{{FASE_2_DURACAO}}</div>
+        </div>
+      </div>
+      <p>{{FASE_2_DESCRICAO}}</p>
+      <ul class="feature-list">
+        <li>{{FASE_2_ENTREGA_1}}</li>
+        <li>{{FASE_2_ENTREGA_2}}</li>
+      </ul>
+    </div>
+
+    <!-- escopo opcional (o que o cliente não pediu mas precisa) vai aqui,
+         com valor separado e a pill "opcional" -->
+  </div>
+
+  <!-- ============ 5. INCLUSO / NÃO INCLUSO ============ -->
+  <div class="section">
+    <div class="section-label">04 · fronteira do trabalho</div>
+    <h2 class="section-title">o que está e o que não está incluso</h2>
+    <div class="includes-grid">
+      <div class="card">
+        <div class="briefing-label">está incluso</div>
+        <ul class="include-list yes">
+          <li>{{INCLUSO_1}}</li>
+          <li>{{INCLUSO_2}}</li>
+          <li>{{INCLUSO_3}}</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="briefing-label">não está incluso</div>
+        <ul class="include-list no">
+          <li>{{NAO_INCLUSO_1}}</li>
+          <li>{{NAO_INCLUSO_2}}</li>
+          <li>{{NAO_INCLUSO_3}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 6. INVESTIMENTO ============ -->
+  <div class="section">
+    <div class="section-label">05 · investimento</div>
+    <h2 class="section-title">{{TITULO_INVESTIMENTO}}</h2>
+
+    <div class="price-card card-ok">
+      <div class="price-label">investimento total</div>
+      <div class="price-value">{{VALOR}}</div>
+      <div class="price-desc">{{VALOR_DESCRICAO}}</div>
+    </div>
+
+    <!-- pra mais de um cenário, repetir o bloco acima com .scenario-header
+         e marcar o incremento com .diff-tag. Máximo 3 cenários. -->
+
+    <div class="card" style="margin-top:24px">
+      <div class="payment-item">
+        <div class="payment-label">pagamento</div>
+        <div class="payment-text">{{FORMA_DE_PAGAMENTO}}</div>
+      </div>
+      <div class="payment-item">
+        <div class="payment-label">prazo</div>
+        <div class="payment-text">{{PRAZO}}, contado a partir de <strong>{{MARCO_INICIAL}}</strong></div>
+      </div>
+      <div class="payment-item">
+        <div class="payment-label">validade</div>
+        <div class="payment-text">esta proposta vale até <strong>{{VALIDADE}}</strong></div>
+      </div>
+    </div>
+
+    <!-- cronograma: só quando o projeto passa de 4 semanas -->
+    <div style="margin-top:36px">
+      <div class="briefing-label">cronograma</div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">{{PERIODO_1}}</div>
+        <div class="timeline-content"><strong>{{MARCO_1}}</strong><br>{{MARCO_1_DETALHE}}</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">{{PERIODO_2}}</div>
+        <div class="timeline-content"><strong>{{MARCO_2}}</strong><br>{{MARCO_2_DETALHE}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 7. PRÓXIMO PASSO ============ -->
+  <div class="cta">
+    <div class="cta-title">{{TITULO_PROXIMO_PASSO}}</div>
+    <div class="cta-text">{{ACAO_CONCRETA}}</div>
+    <a class="cta-action" href="mailto:{{CONTATO}}">{{TEXTO_DO_BOTAO}}</a>
+  </div>
+
+  <!-- ============ 8. RODAPÉ ============ -->
+  <footer class="footer">
+    <!-- com logo: <div class="footer-logo"><img src="./assets/logo.svg" alt="{{EMPRESA}}"></div> -->
+    <div class="footer-wordmark">{{EMPRESA}}</div>
+    <div class="footer-sub">{{RODAPE}}</div>
+    <div class="footer-contact">{{CONTATO}}</div>
+  </footer>
+
+</div>
+</body>
+</html>

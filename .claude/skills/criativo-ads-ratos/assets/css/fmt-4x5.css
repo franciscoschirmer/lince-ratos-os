@@ -1,0 +1,11 @@
+/* fmt-4x5.css — 1080x1350 (feed vertical, o formato padrão da Meta hoje).
+ * Sem danger zone: perfil e legenda ficam fora da imagem. Usa o quadro todo.
+ * Só cuidar se pedirem o corte 1:1 da grade do perfil (centro seguro). */
+:root{
+  --w:1080px; --h:1350px;
+  --pad:72px; --pad-top:72px; --pad-bottom:72px; --gap:30px;
+  --fs-h-xl:104px; --fs-h-l:84px; --fs-h-m:66px; --fs-h-s:50px;
+  --fs-sub:38px; --fs-body:32px; --fs-badge:23px; --fs-cta:34px; --fs-foot:24px;
+  --fs-price:172px; --fs-stat:248px; --fs-aspas:168px;
+  --brand-h:52px; --card-h:660px; --split-h:620px;
+}

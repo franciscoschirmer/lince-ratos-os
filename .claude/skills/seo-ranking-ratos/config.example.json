@@ -1,0 +1,15 @@
+{
+  "sites": [
+    {
+      "domain": "meusite.com.br",
+      "brand": "Minha Marca",
+      "descricao": "o que a marca faz, em uma frase",
+      "local_path": "/caminho/pra/pasta/do/site (ou vazio se não controla o código)",
+      "plano_path": "./seo-planos/meusite.com.br/SEO-PLANO.md",
+      "competitors": "Concorrente A=a.com,Concorrente B=b.com",
+      "platforms": "chatgpt,perplexity",
+      "country": "BR"
+    }
+  ],
+  "dataforseo_enabled": false
+}

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste deck — apresentacao-comercial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      background: #FFFFFF;
+      overflow: hidden;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    .slide-container {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide-wrapper {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .slide-container iframe {
+      border: none;
+      width: 1280px;
+      height: 720px;
+      transform-origin: top left;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .slide-container.hidden { display: none; }
+    .slide-container.active { display: flex; }
+    .counter {
+      position: fixed;
+      bottom: 16px;
+      left: 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(0,0,0,0.25);
+      z-index: 100;
+      user-select: none;
+      pointer-events: none;
+    }
+    .hint {
+      position: fixed;
+      bottom: 16px;
+      right: 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(0,0,0,0.15);
+      z-index: 100;
+      user-select: none;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+    @media print {
+      @page { size: 1280px 720px; margin: 0; }
+      html, body { width: 1280px !important; height: auto !important; background: transparent !important; overflow: visible !important; margin: 0 !important; padding: 0 !important; }
+      .counter, .hint { display: none !important; }
+      .slide-container { position: relative !important; inset: auto !important; display: block !important; width: 1280px !important; height: 720px !important; page-break-after: always !important; break-after: page !important; overflow: hidden !important; }
+      .slide-container.hidden { display: block !important; }
+      .slide-container:last-child { page-break-after: auto !important; break-after: auto !important; }
+      .slide-wrapper { width: 1280px !important; height: 720px !important; position: static !important; overflow: visible !important; }
+      .slide-container iframe { transform: none !important; width: 1280px !important; height: 720px !important; display: block !important; position: static !important; top: auto !important; left: auto !important; }
+    }
+    @media (orientation: portrait) and (max-width: 900px) {
+      .counter, .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="counter" id="counter">1/3</div>
+<div class="hint" id="hint">← → navegar · F fullscreen</div>
+
+<script>
+const TOTAL = 3;
+let current = 0;
+
+// Variáveis CSS comuns a todos os slides (fallback neutro com accent azul pra teste)
+const STYLE_VARS = `
+  :root {
+    --color-bg: #FFFFFF;
+    --color-surface: #F7F7F7;
+    --color-text: #111111;
+    --color-text-soft: #555555;
+    --color-text-mute: #999999;
+    --color-border: #BBBBBB;
+    --color-accent: #2D5BFF;
+    --color-accent-text: #2D5BFF;
+    --color-accent-soft: #E8EEFF;
+    --color-accent-border: #B5C5FF;
+    --color-card-strong: #111111;
+    --color-card-strong-text: #FFFFFF;
+    --color-card-soft: #F2F2F2;
+    --color-card-dark: #111111;
+    --font-main: 'Inter', system-ui, sans-serif;
+    --font-accent: 'Inter', serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-main); background: var(--color-bg); overflow: hidden; color: var(--color-text); }
+  .slide { width: 1280px; height: 720px; padding: 80px 100px; position: relative; display: flex; flex-direction: column; justify-content: center; }
+`;
+
+const FONT_LINK = `<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">`;
+
+const slides = [
+  // SLIDE 1 — Capa (fundo claro, template 1 variante A)
+  `<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280,initial-scale=1">
+    ${FONT_LINK}
+    <style>
+      ${STYLE_VARS}
+      .slide { background: var(--color-bg); align-items: center; justify-content: center; }
+      .center { text-align: center; }
+      .tag { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-mute); margin-bottom: 24px; font-weight: 500; }
+      .title { font-size: 72px; font-weight: 800; color: var(--color-text); letter-spacing: -2px; line-height: 1; margin-bottom: 16px; }
+      .subtitle { font-size: 28px; color: var(--color-text-soft); font-weight: 400; margin-bottom: 80px; }
+      .logos { display: flex; align-items: center; gap: 32px; justify-content: center; }
+      .logos .plus { font-size: 32px; color: var(--color-text-mute); }
+      .logo-text { font-size: 24px; font-weight: 700; color: var(--color-text); }
+    </style>
+  </head><body>
+    <div class="slide">
+      <div class="center">
+        <div class="tag">proposta comercial</div>
+        <div class="title">Programa de Exemplo</div>
+        <div class="subtitle">capacitação em IA pra equipes operacionais</div>
+        <div class="logos">
+          <div class="logo-text">Tua Empresa</div>
+          <span class="plus">+</span>
+          <div class="logo-text">Cliente Exemplo</div>
+        </div>
+      </div>
+    </div>
+  </body></html>`,
+
+  // SLIDE 2 — Punchline (fundo cinza claro, template 5)
+  `<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280,initial-scale=1">
+    ${FONT_LINK}
+    <style>
+      ${STYLE_VARS}
+      body { background: var(--color-surface); }
+      .slide { padding: 100px; align-items: center; justify-content: center; }
+      .box { border: 2px dashed var(--color-border); border-radius: 24px; padding: 70px 90px; background: var(--color-bg); max-width: 1000px; text-align: center; }
+      .line1 { font-size: 42px; font-weight: 800; color: var(--color-text); line-height: 1.3; letter-spacing: -0.5px; margin-bottom: 16px; }
+      .line2 { font-size: 42px; font-weight: 800; color: var(--color-accent-text); line-height: 1.3; letter-spacing: -0.5px; }
+    </style>
+  </head><body>
+    <div class="slide">
+      <div class="box">
+        <div class="line1">a equipe não precisa só de teoria.</div>
+        <div class="line2">precisa botar a mão na massa.</div>
+      </div>
+    </div>
+  </body></html>`,
+
+  // SLIDE 3 — Investimento (fundo escuro, template 10A)
+  `<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280,initial-scale=1">
+    ${FONT_LINK}
+    <style>
+      ${STYLE_VARS}
+      body { background: var(--color-card-dark); color: var(--color-card-strong-text); }
+      .slide { padding: 80px 100px; align-items: center; justify-content: center; text-align: center; }
+      .act-title { font-family: var(--font-accent); font-style: italic; font-size: 48px; margin-bottom: 40px; color: #777; font-weight: 400; }
+      .price { font-size: 160px; font-weight: 800; letter-spacing: -6px; line-height: 0.9; color: #FFFFFF; margin-bottom: 20px; }
+      .price-meta { font-size: 20px; color: #999; margin-bottom: 60px; }
+      .includes { display: flex; gap: 48px; justify-content: center; max-width: 1000px; }
+      .include-item { text-align: left; }
+      .include-label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #999; margin-bottom: 6px; font-weight: 500; }
+      .include-value { font-size: 18px; color: #FFFFFF; font-weight: 600; }
+    </style>
+  </head><body>
+    <div class="slide">
+      <div style="width: 100%;">
+        <div class="act-title">investimento</div>
+        <div class="price">R$ 30k</div>
+        <div class="price-meta">à vista ou em até 3x sem juros</div>
+        <div class="includes">
+          <div class="include-item">
+            <div class="include-label">inclui</div>
+            <div class="include-value">5 encontros · 1h30 cada</div>
+          </div>
+          <div class="include-item">
+            <div class="include-label">duração</div>
+            <div class="include-value">5 semanas</div>
+          </div>
+          <div class="include-item">
+            <div class="include-label">validade</div>
+            <div class="include-value">30 dias</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body></html>`
+];
+
+const body = document.body;
+const containers = [];
+
+let touchStartX = 0, touchStartY = 0;
+
+function handleSwipeEnd(dx, dy) {
+  const isPortraitMobile = window.innerHeight > window.innerWidth && window.innerWidth < 900;
+  if (isPortraitMobile) {
+    if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 50) {
+      if (dy < 0) { next(); } else { prev(); }
+    }
+  } else {
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (dx < 0) { next(); } else { prev(); }
+    }
+  }
+}
+
+slides.forEach((html, i) => {
+  const container = document.createElement('div');
+  container.className = 'slide-container' + (i === 0 ? ' active' : ' hidden');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'slide-wrapper';
+  const iframe = document.createElement('iframe');
+  iframe.srcdoc = html;
+  iframe.setAttribute('scrolling', 'no');
+  iframe.style.overflow = 'hidden';
+  iframe.addEventListener('load', () => {
+    try {
+      const doc = iframe.contentDocument;
+      try {
+        const bg = getComputedStyle(doc.body).backgroundColor;
+        container.dataset.bg = bg;
+        if (i === current) applyActiveBg();
+      } catch(e) {}
+      doc.addEventListener('keydown', (e) => {
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: e.key, code: e.code, bubbles: true }));
+      });
+      doc.addEventListener('click', (e) => {
+        document.dispatchEvent(new MouseEvent('click', { clientX: e.clientX, clientY: e.clientY, bubbles: true }));
+      });
+      doc.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+      doc.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].screenX - touchStartX;
+        const dy = e.changedTouches[0].screenY - touchStartY;
+        handleSwipeEnd(dx, dy);
+      }, { passive: true });
+    } catch(err) {}
+  });
+  wrapper.appendChild(iframe);
+  container.appendChild(wrapper);
+  body.appendChild(container);
+  containers.push(container);
+});
+
+function scaleIframes() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const isMobile = vw < 900 || vh < 500;
+  const isPortrait = vh > vw;
+  let scale, rotate = false;
+  if (isMobile && isPortrait) {
+    scale = Math.min(vh / 1280, vw / 720);
+    rotate = true;
+  } else if (isMobile) {
+    scale = Math.min(vw / 1280, vh / 720);
+  } else {
+    scale = Math.min(vw / 1280, vh / 720);
+  }
+  const slideW = 1280 * scale;
+  const slideH = 720 * scale;
+  containers.forEach(c => {
+    const wrapper = c.querySelector('.slide-wrapper');
+    const iframe = c.querySelector('iframe');
+    if (rotate) {
+      wrapper.style.width = slideH + 'px';
+      wrapper.style.height = slideW + 'px';
+      iframe.style.transform = `translate(${slideH}px, 0) rotate(90deg) scale(${scale})`;
+    } else {
+      wrapper.style.width = slideW + 'px';
+      wrapper.style.height = slideH + 'px';
+      iframe.style.transform = `scale(${scale})`;
+    }
+  });
+}
+
+function isDarkBg(color) {
+  const match = color && color.match(/\d+/g);
+  if (!match || match.length < 3) return false;
+  const [r, g, b] = match.map(Number);
+  return (r*0.299 + g*0.587 + b*0.114) < 128;
+}
+
+function applyActiveBg() {
+  const bg = containers[current] && containers[current].dataset.bg;
+  if (!bg) return;
+  document.documentElement.style.background = bg;
+  document.body.style.background = bg;
+  const dark = isDarkBg(bg);
+  const counter = document.getElementById('counter');
+  const hint = document.getElementById('hint');
+  if (counter) counter.style.color = dark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.25)';
+  if (hint) hint.style.color = dark ? 'rgba(255,255,255,0.22)' : 'rgba(0,0,0,0.15)';
+}
+
+function showSlide(index) {
+  if (index < 0 || index >= TOTAL) return;
+  containers[current].className = 'slide-container hidden';
+  current = index;
+  containers[current].className = 'slide-container active';
+  document.getElementById('counter').textContent = (current + 1) + '/' + TOTAL;
+  applyActiveBg();
+}
+
+function next() { showSlide(current + 1); }
+function prev() { showSlide(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault(); next();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault(); prev();
+  } else if (e.key === 'f' || e.key === 'F') {
+    e.preventDefault();
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else { document.exitFullscreen(); }
+  } else if (e.key === 'Home') {
+    e.preventDefault(); showSlide(0);
+  } else if (e.key === 'End') {
+    e.preventDefault(); showSlide(TOTAL - 1);
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.counter, .hint')) return;
+  const x = e.clientX / window.innerWidth;
+  if (x < 0.33) { prev(); } else { next(); }
+});
+
+document.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+document.addEventListener('touchend', (e) => {
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  const dy = e.changedTouches[0].screenY - touchStartY;
+  handleSwipeEnd(dx, dy);
+}, { passive: true });
+
+scaleIframes();
+applyActiveBg();
+window.addEventListener('resize', scaleIframes);
+window.addEventListener('orientationchange', () => setTimeout(scaleIframes, 200));
+
+setTimeout(() => {
+  document.getElementById('hint').style.opacity = '0';
+}, 5000);
+</script>
+</body>
+</html>

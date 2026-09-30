@@ -1,0 +1,10 @@
+{
+  "setup_feito": true,
+  "idioma": "pt",
+  "output_path": "./Aprendizados/",
+  "integracoes": {
+    "transcribe": false,
+    "dataforseo": false,
+    "skill_creator": false
+  }
+}

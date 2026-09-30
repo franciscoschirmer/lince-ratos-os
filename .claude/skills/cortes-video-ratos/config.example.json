@@ -1,0 +1,40 @@
+{
+  "_comentario": "Copia pra config.json e edita. A skill cria ela sozinha no primeiro setup.",
+
+  "modo": "destaques",
+  "_modo_ajuda": "'destaques' = achar os melhores momentos que se sustentam sozinhos (podcast, live, aula, talking head). 'blocos' = a fonte JA tem virada de assunto e tu quer os blocos inteiros (compilado de noticias, aula com modulos). Na duvida, destaques.",
+
+  "duracao": {
+    "destaques_min_s": 20,
+    "destaques_max_s": 60,
+    "blocos_min_s": 180,
+    "blocos_max_s": 480
+  },
+  "_duracao_ajuda": "destaques: 20-40s e o ponto doce pra Reels/TikTok. blocos: 3-8min pra TikTok longo e YouTube.",
+
+  "formato": "vertical",
+  "_formato_ajuda": "'vertical' reenquadra pra 1080x1920 com crop central. 'original' mantem como esta. Crop central decepa se o assunto nao esta no centro: confere um frame.",
+
+  "hook": {
+    "ativo": true,
+    "ate_s": 3,
+    "y": 0.24,
+    "tamanho": 60,
+    "contorno": 4,
+    "fonte": null
+  },
+  "_hook_ajuda": "y: 0=topo, 1=base. 0.24 = terco superior. contorno>0 deixa o texto legivel sobre fundo claro E escuro. fonte null = acha uma do sistema.",
+
+  "legendas_queimadas": false,
+  "_legendas_ajuda": "Legenda palavra-a-palavra queimada no video. Desligada por padrao: e lenta e a maioria das plataformas ja gera legenda automatica. A legenda de POST (o caption) e outra coisa e sai sempre.",
+
+  "av_offset_frames": 0,
+  "_av_offset_ajuda": "So mexe se a TUA fonte tiver a imagem dessincronizada do audio. Mede antes, nao chuta: a skill te mostra como. 0 = sem correcao.",
+
+  "backend": "auto",
+  "_backend_ajuda": "'auto' detecta. 'palmier' (Mac, GUI) ou 'ffmpeg' (qualquer OS).",
+
+  "transcricao": "auto",
+  "saida": "./cortes/",
+  "fps": 30
+}
