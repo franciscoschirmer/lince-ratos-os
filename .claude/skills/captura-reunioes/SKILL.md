@@ -101,7 +101,13 @@ reunião de cliente da lista Rituais.
 
 ### 4b. Concluir o que a reunião disse que foi feito
 Aprovado pelo Francisco em 2026-09-30. Para cada conclusão do passo 3c, achar a tarefa aberta correspondente
-(mesma busca do passo 4). Todo comentário do robô diz **quem falou, em qual reunião e quando**:
+(mesma busca do passo 4). Todo comentário do robô diz **quem falou, em qual reunião e quando**.
+
+**Todo comentário do robô marca o responsável** (Francisco, 2026-09-30), pra cair na caixa de entrada dele no ClickUp:
+usar `clickup_create_comment` com a menção no texto, no formato `[@Nome](#user_mention#ID)` (IDs na tabela acima),
+na primeira linha do comentário. Marcar todos os responsáveis da tarefa e, se quem falou na reunião for outra
+pessoa da equipe, marcar também. Tarefa sem responsável: marcar o Francisco.
+Ex.: `[@Claudio Duarte](#user_mention#118092849) 🤖 Possivelmente concluída, confirmar`
 
 - **Uma tarefa só, sem dúvida:** comentar
   ```
@@ -142,8 +148,10 @@ já existiam · divergências · sem dono.
 O detalhe completo (ATA + tabela) vai para `operacao/captura-reunioes/AAAA-MM-DD.md`.
 
 Rodando sozinha (rotina na nuvem): o relatório vira um **comentário no container da semana** no ClickUp,
-começando com `🤖 Captura DD/MM`. A rotina não escreve nada no repositório (não faz commit). Se não houve
-reunião nova, não comenta nada.
+começando com `[@Francisco Schirmer](#user_mention#158419961) 🤖 Captura DD/MM` (a menção faz o aviso chegar no
+celular dele pelo app do ClickUp). A rotina não escreve nada no repositório (não faz commit). Se não houve
+reunião nova, comenta só `[@Francisco Schirmer](#user_mention#158419961) 🤖 Captura DD/MM: rodou, nenhuma reunião nova`,
+pra ficar a prova de que rodou.
 
 ## Regras
 - Em tarefa existente, a skill só faz três coisas: comentar, pôr a tag `captura-ia` e mudar para concluído
