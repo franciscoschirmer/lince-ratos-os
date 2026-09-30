@@ -44,19 +44,23 @@ naquele status. Cada `since` novo é uma passagem. A foto diária guarda cada `s
 Limite conhecido: duas passagens pelo mesmo status no mesmo dia (entre duas fotos) contam como uma.
 
 ## Tipo da peça (pelo nome, sem acento e minúsculo)
-`reels` (reels, video, vídeo) · `corte` · `roteiro` · `carrossel` · `card` · `capa` · `estatico` (estático, post) ·
-`caixinha` · senão `outro`. Design = carrossel, card, capa, estatico, caixinha. Vídeo = reels, corte, roteiro.
+`reels` (reels, rells, video, vídeo, extração, pergunta extra, sessão) · `corte` · `roteiro` · `carrossel` · `card` ·
+`capa` · `estatico` (estático, post) · `caixinha` · `design` (logotipo, guia, comunicado, folder, cartão, qualquer peça
+da lista Peças de Design sem outro tipo) · senão `outro`.
+Design = carrossel, card, capa, estatico, design. Vídeo = reels, corte, roteiro. Caixinha = qualquer um.
 
 ## Quem produziu (ordem de decisão; guardar em `atribuicao` qual regra valeu)
-1. Pâmela nos watchers ou responsável, e peça de design → `Pamela` (`watcher`)
-2. Mateus nos watchers ou autor de comentário, e peça de vídeo → `Mateus` (`watcher` / `comentario`)
-3. Peça de vídeo com comentário do Francisco contendo "repassado" (ou "VH"), sem Mateus → `Victor` (`repassado`)
-4. Peça de vídeo em `revisão de social media`+ sem Mateus e sem Pâmela, só Francisco/Marina/Admin nos watchers → `Victor` (`sem-mateus`)
-5. Giovanna nos watchers → `outro` (não é medida aqui)
-6. Resto → `outro`
+Olhar só Pâmela `284651027` e Mateus `118126212` nos watchers/responsáveis; qualquer outro watcher (Victoria, Henri,
+Admin, id `-1`, desconhecidos) é ignorado.
+1. Só a Pâmela presente (sem Mateus) e a peça não é vídeo → `Pamela` (`watcher`)
+2. Só o Mateus presente, ou Mateus autor de comentário, e a peça não é design → `Mateus` (`watcher` / `comentario`)
+3. Os dois presentes: decide o tipo (design → Pamela, vídeo → Mateus, caixinha/outro → `outro`) (`tipo`)
+4. Nenhum dos dois, comentário do Francisco com "repassado" (palavra exata) ou "VH" → `Victor` (`repassado`)
+5. Nenhum dos dois, peça de vídeo que **não é roteiro** e chegou em `revisão de social media` → `Victor` (`sem-mateus`)
+6. Giovanna presente e nenhum dos dois → `outro` (`giovanna`)
+7. Resto → `outro` (`sem-regra`)
 
-Watcher pode entrar por @menção sem ter feito a peça: por isso a regra de tipo vem junto. Dúvida vira `outro`,
-nunca chute.
+Roteiro sem "repassado" não vira Victor: pode ser só texto. Dúvida vira `outro`, nunca chute.
 
 ## Modo foto
 

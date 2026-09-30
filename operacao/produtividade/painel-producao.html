@@ -96,7 +96,11 @@ details summary { cursor: pointer; color: var(--ink-2); }
     </div>
   </header>
 
-  <div id="aviso" class="banner" hidden></div>
+  <div id="aviso" class="banner" hidden>
+    <span id="aviso-txt"></span>
+    <button type="button" id="permitir" hidden>Permitir acesso ao Supabase</button>
+    <div class="status" id="diag"></div>
+  </div>
 
   <section class="cards" id="cards" aria-label="Resumo da semana por profissional"></section>
 
@@ -324,19 +328,51 @@ function renderAll() {
   renderRework();
 }
 
-function aviso(msg) { const a = $("#aviso"); a.textContent = msg; a.hidden = !msg; }
+function aviso(msg, diag = "", pedir = false) {
+  $("#aviso-txt").textContent = msg; $("#diag").textContent = diag;
+  $("#permitir").hidden = !pedir; $("#aviso").hidden = !msg;
+}
+
+async function permissaoSupabase() {
+  const perm = await claude.use("permissions");
+  if (!perm) return "unavailable";
+  try { return await perm.state("mcp:Supabase"); } catch { return "unavailable"; }
+}
+
+$("#permitir").addEventListener("click", async () => {
+  const perm = await claude.use("permissions");
+  if (!perm) { aviso("Este visualizador não permite pedir acesso. Abra o painel pelo claude.ai no navegador.", "permissions: indisponível"); return; }
+  const r = await perm.request(["mcp:Supabase"]);
+  const st = r["mcp:Supabase"];
+  if (st === "denied") aviso("O acesso ao Supabase está recusado para este painel. Libere no menu de permissões do painel (topo da página do artefato) e clique em Atualizar.", "permissão: denied");
+  else carregar();
+});
 
 async function carregar() {
   $("#estado").textContent = "Buscando dados…";
   const mcp = await claude.use("mcp");
-  if (!mcp) { aviso("Este painel precisa ser aberto no claude.ai para ler os dados do Supabase."); $("#estado").textContent = ""; return; }
+  if (!mcp) { aviso("Este painel precisa ser aberto no claude.ai para ler os dados do Supabase.", "mcp: indisponível nesta visualização"); $("#estado").textContent = ""; return; }
+  const st = await permissaoSupabase();
+  if (st === "denied") { aviso("O acesso ao Supabase foi recusado para este painel. Libere no menu de permissões do painel e clique em Atualizar.", "permissão: denied", true); $("#estado").textContent = ""; return; }
+  if (st === "prompt") $("#estado").textContent = "Aguardando você permitir o Supabase…";
+  let res;
   try {
-    const res = await mcp.callTool("Supabase", "execute_sql", { project_id: PROJECT, query: SQL }, { cache: false });
-    const rows = parsePayload(res.payload ?? res.content?.[0]?.text);
-    index(rows); aviso(rows.length ? "" : "Ainda não há eventos registrados. A foto diária grava a partir de hoje, e o histórico das últimas semanas entra na primeira carga.");
-    renderAll();
-    $("#estado").textContent = "Atualizado às " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-  } catch (e) {
+    res = await mcp.callTool("Supabase", "execute_sql", { project_id: PROJECT, query: SQL }, { cache: false });
+  } catch (e) { return falha(e, st); }
+  let rows;
+  try { rows = parsePayload(res.payload ?? res.content?.[0]?.text); }
+  catch (e) {
+    const amostra = JSON.stringify(res.payload ?? res.content ?? res).slice(0, 180);
+    aviso("O Supabase respondeu, mas não consegui ler a resposta.", "formato recebido: " + amostra); $("#estado").textContent = ""; return;
+  }
+  if (!Array.isArray(rows)) { aviso("O Supabase respondeu num formato inesperado.", "formato recebido: " + JSON.stringify(rows).slice(0, 180)); $("#estado").textContent = ""; return; }
+  index(rows); aviso(rows.length ? "" : "O banco respondeu, mas ainda não há eventos das três pessoas.", rows.length ? "" : "linhas: 0");
+  renderAll();
+  $("#estado").textContent = `Atualizado às ${new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })} · ${rows.length} eventos`;
+}
+
+function falha(e, st) {
+  {
     const c = e && e.code;
     const msg = {
       needs_reauth: "A conexão com o Supabase expirou. Reconecte em claude.ai > Configurações > Conectores.",
@@ -345,8 +381,10 @@ async function carregar() {
       not_in_manifest: "O acesso deste painel ao Supabase foi recusado. Libere o Supabase para este painel e clique em Atualizar.",
       server_unavailable: "O Supabase não respondeu agora. Tente Atualizar em alguns segundos.",
       tool_error: "A consulta ao banco falhou: " + (e && e.message || ""),
-    }[c] || "Não consegui ler os dados agora (" + (c || "erro") + "). Clique em Atualizar para tentar de novo.";
-    aviso(msg); $("#estado").textContent = "";
+    }[c] || "Não consegui ler os dados agora. Clique em Atualizar para tentar de novo.";
+    const pedir = ["not_in_manifest", "consent_required", "not_granted"].includes(c) || st === "prompt";
+    aviso(msg, `código: ${c || "sem código"} · permissão: ${st} · ${(e && e.message || "").slice(0, 160)}`, pedir);
+    $("#estado").textContent = "";
   }
 }
 
