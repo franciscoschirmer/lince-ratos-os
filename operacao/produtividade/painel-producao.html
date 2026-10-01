@@ -76,6 +76,8 @@ td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
 a { color: var(--accent); }
 .costs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; align-items: end; }
 .costs label { display: grid; gap: 4px; font-size: .85rem; color: var(--ink-2); }
+.cost { display: grid; grid-template-columns: 1fr auto; gap: 6px; align-items: end; min-width: 0; }
+.cost input { min-width: 0; width: 100%; }
 details summary { cursor: pointer; color: var(--ink-2); }
 .note { font-size: .85rem; color: var(--ink-2); max-width: 70ch; }
 @media (prefers-reduced-motion: no-preference) { .bar { transition: opacity .15s; } }
@@ -134,11 +136,14 @@ details summary { cursor: pointer; color: var(--ink-2); }
   </section>
 
   <section class="panel" id="sec-custos">
-    <div><h2>Custo por peça</h2><div class="status">valor mensal pago a cada profissional. Fica guardado só neste painel, visível só para você.</div></div>
+    <div><h2>Custo por peça</h2><div class="status">quanto cada profissional recebe, por mês ou por peça entregue. Fica guardado só neste painel, visível só para você.</div></div>
     <form class="costs" id="f-custos">
-      <label for="c-Pamela">Pâmela (R$/mês)<input id="c-Pamela" inputmode="decimal" placeholder="0,00"></label>
-      <label for="c-Mateus">Mateus (R$/mês)<input id="c-Mateus" inputmode="decimal" placeholder="0,00"></label>
-      <label for="c-Victor">Victor (R$/mês)<input id="c-Victor" inputmode="decimal" placeholder="0,00"></label>
+      <div class="cost"><label for="c-Pamela">Pâmela (R$)<input id="c-Pamela" inputmode="decimal" placeholder="0,00"></label>
+        <select id="m-Pamela" aria-label="Forma de pagamento da Pâmela"><option value="mes">por mês</option><option value="peca">por peça</option></select></div>
+      <div class="cost"><label for="c-Mateus">Mateus (R$)<input id="c-Mateus" inputmode="decimal" placeholder="0,00"></label>
+        <select id="m-Mateus" aria-label="Forma de pagamento do Mateus"><option value="mes">por mês</option><option value="peca">por peça</option></select></div>
+      <div class="cost"><label for="c-Victor">Victor (R$)<input id="c-Victor" inputmode="decimal" placeholder="0,00"></label>
+        <select id="m-Victor" aria-label="Forma de pagamento do Victor"><option value="mes">por mês</option><option value="peca" selected>por peça</option></select></div>
       <button type="submit" id="salvar-custos">Salvar valores</button>
     </form>
     <span class="status" id="custos-estado"></span>
@@ -149,6 +154,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
     <div class="note">
       <p><b>Entregas</b>: peças que entraram em "revisão de social media" na semana. <b>Por dia</b>: entregas divididas pelos dias úteis da semana (na semana corrente, os dias úteis que já passaram).</p>
       <p><b>Aprovação de primeira (Marina)</b>: das peças que a Marina aprovou na semana, quantas não tiveram nenhuma alteração interna antes da aprovação. <b>Aprovação de primeira (cliente)</b>: das peças que o cliente aprovou na semana, quantas não tiveram alteração do cliente antes.</p>
+      <p><b>Custo</b>: para quem recebe por mês, o custo da semana é o valor mensal × 12 ÷ 52, dividido pelas entregas da semana. Para quem recebe por peça, o custo da semana é o valor da peça × entregas.</p>
       <p><b>Quem fez a peça</b> vem de quem acompanhou a tarefa no ClickUp e dos comentários ("Repassado VH" marca o Victor). Peças sem produtor claro ficam fora.</p>
       <p>Até 30/09/2026 o histórico é aproximado: o ClickUp guarda só a última passagem por cada status. A partir daí a foto diária registra cada ida e volta.</p>
     </div>
@@ -218,6 +224,13 @@ function metrics(ws, pid, filter = () => true) {
   return { entregas: entregas.size, porDia: entregas.size / dias, altInt, smN: aprSm.length, smOk, smPct: pct(smOk, aprSm.length), cliN: aprCli.length, cliOk, cliPct: pct(cliOk, aprCli.length) };
 }
 
+function custoDe(pid) {
+  const c = state.custos[pid];
+  if (typeof c === "number") return c > 0 ? { modo: "mes", valor: c } : null;
+  if (c && Number(c.valor) > 0) return { modo: c.modo === "peca" ? "peca" : "mes", valor: Number(c.valor) };
+  return null;
+}
+
 function chip(p) {
   if (p == null) return `<span class="chip none">sem aprovação ainda</span>`;
   if (p >= 80) return `<span class="chip good">✓ ${p}% de primeira</span>`;
@@ -229,9 +242,14 @@ function renderCards() {
   const ws = state.sel;
   $("#cards").innerHTML = PEOPLE.map(p => {
     const m = metrics(ws, p.id);
-    const mensal = state.custos[p.id];
-    let custo = `<dd class="status">defina abaixo</dd>`;
-    if (mensal > 0) { const semanal = mensal * 12 / 52; custo = `<dd>${m.entregas ? brl(semanal / m.entregas) : "sem entregas"}</dd>`; }
+    const c = custoDe(p.id);
+    let custo = `<dt>Custo por peça</dt><dd class="status">defina abaixo</dd>`;
+    if (c && c.modo === "peca") {
+      custo = `<dt>Custo por peça</dt><dd>${brl(c.valor)}</dd><dt>Custo na semana</dt><dd>${brl(c.valor * m.entregas)}</dd>`;
+    } else if (c) {
+      const semanal = c.valor * 12 / 52;
+      custo = `<dt>Custo por peça</dt><dd>${m.entregas ? brl(semanal / m.entregas) : "sem entregas"}</dd><dt>Custo na semana</dt><dd>${brl(semanal)}</dd>`;
+    }
     return `<article class="card">
       <div class="card-head"><div><div class="name"><span class="dot" style="background:var(${p.cor})"></span>${p.nome}</div><div class="role">${p.papel}</div></div>${chip(m.smPct)}</div>
       <div class="big">${m.entregas}<small>entregas · ${m.porDia.toFixed(1).replace(".", ",")} por dia</small></div>
@@ -239,7 +257,7 @@ function renderCards() {
         <dt>Alterações internas</dt><dd>${m.altInt}</dd>
         <dt>Aprovadas pela Marina</dt><dd>${m.smN ? `${m.smOk} de ${m.smN} de primeira` : "–"}</dd>
         <dt>Aprovadas pelo cliente</dt><dd>${m.cliN ? `${m.cliOk} de ${m.cliN} de primeira (${m.cliPct}%)` : "–"}</dd>
-        <dt>Custo por peça</dt>${custo}
+        ${custo}
       </dl>
     </article>`;
   }).join("");
@@ -397,14 +415,22 @@ async function custos() {
   dbRef = db.doc("config/custos");
   dbRef.onSnapshot((snap) => {
     state.custos = snap.exists ? (snap.data() || {}) : {};
-    for (const p of PEOPLE) { const v = state.custos[p.id]; const inp = $("#c-" + p.id); if (document.activeElement !== inp) inp.value = v ? String(v).replace(".", ",") : ""; }
+    for (const p of PEOPLE) {
+      const c = custoDe(p.id), inp = $("#c-" + p.id), sel = $("#m-" + p.id);
+      if (document.activeElement !== inp) inp.value = c ? String(c.valor).replace(".", ",") : "";
+      if (c && document.activeElement !== sel) sel.value = c.modo;
+    }
     if (state.rows.length) renderCards();
   }, () => { $("#sec-custos").hidden = true; });
 }
 
 $("#f-custos").addEventListener("submit", async (e) => {
   e.preventDefault(); if (!dbRef) return;
-  const body = {}; for (const p of PEOPLE) { const v = parseFloat(($("#c-" + p.id).value || "").replace(/\./g, "").replace(",", ".")); if (v > 0) body[p.id] = v; }
+  const body = {};
+  for (const p of PEOPLE) {
+    const v = parseFloat(($("#c-" + p.id).value || "").replace(/\./g, "").replace(",", "."));
+    if (v > 0) body[p.id] = { modo: $("#m-" + p.id).value, valor: v };
+  }
   try { await dbRef.set(body); $("#custos-estado").textContent = "Valores salvos."; }
   catch (err) { $("#custos-estado").textContent = err && err.code === "invalid_argument" ? "Só o dono do painel pode salvar os valores." : "Não consegui salvar agora. Tente de novo."; }
 });
