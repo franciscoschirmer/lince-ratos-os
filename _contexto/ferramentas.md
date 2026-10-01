@@ -13,7 +13,7 @@
 | Google Agenda | agenda e reuniões | MCP (conector do claude.ai), conta admin@linceco.com.br, que vê todas as reuniões da equipe | ligada, chega ao Claude Code e à rotina na nuvem (testado) | 2026-09-30 |
 | Google Drive (Docs, Sheets) | ficha do cliente, materiais, planilhas, drives compartilhados com clientes; Anotações do Gemini (dono operacional@linceco.com.br) | MCP (conector do claude.ai) | ligada, chega ao Claude Code e à rotina na nuvem (testado) | 2026-09-30 |
 | Cloudflare | hospedar páginas e painéis (Pages), funções, controle de acesso por e-mail (Access) | CLI `wrangler` (OAuth, `npx wrangler login` neste computador) + skill `/cloudflare-ratos`; conta pessoal do Francisco (franciscoschirmer@gmail.com), Account ID `dd1f6c7762790b4ae65f086e86ca8832`. A conta da empresa (operacional@linceco.com.br) existe mas foi desconectada por escolha dele. Login no navegador certo: `npx wrangler login --browser=false` e colar o link | ligada (modo básico, sem token) | 2026-09-30 |
-| Supabase | banco do log de produtividade (e do portal do Cláudio) | MCP (conector do claude.ai), chega ao Claude Code, às rotinas e ao Painel de Produção | ligada | 2026-09-30 |
+| Supabase | banco do log de produtividade (projeto "Chico" na conta pessoal do Francisco desde 2026-10-01; o portal do Cláudio fica em outra conta) | MCP (conector do claude.ai), chega ao Claude Code, às rotinas e ao Painel de Produção | ligada | 2026-09-30 |
 | Granola | notas de reunião | MCP (conector do claude.ai), conta operacional@brio-lab.com | ligada, vazia, sem uso | 2026-09-30 |
 | Meta Ads (Gerenciador) | campanhas dos clientes, análises e criativos | skill `/meta-ads-ratos` + `/ads-ratos` (token no `.env`) | não ligada | 2026-09-29 |
 | WhatsApp | grupos com os clientes | só você, na mão (exportar conversa e trazer) | não ligada | 2026-09-29 |
@@ -38,5 +38,7 @@
 ## Notas de uso
 - Doc do Google com link aberto: o agente lê pelo export em txt (`/export?format=txt`), mas não escreve nele (2026-09-30)
 - O modo automático do Claude Code bloqueia gravar arquivo com senhas ou CPFs de terceiros; nesses casos o Francisco roda o script à mão (2026-09-30)
+- O conector do ClickUp tem limite de 1.000 chamadas por dia para o workspace inteiro (rotinas e sessões somadas); carga grande só fora do horário das rotinas (2026-10-01)
+- O modo automático do Claude Code pode barrar o `git push` quando o pacote tem arquivo de outra sessão; aí o Francisco roda no terminal, um comando por vez (o PowerShell não aceita `&&`) (2026-10-01)
 - ClickUp, IDs de usuário (resolver por nome é instável): Francisco `158419961` · Ivan `112000442` · Júlia `82001470` · Pâmela `284651027` · Victoria `48777424` · Marina `81994084` · Jenifer `49036032` · Henri `164678340` · Cláudio `118092849` · Mateus `118126212` · Giovanna `284462463` (2026-09-30)
 - O conector ClickUp age como Admin Lince & Co (`266535331`), não como o Francisco: mensagem de chat atribuída a ele (assignee `158419961`) gera notificação. O conector não cria canal de chat (2026-09-30)
