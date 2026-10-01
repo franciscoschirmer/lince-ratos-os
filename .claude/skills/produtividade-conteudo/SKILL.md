@@ -17,7 +17,7 @@ no dashboard privado do Francisco (dado financeiro, confidencial).
 
 | o quê | valor |
 |---|---|
-| Supabase | projeto `axilzquaqtppqjkbqqca` ("Lince"), schema `produtividade`, tabelas `pecas` e `eventos`. **Nunca tocar no schema public** (é do portal do Cláudio) |
+| Supabase | projeto `mastlaemlelhtnefmdud` ("Chico", conta pessoal do Francisco, São Paulo), schema `produtividade`, tabelas `pecas`, `eventos` e `config`. No `public` só existe a função de leitura do painel; não criar mais nada lá |
 | Listas de conteúdo | Calendário Editorial `901325858184` · Lince & Co. (Cliente 00) `901325858587` · Peças de Design `901325858360` |
 | Campo cliente | 👔 Clientes `35443fa6-1e27-466f-9a6b-a2d132237079` (dropdown; vem como orderindex, traduzir pela lista de opções) |
 | Container onde comentar o fechamento | tarefa `🔄 Review/Retro Semanal (Sexta-feira)` `86ahaqq7k` |

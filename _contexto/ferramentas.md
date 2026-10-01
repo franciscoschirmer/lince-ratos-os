@@ -39,3 +39,4 @@
 - Doc do Google com link aberto: o agente lê pelo export em txt (`/export?format=txt`), mas não escreve nele (2026-09-30)
 - O modo automático do Claude Code bloqueia gravar arquivo com senhas ou CPFs de terceiros; nesses casos o Francisco roda o script à mão (2026-09-30)
 - ClickUp, IDs de usuário (resolver por nome é instável): Francisco `158419961` · Ivan `112000442` · Júlia `82001470` · Pâmela `284651027` · Victoria `48777424` · Marina `81994084` · Jenifer `49036032` · Henri `164678340` · Cláudio `118092849` · Mateus `118126212` · Giovanna `284462463` (2026-09-30)
+- O conector ClickUp age como Admin Lince & Co (`266535331`), não como o Francisco: mensagem de chat atribuída a ele (assignee `158419961`) gera notificação. O conector não cria canal de chat (2026-09-30)

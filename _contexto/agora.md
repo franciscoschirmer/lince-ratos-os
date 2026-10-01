@@ -6,7 +6,7 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
-2026-09-30: painel de produção funcionando em dois lugares: o privado no claude.ai e o do time em producao-lince.pages.dev (login lince + senha, visual da marca, custos inclusos), com visão por semana e por mês. Backend endurecido (chave do painel no banco, bloqueio de tentativas, cabeçalhos de proteção). Também no ar: /captura-reunioes diária 18h.
+2026-09-30: painel de produção funcionando em dois lugares: o privado no claude.ai e o do time em producao-lince.pages.dev (login lince + senha, visual da marca, custos inclusos), com visão por semana e por mês. Backend endurecido (chave do painel no banco, bloqueio de tentativas, cabeçalhos de proteção). Também no ar: /captura-reunioes diária 18h. Skill /fila-aprovacao pronta (lista do que enviar aos clientes, sem capas); falta o canal, o teste e as rotinas.
 
 ## Pendências
 - Confirmar com o Cláudio o schema `produtividade` e a função `public.produtividade_dados_painel` (com chave) no Supabase "Lince"; se ele não quiser na área pública, o caminho é ele expor o schema `produtividade` no Data API (2026-09-30)
@@ -15,7 +15,8 @@
 - Conferir o primeiro fechamento semanal de produtividade na Review/Retro, quinta 2026-10-01 18h (2026-09-30)
 - Conferir o comentário "🤖 Captura 01/10" no container da semana: primeira execução automática (2026-10-01)
 - Na Planning de 2026-10-05, revisar as tarefas com a tag captura-ia e as 7 divergências do relatório de 30/09 (2026-09-30)
-- Mapear os próximos processos (o primeiro, Reunião para ClickUp, virou /captura-reunioes) (2026-09-29)
+- Criar o canal "Fila de Aprovação" no chat do ClickUp, testar o disparo da /fila-aprovacao e ligar as rotinas 10h e 16h30 seg-sex (registrar em automacoes.md) (2026-09-30)
+- Mapear os próximos processos: varredura operacional do ClickUp, programação semanal, fechamento semanal, avanços da semana, WhatsApp para ClickUp, auditoria de setup (2026-09-30)
 - Troca geral de senhas expostas nos grupos: Karina (Registro.br, Hostgator, wp-admin), e-mails operacional e criativos, Simone no doc aberto (2026-09-30)
 - Restringir o doc de acessos e colar nele os acessos da Átria e dos sócios (2026-09-30)
 - Pedir à Jenifer os acessos da Urocenter (2026-09-30)
