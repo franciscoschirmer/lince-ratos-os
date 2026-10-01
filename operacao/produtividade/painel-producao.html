@@ -43,6 +43,9 @@ button { cursor: pointer; }
 button:hover { border-color: var(--accent); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .status { font-size: .82rem; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--ring); border-radius: 8px; overflow: hidden; }
+.seg button { border: 0; border-radius: 0; background: var(--surface); color: var(--ink-2); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 .banner { background: var(--surface); border: 1px solid var(--ring); border-left: 4px solid var(--warn); border-radius: 8px; padding: 12px 14px; color: var(--ink-2); }
 
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
@@ -91,7 +94,11 @@ details summary { cursor: pointer; color: var(--ink-2); }
       <p class="sub">Pâmela (design), Mateus e Victor (edição) · status das peças registrados do ClickUp</p>
     </div>
     <div class="controls">
-      <label for="semana" class="status">Semana</label>
+      <div class="seg" role="group" aria-label="Ver por">
+        <button type="button" data-modo="semana" aria-pressed="true">Semana</button>
+        <button type="button" data-modo="mes" aria-pressed="false">Mês</button>
+      </div>
+      <label for="semana" class="status" id="lbl-periodo">Semana</label>
       <select id="semana"></select>
       <button id="atualizar" type="button">Atualizar</button>
       <span class="status" id="estado">Carregando…</span>
@@ -108,7 +115,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
 
   <section class="grid2">
     <div class="panel">
-      <div><h2>Entregas para revisão</h2><div class="status">peças enviadas à Marina por semana</div></div>
+      <div><h2>Entregas para revisão</h2><div class="status" id="sub-entregas">peças enviadas à Marina por semana</div></div>
       <div class="legend" id="leg1"></div>
       <svg class="chart" id="ch-entregas" viewBox="0 0 520 230" role="img" aria-label="Entregas por semana"></svg>
     </div>
@@ -131,7 +138,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
   </section>
 
   <section class="panel">
-    <div><h2>Peças que mais voltaram</h2><div class="status">últimas 8 semanas, alterações internas e do cliente</div></div>
+    <div><h2>Peças que mais voltaram</h2><div class="status" id="sub-retrabalho">alterações internas e do cliente no período</div></div>
     <div class="scroll"><table id="t-retrabalho"></table></div>
   </section>
 
@@ -172,18 +179,22 @@ const PEOPLE = [
 const SQL = `select e.task_id, e.evento, extract(epoch from e.ocorrido_em)*1000 as t,
   p.produtor, p.nome, p.cliente, p.tipo, p.url
   from produtividade.eventos e join produtividade.pecas p using (task_id)
-  where e.ocorrido_em > now() - interval '120 days' and p.produtor in ('Pamela','Mateus','Victor')
+  where e.ocorrido_em > now() - interval '400 days' and p.produtor in ('Pamela','Mateus','Victor')
   order by e.ocorrido_em`;
 const DAY = 864e5, WEEK = 7 * DAY;
 const $ = (s) => document.querySelector(s);
-const state = { rows: [], byTask: new Map(), weeks: [], sel: null, custos: {} };
+const state = { rows: [], byTask: new Map(), modo: "semana", periodos: [], sel: null, custos: {} };
 let dbRef = null;
 
 function mondayOf(ts) { const d = new Date(ts); d.setHours(0,0,0,0); const k = (d.getDay() + 6) % 7; d.setDate(d.getDate() - k); return d.getTime(); }
+function firstOfMonth(ts) { const d = new Date(ts); return new Date(d.getFullYear(), d.getMonth(), 1).getTime(); }
+function nextMonth(ts) { const d = new Date(ts); return new Date(d.getFullYear(), d.getMonth() + 1, 1).getTime(); }
 const fmtD = (ts) => new Date(ts).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+const fmtM = (ts) => new Date(ts).toLocaleDateString("pt-BR", { month: "short", year: "2-digit" }).replace(".", "").replace(" de ", "/");
+const fmtMLong = (ts) => { const s = new Date(ts).toLocaleDateString("pt-BR", { month: "long", year: "numeric" }); return s.charAt(0).toUpperCase() + s.slice(1); };
 const pct = (a, b) => b ? Math.round(100 * a / b) : null;
 const brl = (v) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-const cssv = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const PALAVRA = { semana: { nome: "semana", nesta: "nesta semana", na: "na semana", por: "por semana" }, mes: { nome: "mês", nesta: "neste mês", na: "no mês", por: "por mês" } };
 
 function parsePayload(p) {
   const txt = typeof p === "string" ? p : (p && typeof p.result === "string") ? p.result : JSON.stringify(p);
@@ -194,34 +205,60 @@ function parsePayload(p) {
   return JSON.parse(ini >= 0 && fim > ini ? txt.slice(ini, fim + 1) : txt);
 }
 
+// períodos do mais recente para o mais antigo: {ini, fim, curto, longo}
+function periodos(modo) {
+  const now = Date.now(), first = state.rows.length ? state.rows[0].t : now, out = [];
+  if (modo === "mes") {
+    for (let m = firstOfMonth(now); m >= firstOfMonth(first); m = firstOfMonth(m - DAY)) {
+      out.push({ ini: m, fim: nextMonth(m), curto: fmtM(m), longo: fmtMLong(m) + (m === firstOfMonth(now) ? " (atual)" : "") });
+    }
+  } else {
+    for (let w = mondayOf(now); w >= mondayOf(first); w -= WEEK) {
+      out.push({ ini: w, fim: w + WEEK, curto: fmtD(w), longo: `${fmtD(w)} a ${fmtD(w + 6 * DAY)}${w === mondayOf(now) ? " (atual)" : ""}` });
+    }
+  }
+  return out;
+}
+
+function montarPeriodos() {
+  state.periodos = periodos(state.modo);
+  if (state.sel == null || !state.periodos.some(p => p.ini === state.sel)) state.sel = state.periodos[0].ini;
+  const sel = $("#semana");
+  sel.innerHTML = state.periodos.map(p => `<option value="${p.ini}">${p.longo}</option>`).join("");
+  sel.value = String(state.sel);
+  $("#lbl-periodo").textContent = state.modo === "mes" ? "Mês" : "Semana";
+  for (const b of document.querySelectorAll("[data-modo]")) b.setAttribute("aria-pressed", String(b.dataset.modo === state.modo));
+  const w = PALAVRA[state.modo];
+  $("#sub-entregas").textContent = `peças enviadas à Marina ${w.por}`;
+  $("#cards").setAttribute("aria-label", `Resumo ${w.na === "no mês" ? "do mês" : "da semana"} por profissional`);
+}
+
+function periodoAtual() { return state.periodos.find(p => p.ini === state.sel) || state.periodos[0]; }
+
 function index(rows) {
   state.rows = rows.map(r => ({ ...r, t: Number(r.t) }));
   state.byTask = new Map();
   for (const r of state.rows) { if (!state.byTask.has(r.task_id)) state.byTask.set(r.task_id, []); state.byTask.get(r.task_id).push(r); }
-  const now = Date.now();
-  const first = state.rows.length ? mondayOf(state.rows[0].t) : mondayOf(now);
-  const weeks = []; for (let w = mondayOf(now); w >= first; w -= WEEK) weeks.push(w);
-  state.weeks = weeks;
-  if (state.sel == null || !weeks.includes(state.sel)) state.sel = weeks[0];
-  const sel = $("#semana");
-  sel.innerHTML = weeks.map(w => `<option value="${w}">${fmtD(w)} a ${fmtD(w + 6 * DAY)}${w === weeks[0] ? " (atual)" : ""}</option>`).join("");
-  sel.value = String(state.sel);
+  montarPeriodos();
 }
 
 function hadBefore(task, evento, t) { return (state.byTask.get(task) || []).some(r => r.evento === evento && r.t < t); }
 
-function metrics(ws, pid, filter = () => true) {
-  const we = ws + WEEK;
-  const evs = state.rows.filter(r => r.produtor === pid && r.t >= ws && r.t < we && filter(r));
+function diasUteis(ini, fim) {
+  const ate = Math.min(fim, Date.now() + 1); let n = 0;
+  for (let d = ini; d < ate; d += DAY) { const k = new Date(d).getDay(); if (k > 0 && k < 6) n++; }
+  return Math.max(1, n);
+}
+
+function metrics(per, pid, filter = () => true) {
+  const evs = state.rows.filter(r => r.produtor === pid && r.t >= per.ini && r.t < per.fim && filter(r));
   const entregas = new Set(evs.filter(r => r.evento === "entrega_revisao").map(r => r.task_id));
   const altInt = evs.filter(r => r.evento === "alteracao_interna").length;
   const aprSm = evs.filter(r => r.evento === "aprovado_sm");
   const smOk = aprSm.filter(r => !hadBefore(r.task_id, "alteracao_interna", r.t)).length;
   const aprCli = evs.filter(r => r.evento === "aprovado_cliente");
   const cliOk = aprCli.filter(r => !hadBefore(r.task_id, "alteracao_cliente", r.t)).length;
-  let dias = 5;
-  if (Date.now() < we) { dias = 0; for (let d = ws; d <= Date.now() && d < we; d += DAY) { const k = new Date(d).getDay(); if (k > 0 && k < 6) dias++; } dias = Math.max(1, dias); }
-  return { entregas: entregas.size, porDia: entregas.size / dias, altInt, smN: aprSm.length, smOk, smPct: pct(smOk, aprSm.length), cliN: aprCli.length, cliOk, cliPct: pct(cliOk, aprCli.length) };
+  return { entregas: entregas.size, porDia: entregas.size / diasUteis(per.ini, per.fim), altInt, smN: aprSm.length, smOk, smPct: pct(smOk, aprSm.length), cliN: aprCli.length, cliOk, cliPct: pct(cliOk, aprCli.length) };
 }
 
 function custoDe(pid) {
@@ -229,6 +266,12 @@ function custoDe(pid) {
   if (typeof c === "number") return c > 0 ? { modo: "mes", valor: c } : null;
   if (c && Number(c.valor) > 0) return { modo: c.modo === "peca" ? "peca" : "mes", valor: Number(c.valor) };
   return null;
+}
+
+// custo do período: mensal vira semanal (× 12 ÷ 52) na visão de semana; por peça é valor × entregas
+function custoPeriodo(c, entregas) {
+  if (c.modo === "peca") return c.valor * entregas;
+  return state.modo === "mes" ? c.valor : c.valor * 12 / 52;
 }
 
 function chip(p) {
@@ -239,20 +282,19 @@ function chip(p) {
 }
 
 function renderCards() {
-  const ws = state.sel;
+  const per = periodoAtual(), w = PALAVRA[state.modo];
   $("#cards").innerHTML = PEOPLE.map(p => {
-    const m = metrics(ws, p.id);
+    const m = metrics(per, p.id);
     const c = custoDe(p.id);
     let custo = `<dt>Custo por peça</dt><dd class="status">defina abaixo</dd>`;
-    if (c && c.modo === "peca") {
-      custo = `<dt>Custo por peça</dt><dd>${brl(c.valor)}</dd><dt>Custo na semana</dt><dd>${brl(c.valor * m.entregas)}</dd>`;
-    } else if (c) {
-      const semanal = c.valor * 12 / 52;
-      custo = `<dt>Custo por peça</dt><dd>${m.entregas ? brl(semanal / m.entregas) : "sem entregas"}</dd><dt>Custo na semana</dt><dd>${brl(semanal)}</dd>`;
+    if (c) {
+      const total = custoPeriodo(c, m.entregas);
+      const unit = c.modo === "peca" ? brl(c.valor) : (m.entregas ? brl(total / m.entregas) : "sem entregas");
+      custo = `<dt>Custo por peça</dt><dd>${unit}</dd><dt>Custo ${w.na}</dt><dd>${brl(total)}</dd>`;
     }
     return `<article class="card">
       <div class="card-head"><div><div class="name"><span class="dot" style="background:var(${p.cor})"></span>${p.nome}</div><div class="role">${p.papel}</div></div>${chip(m.smPct)}</div>
-      <div class="big">${m.entregas}<small>entregas · ${m.porDia.toFixed(1).replace(".", ",")} por dia</small></div>
+      <div class="big">${m.entregas}<small>entregas · ${m.porDia.toFixed(1).replace(".", ",")} por dia útil</small></div>
       <dl class="kv">
         <dt>Alterações internas</dt><dd>${m.altInt}</dd>
         <dt>Aprovadas pela Marina</dt><dd>${m.smN ? `${m.smOk} de ${m.smN} de primeira` : "–"}</dd>
@@ -265,7 +307,7 @@ function renderCards() {
 
 function legend(el) { el.innerHTML = PEOPLE.map(p => `<span><i class="dot" style="background:var(${p.cor})"></i>${p.nome}</span>`).join(""); }
 
-function niceMax(v) { if (v <= 5) return 5; const s = [10, 15, 20, 25, 30, 40, 50, 60, 80, 100, 150, 200]; return s.find(x => x >= v) || Math.ceil(v / 50) * 50; }
+function niceMax(v) { if (v <= 5) return 5; const s = [10, 15, 20, 25, 30, 40, 50, 60, 80, 100, 150, 200, 250, 300, 400, 500]; return s.find(x => x >= v) || Math.ceil(v / 100) * 100; }
 
 function tipOn(el) {
   const tip = $("#tip");
@@ -273,24 +315,28 @@ function tipOn(el) {
   el.addEventListener("pointerleave", () => { tip.hidden = true; });
 }
 
+// últimos 8 períodos (semana) ou 6 (mês), do mais antigo ao mais recente
+function serie() { return state.periodos.slice(0, state.modo === "mes" ? 6 : 8).reverse(); }
+
 function renderBars() {
   const svg = $("#ch-entregas"); const W = 520, H = 230, L = 34, R = 8, T = 10, B = 28;
-  const weeks = state.weeks.slice(0, 8).reverse();
-  const data = weeks.map(w => PEOPLE.map(p => metrics(w, p.id).entregas));
+  const pers = serie(), nome = PALAVRA[state.modo].nome;
+  const data = pers.map(per => PEOPLE.map(p => metrics(per, p.id).entregas));
   const max = niceMax(Math.max(1, ...data.flat()));
   const y = (v) => T + (H - T - B) * (1 - v / max);
-  const band = (W - L - R) / Math.max(1, weeks.length), bw = Math.min(16, (band - 12) / 3);
+  const band = (W - L - R) / Math.max(1, pers.length), bw = Math.min(state.modo === "mes" ? 22 : 16, (band - 12) / 3);
   let s = "";
   for (let i = 0; i <= 4; i++) { const v = max * i / 4; s += `<line class="gl" x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${Math.round(v)}</text>`; }
-  weeks.forEach((w, i) => {
+  pers.forEach((per, i) => {
     const x0 = L + i * band + (band - (3 * bw + 4)) / 2;
     PEOPLE.forEach((p, j) => {
       const v = data[i][j], x = x0 + j * (bw + 2), h = y(0) - y(v);
+      const tipTxt = `${p.nome} · ${nome} ${per.curto}: ${v} entregas`;
       if (v > 0 && h < 6) s += `<rect class="bar" x="${x}" y="${y(v)}" width="${bw}" height="${h}" fill="var(${p.cor})"/>`;
-      else if (v > 0) s += `<path class="bar" data-tip="${p.nome} · semana ${fmtD(w)}: ${v} entregas" fill="var(${p.cor})" d="M${x},${y(0)} v${-(h - 3)} q0,-3 3,-3 h${bw - 6} q3,0 3,3 v${h - 3} z"/>`;
-      s += `<rect data-tip="${p.nome} · semana ${fmtD(w)}: ${v} entregas" x="${x - 1}" y="${T}" width="${bw + 2}" height="${H - T - B}" fill="transparent"/>`;
+      else if (v > 0) s += `<path class="bar" fill="var(${p.cor})" d="M${x},${y(0)} v${-(h - 3)} q0,-3 3,-3 h${bw - 6} q3,0 3,3 v${h - 3} z"/>`;
+      s += `<rect data-tip="${tipTxt}" x="${x - 1}" y="${T}" width="${bw + 2}" height="${H - T - B}" fill="transparent"/>`;
     });
-    s += `<text x="${L + i * band + band / 2}" y="${H - 10}" text-anchor="middle">${fmtD(w)}</text>`;
+    s += `<text x="${L + i * band + band / 2}" y="${H - 10}" text-anchor="middle">${per.curto}</text>`;
   });
   s += `<line class="base" x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}"/>`;
   svg.innerHTML = s;
@@ -298,31 +344,31 @@ function renderBars() {
 
 function renderLines() {
   const svg = $("#ch-primeira"); const W = 520, H = 230, L = 38, R = 12, T = 10, B = 28;
-  const weeks = state.weeks.slice(0, 8).reverse();
-  const x = (i) => L + (weeks.length === 1 ? (W - L - R) / 2 : i * (W - L - R) / (weeks.length - 1));
+  const pers = serie(), nome = PALAVRA[state.modo].nome;
+  const x = (i) => L + (pers.length === 1 ? (W - L - R) / 2 : i * (W - L - R) / (pers.length - 1));
   const y = (v) => T + (H - T - B) * (1 - v / 100);
   let s = "";
   [0, 25, 50, 75, 100].forEach(v => { s += `<line class="gl" x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${v}%</text>`; });
-  weeks.forEach((w, i) => { s += `<text x="${x(i)}" y="${H - 10}" text-anchor="middle">${fmtD(w)}</text>`; });
+  pers.forEach((per, i) => { s += `<text x="${x(i)}" y="${H - 10}" text-anchor="middle">${per.curto}</text>`; });
   PEOPLE.forEach(p => {
-    const pts = weeks.map((w, i) => { const m = metrics(w, p.id); return m.smPct == null ? null : { x: x(i), y: y(m.smPct), v: m.smPct, n: m.smN, w }; });
+    const pts = pers.map((per, i) => { const m = metrics(per, p.id); return m.smPct == null ? null : { x: x(i), y: y(m.smPct), v: m.smPct, n: m.smN, per }; });
     let d = "", pen = false;
     pts.forEach(pt => { if (!pt) { pen = false; return; } d += `${pen ? "L" : "M"}${pt.x.toFixed(1)},${pt.y.toFixed(1)} `; pen = true; });
     if (d) s += `<path d="${d}" fill="none" stroke="var(${p.cor})" stroke-width="2" stroke-linejoin="round"/>`;
-    pts.forEach(pt => { if (pt) s += `<circle cx="${pt.x}" cy="${pt.y}" r="4" fill="var(${p.cor})" stroke="var(--surface)" stroke-width="2"/><circle data-tip="${p.nome} · semana ${fmtD(pt.w)}: ${pt.v}% de primeira (${pt.n} aprovadas)" cx="${pt.x}" cy="${pt.y}" r="11" fill="transparent"/>`; });
+    pts.forEach(pt => { if (pt) s += `<circle cx="${pt.x}" cy="${pt.y}" r="4" fill="var(${p.cor})" stroke="var(--surface)" stroke-width="2"/><circle data-tip="${p.nome} · ${nome} ${pt.per.curto}: ${pt.v}% de primeira (${pt.n} aprovadas)" cx="${pt.x}" cy="${pt.y}" r="11" fill="transparent"/>`; });
   });
   s += `<line class="base" x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}"/>`;
   svg.innerHTML = s;
 }
 
 function crossTable(el, key, label) {
-  const ws = state.sel;
-  const vals = [...new Set(state.rows.filter(r => r.t >= ws && r.t < ws + WEEK).map(r => r[key] || "sem " + label))].sort();
-  if (!vals.length) { el.innerHTML = `<tr><td class="status">Nenhuma movimentação nesta semana.</td></tr>`; return; }
+  const per = periodoAtual();
+  const vals = [...new Set(state.rows.filter(r => r.t >= per.ini && r.t < per.fim).map(r => r[key] || "sem " + label))].sort();
+  if (!vals.length) { el.innerHTML = `<tr><td class="status">Nenhuma movimentação ${PALAVRA[state.modo].nesta}.</td></tr>`; return; }
   let h = `<tr><th>${label}</th>${PEOPLE.map(p => `<th class="n">${p.nome}</th>`).join("")}<th class="n">Alt. internas</th><th class="n">1ª Marina</th></tr>`;
   for (const v of vals) {
     const f = (r) => (r[key] || "sem " + label) === v;
-    const ms = PEOPLE.map(p => metrics(ws, p.id, f));
+    const ms = PEOPLE.map(p => metrics(per, p.id, f));
     const alt = ms.reduce((a, m) => a + m.altInt, 0), ok = ms.reduce((a, m) => a + m.smOk, 0), n = ms.reduce((a, m) => a + m.smN, 0);
     h += `<tr><td>${esc(v)}</td>${ms.map(m => `<td class="n">${m.entregas || "–"}</td>`).join("")}<td class="n">${alt || "–"}</td><td class="n">${n ? pct(ok, n) + "%" : "–"}</td></tr>`;
   }
@@ -330,13 +376,14 @@ function crossTable(el, key, label) {
 }
 
 function renderRework() {
-  const since = state.weeks[Math.min(7, state.weeks.length - 1)] ?? 0;
+  const per = periodoAtual();
   const list = [...state.byTask.entries()].map(([id, evs]) => {
-    const e = evs.filter(r => r.t >= since);
+    const e = evs.filter(r => r.t >= per.ini && r.t < per.fim);
     return { r: evs[0], ai: e.filter(x => x.evento === "alteracao_interna").length, ac: e.filter(x => x.evento === "alteracao_cliente").length };
   }).filter(x => x.ai + x.ac > 0).sort((a, b) => (b.ai + b.ac) - (a.ai + a.ac)).slice(0, 12);
+  $("#sub-retrabalho").textContent = `${per.longo.replace(" (atual)", "")} · alterações internas e do cliente`;
   const el = $("#t-retrabalho");
-  if (!list.length) { el.innerHTML = `<tr><td class="status">Nenhuma peça voltou para alteração nas últimas 8 semanas.</td></tr>`; return; }
+  if (!list.length) { el.innerHTML = `<tr><td class="status">Nenhuma peça voltou para alteração ${PALAVRA[state.modo].nesta}.</td></tr>`; return; }
   el.innerHTML = `<tr><th>Peça</th><th>Profissional</th><th>Cliente</th><th class="n">Internas</th><th class="n">Cliente</th></tr>` +
     list.map(x => `<tr><td>${x.r.url ? `<a href="${esc(x.r.url)}" target="_blank" rel="noopener">${esc(x.r.nome)}</a>` : esc(x.r.nome)}</td><td>${PEOPLE.find(p => p.id === x.r.produtor)?.nome || "–"}</td><td>${esc(x.r.cliente || "–")}</td><td class="n">${x.ai}</td><td class="n">${x.ac}</td></tr>`).join("");
 }
@@ -435,6 +482,13 @@ $("#f-custos").addEventListener("submit", async (e) => {
   catch (err) { $("#custos-estado").textContent = err && err.code === "invalid_argument" ? "Só o dono do painel pode salvar os valores." : "Não consegui salvar agora. Tente de novo."; }
 });
 $("#semana").addEventListener("change", (e) => { state.sel = Number(e.target.value); renderAll(); });
+for (const b of document.querySelectorAll("[data-modo]")) b.addEventListener("click", () => {
+  if (state.modo === b.dataset.modo) return;
+  state.modo = b.dataset.modo; state.sel = null;
+  try { localStorage.setItem("painel-modo", state.modo); } catch {}
+  montarPeriodos(); renderAll();
+});
+try { const m = localStorage.getItem("painel-modo"); if (m === "mes" || m === "semana") state.modo = m; } catch {}
 $("#atualizar").addEventListener("click", carregar);
 legend($("#leg1")); legend($("#leg2"));
 tipOn($("#ch-entregas")); tipOn($("#ch-primeira"));
