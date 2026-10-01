@@ -6,7 +6,7 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
-2026-10-01: produtividade migrada para o Supabase próprio do Francisco (projeto "Chico"); painel privado, site do time (producao-lince.pages.dev), skill e rotinas já apontam pra ele. ClickUp bateu o limite diário do conector (1.000 chamadas) depois da carga retroativa; captura de reuniões e fechamento semanal passaram para 19h. Skill /fila-aprovacao pronta; falta o canal, o teste e as rotinas.
+2026-10-01: produtividade migrada para o Supabase próprio do Francisco (projeto "Chico"); painel privado, site do time (producao-lince.pages.dev), skill e rotinas já apontam pra ele. ClickUp bateu o limite diário do conector (1.000 chamadas) depois da carga retroativa; captura de reuniões e fechamento semanal passaram para 19h. Filas no chat do ClickUp no ar (10h e 16h30): Fila de Aprovação pro Francisco e Fila de Revisão pra Marina; primeiro disparo hoje 16h30.
 
 ## Pendências
 - Remover do projeto Supabase antigo do Cláudio ("Lince", axilzquaqtppqjkbqqca) o schema `produtividade` e a função `public.produtividade_dados_painel`: o Cláudio apaga, ou reconectar a conta operacional por um minuto (2026-10-01)
@@ -15,7 +15,8 @@
 - Conferir o primeiro fechamento semanal de produtividade na Review/Retro, quinta 2026-10-01 19h: é o teste completo com o banco novo (2026-10-01)
 - Conferir o comentário "🤖 Captura 01/10" no container da semana: primeira execução automática (2026-10-01)
 - Na Planning de 2026-10-05, revisar as tarefas com a tag captura-ia e as 7 divergências do relatório de 30/09 (2026-09-30)
-- Criar o canal "Fila de Aprovação" no chat do ClickUp, testar o disparo da /fila-aprovacao e ligar as rotinas 10h e 16h30 seg-sex (registrar em automacoes.md) (2026-09-30)
+- Conferir o primeiro disparo das filas (hoje 16h30 ou amanhã 10h, se o limite do conector travar): chegou notificação pra você e pra Marina? (2026-10-01)
+- Apagar o canal "Fila de Aprovação (antigo)" no ClickUp (2026-10-01)
 - Mapear os próximos processos: varredura operacional do ClickUp, programação semanal, fechamento semanal, avanços da semana, WhatsApp para ClickUp, auditoria de setup (2026-09-30)
 - Troca geral de senhas expostas nos grupos: Karina (Registro.br, Hostgator, wp-admin), e-mails operacional e criativos, Simone no doc aberto (2026-09-30)
 - Restringir o doc de acessos e colar nele os acessos da Átria e dos sócios (2026-09-30)

@@ -9,3 +9,6 @@ operacao/conversas/
 
 # cache local da Cloudflare (wrangler)
 .wrangler/
+
+# exports semanais dos grupos de cliente (dados de clientes, trocados toda semana)
+operacao/auditoria-grupos/exports/

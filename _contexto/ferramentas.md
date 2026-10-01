@@ -8,7 +8,7 @@
 
 | ferramenta | pra quê | como o agente alcança | estado | última checagem |
 |---|---|---|---|---|
-| ClickUp | tarefas, prazos, rotinas das lideranças, espaços de cliente | MCP (conector do claude.ai) | ligada, liberada em definitivo no `.claude/settings.local.json` | 2026-09-30 |
+| ClickUp | tarefas, prazos, rotinas das lideranças, espaços de cliente | MCP (conector do claude.ai) | ligada, liberada em definitivo no `.claude/settings.local.json` | 2026-10-01 |
 | Gmail | email (conta operacional@brio-lab.com) | MCP (conector do claude.ai) | ligada, chega ao Claude Code (testado) | 2026-09-30 |
 | Google Agenda | agenda e reuniões | MCP (conector do claude.ai), conta admin@linceco.com.br, que vê todas as reuniões da equipe | ligada, chega ao Claude Code e à rotina na nuvem (testado) | 2026-09-30 |
 | Google Drive (Docs, Sheets) | ficha do cliente, materiais, planilhas, drives compartilhados com clientes; Anotações do Gemini (dono operacional@linceco.com.br) | MCP (conector do claude.ai) | ligada, chega ao Claude Code e à rotina na nuvem (testado) | 2026-09-30 |
@@ -42,3 +42,4 @@
 - O modo automático do Claude Code pode barrar o `git push` quando o pacote tem arquivo de outra sessão; aí o Francisco roda no terminal, um comando por vez (o PowerShell não aceita `&&`) (2026-10-01)
 - ClickUp, IDs de usuário (resolver por nome é instável): Francisco `158419961` · Ivan `112000442` · Júlia `82001470` · Pâmela `284651027` · Victoria `48777424` · Marina `81994084` · Jenifer `49036032` · Henri `164678340` · Cláudio `118092849` · Mateus `118126212` · Giovanna `284462463` (2026-09-30)
 - O conector ClickUp age como Admin Lince & Co (`266535331`), não como o Francisco: mensagem de chat atribuída a ele (assignee `158419961`) gera notificação. O conector não cria canal de chat (2026-09-30)
+- Token pessoal do ClickUp do Francisco no `.env` (`CLICKUP_API_TOKEN`): plano B quando o conector bate o limite diário (o limite é só do MCP; a API direta não conta). Cria canal de chat (membros só na criação: canal privado com `user_ids`; mudar a visibilidade depois derruba todo mundo menos o criador, e não há como adicionar membro pela API). O que ele posta sai como Francisco e não o notifica. No Windows, mandar texto com acento por Node/UTF-8, não direto pelo Git Bash; o Node daqui só sai pra internet via curl (2026-10-01)
