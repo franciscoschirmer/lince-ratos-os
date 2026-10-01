@@ -36,16 +36,29 @@ todo mundo menos o criador).
 | Campo cliente | 👔 Clientes `35443fa6-1e27-466f-9a6b-a2d132237079` (dropdown; o valor vem como orderindex, traduzir pelas opções do próprio campo) |
 | Campo data | Data de Postagem `d4806a40-74c1-45fb-9c36-972aca497d00` (sem valor: usar o `due_date` da tarefa) |
 
-O conector posta como Admin Lince & Co, por isso a mensagem notifica quem está no assignee. O token do `.env`
-(`CLICKUP_API_TOKEN`) é do próprio Francisco: o que ele posta não notifica o Francisco. Use o token só
-como plano B, pra rodar à mão quando o conector bater o limite diário. Nesse caso, `GET /api/v2/list/{id}/task`
-já traz os custom_fields e dispensa uma leitura por peça.
+O conector posta como Admin Lince & Co, por isso a mensagem notifica quem está no assignee.
+
+## Plano B: conector travado (rodando à mão, neste computador)
+
+Se o conector devolver `RATE_LIMIT_EXCEEDED` ou estiver fora, não parar: rodar o script desta pasta,
+que usa o token pessoal do Francisco guardado no `.env` da raiz (`CLICKUP_API_TOKEN`) e chama a API direto
+(fora do limite do conector, uma chamada por lista):
+
+```bash
+node .claude/skills/fila-aprovacao/fila.mjs            # rascunho da aprovação
+node .claude/skills/fila-aprovacao/fila.mjs postar     # posta a aprovação
+node .claude/skills/fila-aprovacao/fila.mjs revisao postar
+```
+
+- O que sai pelo token aparece como mensagem do Francisco: notifica a Marina, mas não ele. Avisar isso.
+- **O `.env` nunca vai pro git** (está no `.gitignore`). Nunca copiar o token pra skill, rotina, recado, diário ou chat.
+- Na nuvem não tem `.env`: lá a rotina para e avisa, e o plano B é rodar à mão aqui.
 
 ## Passo a passo
 
-1. `clickup_filter_tasks` com as três listas, `statuses: [<status do modo>]`, `subtasks: true`, paginando até `has_more` ser false.
+1. `clickup_filter_tasks` **sem filtro de lista** (o workspace inteiro), `statuses: [<status do modo>]`, `subtasks: true`, paginando até `has_more` ser false. Nada pode ficar de fora: se alguém criar uma lista nova com esse status, ela entra sozinha. Tirar duplicadas pelo id. Peça que vier de fora das três listas de conteúdo entra normalmente, com "(lista: <nome>)" depois da data.
 2. Ignorar as tarefas-mãe "[Cliente] Calendário Editorial" (são contêineres). **Só no modo aprovação:** descartar toda tarefa cujo nome, sem acento e em minúsculo, contém `capa` (pega "CAPA - ...", "[CAPA DE REELS] ...").
-3. Para cada peça restante, `clickup_get_task` com `include: ["custom_fields"]`:
+3. Para cada peça restante, `clickup_get_task` com `include: ["custom_fields"]`. Se a leitura falhar (sem acesso, erro), a peça **continua na lista** com o que a busca trouxe (nome, link, `due_date`) e vai também pro bloco de avisos:
    - cliente = nome da opção do 👔 Clientes cujo `orderindex` é o valor. Sem valor: tirar do nome da tarefa-mãe (o que está entre colchetes) ou de um `[Nome]` no início do nome da peça. Sem nada disso: "Sem cliente".
    - data = Data de Postagem, ou `due_date`. Converter de ms para data em America/Sao_Paulo.
 4. Montar a mensagem (formato abaixo). Ordem: primeiro o bloco de urgentes, depois os clientes em ordem alfabética e, dentro de cada cliente, as peças por data (sem data por último).
@@ -72,4 +85,6 @@ já traz os custom_fields e dispensa uma leitura por peça.
 - Nome da peça como está no ClickUp, sem cortar. Link sempre no nome.
 - "posta DD/MM" quando a data vem da Data de Postagem; "prazo DD/MM" quando vem do `due_date`; "sem data" quando não há nenhuma.
 - Fila vazia: só o título com "nada pra enviar/revisar agora." (posta mesmo assim, é o sinal de que a rotina rodou)
+- **Avisos no fim, sempre que houver:** qualquer coisa que impediu ver tudo vai num bloco `**⚠️ Não consegui ler**` com o que falhou e o erro em poucas palavras (peça sem acesso, página da busca que deu erro, campo de cliente que não veio). Nunca esconder falha: fila "vazia" porque a busca deu erro **não** é "nada pra enviar". Nesse caso o título diz `· ⚠️ busca falhou, a lista pode estar incompleta`.
+- Conector inteiro fora ou no limite: não dá pra postar. A rotina para, manda notificação pro celular com o motivo, e o plano B é rodar à mão aqui.
 - Sem texto extra: sem saudação, sem resumo no fim.
