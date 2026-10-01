@@ -102,7 +102,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
       <select id="semana"></select>
       <button id="atualizar" type="button">Atualizar</button>
       <span class="status" id="estado">Carregando…</span>
-      <span class="status" id="quem"></span>
+      <a href="/sair" class="status">Sair</a>
     </div>
   </header>
 
@@ -143,7 +143,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
   </section>
 
   <section class="panel" id="sec-custos" hidden>
-    <div><h2>Custos</h2><div class="status">Visível só para quem tem acesso a valores. Os valores pagos são definidos pelo Francisco e guardados fora do código.</div></div>
+    <div><h2>Custos</h2><div class="status">Valores pagos definidos pelo Francisco, guardados como segredo do servidor (fora do código).</div></div>
     <div class="scroll"><table id="t-custos"></table></div>
   </section>
 
@@ -401,7 +401,7 @@ function aviso(msg, diag = "") {
   $("#aviso").hidden = !msg;
 }
 
-// a função /api/dados confere quem entrou (Cloudflare Access) e só manda custos para quem pode ver valores
+// a função /api/dados só responde para quem fez login (functions/_middleware.js)
 async function carregar() {
   $("#estado").textContent = "Buscando dados…";
   let res, body;
@@ -412,10 +412,9 @@ async function carregar() {
     aviso("Não consegui falar com o servidor agora. Confira a internet e clique em Atualizar.", String(e && e.message || e));
     $("#estado").textContent = ""; return;
   }
+  if (res.status === 401) { location.reload(); return; } // sessão expirou: o servidor mostra o login
   if (!res.ok || !body || !Array.isArray(body.rows)) {
     const msg = {
-      401: "Sua sessão expirou. Recarregue a página para entrar de novo com seu e-mail.",
-      403: "Seu e-mail não tem acesso a este painel. Fale com o Francisco.",
       503: "O painel ainda está sendo configurado. Tente de novo mais tarde.",
     }[res.status] || "Não consegui ler os dados agora. Clique em Atualizar para tentar de novo.";
     aviso(msg, `código: ${res.status} · ${(body && body.erro) || ""}`); $("#estado").textContent = ""; return;
@@ -423,7 +422,6 @@ async function carregar() {
   state.valores = !!body.valores;
   state.custos = body.valores && body.custos ? body.custos : {};
   $("#sec-custos").hidden = !state.valores;
-  $("#quem").textContent = body.email ? `Entrou como ${body.email}` : "";
   index(body.rows);
   aviso(body.rows.length ? "" : "O banco respondeu, mas ainda não há eventos das três pessoas.");
   renderAll();
