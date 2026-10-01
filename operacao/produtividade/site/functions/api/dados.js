@@ -5,7 +5,7 @@
 //   ACCESS_TEAM     nome da equipe do Zero Trust (o "xxx" de xxx.cloudflareaccess.com)
 //   ACCESS_AUD      Application Audience (AUD) da aplicação do Access
 //   SUPABASE_URL    https://axilzquaqtppqjkbqqca.supabase.co
-//   SUPABASE_KEY    chave publicável do Supabase (só executa produtividade.dados_painel)
+//   SUPABASE_KEY    chave publicável do Supabase (só executa public.produtividade_dados_painel)
 //   EMAILS_VALORES  e-mails que veem custos, separados por vírgula
 //   CUSTOS_JSON     {"Victor":{"modo":"peca","valor":40}, ...}
 
@@ -56,12 +56,12 @@ export async function onRequestGet({ request, env }) {
   const email = String(ident.email || "").toLowerCase();
   const valores = String(env.EMAILS_VALORES || "").toLowerCase().split(",").map(x => x.trim()).filter(Boolean).includes(email);
 
-  const r = await fetch(`${env.SUPABASE_URL}/rest/v1/rpc/dados_painel`, {
+  // public.produtividade_dados_painel só repassa a leitura de produtividade.dados_painel (sem dado financeiro)
+  const r = await fetch(`${env.SUPABASE_URL}/rest/v1/rpc/produtividade_dados_painel`, {
     method: "POST",
     headers: {
       apikey: env.SUPABASE_KEY,
       "content-type": "application/json",
-      "content-profile": "produtividade",
     },
     body: JSON.stringify({ dias: 400 }),
   });
