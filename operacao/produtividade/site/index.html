@@ -1,0 +1,446 @@
+<title>Produção de Conteúdo Lince</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap">
+<style>
+/* Layout: painel de operação. Resumo por profissional no topo, tendência de 8 semanas, depois recortes e retrabalho. */
+:root {
+  --bg: #f7f6f2;
+  --surface: #fcfcfb;
+  --ink: #16150f;
+  --ink-2: #52514e;
+  --muted: #86847c;
+  --grid: #e3e1d8;
+  --axis: #c3c2b7;
+  --ring: rgba(22,21,15,0.10);
+  --accent: #6b4f2a;
+  --s1: #2a78d6; /* Pâmela */
+  --s2: #eb6834; /* Mateus */
+  --s3: #1baf7a; /* Victor */
+  --good: #0ca30c; --warn: #fab219; --crit: #d03b3b;
+  --good-ink: #006300;
+  --display: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11110f; --surface: #1a1a19; --ink: #f4f3ee; --ink-2: #c3c2b7; --muted: #8f8d85;
+  --grid: #2c2c2a; --axis: #3a3a37; --ring: rgba(255,255,255,0.10); --accent: #d4b48a;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --good-ink: #0ca30c; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #11110f; --surface: #1a1a19; --ink: #f4f3ee; --ink-2: #c3c2b7; --muted: #8f8d85;
+  --grid: #2c2c2a; --axis: #3a3a37; --ring: rgba(255,255,255,0.10); --accent: #d4b48a;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --good-ink: #0ca30c; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--body); line-height: 1.45; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; gap: 28px; }
+h1, h2, .name { font-family: var(--display); text-wrap: balance; }
+h1 { font-size: 1.9rem; margin: 0; letter-spacing: -0.01em; }
+h2 { font-size: 1.1rem; margin: 0; }
+.sub { color: var(--ink-2); margin: 4px 0 0; }
+.eyebrow { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+header { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; justify-content: space-between; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+select, button, input { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 7px 10px; }
+button { cursor: pointer; }
+button:hover { border-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.status { font-size: .82rem; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--ring); border-radius: 8px; overflow: hidden; }
+.seg button { border: 0; border-radius: 0; background: var(--surface); color: var(--ink-2); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.banner { background: var(--surface); border: 1px solid var(--ring); border-left: 4px solid var(--warn); border-radius: 8px; padding: 12px 14px; color: var(--ink-2); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.name { font-size: 1.25rem; display: flex; align-items: center; gap: 8px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.role { font-size: .8rem; color: var(--muted); }
+.big { font-family: var(--display); font-size: 2.4rem; line-height: 1; }
+.big small { font-family: var(--body); font-size: .85rem; color: var(--ink-2); font-weight: 400; margin-left: 6px; }
+.kv { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; font-size: .9rem; }
+.kv dt { color: var(--ink-2); }
+.kv dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.chip { font-size: .72rem; padding: 2px 8px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+.chip.good { color: var(--good-ink); } .chip.warn { color: #9a6a00; } .chip.crit { color: var(--crit); } .chip.none { color: var(--muted); }
+
+.panel { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 18px; display: grid; gap: 12px; min-width: 0; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .82rem; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.chart { width: 100%; height: auto; display: block; }
+.chart text { fill: var(--muted); font-size: 11px; font-family: var(--body); }
+.chart .gl { stroke: var(--grid); stroke-width: 1; }
+.chart .base { stroke: var(--axis); stroke-width: 1; }
+.tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--bg); font-size: .8rem; padding: 6px 9px; border-radius: 6px; z-index: 10; max-width: 240px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th { font-weight: 600; color: var(--ink-2); font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+a { color: var(--accent); }
+.costs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; align-items: end; }
+.costs label { display: grid; gap: 4px; font-size: .85rem; color: var(--ink-2); }
+.cost { display: grid; grid-template-columns: 1fr auto; gap: 6px; align-items: end; min-width: 0; }
+.cost input { min-width: 0; width: 100%; }
+details summary { cursor: pointer; color: var(--ink-2); }
+.note { font-size: .85rem; color: var(--ink-2); max-width: 70ch; }
+@media (prefers-reduced-motion: no-preference) { .bar { transition: opacity .15s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Lince &amp; Co · operação</div>
+      <h1>Produção de Conteúdo</h1>
+      <p class="sub">Pâmela (design), Mateus e Victor (edição) · status das peças registrados do ClickUp</p>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Ver por">
+        <button type="button" data-modo="semana" aria-pressed="true">Semana</button>
+        <button type="button" data-modo="mes" aria-pressed="false">Mês</button>
+      </div>
+      <label for="semana" class="status" id="lbl-periodo">Semana</label>
+      <select id="semana"></select>
+      <button id="atualizar" type="button">Atualizar</button>
+      <span class="status" id="estado">Carregando…</span>
+      <span class="status" id="quem"></span>
+    </div>
+  </header>
+
+  <div id="aviso" class="banner" hidden>
+    <span id="aviso-txt"></span>
+    <div class="status" id="diag"></div>
+  </div>
+
+  <section class="cards" id="cards" aria-label="Resumo da semana por profissional"></section>
+
+  <section class="grid2">
+    <div class="panel">
+      <div><h2>Entregas para revisão</h2><div class="status" id="sub-entregas">peças enviadas à Marina por semana</div></div>
+      <div class="legend" id="leg1"></div>
+      <svg class="chart" id="ch-entregas" viewBox="0 0 520 230" role="img" aria-label="Entregas por semana"></svg>
+    </div>
+    <div class="panel">
+      <div><h2>Aprovação de primeira pela Marina</h2><div class="status">% das peças aprovadas sem voltar para alteração interna</div></div>
+      <div class="legend" id="leg2"></div>
+      <svg class="chart" id="ch-primeira" viewBox="0 0 520 230" role="img" aria-label="Aprovação de primeira por semana"></svg>
+    </div>
+  </section>
+
+  <section class="grid2">
+    <div class="panel">
+      <h2>Por cliente</h2>
+      <div class="scroll"><table id="t-cliente"></table></div>
+    </div>
+    <div class="panel">
+      <h2>Por tipo de peça</h2>
+      <div class="scroll"><table id="t-tipo"></table></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div><h2>Peças que mais voltaram</h2><div class="status" id="sub-retrabalho">alterações internas e do cliente no período</div></div>
+    <div class="scroll"><table id="t-retrabalho"></table></div>
+  </section>
+
+  <section class="panel" id="sec-custos" hidden>
+    <div><h2>Custos</h2><div class="status">Visível só para quem tem acesso a valores. Os valores pagos são definidos pelo Francisco e guardados fora do código.</div></div>
+    <div class="scroll"><table id="t-custos"></table></div>
+  </section>
+
+  <details class="panel">
+    <summary>Como os números são calculados</summary>
+    <div class="note">
+      <p><b>Entregas</b>: peças que entraram em "revisão de social media" na semana. <b>Por dia</b>: entregas divididas pelos dias úteis da semana (na semana corrente, os dias úteis que já passaram).</p>
+      <p><b>Aprovação de primeira (Marina)</b>: das peças que a Marina aprovou na semana, quantas não tiveram nenhuma alteração interna antes da aprovação. <b>Aprovação de primeira (cliente)</b>: das peças que o cliente aprovou na semana, quantas não tiveram alteração do cliente antes.</p>
+      <p><b>Custo</b>: para quem recebe por mês, o custo da semana é o valor mensal × 12 ÷ 52, dividido pelas entregas da semana. Para quem recebe por peça, o custo da semana é o valor da peça × entregas.</p>
+      <p><b>Quem fez a peça</b> vem de quem acompanhou a tarefa no ClickUp e dos comentários ("Repassado VH" marca o Victor). Peças sem produtor claro ficam fora.</p>
+      <p>Até 30/09/2026 o histórico é aproximado: o ClickUp guarda só a última passagem por cada status. A partir daí a foto diária registra cada ida e volta.</p>
+    </div>
+  </details>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const PEOPLE = [
+  { id: "Pamela", nome: "Pâmela", papel: "design", cor: "--s1" },
+  { id: "Mateus", nome: "Mateus", papel: "edição de vídeo", cor: "--s2" },
+  { id: "Victor", nome: "Victor", papel: "edição externa", cor: "--s3" },
+];
+const DAY = 864e5, WEEK = 7 * DAY;
+const $ = (s) => document.querySelector(s);
+const state = { rows: [], byTask: new Map(), modo: "semana", periodos: [], sel: null, custos: {} };
+let dbRef = null;
+
+function mondayOf(ts) { const d = new Date(ts); d.setHours(0,0,0,0); const k = (d.getDay() + 6) % 7; d.setDate(d.getDate() - k); return d.getTime(); }
+function firstOfMonth(ts) { const d = new Date(ts); return new Date(d.getFullYear(), d.getMonth(), 1).getTime(); }
+function nextMonth(ts) { const d = new Date(ts); return new Date(d.getFullYear(), d.getMonth() + 1, 1).getTime(); }
+const fmtD = (ts) => new Date(ts).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+const fmtM = (ts) => new Date(ts).toLocaleDateString("pt-BR", { month: "short", year: "2-digit" }).replace(".", "").replace(" de ", "/");
+const fmtMLong = (ts) => { const s = new Date(ts).toLocaleDateString("pt-BR", { month: "long", year: "numeric" }); return s.charAt(0).toUpperCase() + s.slice(1); };
+const pct = (a, b) => b ? Math.round(100 * a / b) : null;
+const brl = (v) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const PALAVRA = { semana: { nome: "semana", nesta: "nesta semana", na: "na semana", por: "por semana" }, mes: { nome: "mês", nesta: "neste mês", na: "no mês", por: "por mês" } };
+
+function parsePayload(p) {
+  const txt = typeof p === "string" ? p : (p && typeof p.result === "string") ? p.result : JSON.stringify(p);
+  // o aviso cita a marcação na mesma linha; os dados ficam entre a marcação sozinha numa linha e o fechamento com o mesmo id
+  const m = txt.match(/(?:^|\n)<untrusted-data-([^>\s]+)>\s*\n([\s\S]*?)\n\s*<\/untrusted-data-\1>/);
+  if (m) return JSON.parse(m[2]);
+  const ini = txt.indexOf("["), fim = txt.lastIndexOf("]");
+  return JSON.parse(ini >= 0 && fim > ini ? txt.slice(ini, fim + 1) : txt);
+}
+
+// períodos do mais recente para o mais antigo: {ini, fim, curto, longo}
+function periodos(modo) {
+  const now = Date.now(), first = state.rows.length ? state.rows[0].t : now, out = [];
+  if (modo === "mes") {
+    for (let m = firstOfMonth(now); m >= firstOfMonth(first); m = firstOfMonth(m - DAY)) {
+      out.push({ ini: m, fim: nextMonth(m), curto: fmtM(m), longo: fmtMLong(m) + (m === firstOfMonth(now) ? " (atual)" : "") });
+    }
+  } else {
+    for (let w = mondayOf(now); w >= mondayOf(first); w -= WEEK) {
+      out.push({ ini: w, fim: w + WEEK, curto: fmtD(w), longo: `${fmtD(w)} a ${fmtD(w + 6 * DAY)}${w === mondayOf(now) ? " (atual)" : ""}` });
+    }
+  }
+  return out;
+}
+
+function montarPeriodos() {
+  state.periodos = periodos(state.modo);
+  if (state.sel == null || !state.periodos.some(p => p.ini === state.sel)) state.sel = state.periodos[0].ini;
+  const sel = $("#semana");
+  sel.innerHTML = state.periodos.map(p => `<option value="${p.ini}">${p.longo}</option>`).join("");
+  sel.value = String(state.sel);
+  $("#lbl-periodo").textContent = state.modo === "mes" ? "Mês" : "Semana";
+  for (const b of document.querySelectorAll("[data-modo]")) b.setAttribute("aria-pressed", String(b.dataset.modo === state.modo));
+  const w = PALAVRA[state.modo];
+  $("#sub-entregas").textContent = `peças enviadas à Marina ${w.por}`;
+  $("#cards").setAttribute("aria-label", `Resumo ${w.na === "no mês" ? "do mês" : "da semana"} por profissional`);
+}
+
+function periodoAtual() { return state.periodos.find(p => p.ini === state.sel) || state.periodos[0]; }
+
+function index(rows) {
+  state.rows = rows.map(r => ({ ...r, t: Number(r.t) }));
+  state.byTask = new Map();
+  for (const r of state.rows) { if (!state.byTask.has(r.task_id)) state.byTask.set(r.task_id, []); state.byTask.get(r.task_id).push(r); }
+  montarPeriodos();
+}
+
+function hadBefore(task, evento, t) { return (state.byTask.get(task) || []).some(r => r.evento === evento && r.t < t); }
+
+function diasUteis(ini, fim) {
+  const ate = Math.min(fim, Date.now() + 1); let n = 0;
+  for (let d = ini; d < ate; d += DAY) { const k = new Date(d).getDay(); if (k > 0 && k < 6) n++; }
+  return Math.max(1, n);
+}
+
+function metrics(per, pid, filter = () => true) {
+  const evs = state.rows.filter(r => r.produtor === pid && r.t >= per.ini && r.t < per.fim && filter(r));
+  const entregas = new Set(evs.filter(r => r.evento === "entrega_revisao").map(r => r.task_id));
+  const altInt = evs.filter(r => r.evento === "alteracao_interna").length;
+  const aprSm = evs.filter(r => r.evento === "aprovado_sm");
+  const smOk = aprSm.filter(r => !hadBefore(r.task_id, "alteracao_interna", r.t)).length;
+  const aprCli = evs.filter(r => r.evento === "aprovado_cliente");
+  const cliOk = aprCli.filter(r => !hadBefore(r.task_id, "alteracao_cliente", r.t)).length;
+  return { entregas: entregas.size, porDia: entregas.size / diasUteis(per.ini, per.fim), altInt, smN: aprSm.length, smOk, smPct: pct(smOk, aprSm.length), cliN: aprCli.length, cliOk, cliPct: pct(cliOk, aprCli.length) };
+}
+
+function custoDe(pid) {
+  const c = state.custos[pid];
+  if (typeof c === "number") return c > 0 ? { modo: "mes", valor: c } : null;
+  if (c && Number(c.valor) > 0) return { modo: c.modo === "peca" ? "peca" : "mes", valor: Number(c.valor) };
+  return null;
+}
+
+// custo do período: mensal vira semanal (× 12 ÷ 52) na visão de semana; por peça é valor × entregas
+function custoPeriodo(c, entregas) {
+  if (c.modo === "peca") return c.valor * entregas;
+  return state.modo === "mes" ? c.valor : c.valor * 12 / 52;
+}
+
+function chip(p) {
+  if (p == null) return `<span class="chip none">sem aprovação ainda</span>`;
+  if (p >= 80) return `<span class="chip good">✓ ${p}% de primeira</span>`;
+  if (p >= 60) return `<span class="chip warn">! ${p}% de primeira</span>`;
+  return `<span class="chip crit">✕ ${p}% de primeira</span>`;
+}
+
+function renderCards() {
+  const per = periodoAtual(), w = PALAVRA[state.modo];
+  $("#cards").innerHTML = PEOPLE.map(p => {
+    const m = metrics(per, p.id);
+    const c = custoDe(p.id);
+    let custo = state.valores ? `<dt>Custo por peça</dt><dd class="status">sem valor definido</dd>` : "";
+    if (state.valores && c) {
+      const total = custoPeriodo(c, m.entregas);
+      const unit = c.modo === "peca" ? brl(c.valor) : (m.entregas ? brl(total / m.entregas) : "sem entregas");
+      custo = `<dt>Custo por peça</dt><dd>${unit}</dd><dt>Custo ${w.na}</dt><dd>${brl(total)}</dd>`;
+    }
+    return `<article class="card">
+      <div class="card-head"><div><div class="name"><span class="dot" style="background:var(${p.cor})"></span>${p.nome}</div><div class="role">${p.papel}</div></div>${chip(m.smPct)}</div>
+      <div class="big">${m.entregas}<small>entregas · ${m.porDia.toFixed(1).replace(".", ",")} por dia útil</small></div>
+      <dl class="kv">
+        <dt>Alterações internas</dt><dd>${m.altInt}</dd>
+        <dt>Aprovadas pela Marina</dt><dd>${m.smN ? `${m.smOk} de ${m.smN} de primeira` : "–"}</dd>
+        <dt>Aprovadas pelo cliente</dt><dd>${m.cliN ? `${m.cliOk} de ${m.cliN} de primeira (${m.cliPct}%)` : "–"}</dd>
+        ${custo}
+      </dl>
+    </article>`;
+  }).join("");
+}
+
+function legend(el) { el.innerHTML = PEOPLE.map(p => `<span><i class="dot" style="background:var(${p.cor})"></i>${p.nome}</span>`).join(""); }
+
+function niceMax(v) { if (v <= 5) return 5; const s = [10, 15, 20, 25, 30, 40, 50, 60, 80, 100, 150, 200, 250, 300, 400, 500]; return s.find(x => x >= v) || Math.ceil(v / 100) * 100; }
+
+function tipOn(el) {
+  const tip = $("#tip");
+  el.addEventListener("pointermove", (e) => { const t = e.target.closest("[data-tip]"); if (!t) { tip.hidden = true; return; } tip.textContent = t.dataset.tip; tip.hidden = false; tip.style.left = Math.min(e.clientX + 12, innerWidth - 250) + "px"; tip.style.top = (e.clientY + 12) + "px"; });
+  el.addEventListener("pointerleave", () => { tip.hidden = true; });
+}
+
+// últimos 8 períodos (semana) ou 6 (mês), do mais antigo ao mais recente
+function serie() { return state.periodos.slice(0, state.modo === "mes" ? 6 : 8).reverse(); }
+
+function renderBars() {
+  const svg = $("#ch-entregas"); const W = 520, H = 230, L = 34, R = 8, T = 10, B = 28;
+  const pers = serie(), nome = PALAVRA[state.modo].nome;
+  const data = pers.map(per => PEOPLE.map(p => metrics(per, p.id).entregas));
+  const max = niceMax(Math.max(1, ...data.flat()));
+  const y = (v) => T + (H - T - B) * (1 - v / max);
+  const band = (W - L - R) / Math.max(1, pers.length), bw = Math.min(state.modo === "mes" ? 22 : 16, (band - 12) / 3);
+  let s = "";
+  for (let i = 0; i <= 4; i++) { const v = max * i / 4; s += `<line class="gl" x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${Math.round(v)}</text>`; }
+  pers.forEach((per, i) => {
+    const x0 = L + i * band + (band - (3 * bw + 4)) / 2;
+    PEOPLE.forEach((p, j) => {
+      const v = data[i][j], x = x0 + j * (bw + 2), h = y(0) - y(v);
+      const tipTxt = `${p.nome} · ${nome} ${per.curto}: ${v} entregas`;
+      if (v > 0 && h < 6) s += `<rect class="bar" x="${x}" y="${y(v)}" width="${bw}" height="${h}" fill="var(${p.cor})"/>`;
+      else if (v > 0) s += `<path class="bar" fill="var(${p.cor})" d="M${x},${y(0)} v${-(h - 3)} q0,-3 3,-3 h${bw - 6} q3,0 3,3 v${h - 3} z"/>`;
+      s += `<rect data-tip="${tipTxt}" x="${x - 1}" y="${T}" width="${bw + 2}" height="${H - T - B}" fill="transparent"/>`;
+    });
+    s += `<text x="${L + i * band + band / 2}" y="${H - 10}" text-anchor="middle">${per.curto}</text>`;
+  });
+  s += `<line class="base" x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}"/>`;
+  svg.innerHTML = s;
+}
+
+function renderLines() {
+  const svg = $("#ch-primeira"); const W = 520, H = 230, L = 38, R = 12, T = 10, B = 28;
+  const pers = serie(), nome = PALAVRA[state.modo].nome;
+  const x = (i) => L + (pers.length === 1 ? (W - L - R) / 2 : i * (W - L - R) / (pers.length - 1));
+  const y = (v) => T + (H - T - B) * (1 - v / 100);
+  let s = "";
+  [0, 25, 50, 75, 100].forEach(v => { s += `<line class="gl" x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${v}%</text>`; });
+  pers.forEach((per, i) => { s += `<text x="${x(i)}" y="${H - 10}" text-anchor="middle">${per.curto}</text>`; });
+  PEOPLE.forEach(p => {
+    const pts = pers.map((per, i) => { const m = metrics(per, p.id); return m.smPct == null ? null : { x: x(i), y: y(m.smPct), v: m.smPct, n: m.smN, per }; });
+    let d = "", pen = false;
+    pts.forEach(pt => { if (!pt) { pen = false; return; } d += `${pen ? "L" : "M"}${pt.x.toFixed(1)},${pt.y.toFixed(1)} `; pen = true; });
+    if (d) s += `<path d="${d}" fill="none" stroke="var(${p.cor})" stroke-width="2" stroke-linejoin="round"/>`;
+    pts.forEach(pt => { if (pt) s += `<circle cx="${pt.x}" cy="${pt.y}" r="4" fill="var(${p.cor})" stroke="var(--surface)" stroke-width="2"/><circle data-tip="${p.nome} · ${nome} ${pt.per.curto}: ${pt.v}% de primeira (${pt.n} aprovadas)" cx="${pt.x}" cy="${pt.y}" r="11" fill="transparent"/>`; });
+  });
+  s += `<line class="base" x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}"/>`;
+  svg.innerHTML = s;
+}
+
+function crossTable(el, key, label) {
+  const per = periodoAtual();
+  const vals = [...new Set(state.rows.filter(r => r.t >= per.ini && r.t < per.fim).map(r => r[key] || "sem " + label))].sort();
+  if (!vals.length) { el.innerHTML = `<tr><td class="status">Nenhuma movimentação ${PALAVRA[state.modo].nesta}.</td></tr>`; return; }
+  let h = `<tr><th>${label}</th>${PEOPLE.map(p => `<th class="n">${p.nome}</th>`).join("")}<th class="n">Alt. internas</th><th class="n">1ª Marina</th></tr>`;
+  for (const v of vals) {
+    const f = (r) => (r[key] || "sem " + label) === v;
+    const ms = PEOPLE.map(p => metrics(per, p.id, f));
+    const alt = ms.reduce((a, m) => a + m.altInt, 0), ok = ms.reduce((a, m) => a + m.smOk, 0), n = ms.reduce((a, m) => a + m.smN, 0);
+    h += `<tr><td>${esc(v)}</td>${ms.map(m => `<td class="n">${m.entregas || "–"}</td>`).join("")}<td class="n">${alt || "–"}</td><td class="n">${n ? pct(ok, n) + "%" : "–"}</td></tr>`;
+  }
+  el.innerHTML = h;
+}
+
+function renderRework() {
+  const per = periodoAtual();
+  const list = [...state.byTask.entries()].map(([id, evs]) => {
+    const e = evs.filter(r => r.t >= per.ini && r.t < per.fim);
+    return { r: evs[0], ai: e.filter(x => x.evento === "alteracao_interna").length, ac: e.filter(x => x.evento === "alteracao_cliente").length };
+  }).filter(x => x.ai + x.ac > 0).sort((a, b) => (b.ai + b.ac) - (a.ai + a.ac)).slice(0, 12);
+  $("#sub-retrabalho").textContent = `${per.longo.replace(" (atual)", "")} · alterações internas e do cliente`;
+  const el = $("#t-retrabalho");
+  if (!list.length) { el.innerHTML = `<tr><td class="status">Nenhuma peça voltou para alteração ${PALAVRA[state.modo].nesta}.</td></tr>`; return; }
+  el.innerHTML = `<tr><th>Peça</th><th>Profissional</th><th>Cliente</th><th class="n">Internas</th><th class="n">Cliente</th></tr>` +
+    list.map(x => `<tr><td>${x.r.url ? `<a href="${esc(x.r.url)}" target="_blank" rel="noopener">${esc(x.r.nome)}</a>` : esc(x.r.nome)}</td><td>${PEOPLE.find(p => p.id === x.r.produtor)?.nome || "–"}</td><td>${esc(x.r.cliente || "–")}</td><td class="n">${x.ai}</td><td class="n">${x.ac}</td></tr>`).join("");
+}
+
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function renderAll() {
+  renderCards(); renderBars(); renderLines();
+  crossTable($("#t-cliente"), "cliente", "cliente"); crossTable($("#t-tipo"), "tipo", "tipo");
+  renderRework(); renderCustos();
+}
+
+function renderCustos() {
+  const el = $("#t-custos");
+  if (!el || !state.valores) return;
+  const per = periodoAtual(), w = PALAVRA[state.modo];
+  let total = 0;
+  const linhas = PEOPLE.map(p => {
+    const c = custoDe(p.id), m = metrics(per, p.id);
+    if (!c) return `<tr><td>${p.nome}</td><td colspan="4" class="status">sem valor definido</td></tr>`;
+    const t = custoPeriodo(c, m.entregas); total += t;
+    const unit = c.modo === "peca" ? c.valor : (m.entregas ? t / m.entregas : null);
+    return `<tr><td>${p.nome}</td><td>${c.modo === "peca" ? brl(c.valor) + " por peça" : brl(c.valor) + " por mês"}</td><td class="n">${m.entregas}</td><td class="n">${brl(t)}</td><td class="n">${unit == null ? "–" : brl(unit)}</td></tr>`;
+  }).join("");
+  el.innerHTML = `<tr><th>Profissional</th><th>Pagamento</th><th class="n">Entregas</th><th class="n">Custo ${w.na}</th><th class="n">Custo por peça</th></tr>${linhas}<tr><td><b>Total</b></td><td></td><td></td><td class="n"><b>${brl(total)}</b></td><td></td></tr>`;
+}
+
+function aviso(msg, diag = "") {
+  $("#aviso-txt").textContent = msg; $("#diag").textContent = diag;
+  $("#aviso").hidden = !msg;
+}
+
+// a função /api/dados confere quem entrou (Cloudflare Access) e só manda custos para quem pode ver valores
+async function carregar() {
+  $("#estado").textContent = "Buscando dados…";
+  let res, body;
+  try {
+    res = await fetch("/api/dados", { cache: "no-store", credentials: "same-origin" });
+    body = await res.json().catch(() => null);
+  } catch (e) {
+    aviso("Não consegui falar com o servidor agora. Confira a internet e clique em Atualizar.", String(e && e.message || e));
+    $("#estado").textContent = ""; return;
+  }
+  if (!res.ok || !body || !Array.isArray(body.rows)) {
+    const msg = {
+      401: "Sua sessão expirou. Recarregue a página para entrar de novo com seu e-mail.",
+      403: "Seu e-mail não tem acesso a este painel. Fale com o Francisco.",
+      503: "O painel ainda está sendo configurado. Tente de novo mais tarde.",
+    }[res.status] || "Não consegui ler os dados agora. Clique em Atualizar para tentar de novo.";
+    aviso(msg, `código: ${res.status} · ${(body && body.erro) || ""}`); $("#estado").textContent = ""; return;
+  }
+  state.valores = !!body.valores;
+  state.custos = body.valores && body.custos ? body.custos : {};
+  $("#sec-custos").hidden = !state.valores;
+  $("#quem").textContent = body.email ? `Entrou como ${body.email}` : "";
+  index(body.rows);
+  aviso(body.rows.length ? "" : "O banco respondeu, mas ainda não há eventos das três pessoas.");
+  renderAll();
+  $("#estado").textContent = `Atualizado às ${new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })} · ${body.rows.length} eventos`;
+}
+
+$("#semana").addEventListener("change", (e) => { state.sel = Number(e.target.value); renderAll(); });
+for (const b of document.querySelectorAll("[data-modo]")) b.addEventListener("click", () => {
+  if (state.modo === b.dataset.modo) return;
+  state.modo = b.dataset.modo; state.sel = null;
+  try { localStorage.setItem("painel-modo", state.modo); } catch {}
+  montarPeriodos(); renderAll();
+});
+try { const m = localStorage.getItem("painel-modo"); if (m === "mes" || m === "semana") state.modo = m; } catch {}
+$("#atualizar").addEventListener("click", carregar);
+legend($("#leg1")); legend($("#leg2"));
+tipOn($("#ch-entregas")); tipOn($("#ch-primeira"));
+index([]); renderAll();
+carregar();
+</script>
