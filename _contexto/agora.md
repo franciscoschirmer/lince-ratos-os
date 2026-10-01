@@ -6,14 +6,12 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
-2026-09-30: Painel de Produção (claude.ai/artifact/REKkC48cBCum7vLvXgDZv6) publicado, mas aparecia zerado para o Francisco. Versão 2 tem botão "Permitir acesso ao Supabase" e linha de diagnóstico ("código: ..."). Os dados estão no Supabase (279 peças, 814 eventos). Também no ar: /captura-reunioes diária 18h.
+2026-09-30: painel de produção funcionando em dois lugares: o privado no claude.ai e o do time em producao-lince.pages.dev (login lince + senha, visual da marca, custos inclusos), com visão por semana e por mês. Backend endurecido (chave do painel no banco, bloqueio de tentativas, cabeçalhos de proteção). Também no ar: /captura-reunioes diária 18h.
 
 ## Pendências
-- Abrir o painel no navegador, permitir o Supabase e, se seguir zerado, trazer a linha "código:" do diagnóstico (2026-09-30)
-- Decidir 3 casos da atribuição: vídeo enviado pelo cliente conta como Victor? caixinha com "Repassado" é do Victor? destaques/fixados só com a Pâmela são dela? (2026-09-30)
-- Digitar o valor mensal de cada profissional no painel (2026-09-30)
+- Confirmar com o Cláudio o schema `produtividade` e a função `public.produtividade_dados_painel` (com chave) no Supabase "Lince"; se ele não quiser na área pública, o caminho é ele expor o schema `produtividade` no Data API (2026-09-30)
+- Passar o link producao-lince.pages.dev e a senha às lideranças (operacional@, criativos@, admin@) por canal privado (2026-09-30)
 - Criar os status "alteração interna" e "alteração do cliente" nas 3 listas de conteúdo e orientar a Marina (2026-09-30)
-- Avisar o Cláudio do schema `produtividade` no Supabase "Lince" (2026-09-30)
 - Conferir o primeiro fechamento semanal de produtividade na Review/Retro, quinta 2026-10-01 18h (2026-09-30)
 - Conferir o comentário "🤖 Captura 01/10" no container da semana: primeira execução automática (2026-10-01)
 - Na Planning de 2026-10-05, revisar as tarefas com a tag captura-ia e as 7 divergências do relatório de 30/09 (2026-09-30)

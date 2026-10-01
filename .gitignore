@@ -6,3 +6,6 @@
 
 # conversas exportadas (dados de clientes, nunca no GitHub)
 operacao/conversas/
+
+# cache local da Cloudflare (wrangler)
+.wrangler/
