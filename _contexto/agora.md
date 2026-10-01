@@ -15,7 +15,7 @@
 - Conferir o primeiro fechamento semanal de produtividade na Review/Retro, quinta 2026-10-01 19h: é o teste completo com o banco novo (2026-10-01)
 - Conferir o comentário "🤖 Captura 01/10" no container da semana: primeira execução automática (2026-10-01)
 - Na Planning de 2026-10-05, revisar as tarefas com a tag captura-ia e as 7 divergências do relatório de 30/09 (2026-09-30)
-- Conferir o primeiro disparo das filas (hoje 16h30 ou amanhã 10h, se o limite do conector travar): chegou notificação pra você e pra Marina? (2026-10-01)
+- Conferir o disparo das filas de 2026-10-02 10h, o primeiro com o conector livre (o de 01/10 16h30 parou no limite): chegou notificação pra você e pra Marina? (2026-10-01)
 - Apagar o canal "Fila de Aprovação (antigo)" no ClickUp (2026-10-01)
 - Mapear os próximos processos: varredura operacional do ClickUp, programação semanal, fechamento semanal, avanços da semana, WhatsApp para ClickUp, auditoria de setup (2026-09-30)
 - Troca geral de senhas expostas nos grupos: Karina (Registro.br, Hostgator, wp-admin), e-mails operacional e criativos, Simone no doc aberto (2026-09-30)
