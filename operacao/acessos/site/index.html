@@ -81,20 +81,20 @@ body.enviado .fim{display:block}
     <div id="contas"></div>
 
     <section class="bloco" id="bloco-outros">
-      <div class="bloco-cab"><h2><span class="num">08</span>Outros acessos</h2></div>
+      <div class="bloco-cab"><h2><span class="num">09</span>Outros acessos</h2></div>
       <p class="ajuda">Qualquer outra conta importante para a sua marca: agenda online, Doctoralia, e-mail profissional, domínio, Pinterest, LinkedIn.</p>
       <div id="outros"></div>
       <button type="button" class="btn btn-linha" id="add-outro" style="margin-top:14px">Adicionar acesso</button>
     </section>
 
     <section class="bloco">
-      <div class="bloco-cab"><h2><span class="num">09</span>Verificação em duas etapas</h2></div>
+      <div class="bloco-cab"><h2><span class="num">10</span>Verificação em duas etapas</h2></div>
       <p class="ajuda">Se alguma conta pede um código no celular ou no e-mail na hora de entrar, para qual número ou e-mail ele chega? Assim combinamos com você o primeiro acesso.</p>
       <label class="campo largo">Número ou e-mail<input type="text" id="verificacao" maxlength="500" placeholder="Ex.: (54) 99999-0000, o código do Instagram chega por SMS"></label>
     </section>
 
     <section class="bloco">
-      <div class="bloco-cab"><h2><span class="num">10</span>Algo mais?</h2></div>
+      <div class="bloco-cab"><h2><span class="num">11</span>Algo mais?</h2></div>
       <label class="campo largo">Observações<textarea id="observacoes" maxlength="2000" placeholder="Qualquer coisa que nos ajude, por exemplo quem mais cuida dessas contas hoje."></textarea></label>
     </section>
 
@@ -135,6 +135,8 @@ const CONTAS = [
   { id: "instagram", nome: "Instagram", login: "Usuário, e-mail ou telefone" },
   { id: "facebook", nome: "Facebook", login: "E-mail ou telefone de acesso" },
   { id: "google", nome: "Google Meu Negócio", login: "E-mail da conta Google", ajuda: "A conta Google que administra o seu perfil no Google (o que aparece no Maps e na busca)." },
+  { id: "googleads", nome: "Google Ads", login: "E-mail da conta Google dos anúncios", ads: true, senha: "Senha, se for outra conta Google", obs: "Ex.: já anunciei antes com outra empresa",
+    ajuda: "O ID da conta é o número de 10 dígitos que aparece no canto superior direito do Google Ads, ao lado do seu nome. Com ele vinculamos a sua conta à nossa gestão. Se a conta Google for a mesma do Google Meu Negócio, não precisa repetir a senha." },
   { id: "site", nome: "Site", login: "Usuário ou e-mail", site: true, ajuda: "O acesso ao painel onde o site é editado." },
   { id: "tiktok", nome: "TikTok", login: "Usuário, e-mail ou telefone" },
   { id: "youtube", nome: "YouTube", login: "E-mail da conta Google do canal", obs: "Ex.: é a mesma conta do Google Meu Negócio" },
@@ -144,8 +146,8 @@ const CONTAS = [
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const campo = (rot, k, extra = "", classe = "") =>
   `<label class="campo ${classe}">${rot}<input type="text" data-k="${k}" maxlength="500" ${extra}></label>`;
-const senha = () =>
-  `<label class="campo senha">Senha<input type="password" data-k="senha" maxlength="500" autocapitalize="off" spellcheck="false"><button type="button" class="ver">Mostrar</button></label>`;
+const senha = (rot = "Senha") =>
+  `<label class="campo senha">${rot}<input type="password" data-k="senha" maxlength="500" autocapitalize="off" spellcheck="false"><button type="button" class="ver">Mostrar</button></label>`;
 
 document.getElementById("contas").innerHTML = CONTAS.map((c, i) => `
   <section class="bloco" data-conta="${c.id}">
@@ -156,8 +158,9 @@ document.getElementById("contas").innerHTML = CONTAS.map((c, i) => `
     ${c.ajuda ? `<p class="ajuda">${esc(c.ajuda)}</p>` : ""}
     <div class="campos">
       ${c.site ? campo("Endereço do painel", "endereco", 'placeholder="Ex.: seusite.com.br/wp-admin" autocapitalize="off" spellcheck="false"', "largo") : ""}
+      ${c.ads ? campo("ID da conta", "conta_id", 'placeholder="000-000-0000" inputmode="numeric"', "largo") : ""}
       ${campo(esc(c.login), "login", 'autocapitalize="off" spellcheck="false"')}
-      ${senha()}
+      ${senha(c.senha && esc(c.senha))}
       ${c.site ? campo("Onde está hospedado, se souber", "hospedagem", 'placeholder="Ex.: Hostinger, Wix, Hostgator"', "largo") : ""}
       ${campo("Observação", "obs", c.obs ? `placeholder="${esc(c.obs)}"` : "", "largo")}
     </div>

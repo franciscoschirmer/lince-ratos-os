@@ -12,11 +12,12 @@ const enc = new TextEncoder();
 const dec = new TextDecoder();
 
 // As contas que o formulário pede, na ordem em que aparecem.
-// `campos` diz o que cada uma guarda; `endereco` e `hospedagem` só existem no site.
+// `campos` diz o que cada uma guarda; `endereco` e `hospedagem` só existem no site, `conta_id` só no Google Ads.
 export const PLATAFORMAS = [
   { id: "instagram", nome: "Instagram", campos: ["login", "senha", "obs"] },
   { id: "facebook", nome: "Facebook", campos: ["login", "senha", "obs"] },
   { id: "google", nome: "Google Meu Negócio", campos: ["login", "senha", "obs"] },
+  { id: "googleads", nome: "Google Ads", campos: ["conta_id", "login", "senha", "obs"] },
   { id: "site", nome: "Site", campos: ["endereco", "login", "senha", "hospedagem", "obs"] },
   { id: "tiktok", nome: "TikTok", campos: ["login", "senha", "obs"] },
   { id: "youtube", nome: "YouTube", campos: ["login", "senha", "obs"] },

@@ -3,7 +3,7 @@
 
 import { abrir } from "../../_lib/comum.js";
 
-const COLUNAS = ["Data", "Cliente", "Plataforma", "Situação", "Endereço", "Login", "Senha", "Observação"];
+const COLUNAS = ["Data", "Cliente", "Plataforma", "Situação", "ID da conta", "Endereço", "Login", "Senha", "Observação"];
 
 // valor que começa com = + - @ vira fórmula no Excel; o apóstrofo neutraliza
 function celula(v) {
@@ -24,10 +24,10 @@ export async function onRequestGet({ request, env }) {
   const linhas = [COLUNAS];
   for (const l of results) {
     const e = await abrir(env, l);
-    if (e.erro) linhas.push([dataBr(e.criado_em), e.nome, "", e.erro, "", "", "", ""]);
+    if (e.erro) linhas.push([dataBr(e.criado_em), e.nome, "", e.erro, "", "", "", "", ""]);
     for (const i of e.itens) {
       const obs = [i.hospedagem && `Hospedagem: ${i.hospedagem}`, i.obs].filter(Boolean).join(" | ");
-      linhas.push([dataBr(e.criado_em), e.nome, i.plataforma, i.nao_tem ? "Não tem a conta" : i.geral ? "" : "Enviado", i.endereco, i.login, i.senha, obs]);
+      linhas.push([dataBr(e.criado_em), e.nome, i.plataforma, i.nao_tem ? "Não tem a conta" : i.geral ? "" : "Enviado", i.conta_id, i.endereco, i.login, i.senha, obs]);
     }
   }
 
