@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Acessos · Painel Lince</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap">
+<style>
+:root{--bg:#110B08;--card:#1D1511;--card-2:#251b16;--ink:#F1EDE5;--ink-2:#988E84;--bronze:#BAA079;--ouro:#D6C294;--linha:rgba(214,203,182,.18);--erro:#E0A3A6;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg)}
+main{max-width:980px;margin:0 auto;padding:32px 16px 64px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+header img{width:48px;height:48px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--linha)}
+header .tit{flex:1;min-width:200px}
+header .casa{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;letter-spacing:.38em;text-transform:uppercase;color:var(--ouro);font-size:.85rem}
+header h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-size:2rem;line-height:1.1;margin:2px 0 0}
+.acoes{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:500 .68rem/1 Inter,system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;border-radius:2px;padding:11px 14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn-cheio{color:var(--bg);background:var(--bronze);border:1px solid var(--bronze)}
+.btn-cheio:hover{background:var(--ouro);border-color:var(--ouro)}
+.btn-linha{color:var(--bronze);background:transparent;border:1px solid rgba(186,160,121,.45)}
+.btn-linha:hover{border-color:var(--bronze);color:var(--ouro)}
+.btn-perigo{color:var(--erro);background:transparent;border:1px solid rgba(224,163,166,.35)}
+.btn-perigo:hover{border-color:var(--erro)}
+.barra{display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+.barra input{flex:1;min-width:200px;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--linha);border-radius:2px;padding:10px 12px}
+.barra input:focus{outline:none;border-color:var(--bronze)}
+.conta{color:var(--ink-2);font-size:.85rem}
+.envio{background:var(--card);border:1px solid var(--linha);border-radius:4px;margin-bottom:10px}
+.envio summary{list-style:none;cursor:pointer;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:baseline}
+.envio summary::-webkit-details-marker{display:none}
+.envio summary:hover{background:var(--card-2)}
+.envio .quem{font-family:"Cormorant Garamond",Georgia,serif;font-size:1.35rem;font-weight:500}
+.envio .quando{color:var(--ink-2);font-size:.8rem;font-variant-numeric:tabular-nums;text-align:right}
+.chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:.7rem;letter-spacing:.06em;color:var(--ouro);border:1px solid rgba(214,194,148,.3);border-radius:2px;padding:2px 7px}
+.chip.nao{color:var(--ink-2);border-color:var(--linha);text-decoration:line-through}
+.corpo{border-top:1px solid var(--linha);padding:8px 18px 18px}
+.item{padding:14px 0;border-bottom:1px solid var(--linha)}
+.item:last-of-type{border-bottom:0}
+.item h3{margin:0 0 8px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bronze);font-weight:500}
+.item .nao-tem{color:var(--ink-2);font-style:italic}
+.linha{display:grid;grid-template-columns:110px 1fr auto;gap:12px;align-items:center;padding:3px 0}
+.linha .rot{color:var(--ink-2);font-size:.8rem}
+.linha .val{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:.88rem;word-break:break-all;white-space:pre-wrap}
+.linha .val.texto{font-family:inherit}
+.mini{display:flex;gap:4px}
+.mini button{font:500 .62rem/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);background:none;border:1px solid transparent;border-radius:2px;padding:6px 7px;cursor:pointer}
+.mini button:hover{border-color:rgba(186,160,121,.45)}
+@media (max-width:560px){.linha{grid-template-columns:1fr auto}.linha .rot{grid-column:1/-1}}
+.rodape-envio{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:14px}
+.vazio,.estado{color:var(--ink-2);text-align:center;padding:48px 16px;border:1px dashed var(--linha);border-radius:4px}
+.erro{color:var(--erro)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ouro);color:var(--bg);padding:10px 16px;border-radius:2px;font-size:.85rem;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:1px solid var(--ouro);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="/marca/selo-lince.jpg" alt="">
+    <div class="tit"><div class="casa">Lince</div><h1>Acessos dos clientes</h1></div>
+    <div class="acoes">
+      <a class="btn btn-linha" href="/" target="_blank" rel="noopener">Ver formulário</a>
+      <button class="btn btn-linha" id="copiar-link">Copiar link do formulário</button>
+      <a class="btn btn-cheio" href="/api/painel/exportar" id="exportar-tudo">Exportar tudo</a>
+      <a class="btn btn-linha" href="/painel/sair">Sair</a>
+    </div>
+  </header>
+
+  <div class="barra">
+    <input type="search" id="busca" placeholder="Buscar por nome do cliente" autocomplete="off">
+    <span class="conta" id="conta"></span>
+  </div>
+
+  <div id="lista"><div class="estado">Carregando</div></div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const ROTULOS = { endereco: "Endereço", login: "Login", senha: "Senha", hospedagem: "Hospedagem", obs: "Observação" };
+const ORDEM = ["endereco", "login", "senha", "hospedagem", "obs"];
+let envios = [];
+
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const quando = (iso) => new Date(iso).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
+
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("on");
+  clearTimeout(toast.t);
+  toast.t = setTimeout(() => t.classList.remove("on"), 1600);
+}
+
+async function copiar(txt, msg = "Copiado") {
+  try { await navigator.clipboard.writeText(txt); toast(msg); }
+  catch { toast("Não deu pra copiar; selecione e copie à mão"); }
+}
+
+function itemHtml(i, eid, idx) {
+  if (i.nao_tem) return `<div class="item"><h3>${esc(i.plataforma)}</h3><div class="nao-tem">Não tem essa conta</div></div>`;
+  const linhas = ORDEM.filter((k) => i[k]).map((k) => {
+    const secreto = k === "senha";
+    const texto = k === "obs" || k === "hospedagem";
+    return `<div class="linha"><span class="rot">${ROTULOS[k]}</span>
+      <span class="val ${texto ? "texto" : ""}" ${secreto ? 'data-oculto="1"' : ""}>${secreto ? "••••••••" : esc(i[k])}</span>
+      <span class="mini">${secreto ? `<button data-ver="${eid}:${idx}">Mostrar</button>` : ""}<button data-copiar="${eid}:${idx}:${k}">Copiar</button></span></div>`;
+  }).join("");
+  return `<div class="item"><h3>${esc(i.plataforma)}</h3>${linhas}</div>`;
+}
+
+function render() {
+  const q = document.getElementById("busca").value.trim().toLowerCase();
+  const lista = envios.filter((e) => !q || e.nome.toLowerCase().includes(q));
+  document.getElementById("conta").textContent = `${lista.length} envio${lista.length === 1 ? "" : "s"}`;
+  const el = document.getElementById("lista");
+  if (!envios.length) { el.innerHTML = `<div class="vazio">Nenhum envio ainda. Mande o link do formulário pro cliente.</div>`; return; }
+  if (!lista.length) { el.innerHTML = `<div class="vazio">Nenhum cliente com esse nome.</div>`; return; }
+  el.innerHTML = lista.map((e) => {
+    const chips = e.itens.filter((i) => !i.geral).map((i) => `<span class="chip ${i.nao_tem ? "nao" : ""}">${esc(i.plataforma)}</span>`).join("");
+    const corpo = e.erro ? `<p class="erro">${esc(e.erro)}</p>` : e.itens.map((i, idx) => itemHtml(i, e.id, idx)).join("");
+    return `<details class="envio" data-id="${e.id}">
+      <summary><span class="quem">${esc(e.nome)}</span><span class="quando">${quando(e.criado_em)}</span><span class="chips">${chips}</span></summary>
+      <div class="corpo">${corpo}
+        <div class="rodape-envio">
+          <a class="btn btn-linha" href="/api/painel/exportar?id=${e.id}">Exportar este</a>
+          <button class="btn btn-perigo" data-apagar="${e.id}">Apagar</button>
+        </div>
+      </div>
+    </details>`;
+  }).join("");
+}
+
+async function carregar() {
+  try {
+    const r = await fetch("/api/painel/lista");
+    if (r.status === 401) { location.href = "/painel/"; return; }
+    if (!r.ok) throw new Error();
+    envios = (await r.json()).envios;
+    render();
+  } catch {
+    document.getElementById("lista").innerHTML = `<div class="estado erro">Não consegui carregar os envios. Recarregue a página.</div>`;
+  }
+}
+
+const achar = (ref) => {
+  const [eid, idx, k] = ref.split(":");
+  const e = envios.find((x) => x.id === Number(eid));
+  return { e, i: e.itens[Number(idx)], k };
+};
+
+document.addEventListener("click", async (ev) => {
+  const b = ev.target.closest("button");
+  if (!b) return;
+  if (b.id === "copiar-link") return copiar(location.origin + "/", "Link do formulário copiado");
+  if (b.dataset.copiar) {
+    const { i, k } = achar(b.dataset.copiar);
+    return copiar(i[k], `${ROTULOS[k]} copiado`);
+  }
+  if (b.dataset.ver) {
+    const { i } = achar(b.dataset.ver);
+    const val = b.closest(".linha").querySelector(".val");
+    const mostrar = val.dataset.oculto === "1";
+    val.textContent = mostrar ? i.senha : "••••••••";
+    val.dataset.oculto = mostrar ? "0" : "1";
+    b.textContent = mostrar ? "Ocultar" : "Mostrar";
+    return;
+  }
+  if (b.dataset.apagar) {
+    const id = Number(b.dataset.apagar);
+    const e = envios.find((x) => x.id === id);
+    if (!confirm(`Apagar de vez o envio de ${e.nome} (${quando(e.criado_em)})?\n\nNão tem como desfazer. Se ainda não passou os acessos pro lugar definitivo, exporte antes.`)) return;
+    b.disabled = true;
+    const r = await fetch("/api/painel/apagar", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ id }) });
+    if (r.ok) { envios = envios.filter((x) => x.id !== id); render(); toast("Envio apagado"); }
+    else { b.disabled = false; toast("Não consegui apagar; tente de novo"); }
+  }
+});
+
+document.getElementById("busca").addEventListener("input", render);
+carregar();
+</script>
+</body>
+</html>

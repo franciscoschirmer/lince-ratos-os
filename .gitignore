@@ -12,3 +12,6 @@ operacao/conversas/
 
 # exports semanais dos grupos de cliente (dados de clientes, trocados toda semana)
 operacao/auditoria-grupos/exports/
+
+# segredos locais do wrangler (teste)
+.dev.vars
