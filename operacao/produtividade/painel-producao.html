@@ -181,8 +181,11 @@ const cssv = (n) => getComputedStyle(document.documentElement).getPropertyValue(
 
 function parsePayload(p) {
   const txt = typeof p === "string" ? p : (p && typeof p.result === "string") ? p.result : JSON.stringify(p);
-  const m = txt.match(/<untrusted-data-[^>]+>\s*([\s\S]*?)\s*<\/untrusted-data/);
-  return JSON.parse(m ? m[1] : txt);
+  // o aviso cita a marcação na mesma linha; os dados ficam entre a marcação sozinha numa linha e o fechamento com o mesmo id
+  const m = txt.match(/(?:^|\n)<untrusted-data-([^>\s]+)>\s*\n([\s\S]*?)\n\s*<\/untrusted-data-\1>/);
+  if (m) return JSON.parse(m[2]);
+  const ini = txt.indexOf("["), fim = txt.lastIndexOf("]");
+  return JSON.parse(ini >= 0 && fim > ini ? txt.slice(ini, fim + 1) : txt);
 }
 
 function index(rows) {

@@ -56,7 +56,9 @@ Admin, id `-1`, desconhecidos) é ignorado.
 2. Só o Mateus presente, ou Mateus autor de comentário, e a peça não é design → `Mateus` (`watcher` / `comentario`)
 3. Os dois presentes: decide o tipo (design → Pamela, vídeo → Mateus, caixinha/outro → `outro`) (`tipo`)
 4. Nenhum dos dois, comentário do Francisco com "repassado" (palavra exata) ou "VH" → `Victor` (`repassado`)
-5. Nenhum dos dois, peça de vídeo que **não é roteiro** e chegou em `revisão de social media` → `Victor` (`sem-mateus`)
+5. Nenhum dos dois, peça de vídeo que **não é roteiro**, cujo nome **não** tem "enviado/enviada", "bruto" ou
+   "avaliar" (vídeo bruto mandado pelo cliente), e chegou em `revisão de social media` → `Victor` (`sem-mateus`).
+   Com esses termos e sem "repassado" → `outro` (`video-cliente`). Decisão do Francisco, 2026-09-30.
 6. Giovanna presente e nenhum dos dois → `outro` (`giovanna`)
 7. Resto → `outro` (`sem-regra`)
 
