@@ -15,3 +15,6 @@ operacao/auditoria-grupos/exports/
 
 # segredos locais do wrangler (teste)
 .dev.vars
+
+# log local das filas (Agendador do Windows)
+.claude/skills/fila-aprovacao/ultima-execucao.log
