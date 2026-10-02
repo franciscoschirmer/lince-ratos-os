@@ -22,12 +22,13 @@ const WS = '90132863446', LISTA = '901325858557', API = 'https://api.clickup.com
 const falha = m => { console.error('ERRO: ' + m); process.exit(1); };
 if (!TOKEN) falha('CLICKUP_API_TOKEN ausente (nem variável de ambiente, nem .env)');
 const j = (u, o = {}) => {
-  const a = ['-s', '--fail-with-body', '--max-time', '60', '-H', `Authorization: ${TOKEN}`, '-H', 'Content-Type: application/json; charset=utf-8'];
+  const a = ['-sS', '--fail-with-body', '--max-time', '60', '-H', `Authorization: ${TOKEN}`, '-H', 'Content-Type: application/json; charset=utf-8'];
   if (o.method) a.push('-X', o.method);
   if (o.body) a.push('--data-binary', '@-');
   let out;
-  try { out = execFileSync('curl', [...a, API + u], { input: o.body, encoding: 'utf8', maxBuffer: 64e6 }); }
-  catch (e) { falha(`${o.method || 'GET'} ${u}: ${String(e.stdout || e.message).slice(0, 300)}`); }
+  // erro nunca repete o comando (ele leva o token): só código de saída, stderr e corpo da resposta, e ainda passa pelo filtro
+  try { out = execFileSync('curl', [...a, API + u], { input: o.body, encoding: 'utf8', maxBuffer: 64e6, stdio: ['pipe', 'pipe', 'pipe'] }); }
+  catch (e) { falha(`${o.method || 'GET'} ${u}: curl saiu com código ${e.status} · ${String(e.stderr || '').trim()} · ${String(e.stdout || '').slice(0, 300)}`.split(TOKEN).join('***')); }
   return out ? JSON.parse(out) : {};
 };
 const stdin = () => fs.readFileSync(0, 'utf8').replace(/^﻿/, '').trimEnd();

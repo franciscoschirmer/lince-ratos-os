@@ -12,10 +12,12 @@ const LISTAS = ['901325858184', '901325858587', '901325858360'];
 const F_CLIENTE = '35443fa6-1e27-466f-9a6b-a2d132237079', F_POST = 'd4806a40-74c1-45fb-9c36-972aca497d00';
 import { execFileSync } from 'node:child_process';
 const j = async (u, o = {}) => {
-  const a = ['-s', '--fail-with-body', '-H', `Authorization: ${H.Authorization}`, '-H', 'Content-Type: application/json'];
+  const a = ['-sS', '--fail-with-body', '-H', `Authorization: ${H.Authorization}`, '-H', 'Content-Type: application/json'];
   if (o.method) a.push('-X', o.method);
   if (o.body) a.push('--data-binary', '@-');
-  return JSON.parse(execFileSync('curl', [...a, u], { input: o.body, encoding: 'utf8', maxBuffer: 64e6 }));
+  // erro nunca repete o comando (ele leva o token)
+  try { return JSON.parse(execFileSync('curl', [...a, u], { input: o.body, encoding: 'utf8', maxBuffer: 64e6, stdio: ['pipe', 'pipe', 'pipe'] })); }
+  catch (e) { throw new Error(`curl saiu com código ${e.status} · ${String(e.stderr || '').trim()} · ${String(e.stdout || '').slice(0, 300)}`.split(H.Authorization).join('***')); }
 };
 const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const tz = 'America/Sao_Paulo';
