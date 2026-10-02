@@ -6,9 +6,12 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
-2026-10-01: produtividade migrada para o Supabase próprio do Francisco (projeto "Chico"); painel privado, site do time (producao-lince.pages.dev), skill e rotinas já apontam pra ele. ClickUp bateu o limite diário do conector (1.000 chamadas) depois da carga retroativa; captura de reuniões e fechamento semanal passaram para 19h. Filas no chat do ClickUp no ar (10h e 16h30): Fila de Aprovação pro Francisco e Fila de Revisão pra Marina; primeiro disparo hoje 16h30.
+2026-10-01: produtividade migrada para o Supabase próprio do Francisco (projeto "Chico"); painel privado, site do time (producao-lince.pages.dev), skill e rotinas já apontam pra ele. ClickUp bateu o limite diário do conector (1.000 chamadas) depois da carga retroativa; captura de reuniões e fechamento semanal passaram para 19h. Filas no chat do ClickUp no ar (10h e 16h30): Fila de Aprovação pro Francisco e Fila de Revisão pra Marina; primeiro disparo hoje 16h30. Formulário de acessos do cliente no ar (acessos-lince.pages.dev, painel em /painel).
 
 ## Pendências
+- Com o Cláudio: subdomínio do formulário de acessos. Primeiro decidir linceco.com.br ou lince.company; depois Custom domain no projeto `acessos-lince` e CNAME `acessos` → `acessos-lince.pages.dev` no DNS (2026-10-02)
+- Entrar no painel de acessos, testar mostrar, exportar e apagar com o envio "TESTE CLAUDE (apagar)" (2026-10-01)
+- Guardar a `ACESSOS_CHAVE` do `.env` no gerenciador de senhas (2026-10-01)
 - Remover do projeto Supabase antigo do Cláudio ("Lince", axilzquaqtppqjkbqqca) o schema `produtividade` e a função `public.produtividade_dados_painel`: o Cláudio apaga, ou reconectar a conta operacional por um minuto (2026-10-01)
 - Passar o link producao-lince.pages.dev e a senha às lideranças (operacional@, criativos@, admin@) por canal privado (2026-09-30)
 - Conferir os nomes dos status "alteração interna" e "alteração do cliente" (criados pelo Francisco em 2026-10-01) quando o ClickUp liberar, e orientar a Marina (2026-10-01)
