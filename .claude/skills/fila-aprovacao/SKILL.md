@@ -38,11 +38,12 @@ todo mundo menos o criador).
 
 O conector posta como Admin Lince & Co, por isso a mensagem notifica quem está no assignee.
 
-## Plano B: conector travado (rodando à mão, neste computador)
+## Caminho principal: o script `fila.mjs` (API direta, fora do limite do conector)
 
-Se o conector devolver `RATE_LIMIT_EXCEEDED` ou estiver fora, não parar: rodar o script desta pasta,
-que usa o token pessoal do Francisco guardado no `.env` da raiz (`CLICKUP_API_TOKEN`) e chama a API direto
-(fora do limite do conector, uma chamada por lista):
+Desde 2026-10-02 as rotinas **não usam o conector** (o limite de 1.000 chamadas/dia da conta compartilhada
+travava todo dia). Rodam o script desta pasta, que chama a API do ClickUp direto com o token pessoal do
+Francisco: na nuvem ele vem da variável de ambiente `CLICKUP_API_TOKEN` da rotina; aqui, do `.env` da raiz.
+O script já faz tudo da seção abaixo (busca no workspace, tira capas e duplicadas, agrupa, avisa falhas):
 
 ```bash
 node .claude/skills/fila-aprovacao/fila.mjs            # rascunho da aprovação
@@ -52,7 +53,8 @@ node .claude/skills/fila-aprovacao/fila.mjs revisao postar
 
 - O que sai pelo token aparece como mensagem do Francisco: notifica a Marina, mas não ele. Avisar isso.
 - **O `.env` nunca vai pro git** (está no `.gitignore`). Nunca copiar o token pra skill, rotina, recado, diário ou chat.
-- Na nuvem não tem `.env`: lá a rotina para e avisa, e o plano B é rodar à mão aqui.
+- Na nuvem não tem `.env`: o token fica só nas variáveis de ambiente da rotina (configuração no claude.ai, fora do git).
+- O passo a passo abaixo (pelo conector) fica como referência e plano B, se a API direta falhar.
 
 ## Passo a passo
 

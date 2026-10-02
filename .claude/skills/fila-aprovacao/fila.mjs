@@ -1,8 +1,10 @@
 // Plano B da /fila-aprovacao quando o conector ClickUp bate o limite. Lê CLICKUP_API_TOKEN do .env (fora do git).
+// Na nuvem a chave vem da variável de ambiente CLICKUP_API_TOKEN da rotina.
 // uso, na raiz do repo: node .claude/skills/fila-aprovacao/fila.mjs [revisao] [postar]
 import fs from 'node:fs';
-const env = Object.fromEntries(fs.readFileSync(process.env.ENVFILE || '.env', 'utf8').split(/\r?\n/).filter(l => l.includes('=')).map(l => [l.slice(0, l.indexOf('=')).trim(), l.slice(l.indexOf('=') + 1).trim()]));
-const H = { Authorization: env.CLICKUP_API_TOKEN, 'Content-Type': 'application/json' };
+const envFile = process.env.ENVFILE || '.env';
+const env = !fs.existsSync(envFile) ? {} : Object.fromEntries(fs.readFileSync(envFile, 'utf8').split(/\r?\n/).filter(l => l.includes('=')).map(l => [l.slice(0, l.indexOf('=')).trim(), l.slice(l.indexOf('=') + 1).trim()]));
+const H = { Authorization: process.env.CLICKUP_API_TOKEN || env.CLICKUP_API_TOKEN, 'Content-Type': 'application/json' };
 const REV = process.argv.includes('revisao');
 const WS = '90132863446', CANAL = REV ? '2ky5cpep-5533' : '2ky5cpep-5553';
 const STATUS = REV ? 'revisão de social media' : 'disponível para aprovação', ASSIGNEE = REV ? '81994084' : '158419961';
