@@ -6,6 +6,7 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
+2026-10-02 (tarde): filas de aprovação e revisão rodam num Worker da Cloudflare (`filas-lince`, seg-sex 10h e 16h30), sem depender do note nem do conector; rotinas das filas no Claude e tarefas do Windows desligadas.
 2026-10-02: captura de reuniões e filas passam a falar com o ClickUp pela API direta com o token do Francisco (variável no ambiente de nuvem, `api.clickup.com` liberado), fora do limite do conector; testado na nuvem. A captura ganhou o filtro do que vira tarefa (na dúvida não cria), o bloco "Filtrado" no relatório, o banco de ideias (💡 Ideias e combinados das reuniões, `86akru8d2`) e aviso no celular a cada execução.
 2026-10-01: produtividade migrada para o Supabase próprio do Francisco (projeto "Chico"). Formulário de acessos do cliente no ar (acessos-lince.pages.dev, painel em /painel).
 
@@ -21,7 +22,8 @@
 - Na Planning de 2026-10-05, revisar as tarefas com a tag captura-ia e as 7 divergências do relatório de 30/09 (2026-09-30)
 - Apagar na web a execução de teste de 14:46 (claude.ai/code/session_01UH8cHRxJP97QzVYuThyD3V, mostra o token do ClickUp) e a rotina "TESTE · token ClickUp na nuvem (apagar)" (2026-10-02)
 - Conferir a captura das 19h de 2026-10-02, a primeira com filtro e API: notificação no celular e bloco Filtrado no comentário do container (2026-10-02)
-- Conferir a fila das 16h30 de 2026-10-02, a primeira pela API (sai como Francisco: notifica a Marina, não ele) (2026-10-02)
+- Conferir o primeiro disparo do Worker das filas, segunda 2026-10-05 10h: mensagem nos dois canais (sai como Francisco: notifica a Marina, não ele). Se não chegar, religar as tarefas do Agendador do Windows (2026-10-02)
+- Ativar a verificação em duas etapas na Cloudflare (o token do ClickUp mora lá agora) e, se faltar, no ClickUp (2026-10-02)
 - Apagar o canal "Fila de Aprovação (antigo)" no ClickUp (2026-10-01)
 - Mapear os próximos processos: varredura operacional do ClickUp, programação semanal, fechamento semanal, avanços da semana, WhatsApp para ClickUp, auditoria de setup (2026-09-30)
 - Troca geral de senhas expostas nos grupos: Karina (Registro.br, Hostgator, wp-admin), e-mails operacional e criativos, Simone no doc aberto (2026-09-30)
