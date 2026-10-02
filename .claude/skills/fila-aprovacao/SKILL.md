@@ -38,7 +38,14 @@ todo mundo menos o criador).
 
 O conector posta como Admin Lince & Co, por isso a mensagem notifica quem está no assignee.
 
-## Caminho principal: o script `fila.mjs` (API direta, fora do limite do conector)
+## Onde roda: Cloudflare Worker `filas-lince` (código em `operacao/filas-worker/`)
+
+Desde 2026-10-02 quem posta nos horários é o Worker na Cloudflare: mesma lógica do `fila.mjs`, token
+como segredo do Worker, 3 tentativas e aviso "⚠️ Fila não rodou" no canal se falhar. Mudou a regra das
+filas? Mudar nos dois (`fila.mjs` e `operacao/filas-worker/src/index.js`) e publicar com
+`npx wrangler deploy` na pasta do Worker. Reserva: tarefas desligadas no Agendador do Windows.
+
+## O script `fila.mjs` (à mão, API direta, fora do limite do conector)
 
 Desde 2026-10-02 as rotinas **não usam o conector** (o limite de 1.000 chamadas/dia da conta compartilhada
 travava todo dia). Rodam o script desta pasta, que chama a API do ClickUp direto com o token pessoal do
