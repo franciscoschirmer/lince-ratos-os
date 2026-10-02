@@ -23,11 +23,37 @@ Modos:
 | Agenda que vê todas as reuniões | `admin@linceco.com.br` |
 | Onde caem as transcrições | Drive, docs `... - Anotações do Gemini` (dono operacional@linceco.com.br) |
 | Tag obrigatória nas subtarefas criadas | `captura-ia` |
+| Banco de ideias `💡 Ideias e combinados das reuniões` | `86akru8d2` (lista Rituais, sem responsável, sem prazo) |
 
 IDs de gente no ClickUp (resolver por nome é instável, usar sempre o ID):
 Francisco `158419961` · Victoria `48777424` · Júlia `82001470` · Marina `81994084` · Ivan `112000442` ·
 Jenifer `49036032` · Henri `164678340` · Pâmela `284651027` · Cláudio `118092849` · Mateus `118126212` ·
 Giovanna `284462463`
+
+## Como falar com o ClickUp: o script `cu.mjs` (API direta), nunca o conector primeiro
+Desde 2026-10-02 (Francisco): o conector do ClickUp tem limite de 1.000 chamadas/dia na conta compartilhada e
+travava a captura. **Toda leitura e escrita no ClickUp passa pelo script desta pasta**, que chama a API direto
+com o token pessoal do Francisco (na nuvem, variável de ambiente `CLICKUP_API_TOKEN` do ambiente da rotina;
+aqui, o `.env` da raiz). Tudo que ele cria ou comenta aparece como Francisco. Drive e Agenda continuam pelos conectores do Google.
+
+| precisa de | comando (na raiz do repo) |
+|---|---|
+| conferir token e rede (rodar primeiro, sempre) | `node .claude/skills/captura-reunioes/cu.mjs check` |
+| tarefa + subtarefas (ex.: achar o container da semana em `86ahaqpwn`) | `cu.mjs get <id>` |
+| descrição completa | `cu.mjs desc <id>` |
+| deduplicar (tarefas abertas do workspace, todos os termos no nome, sem acento) | `cu.mjs search <cliente> <palavra>` |
+| criar tarefa ou subtarefa | `cu.mjs create` com JSON no stdin: `{"name","parent","assignees":[ids],"due":"AAAA-MM-DD","priority","description","tags":["captura-ia"]}` |
+| trocar descrição (ler com `desc`, montar a versão completa, mandar inteira) | `cu.mjs setdesc <id>` com o texto no stdin |
+| comentar com menção (`[@Nome](#user_mention#ID)` vira menção de verdade) | `cu.mjs comment <id>` com o texto no stdin |
+| status válidos / mudar status / pôr tag | `cu.mjs statuses <id>` · `cu.mjs status <id> <status>` · `cu.mjs tag <id> captura-ia` |
+
+Texto com acento ou emoji vai sempre por arquivo ou heredoc no stdin (`node ... create < /tmp/t.json`), nunca como argumento.
+Nunca imprimir, gravar ou repetir o valor do token.
+
+**Se o script falhar** (`ERRO:` na saída): ler a mensagem. Token ausente ou rede bloqueada → plano B: o conector
+ClickUp (carregar via ToolSearch), mesmas operações. Se o conector também falhar ou estiver no limite: **parar e
+avisar** (seção 6), dizendo exatamente o que faltou. Nunca terminar em silêncio, nunca deixar reunião lida e não
+registrada: se nada foi escrito, o doc **não** entra em FONTES PROCESSADAS, e a próxima execução pega de novo.
 
 ## Passo a passo
 
@@ -61,7 +87,8 @@ Extrair duas coisas:
 Sem travessão decorativo além do separador do título, sem emoji, sem bullet.
 Nunca colocar senha, token, CPF ou dado financeiro da Lince na ata (dado financeiro de campanha de cliente pode).
 
-**b) Demandas**, uma por ação acordada que tenha dono na equipe Lince:
+**b) Demandas**, uma por ação acordada que tenha dono na equipe Lince **e que passe no filtro do passo 3d**
+(extrair tudo primeiro, filtrar depois; o que não passa vai pro relatório como "Filtrado", nunca pro ClickUp):
 - Nome: `[Cliente] — Verbo no infinitivo + objeto` (ex.: `[Hospital Piltcher] — Reenviar os dados do deposito da verba de trafego`).
   Prefixos internos: `[Interno]`, `[Tecnologia]`, `[Tráfego]`, `[Lince]`, `[Comercial]`.
   Cliente com o nome como aparece no campo 👔 Clientes do ClickUp (Luis Henrique, Hospital Piltcher, Urocenter, Atria, Gabriel Parede, Fazenda do Rosa, Pamela Dal Canton...).
@@ -88,12 +115,68 @@ assinado", "já mandei a proposta"). Guardar: o que foi concluído, quem disse, 
 Só conta como concluído o que foi dito no passado e sem ressalva. "Quase pronto", "falta só", "mando hoje",
 "em revisão" não é conclusão; nesses casos, se a tarefa existe, só comentar o andamento (passo 4b).
 
-Não vira demanda: compromisso do cliente (fica na ATA como "compromissos do cliente, cobrar no próximo alinhamento"),
-opinião sem ação, coisa já concluída na própria reunião.
+### 3d. Filtro: vira tarefa ou não
+Regra do Francisco (2026-10-02): **tarefa é o que precisa de acompanhamento pra acontecer.** O ClickUp não é
+registro de tudo que foi falado; tarefa que ninguém vai abrir vira cemitério e atrapalha a operação.
+Na dúvida, **não cria**: lista em "Filtrado" no relatório, com o motivo. É melhor o Francisco promover uma
+tarefa à mão do que limpar cinco.
+
+**Passa uma demanda pelas quatro perguntas, nesta ordem. Qualquer "não" derruba:**
+
+1. **Foi decidido pra fazer agora?** Vale o que foi combinado como ação real, com dono, pra este ciclo.
+   Não vale: exemplo dado pra ilustrar uma ideia, hipótese ("a gente podia", "um jeito seria"), teste de algo que
+   ainda não existe, passo de um projeto que ainda não chegou nessa fase.
+   Se é passo futuro de um projeto que já tem tarefa (ex.: plataforma em desenvolvimento), não vira tarefa solta:
+   vai pra ATA como "registrar na tarefa do projeto quando chegar a fase", e no relatório em "Filtrado".
+2. **Outra automação já cobre?** Não vira tarefa:
+   - enviar conteúdo, peça ou material pra aprovação do cliente (a Fila de Aprovação mostra o que está pronto pra enviar);
+   - responder alguém no WhatsApp, responder grupo, dar retorno a mensagem (a automação de grupos sem resposta cobre);
+   - mandar conteúdo pra revisão interna (a Fila de Revisão cobre).
+3. **É maior que um repasse interno?** Não vira tarefa:
+   - repasse entre pessoas da equipe (mandar copy, paleta, logo, arquivo, link pro colega), principalmente se pôde
+     ser feito na hora ou durante a reunião;
+   - "alinhar com", "conversar com", "falar com" um colega da equipe, sem entregável;
+   - combinado interno de rotina ("incluir o Henri nas próximas reuniões", "chamar fulano no onboarding");
+   - meta-tarefa sobre o próprio ClickUp ("registrar no ClickUp", "atualizar a tarefa").
+4. **Gera algo que alguém vai cobrar?** Tem que ter entregável ou resultado verificável: algo que sai pro cliente,
+   pro lead, pra produção, pro financeiro ou destrava um bloqueio.
+
+**Vira tarefa (exemplos aprovados pelo Francisco, semana de 28/09):**
+- Produção e entrega: rodar anúncio, passar conteúdo pra produção, aplicar alterações do cliente.
+- Cliente: agendar reunião com cliente (tráfego, alinhamento), enviar NPS, registrar no farol, presente de cliente.
+- Comercial: enviar proposta, formalizar contrato e data de início, agendar reunião com lead, acompanhar proposta enviada.
+- Bloqueio e acesso: obter acesso à conta de anúncio, resolver verificação, abrir chamado na Meta.
+- Financeiro e administrativo: emitir notas pendentes, resolver falha com a contabilidade, revisar compras e
+  assinaturas depois da troca de cartão.
+
+**Não vira tarefa (exemplos reprovados pelo Francisco, semana de 28/09):**
+- `[Tecnologia] — Testar o fluxo da plataforma simulando a conta do Cristiano Cruz` · foi exemplo de como testar, e a
+  plataforma nem está pronta (pergunta 1).
+- `[Walter Pinto] — Enviar ao Cláudio copy, paleta e moodboard da LP` · repasse interno, feito durante a reunião (pergunta 3).
+- `[Hospital Piltcher] — Enviar o folder do paciente para aprovação do cliente` · a Fila de Aprovação cobre (pergunta 2).
+- `[Fazenda do Rosa] — Responder o Alan sobre o reconhecimento da marca` · a automação de grupos sem resposta cobre (pergunta 2).
+- `[Interno] — Incluir o Henri nas reuniões de onboarding` · combinado interno, vai acontecer sem tarefa (pergunta 3).
+- `[Lince] — Alinhar com a Júlia o produto comercial` · alinhamento interno sem entregável (pergunta 3).
+
+Também não vira tarefa: compromisso do cliente (fica na ATA como "compromissos do cliente, cobrar no próximo
+alinhamento"), opinião sem ação, coisa já concluída na própria reunião (essa entra como conclusão, passo 3c,
+se houver tarefa aberta).
+
+**Pra onde vai o que foi filtrado:**
+- Ideia, hipótese, passo futuro de projeto, combinado interno sem entregável (perguntas 1, 3 e 4) → uma linha no
+  **banco de ideias** (`86akru8d2`), pra não se perder sem virar tarefa. Formato `DD/MM · <reunião> · <ideia em uma linha>`,
+  embaixo do título `SEMANA DD/MM` (a segunda-feira; criar o título se não existe). Antes de acrescentar, ler a
+  descrição e não repetir ideia que já está lá. Repasse que foi feito na própria reunião não entra (já acabou).
+- Coberto por outra automação (pergunta 2) → não vai pra lugar nenhum além do relatório.
+- Quando uma ideia do banco aparecer numa reunião como decidida, aí vira tarefa normal, e a linha no banco ganha
+  `→ virou tarefa` no fim.
+
+**Teto:** se uma reunião interna (daily, Planning, tecnologia) passar de 6 tarefas depois do filtro, reler a lista
+com mais rigor: quase sempre tem repasse ou alinhamento disfarçado. Não é corte cego; é sinal de filtro frouxo.
 
 ### 4. Deduplicar contra o ClickUp
-Antes de criar, buscar tarefas **abertas, sem limite de data**, com o mesmo cliente e verbo/objeto: `clickup_search`
-pelo cliente + palavra-chave, e as subtarefas abertas dos dois últimos containers semanais e dos containers de
+Antes de criar, buscar tarefas **abertas, sem limite de data**, com o mesmo cliente e verbo/objeto: `cu.mjs search`
+pelo cliente + palavra-chave (tentar duas ou três palavras diferentes do objeto), e as subtarefas abertas dos dois últimos containers semanais e dos containers de
 reunião de cliente da lista Rituais.
 - Já existe aberta e a reunião só confirmou: não cria; anota na ATA "segue em <link>".
 - Já existe e mudou prazo ou dono: não altera sozinho; lista em "Divergências" no relatório final.
@@ -104,9 +187,11 @@ Aprovado pelo Francisco em 2026-09-30. Para cada conclusão do passo 3c, achar a
 (mesma busca do passo 4). Todo comentário do robô diz **quem falou, em qual reunião e quando**.
 
 **Todo comentário do robô marca o responsável** (Francisco, 2026-09-30), pra cair na caixa de entrada dele no ClickUp:
-usar `clickup_create_comment` com a menção no texto, no formato `[@Nome](#user_mention#ID)` (IDs na tabela acima),
+usar `cu.mjs comment` com a menção no texto, no formato `[@Nome](#user_mention#ID)` (IDs na tabela acima),
 na primeira linha do comentário. Marcar todos os responsáveis da tarefa e, se quem falou na reunião for outra
 pessoa da equipe, marcar também. Tarefa sem responsável: marcar o Francisco.
+(Como o comentário sai como Francisco, a menção a ele mesmo não o notifica; os outros recebem normalmente.
+O aviso pra ele é a notificação do celular da seção 6.)
 Ex.: `[@Claudio Duarte](#user_mention#118092849) 🤖 Possivelmente concluída, confirmar`
 
 - **Uma tarefa só, sem dúvida:** comentar
@@ -118,7 +203,7 @@ Ex.: `[@Claudio Duarte](#user_mention#118092849) 🤖 Possivelmente concluída, 
   Fala: "<trecho curto da transcrição>"
   Status: <status anterior> → <status de concluído>
   ```
-  depois pôr a tag `captura-ia` e mudar o status para o de concluído daquela lista (`expand_statuses` mostra os
+  depois pôr a tag `captura-ia` e mudar o status para o de concluído daquela lista (`cu.mjs statuses` mostra os
   válidos; em geral `concluido`, em lista de conteúdo `postado/subido`).
   Tarefa com subtarefas abertas não se fecha: só comenta, com `Status: mantido (subtarefas abertas)`.
 - **Correspondência duvidosa ou mais de uma candidata:** mesmo comentário com o título `🤖 Possivelmente concluída, confirmar`
@@ -144,17 +229,31 @@ Ex.: `[@Claudio Duarte](#user_mention#118092849) 🤖 Possivelmente concluída, 
 ### 6. Relatório
 Rodando com gente na frente: resumo de até 15 linhas no chat, por categoria:
 reuniões processadas · subtarefas criadas (por responsável) · concluídas (com link) · conclusões a confirmar ·
-já existiam · divergências · sem dono.
+já existiam · divergências · sem dono · **filtrado** (o que foi falado e não virou tarefa, uma linha cada:
+`<ação> · <motivo curto>`, ex.: `Enviar folder do Piltcher pra aprovação · Fila de Aprovação cobre`).
 O detalhe completo (ATA + tabela) vai para `operacao/captura-reunioes/AAAA-MM-DD.md`.
 
-Rodando sozinha (rotina na nuvem): o relatório vira um **comentário no container da semana** no ClickUp,
-começando com `[@Francisco Schirmer](#user_mention#158419961) 🤖 Captura DD/MM` (a menção faz o aviso chegar no
-celular dele pelo app do ClickUp). A rotina não escreve nada no repositório (não faz commit). Se não houve
-reunião nova, comenta só `[@Francisco Schirmer](#user_mention#158419961) 🤖 Captura DD/MM: rodou, nenhuma reunião nova`,
-pra ficar a prova de que rodou.
+O bloco "Filtrado" é como o Francisco calibra o filtro: se algo ali deveria ter virado tarefa, ele cria à mão
+e o exemplo entra na lista do passo 3d. Nunca omitir esse bloco quando houve item filtrado.
+
+Rodando sozinha (rotina na nuvem), duas coisas, **sempre as duas**:
+1. **Registro:** comentário no container da semana (`cu.mjs comment`), começando com
+   `[@Francisco Schirmer](#user_mention#158419961) 🤖 Captura DD/MM`, com o relatório e o bloco "Filtrado" no fim, curto.
+   Sem reunião nova: só `🤖 Captura DD/MM: rodou, nenhuma reunião nova`, pra ficar a prova de que rodou.
+2. **Aviso no celular:** ferramenta `PushNotification`, uma mensagem curta: `Captura DD/MM: N reuniões, X tarefas,
+   Y concluídas, Z no banco de ideias` (ou `nenhuma reunião nova`). É ela que avisa o Francisco, porque o comentário
+   sai no nome dele e não o notifica.
+
+**Deu errado** (script e conector falharam, doc do Gemini não leu, tarefa não criou): a notificação começa com
+`⚠️ Captura DD/MM falhou:` + o motivo exato (token ausente, rede, limite do conector, qual reunião ficou de fora)
++ `rodar /captura-reunioes no computador`. Falha parcial também avisa: o que entrou e o que não entrou.
+A rotina não escreve nada no repositório (não faz commit).
 
 ## Regras
 - Em tarefa existente, a skill só faz três coisas: comentar, pôr a tag `captura-ia` e mudar para concluído
   (regras do passo 4b). Nunca apagar, reatribuir, mudar prazo ou reabrir.
+- Exceção: no banco de ideias (`86akru8d2`) a skill só **acrescenta linhas na descrição** (passo 3d), nunca apaga
+  linha, nunca comenta, nunca atribui ninguém. É pra não incomodar ninguém.
 - Nunca mexer nos docs do Drive (existe outra automação que marca a descrição deles com "Resumo enviado ao WhatsApp").
-- Dúvida sobre se algo é demanda: criar com prioridade normal e `(validar na Planning)` na descrição. A tag captura-ia existe pra isso.
+- Dúvida sobre se algo é demanda: **não criar**. Vai pro bloco "Filtrado" do relatório com o motivo da dúvida
+  (Francisco, 2026-10-02; substitui a regra antiga "na dúvida, cria com (validar na Planning)").
