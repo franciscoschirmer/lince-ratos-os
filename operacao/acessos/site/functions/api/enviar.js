@@ -14,6 +14,7 @@ export async function onRequestPost({ request, env }) {
   const n = atual ? Number(await atual.text()) || 0 : 0;
   if (n >= MAX_POR_HORA) return json({ erro: "Muitos envios seguidos. Tente de novo em uma hora." }, 429);
 
+  if (Number(request.headers.get("content-length") || 0) > MAX_BYTES) return json({ erro: "Envio grande demais." }, 413);
   const bruto = await request.text();
   if (bruto.length > MAX_BYTES) return json({ erro: "Envio grande demais." }, 413);
 
@@ -63,9 +64,14 @@ export async function onRequestPost({ request, env }) {
 
   const plataformas = itens.filter((i) => !i.geral && !i.nao_tem).map((i) => i.plataforma).join(", ");
 
-  await env.DB.prepare("INSERT INTO envios (criado_em, nome, plataformas, dados) VALUES (?, ?, ?, ?)")
-    .bind(new Date().toISOString(), nome, plataformas, await cifrar(env, itens))
-    .run();
+  try {
+    await env.DB.prepare("INSERT INTO envios (criado_em, nome, plataformas, dados) VALUES (?, ?, ?, ?)")
+      .bind(new Date().toISOString(), nome, plataformas, await cifrar(env, itens))
+      .run();
+  } catch (e) {
+    console.error("falha ao gravar envio", e);
+    return json({ erro: "Não conseguimos registrar agora." }, 500);
+  }
 
   await caches.default.put(chaveIp(ip), new Response(String(n + 1), { headers: { "Cache-Control": "max-age=3600" } }));
   return json({ ok: true });

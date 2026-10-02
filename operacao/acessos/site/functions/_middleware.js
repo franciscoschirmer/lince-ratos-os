@@ -5,12 +5,11 @@
 // - Põe cabeçalhos de proteção em todas as respostas.
 // Segredos: ver functions/_lib/comum.js.
 
-const COOKIE = "acessos_sessao";
+import { COOKIE, assinar, iguais, sessaoValida, caminho } from "./_lib/sessao.js";
+
 const DIAS = 30;
 const MAX_ERROS = 5;
 const BLOQUEIO_SEG = 15 * 60;
-
-const enc = new TextEncoder();
 
 const CSP = [
   "default-src 'self'",
@@ -36,32 +35,6 @@ function protegido(resp, { cache = false } = {}) {
   r.headers.set("X-Robots-Tag", "noindex, nofollow");
   if (!cache) r.headers.set("Cache-Control", "no-store");
   return r;
-}
-
-async function assinar(segredo, texto) {
-  const k = await crypto.subtle.importKey("raw", enc.encode(segredo), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
-  const s = new Uint8Array(await crypto.subtle.sign("HMAC", k, enc.encode(texto)));
-  return btoa(String.fromCharCode(...s)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-}
-
-// comparação sem atalho, para não vazar informação pelo tempo de resposta
-function iguais(a, b) {
-  const x = enc.encode(String(a)), y = enc.encode(String(b));
-  let d = x.length ^ y.length;
-  for (let i = 0; i < Math.max(x.length, y.length); i++) d |= (x[i] || 0) ^ (y[i] || 0);
-  return d === 0;
-}
-
-function lerCookie(request) {
-  const c = request.headers.get("cookie") || "";
-  const m = c.match(new RegExp("(?:^|;\\s*)" + COOKIE + "=([^;]+)"));
-  return m ? m[1] : "";
-}
-
-async function sessaoValida(request, env) {
-  const [exp, sig] = lerCookie(request).split(".");
-  if (!exp || !sig || !/^\d+$/.test(exp) || Number(exp) < Date.now()) return false;
-  return iguais(sig, await assinar(env.PAINEL_SEGREDO, exp));
 }
 
 // contador de erros por IP no cache da borda da Cloudflare (gratuito, sem banco)
@@ -117,8 +90,7 @@ button:focus-visible,input:focus-visible{outline:1px solid var(--ouro);outline-o
 const ehPainel = (p) => p === "/painel" || p.startsWith("/painel/") || p.startsWith("/api/painel/");
 
 export async function onRequest({ request, env, next }) {
-  const url = new URL(request.url);
-  const p = url.pathname;
+  const p = caminho(new URL(request.url));
 
   if (p.startsWith("/marca/")) return protegido(await next(), { cache: true });
 

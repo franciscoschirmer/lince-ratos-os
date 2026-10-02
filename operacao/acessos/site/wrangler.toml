@@ -1,6 +1,6 @@
 # Projeto Cloudflare Pages `acessos-lince` (ligado ao GitHub, pasta operacao/acessos/site).
 name = "acessos-lince"
-pages_build_output_dir = "."
+pages_build_output_dir = "public"
 compatibility_date = "2026-09-01"
 
 [[d1_databases]]
