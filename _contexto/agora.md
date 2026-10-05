@@ -6,11 +6,16 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
+2026-10-05: programação da semana de 06 a 12/10 feita no ClickUp (3 por cliente, começa terça, formatos alternados) e mensagens de cada cliente montadas no modelo (`operacao/programacao-semanal/modelo-mensagem.md`). Piltcher com programação macro aplicada de 20/10 a 25/12.
 2026-10-02 (tarde): filas de aprovação e revisão rodam num Worker da Cloudflare (`filas-lince`, seg-sex 10h e 16h30), sem depender do note nem do conector; rotinas das filas no Claude e tarefas do Windows desligadas.
 2026-10-02: captura de reuniões e filas passam a falar com o ClickUp pela API direta com o token do Francisco (variável no ambiente de nuvem, `api.clickup.com` liberado), fora do limite do conector; testado na nuvem. A captura ganhou o filtro do que vira tarefa (na dúvida não cria), o bloco "Filtrado" no relatório, o banco de ideias (💡 Ideias e combinados das reuniões, `86akru8d2`) e aviso no celular a cada execução.
 2026-10-01: produtividade migrada para o Supabase próprio do Francisco (projeto "Chico"). Formulário de acessos do cliente no ar (acessos-lince.pages.dev, painel em /painel).
 
 ## Pendências
+- Piltcher: passar pro ClickUp os conteúdos aprovados na reunião de 02/10 (Francisco faz em outra conversa); ver a alteração do CNPJ na Hotmart do Dr. Luis Henrique (tarefa 86akm4vqc, vencida desde 30/09) (2026-10-05)
+- Piltcher: decisão da Vic e da Marina sobre Saúde Bucal, Consciência Negra e Pessoas com Deficiência até 2026-10-09 (tarefa 86akt98hj); pautas novas do Cartão até 2026-11-13 (86akt9hkj); Curiosidades do robô (17/11) depende do OK do Dr. Rodrigo; Outubro Rosa espera gravações, sem data (2026-10-05)
+- Programação: Otorrinos e RA Clinic sem conteúdo na semana de 06/10 (confirmar se RA Clinic está ativo); a semana de 13/10 do Cristiano tem 6 conteúdos, enxugar pra 3 (2026-10-05)
+- Piltcher: conferir a revisão da Marina na tarefa 86akrzb99, confirmar quem da design faz os ajustes (até 2026-10-06) e se a Vitória da reunião é do cliente (2026-10-02)
 - Com o Cláudio: subdomínio do formulário de acessos. Primeiro decidir linceco.com.br ou lince.company; depois Custom domain no projeto `acessos-lince` e CNAME `acessos` → `acessos-lince.pages.dev` no DNS (2026-10-02)
 - Entrar no painel de acessos, testar mostrar, exportar e apagar com o envio "TESTE CLAUDE (apagar)" (2026-10-01)
 - Guardar a `ACESSOS_CHAVE` do `.env` no gerenciador de senhas (2026-10-01)
@@ -39,5 +44,6 @@
 
 ## Quente agora
 - Fechamento de setembro e Health Score de outubro
+- Piltcher: inauguração da casa do Cartão em 2026-10-08
 - Captura de reuniões: calibrar o filtro pelo bloco "Filtrado" nas primeiras execuções
 - Painel de produtividade da equipe de conteúdo
