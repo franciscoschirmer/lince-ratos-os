@@ -16,6 +16,7 @@
 - Henri Oyama · analista de CS e atendimento (fala nos grupos como "Suporte Briolab")
 - Jenifer Engelmann · gestora de tráfego (Meta e Google Ads, dashboards e relatórios)
 - Pâmela Marasca · designer · Mateus · editor de vídeo · Cláudio · desenvolvedor e automação
+- Victor · editor de vídeo externo, sem usuário no ClickUp; o Francisco repassa as peças manualmente
 - Giovanna Campelo · design (conduz o rebranding da BTS, 2026-09-30)
 
 ## Produtos (a esteira)
@@ -32,6 +33,7 @@
 
 ## Clientes citados na memória (ago–set/2026, confirmar a carteira atual)
 Dr. Walter Pinto (urologista, SP, entrou em ago/2026) · Dr. Luis Henrique Nunes (Potência Médica; concentra a maior parte das oportunidades) · Clínica Urocenter · Dra. Maysa Penteado (renovação pendente) · Hospital Piltcher (Pelotas) · Gabriel Parede (arquiteto) · Aragão Law · Barbearia Cavalheiros. Saíram: Rafa Alias e Karina Miglioli
+RA Clinic saiu da carteira (2026-10-05). Lince & Co. e o perfil Victoria Clasen são marketing interno, fora da análise de cliente
 
 ## Contexto adicional
 - Regulado: toda peça de médico segue CFM (Res. 2.336/2023): sem promessa de resultado, sem antes/depois, sem preço, sem superlativo. Advogado segue OAB 205/2021, dentista segue CFO
