@@ -1,6 +1,9 @@
 // Filas de aprovação e revisão no chat do ClickUp (mesma lógica de .claude/skills/fila-aprovacao/fila.mjs).
 // Roda na Cloudflare por horário (wrangler.toml), seg-sex 10h e 16h30 de Brasília.
+// Também roda o Farol de Clientes todo dia às 7h (src/farol.js).
 // Segredos: CLICKUP_API_TOKEN (token do Francisco) e PREVIEW_CHAVE (só pra ver a prévia sem postar).
+
+import { farol } from './farol.js';
 
 const WS = '90132863446';
 const LISTAS = ['901325858184', '901325858587', '901325858360'];
@@ -103,6 +106,16 @@ async function rodar(env, nome) {
 
 export default {
   async scheduled(evento, env, ctx) {
+    if (evento.cron === '0 10 * * *') {
+      ctx.waitUntil((async () => {
+        const avisos = await farol(env, api);
+        if (avisos.length) {
+          try { await postar(env, 'aprovacao', `⚠️ **Farol de Clientes não atualizou direito** · ${new Date().toLocaleString('pt-BR', { timeZone: tz })}\n` + avisos.map(a => `- ${a}`).join('\n')); }
+          catch (e) { console.error(`aviso do farol não saiu · ${e.message}`); }
+        }
+      })());
+      return;
+    }
     ctx.waitUntil((async () => { await rodar(env, 'aprovacao'); await rodar(env, 'revisao'); })());
   },
   // prévia sem postar, só com a chave: GET /?modo=revisao  (cabeçalho x-chave)
@@ -116,6 +129,7 @@ export default {
         { method: 'POST', body: JSON.stringify({ type: 'message', content: '🧪 TESTE Cloudflare\n\n' + await montar(env, modo), content_format: 'text/md' }) });
       return new Response('postado no canal de teste: ' + ((r.data || r).id || 'sem id'));
     }
+    if (q.get('farol') === '1') return new Response(JSON.stringify(await farol(env, api)), { headers: { 'content-type': 'application/json' } });
     return new Response(await montar(env, modo), { headers: { 'content-type': 'text/plain; charset=utf-8' } });
   },
 };

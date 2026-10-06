@@ -4,9 +4,9 @@ compatibility_date = "2026-09-01"
 account_id = "dd1f6c7762790b4ae65f086e86ca8832"
 workers_dev = true
 
-# seg-sex 10h00 e 16h30 de Brasília (UTC-3, sem horário de verão)
+# filas: seg-sex 10h00 e 16h30 de Brasília (UTC-3, sem horário de verão) · farol: todo dia 7h00
 [triggers]
-crons = ["0 13 * * 1-5", "30 19 * * 1-5"]
+crons = ["0 13 * * 1-5", "30 19 * * 1-5", "0 10 * * *"]
 
 [observability]
 enabled = true
