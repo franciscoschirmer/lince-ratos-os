@@ -6,8 +6,8 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
+2026-10-06 (noite): Farol de Clientes no ClickUp (`🚦 Farol de Clientes`, 901329216299) com histórico de mar a set/26 da planilha; postados e farol automáticos (Worker, 7h) e leads lidos dos relatórios da Jenifer (rotina diária 9h). Falta o dashboard, montado à mão pelo passo a passo.
 2026-10-06: captura de reuniões reescrita: a transcrição inteira é a fonte (o Gemini só confere), critério dos containers feitos à mão, conta fechando e lista "Pra você decidir". Planning de 05/10 refeita: 22 tarefas no lugar de 6.
-2026-10-05 (fim do dia): proposta de levar o Farol de Clientes pro ClickUp em `operacao/farol-clickup/proposta.md`, esperando as 5 decisões do fim do arquivo; retomar em 2026-10-06.
 2026-10-05 (noite): análise de capacidade da semana (`operacao/capacidade/2026-10-05-capacidade-semana.md`) e datas redistribuídas no ClickUp: Fazenda até 31/10, Gabriel 2 por semana até 10/11, Cristiano 3 por semana até 19/11, Karinna 2 vídeos + 1 estático até 21/12.
 2026-10-05: programação da semana de 06 a 12/10 feita no ClickUp (3 por cliente, começa terça, formatos alternados) e mensagens de cada cliente montadas no modelo (`operacao/programacao-semanal/modelo-mensagem.md`). Piltcher com programação macro aplicada de 20/10 a 25/12.
 2026-10-02 (tarde): filas de aprovação e revisão rodam num Worker da Cloudflare (`filas-lince`, seg-sex 10h e 16h30), sem depender do note nem do conector; rotinas das filas no Claude e tarefas do Windows desligadas.
@@ -15,6 +15,7 @@
 2026-10-01: produtividade migrada para o Supabase próprio do Francisco (projeto "Chico"). Formulário de acessos do cliente no ar (acessos-lince.pages.dev, painel em /painel).
 
 ## Pendências
+- Farol: montar o dashboard no ClickUp (passo a passo da conversa de 2026-10-06); encaminhar à Jenifer o pedido do bloco fixo no relatório; cobrar relatório de setembro do Piltcher, Aragão (Logan) e Otorrinos na tarefa [RELATÓRIO]; criar as opções Jan/27 em diante no campo Mês até dez/26 (2026-10-06)
 - Piltcher: passar pro ClickUp os conteúdos aprovados na reunião de 02/10 (Francisco faz em outra conversa); ver a alteração do CNPJ na Hotmart do Dr. Luis Henrique (tarefa 86akm4vqc, vencida desde 30/09) (2026-10-05)
 - Piltcher: decisão da Vic e da Marina sobre Saúde Bucal, Consciência Negra e Pessoas com Deficiência até 2026-10-09 (tarefa 86akt98hj); pautas novas do Cartão até 2026-11-13 (86akt9hkj); Curiosidades do robô (17/11) depende do OK do Dr. Rodrigo; Outubro Rosa espera gravações, sem data (2026-10-05)
 - Programação: Otorrinos com 1 conteúdo por semana e nada depois de 18/10, tem estoque pra distribuir (2026-10-05)
@@ -48,7 +49,7 @@
 - Criar a pasta do Dr. Walter Pinto com /novo-projeto (2026-09-29)
 
 ## Quente agora
-- Farol de Clientes dentro do ClickUp (proposta de 2026-10-05)
+- Farol de Clientes: conferir a 1ª execução do Worker (07/10 7h) e da rotina dos relatórios (07/10 9h)
 - Fechamento de setembro e Health Score de outubro
 - Piltcher: inauguração da casa do Cartão em 2026-10-08
 - Captura de reuniões: calibrar pelo "Pra você decidir" e pela conta nas primeiras execuções
