@@ -1,6 +1,6 @@
 ---
 name: farol-relatorios
-description: Lê os relatórios de performance que a Jenifer posta como comentário nas tarefas [RELATÓRIO] (lista Gestão de Campanhas do ClickUp) e grava leads, conversas iniciadas e agendamentos do mês na linha do cliente no 🚦 Farol de Clientes. Roda sozinha depois de cada quinzena (rotina na nuvem) e à mão. Use quando o usuário chamar /farol-relatorios, disser "atualiza os leads do farol", "puxa os relatórios pro farol", "preenche o farol com os relatórios". Com o argumento "rascunho", só mostra o que gravaria.
+description: Lê os relatórios de performance que a Jenifer posta como comentário nas tarefas [RELATÓRIO] (lista Gestão de Campanhas do ClickUp) e grava leads, conversas iniciadas e agendamentos do mês na linha do cliente no 🚦 Farol de Clientes. Roda sozinha todo dia (rotina na nuvem, só age quando a Jenifer posta relatório novo) e à mão. Use quando o usuário chamar /farol-relatorios, disser "atualiza os leads do farol", "puxa os relatórios pro farol", "preenche o farol com os relatórios". Com o argumento "rascunho", só mostra o que gravaria.
 ---
 
 # /farol-relatorios · relatório da Jenifer vira número no Farol
@@ -21,7 +21,8 @@ Regras do Francisco (2026-10-06):
 Tudo pelo script desta pasta (API direta do ClickUp, token `CLICKUP_API_TOKEN`; nunca imprimir o token):
 
 1. `node .claude/skills/farol-relatorios/farol.mjs relatorios` lista as tarefas [RELATÓRIO], o último comentário e o anexo.
-2. Decidir o mês: rodando de 1 a 15, o mês fechado é o anterior (2ª quinzena acabou de sair); de 16 a 31, o mês corrente (1ª quinzena). O argumento `<Mmm/aa>` força um mês.
+2. Roda todo dia, então quase sempre não tem nada novo. Pra cada tarefa [RELATÓRIO], só seguir se o último comentário com relatório for **mais novo do que a fonte já registrada** na Observação da linha do Farol do mês que ele cobre (a Observação guarda `fonte: <arquivo> (<data do comentário>)`). Mesmo arquivo e mesma data: pular.
+   O mês vem do próprio relatório (título, período, "1ª/2ª quinzena de outubro"), não da data de hoje. Relatório de mês até Set/26: pular. O argumento `<Mmm/aa>` força um mês.
 3. `node .claude/skills/farol-relatorios/farol.mjs linhas <Mmm/aa>` mostra as linhas do Farol daquele mês.
 4. Pra cada cliente com relatório novo: `farol.mjs baixar <task> <pasta temporária>` e ler o PDF (ou o documento do link, pelo conector do Drive).
    - Preferir a tabela "Histórico completo" / consolidado do mês quando existir; senão somar as quinzenas do mês.
@@ -29,7 +30,7 @@ Tudo pelo script desta pasta (API direta do ClickUp, token `CLICKUP_API_TOKEN`; 
 5. `farol.mjs gravar <linha>` com `{"Leads":..,"Conversas iniciadas":..,"Agendamentos":..,"Observação":"fonte: <arquivo> (<data do comentário>)"}`.
    Só sobrescrever valor que já existe se o relatório for mais novo que a fonte anterior (ver Observação).
 6. Cliente sem relatório no período, comentário sem anexo, PDF ilegível ou número ambíguo: **não chutar**. `farol.mjs comentar <linha>` com o motivo, e listar no aviso final.
-7. Aviso final (PushNotification se disponível, senão no chat): `Farol <Mmm/aa>: N clientes atualizados, M sem relatório (nomes)`.
+7. Aviso final (PushNotification se disponível, senão no chat), **só quando houve relatório novo ou falha**: `Farol: relatório novo de <clientes> gravado (<Mmm/aa>) · a conferir: <nomes>`. Dia sem nada novo termina sem aviso.
 
 Mapeamento tarefa → cliente: o nome depois de "Relatório Semanal de Performance - " bate com o 👔 Clientes da linha, ignorando acento (Átria Intervenção = Atria Intervenção, Aragão Law = Aragao Law).
 
