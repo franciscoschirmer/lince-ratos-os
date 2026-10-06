@@ -6,6 +6,8 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
+2026-10-06: captura de reuniões reescrita: a transcrição inteira é a fonte (o Gemini só confere), critério dos containers feitos à mão, conta fechando e lista "Pra você decidir". Planning de 05/10 refeita: 22 tarefas no lugar de 6.
+2026-10-05 (fim do dia): proposta de levar o Farol de Clientes pro ClickUp em `operacao/farol-clickup/proposta.md`, esperando as 5 decisões do fim do arquivo; retomar em 2026-10-06.
 2026-10-05 (noite): análise de capacidade da semana (`operacao/capacidade/2026-10-05-capacidade-semana.md`) e datas redistribuídas no ClickUp: Fazenda até 31/10, Gabriel 2 por semana até 10/11, Cristiano 3 por semana até 19/11, Karinna 2 vídeos + 1 estático até 21/12.
 2026-10-05: programação da semana de 06 a 12/10 feita no ClickUp (3 por cliente, começa terça, formatos alternados) e mensagens de cada cliente montadas no modelo (`operacao/programacao-semanal/modelo-mensagem.md`). Piltcher com programação macro aplicada de 20/10 a 25/12.
 2026-10-02 (tarde): filas de aprovação e revisão rodam num Worker da Cloudflare (`filas-lince`, seg-sex 10h e 16h30), sem depender do note nem do conector; rotinas das filas no Claude e tarefas do Windows desligadas.
@@ -28,10 +30,8 @@
 - Passar o link producao-lince.pages.dev e a senha às lideranças (operacional@, criativos@, admin@) por canal privado (2026-09-30)
 - Conferir os nomes dos status "alteração interna" e "alteração do cliente" (criados pelo Francisco em 2026-10-01) quando o ClickUp liberar, e orientar a Marina (2026-10-01)
 - Conferir o primeiro fechamento semanal de produtividade na Review/Retro, quinta 2026-10-01 19h: é o teste completo com o banco novo (2026-10-01)
-- Conferir o comentário "🤖 Captura 01/10" no container da semana: primeira execução automática (2026-10-01)
-- Na Planning de 2026-10-05, revisar as tarefas com a tag captura-ia e as 7 divergências do relatório de 30/09 (2026-09-30)
 - Apagar na web a execução de teste de 14:46 (claude.ai/code/session_01UH8cHRxJP97QzVYuThyD3V, mostra o token do ClickUp) e a rotina "TESTE · token ClickUp na nuvem (apagar)" (2026-10-02)
-- Conferir a captura das 19h de 2026-10-02, a primeira com filtro e API: notificação no celular e bloco Filtrado no comentário do container (2026-10-02)
+- Conferir a captura das 19h de 2026-10-06, a primeira com o método novo: leu a transcrição, a conta fecha, "Pra você decidir" numerado (2026-10-06)
 - Conferir o primeiro disparo do Worker das filas, segunda 2026-10-05 10h: mensagem nos dois canais (sai como Francisco: notifica a Marina, não ele). Se não chegar, religar as tarefas do Agendador do Windows (2026-10-02)
 - Ativar a verificação em duas etapas na Cloudflare (o token do ClickUp mora lá agora) e, se faltar, no ClickUp (2026-10-02)
 - Apagar o canal "Fila de Aprovação (antigo)" no ClickUp (2026-10-01)
@@ -48,7 +48,8 @@
 - Criar a pasta do Dr. Walter Pinto com /novo-projeto (2026-09-29)
 
 ## Quente agora
+- Farol de Clientes dentro do ClickUp (proposta de 2026-10-05)
 - Fechamento de setembro e Health Score de outubro
 - Piltcher: inauguração da casa do Cartão em 2026-10-08
-- Captura de reuniões: calibrar o filtro pelo bloco "Filtrado" nas primeiras execuções
+- Captura de reuniões: calibrar pelo "Pra você decidir" e pela conta nas primeiras execuções
 - Painel de produtividade da equipe de conteúdo

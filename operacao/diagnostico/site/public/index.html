@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Diagnóstico · Lince &amp; Co.</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&family=Italianno&display=swap">
+<style>
+:root{--bg:#110B08;--card:#1D1511;--card-2:#251b16;--ink:#F1EDE5;--ink-2:#988E84;--bronze:#BAA079;--ouro:#D6C294;--linha:rgba(214,203,182,.18);--erro:#E0A3A6;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:15px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg) radial-gradient(120% 60% at 50% 0%,#2a1c15 0%,var(--bg) 55%) no-repeat}
+main{max-width:720px;margin:0 auto;padding:48px 16px 80px}
+.topo{display:grid;justify-items:center;text-align:center;gap:18px;margin-bottom:32px}
+.selo{width:96px;height:96px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--linha)}
+.nome-casa{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:1rem;letter-spacing:.42em;text-transform:uppercase;color:var(--ouro);padding-left:.42em}
+.nome-casa i{font-family:Italianno,cursive;font-style:normal;letter-spacing:0;text-transform:none;font-size:1.5rem;margin-left:-.2em}
+h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-size:clamp(2.1rem,7vw,2.9rem);line-height:1.08;margin:0;text-wrap:balance}
+.lede{color:var(--ink-2);max-width:56ch;margin:0;text-align:left;display:grid;gap:12px}
+.lede p{margin:0;text-wrap:pretty}
+.lede .forte{color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 24px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bronze)}
+.assina-topo{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;color:var(--ink-2);margin:0}
+/* barra que acompanha a rolagem: progresso e rascunho */
+.progresso{position:sticky;top:0;z-index:5;margin:0 -16px 24px;padding:12px 16px;background:rgba(17,11,8,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--linha)}
+.progresso .txt{display:flex;justify-content:space-between;gap:12px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.progresso .txt b{font-weight:500;color:var(--ouro)}
+.trilho{height:2px;background:var(--linha);margin-top:8px}
+.trilho span{display:block;height:100%;width:0;background:var(--bronze);transition:width .3s}
+.recuperado{background:var(--card-2);border:1px solid rgba(186,160,121,.4);border-radius:4px;padding:14px 16px;margin-bottom:16px;font-size:.88rem;color:var(--ink);display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.recuperado[hidden]{display:none}
+.bloco{background:var(--card);border:1px solid var(--linha);border-radius:4px;padding:24px;margin-bottom:16px}
+.secao-cab{margin-bottom:20px}
+.secao-cab .num{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze)}
+.secao-cab h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:1.75rem;line-height:1.15;margin:6px 0 8px;text-wrap:balance}
+.secao-cab p{color:var(--ink-2);font-size:.9rem;margin:0 0 6px}
+.secao-cab .dica{border-left:2px solid var(--bronze);padding-left:12px;color:var(--ink);font-size:.88rem;margin-top:12px}
+.q{padding:18px 0;border-top:1px solid var(--linha)}
+.q:first-of-type{border-top:0;padding-top:4px}
+.q .enun{display:block;font-size:1rem;color:var(--ink);margin-bottom:4px;text-wrap:pretty}
+.q .obrig{color:var(--bronze);margin-left:4px}
+.q .ajuda{display:block;color:var(--ink-2);font-size:.85rem;margin-bottom:10px;text-wrap:pretty}
+input[type=text],textarea{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--linha);border-radius:0;padding:8px 2px}
+textarea{resize:vertical;min-height:112px;border:1px solid var(--linha);padding:10px 12px;border-radius:2px;line-height:1.5}
+input::placeholder,textarea::placeholder{color:#6f665e}
+input:focus,textarea:focus{outline:none;border-color:var(--bronze)}
+.q.falta .enun{color:var(--erro)}
+.q.falta input[type=text],.q.falta textarea{border-color:var(--erro)}
+.q .msg-falta{display:none;color:var(--erro);font-size:.8rem;margin-top:6px}
+.q.falta .msg-falta{display:block}
+.opcoes{display:grid;gap:8px}
+.opcao{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:.93rem;padding:4px 0}
+.opcao input{accent-color:var(--bronze);width:16px;height:16px;margin:3px 0 0;flex:none}
+.opcao-outro{display:flex;gap:10px;align-items:center}
+.opcao-outro input[type=text]{flex:1}
+.origem{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 18px}
+.origem label{display:grid;gap:4px;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.origem .pct{position:relative}
+.origem .pct input{padding-right:22px}
+.origem .pct::after{content:"%";position:absolute;right:2px;bottom:8px;color:var(--ink-2);font-size:.9rem}
+.origem .outros-qual{grid-column:span 3}
+.soma{font-size:.8rem;color:var(--ink-2);margin-top:10px}
+@media (max-width:560px){.origem{grid-template-columns:1fr 1fr}.origem .outros-qual{grid-column:1/-1}}
+.btn{font:500 .74rem/1 Inter,system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;border-radius:2px;padding:14px 18px;cursor:pointer}
+.btn-linha{color:var(--bronze);background:transparent;border:1px solid rgba(186,160,121,.5)}
+.btn-linha:hover{border-color:var(--bronze);color:var(--ouro)}
+.btn-mini{padding:9px 12px;font-size:.64rem}
+.btn-cheio{width:100%;color:var(--bg);background:var(--bronze);border:1px solid var(--bronze);padding:18px}
+.btn-cheio:hover{background:var(--ouro);border-color:var(--ouro)}
+.btn-cheio:disabled{opacity:.5;cursor:wait}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:1px solid var(--ouro);outline-offset:3px}
+.aviso{display:flex;gap:12px;align-items:flex-start;color:var(--ink-2);font-size:.85rem;margin:24px 0}
+.aviso svg{flex:none;margin-top:2px}
+.erro{color:var(--erro);font-size:.9rem;margin:0 0 14px}
+.erro:empty{display:none}
+.isca{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.fim{display:none;text-align:center;padding:24px 0}
+.fim h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-size:2.4rem;margin:0 0 10px}
+.fim p{color:var(--ink-2);max-width:46ch;margin:0 auto 10px}
+.fim .protocolo{display:inline-block;margin:10px 0 18px;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ouro);border:1px solid rgba(214,194,148,.35);padding:8px 12px;border-radius:2px}
+.fim .assina{font-family:Italianno,cursive;font-size:2rem;color:var(--ouro);margin-top:24px}
+body.enviado form,body.enviado .progresso,body.enviado .recuperado,body.enviado .lede,body.enviado .meta,body.enviado .assina-topo{display:none}
+body.enviado .fim{display:block}
+.rodape{text-align:center;margin-top:40px;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;color:var(--ink-2)}
+.sem-js{color:var(--erro);text-align:center}
+</style>
+</head>
+<body>
+<main>
+  <header class="topo">
+    <img class="selo" src="/marca/selo-lince.jpg" alt="Selo Lince &amp; Co.">
+    <span class="nome-casa">Lince <i>&amp; Co.</i></span>
+    <h1>Diagnóstico de Posicionamento &amp; Negócio</h1>
+    <div class="lede">
+      <p class="forte">Antes de escolher uma direção, a gente precisa enxergar o cenário com clareza.</p>
+      <p>Este formulário é o ponto de partida do nosso trabalho juntos. É aqui que começamos a conhecer o seu negócio por inteiro: o que já foi construído, o momento atual, os objetivos e os detalhes que podem estar limitando o próximo passo.</p>
+      <p>Por isso, suas respostas importam. Muito.</p>
+      <p>Não existe uma resposta certa. Responda com calma, profundidade e honestidade. Quanto mais contexto você compartilhar, mais precisa será a nossa leitura e mais consistentes serão as decisões sobre posicionamento, marketing e crescimento.</p>
+      <p>Se algo ainda não estiver claro, tudo bem. Conte o que você sabe hoje. O que ainda precisa ser descoberto também faz parte da investigação.</p>
+      <p>Obrigada por dedicar seu tempo a esse processo. Tudo o que vamos construir começa por uma leitura mais precisa do que existe hoje.</p>
+    </div>
+    <div class="meta"><span>Tempo estimado: 30 minutos</span><span>Escolha um momento tranquilo e sem interrupções</span></div>
+    <p class="assina-topo">Nos vemos em breve, Time Lince &amp; Co.</p>
+  </header>
+
+  <noscript><p class="sem-js">Este formulário precisa do JavaScript ligado no navegador.</p></noscript>
+
+  <div class="progresso" id="progresso">
+    <div class="txt"><span><b id="feitas">0</b> de <span id="total">0</span> obrigatórias</span><span id="salvo">Suas respostas ficam salvas neste aparelho</span></div>
+    <div class="trilho"><span id="barra"></span></div>
+  </div>
+
+  <div class="recuperado" id="recuperado" hidden>
+    <span>Recuperamos o que você já tinha preenchido neste aparelho. Pode continuar de onde parou.</span>
+    <button type="button" class="btn btn-linha btn-mini" id="limpar">Começar do zero</button>
+  </div>
+
+  <form id="form" novalidate autocomplete="off">
+    <div id="secoes"></div>
+
+    <div class="isca" aria-hidden="true"><label>Não preencha<input type="text" id="site_empresa" tabindex="-1" autocomplete="off"></label></div>
+
+    <p class="aviso">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BAA079" stroke-width="1.5" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      <span>Suas respostas ficam restritas à equipe da Lince. Enquanto você preenche, elas ficam guardadas neste aparelho: se precisar parar, volte por este mesmo link, no mesmo celular ou computador, e continue de onde parou.</span>
+    </p>
+    <p class="erro" id="erro" role="alert"></p>
+    <button type="submit" class="btn btn-cheio" id="enviar">Enviar diagnóstico</button>
+  </form>
+
+  <section class="fim" aria-live="polite">
+    <h2>Recebemos, obrigada.</h2>
+    <p>Obrigada por dedicar esse tempo ao diagnóstico. Agora, nosso time vai analisar suas respostas e entrar em contato para orientar os próximos passos.</p>
+    <span class="protocolo" id="protocolo"></span>
+    <p><button type="button" class="btn btn-linha btn-mini" id="baixar">Baixar uma cópia das suas respostas</button></p>
+    <p class="assina">Lince &amp; Co.</p>
+  </section>
+
+  <p class="rodape">For those who see further</p>
+</main>
+
+<script type="module">
+import { SECOES, PERGUNTAS, ORIGENS, textoResposta } from "/perguntas.js";
+
+const CHAVE = "lince-diagnostico-rascunho-v1";
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const MAX = 20000;
+
+// ---------- desenho ----------
+function perguntaHtml(q) {
+  const enun = `<span class="enun" id="e-${q.id}">${esc(q.p)}${q.obrig ? '<span class="obrig" aria-hidden="true">*</span>' : ""}</span>`;
+  const ajuda = q.ajuda ? `<span class="ajuda">${esc(q.ajuda)}</span>` : "";
+  const falta = `<span class="msg-falta">Esta pergunta é obrigatória.</span>`;
+  let campo = "";
+  if (q.tipo === "curta") {
+    campo = `<input type="text" name="${q.id}" maxlength="${q.id === "nome" ? 160 : 2000}" aria-labelledby="e-${q.id}" ${q.obrig ? 'aria-required="true"' : ""} ${q.id === "nome" ? 'autocomplete="name"' : ""}>`;
+  } else if (q.tipo === "longa") {
+    campo = `<textarea name="${q.id}" maxlength="${MAX}" aria-labelledby="e-${q.id}" ${q.obrig ? 'aria-required="true"' : ""}></textarea>`;
+  } else if (q.tipo === "escolha") {
+    campo = `<div class="opcoes" role="radiogroup" aria-labelledby="e-${q.id}">
+      ${q.opcoes.map((o) => `<label class="opcao"><input type="radio" name="${q.id}" value="${esc(o)}"><span>${esc(o)}</span></label>`).join("")}
+      <div class="opcao-outro"><label class="opcao"><input type="radio" name="${q.id}" value="Outro"><span>Outro:</span></label>
+        <input type="text" name="${q.id}__outro" maxlength="500" aria-label="Outro gargalo"></div>
+    </div>`;
+  } else if (q.tipo === "origem") {
+    campo = `<div class="origem">
+      ${ORIGENS.map((o) => `<label>${esc(o.nome)}<span class="pct"><input type="text" inputmode="decimal" name="${q.id}__${o.id}" maxlength="6"></span></label>`).join("")}
+      <label class="outros-qual">Outros: qual?<input type="text" name="${q.id}__outros_qual" maxlength="200" placeholder="Ex.: Doctoralia, convênio"></label>
+      <label>Outros<span class="pct"><input type="text" inputmode="decimal" name="${q.id}__outros" maxlength="6"></span></label>
+    </div><div class="soma" id="soma-${q.id}"></div>`;
+  }
+  return `<div class="q" data-q="${q.id}">${enun}${ajuda}${campo}${falta}</div>`;
+}
+
+document.getElementById("secoes").innerHTML = SECOES.map((s) => `
+  <section class="bloco">
+    <div class="secao-cab">
+      <span class="num">Seção ${s.n}${s.tempo ? ` · ${esc(s.tempo)}` : ""}</span>
+      <h2>${esc(s.titulo)}</h2>
+      <p>${esc(s.intro)}</p>
+      ${s.dica ? `<p class="dica">${esc(s.dica)}</p>` : ""}
+    </div>
+    ${s.perguntas.map(perguntaHtml).join("")}
+  </section>`).join("");
+
+const form = document.getElementById("form");
+const obrigatorias = PERGUNTAS.filter((q) => q.obrig);
+document.getElementById("total").textContent = obrigatorias.length;
+
+// ---------- leitura dos campos ----------
+function valorBruto(q) {
+  if (q.tipo === "escolha") {
+    const m = form.querySelector(`input[name="${q.id}"]:checked`);
+    return { opcao: m ? m.value : "", outro: form.elements[`${q.id}__outro`].value.trim() };
+  }
+  if (q.tipo === "origem") {
+    const o = {};
+    for (const k of [...ORIGENS.map((x) => x.id), "outros_qual", "outros"]) o[k] = form.elements[`${q.id}__${k}`].value.trim();
+    return o;
+  }
+  return form.elements[q.id].value.trim();
+}
+const coletar = () => Object.fromEntries(PERGUNTAS.map((q) => [q.id, valorBruto(q)]));
+const respondida = (q, v = valorBruto(q)) => {
+  if (q.tipo === "escolha") return !!v.opcao && (v.opcao !== "Outro" || !!v.outro);
+  return !!textoResposta(q, v);
+};
+
+// ---------- rascunho no aparelho ----------
+let rascunho = { protocolo: "", campos: {} };
+const novoProtocolo = () => (crypto.randomUUID ? crypto.randomUUID() : "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => { const r = (Math.random() * 16) | 0; return (c === "x" ? r : (r & 3) | 8).toString(16); }));
+
+function lerRascunho() {
+  try { const r = JSON.parse(localStorage.getItem(CHAVE) || "null"); if (r && r.protocolo) return r; } catch {}
+  return null;
+}
+let concluido = false;
+function gravarRascunho() {
+  if (concluido) return; // já enviado: não recria o rascunho ao sair da página
+  rascunho.campos = {};
+  for (const el of form.elements) {
+    if (!el.name || el.id === "site_empresa") continue;
+    if (el.type === "radio") { if (el.checked) rascunho.campos[el.name] = el.value; }
+    else if (el.value) rascunho.campos[el.name] = el.value;
+  }
+  rascunho.salvo_em = new Date().toISOString();
+  try {
+    localStorage.setItem(CHAVE, JSON.stringify(rascunho));
+    document.getElementById("salvo").textContent = `Salvo neste aparelho às ${new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
+  } catch {
+    document.getElementById("salvo").textContent = "Este navegador não deixa salvar o rascunho: envie ao terminar";
+  }
+}
+function aplicarRascunho(r) {
+  for (const [nome, v] of Object.entries(r.campos || {})) {
+    const els = form.querySelectorAll(`[name="${CSS.escape(nome)}"]`);
+    els.forEach((el) => { if (el.type === "radio") el.checked = el.value === v; else el.value = v; });
+  }
+}
+
+const salvo = lerRascunho();
+if (salvo) {
+  rascunho = salvo;
+  aplicarRascunho(salvo);
+  if (Object.keys(salvo.campos || {}).length) document.getElementById("recuperado").hidden = false;
+} else {
+  rascunho.protocolo = novoProtocolo();
+}
+
+document.getElementById("limpar").addEventListener("click", () => {
+  if (!confirm("Apagar tudo o que já foi preenchido neste aparelho e começar do zero?")) return;
+  try { localStorage.removeItem(CHAVE); } catch {}
+  form.reset();
+  rascunho = { protocolo: novoProtocolo(), campos: {} };
+  document.getElementById("recuperado").hidden = true;
+  atualizar();
+});
+
+// ---------- progresso ----------
+function somaOrigem() {
+  const q = PERGUNTAS.find((x) => x.tipo === "origem");
+  if (!q) return;
+  const v = valorBruto(q);
+  const n = [...ORIGENS.map((x) => x.id), "outros"].reduce((t, k) => t + (parseFloat(String(v[k]).replace(",", ".")) || 0), 0);
+  document.getElementById(`soma-${q.id}`).textContent = n ? `Soma: ${(Math.round(n * 10) / 10).toLocaleString("pt-BR")}%` : "";
+}
+function atualizar() {
+  const feitas = obrigatorias.filter((q) => respondida(q)).length;
+  document.getElementById("feitas").textContent = feitas;
+  document.getElementById("barra").style.width = `${(feitas / obrigatorias.length) * 100}%`;
+  somaOrigem();
+}
+
+let tempo;
+form.addEventListener("input", (e) => {
+  const bloco = e.target.closest(".q");
+  if (bloco && bloco.classList.contains("falta")) {
+    const q = PERGUNTAS.find((x) => x.id === bloco.dataset.q);
+    if (respondida(q)) bloco.classList.remove("falta");
+  }
+  if (e.target.name && e.target.name.endsWith("__outro") && e.target.value) {
+    const r = form.querySelector(`input[name="${e.target.name.split("__")[0]}"][value="Outro"]`);
+    if (r) r.checked = true;
+  }
+  atualizar();
+  clearTimeout(tempo);
+  tempo = setTimeout(gravarRascunho, 300);
+});
+form.addEventListener("change", () => { atualizar(); gravarRascunho(); });
+window.addEventListener("pagehide", gravarRascunho);
+atualizar();
+
+// ---------- envio ----------
+const btn = document.getElementById("enviar");
+const erro = document.getElementById("erro");
+let enviando = false;
+
+function textoCopia(protocolo) {
+  const linhas = ["Diagnóstico de Posicionamento & Negócio · Lince & Co.", `Protocolo: ${protocolo}`, `Enviado em: ${new Date().toLocaleString("pt-BR")}`, ""];
+  for (const s of SECOES) {
+    linhas.push(`SEÇÃO ${s.n}: ${s.titulo.toUpperCase()}`, "");
+    for (const q of s.perguntas) linhas.push(q.p, textoResposta(q, valorBruto(q)) || "(sem resposta)", "");
+  }
+  return linhas.join("\n");
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (enviando) return;
+  erro.textContent = "";
+
+  const faltando = obrigatorias.filter((q) => !respondida(q));
+  form.querySelectorAll(".q.falta").forEach((b) => b.classList.remove("falta"));
+  if (faltando.length) {
+    faltando.forEach((q) => form.querySelector(`[data-q="${q.id}"]`).classList.add("falta"));
+    erro.textContent = faltando.length === 1 ? "Falta responder 1 pergunta obrigatória (marcada em vermelho)." : `Faltam ${faltando.length} perguntas obrigatórias (marcadas em vermelho).`;
+    const primeira = form.querySelector(`[data-q="${faltando[0].id}"]`);
+    primeira.scrollIntoView({ behavior: "smooth", block: "center" });
+    const campo = primeira.querySelector("input,textarea");
+    if (campo) setTimeout(() => campo.focus({ preventScroll: true }), 400);
+    return;
+  }
+
+  gravarRascunho();
+  const corpo = { protocolo: rascunho.protocolo, respostas: coletar(), site_empresa: document.getElementById("site_empresa").value };
+  const copia = textoCopia(rascunho.protocolo);
+
+  enviando = true;
+  btn.disabled = true;
+  btn.textContent = "Enviando";
+  try {
+    let r, d = {};
+    // até 3 tentativas: o protocolo é o mesmo, então repetir nunca duplica
+    for (let t = 1; t <= 3; t++) {
+      try {
+        r = await fetch("/api/enviar", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(corpo) });
+        d = await r.json().catch(() => ({}));
+        if (r.ok || (r.status >= 400 && r.status < 500)) break;
+      } catch (err) { r = null; }
+      if (t < 3) await new Promise((ok) => setTimeout(ok, 1500 * t));
+    }
+    if (!r) throw new Error("Sem conexão com a internet agora.");
+    if (!r.ok || !d.ok) throw new Error(d.erro || "Não conseguimos registrar agora.");
+    concluido = true;
+    clearTimeout(tempo);
+    try { localStorage.removeItem(CHAVE); } catch {}
+    document.getElementById("protocolo").textContent = `Protocolo ${d.codigo}`;
+    document.getElementById("baixar").onclick = () => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob(["﻿" + copia], { type: "text/plain;charset=utf-8" }));
+      a.download = `diagnostico-lince-${d.codigo}.txt`;
+      document.body.append(a); a.click(); a.remove();
+    };
+    document.body.classList.add("enviado");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } catch (err) {
+    erro.textContent = `${err.message} Suas respostas continuam aqui e salvas neste aparelho; tente enviar de novo em instantes.`;
+  } finally {
+    enviando = false;
+    btn.disabled = false;
+    btn.textContent = "Enviar diagnóstico";
+  }
+});
+</script>
+</body>
+</html>

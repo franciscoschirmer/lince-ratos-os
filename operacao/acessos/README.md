@@ -5,7 +5,7 @@ Negócio, site, TikTok, YouTube, Linktree e outros), em vez de mandar cada um nu
 
 - **Formulário (público):** a raiz do site. Sem login; o primeiro campo é o nome do cliente.
 - **Painel (equipe):** `/painel`. Um login só, compartilhado. Lista os envios, mostra e copia cada
-  acesso, exporta CSV (tudo ou um envio) e apaga envio (teste, duplicado, ou já passado pro lugar definitivo).
+  acesso, exporta CSV (tudo ou um envio) e arquiva envio (teste, duplicado, ou já passado pro lugar definitivo). Nada se apaga: o banco recusa DELETE e o arquivado continua guardado.
 - **Onde mora:** Cloudflare Pages `acessos-lince` (conta pessoal do Francisco), ligado ao GitHub nesta
   pasta (`operacao/acessos/site`). Banco D1 `acessos-lince`. Os acessos ficam criptografados no banco;
   só o nome do cliente fica aberto.

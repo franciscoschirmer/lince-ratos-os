@@ -1,8 +1,7 @@
-// Porta de entrada do site de acessos.
-// - O formulário (/) e o envio (/api/enviar) são abertos: o cliente não faz login.
-// - O formulário não tem trava de quantidade de envios; a trava abaixo é só do login do painel.
+// Porta de entrada do site do diagnóstico (mesmo desenho do site de acessos).
+// - O formulário (/), as perguntas (/perguntas.js) e o envio (/api/enviar) são abertos: o cliente não faz login.
 // - O painel (/painel) e a API dele (/api/painel/*) exigem a sessão (cookie assinado), com um login só pra equipe.
-// - Bloqueia 15 min depois de 5 senhas erradas seguidas do mesmo IP.
+// - Bloqueia 15 min depois de 5 senhas erradas seguidas do mesmo IP (só o login do painel; o formulário não tem trava).
 // - Põe cabeçalhos de proteção em todas as respostas.
 // Segredos: ver functions/_lib/comum.js.
 
@@ -39,7 +38,7 @@ function protegido(resp, { cache = false } = {}) {
 }
 
 // contador de erros por IP no cache da borda da Cloudflare (gratuito, sem banco)
-const chaveErros = (ip) => new Request(`https://bloqueio.acessos.interno/${encodeURIComponent(ip)}`);
+const chaveErros = (ip) => new Request(`https://bloqueio.diagnostico.interno/${encodeURIComponent(ip)}`);
 async function lerErros(ip) {
   const r = await caches.default.match(chaveErros(ip));
   return r ? Number(await r.text()) || 0 : 0;
@@ -53,7 +52,7 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&l
 
 function telaLogin(erro = "", status = 200) {
   const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Entrar · Acessos Lince</title>
+<title>Entrar · Diagnósticos Lince</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap">
 <style>
@@ -77,7 +76,7 @@ button:focus-visible,input:focus-visible{outline:1px solid var(--ouro);outline-o
 .erro{margin:0;color:var(--erro);font-size:.88rem}
 </style></head><body><main>
   <img class="selo" src="/marca/selo-lince.jpg" alt="Selo Lince &amp; Co.">
-  <div class="marca"><span class="nome">Lince</span><h1>Acessos dos clientes</h1></div>
+  <div class="marca"><span class="nome">Lince</span><h1>Diagnósticos dos clientes</h1></div>
   <form method="post" action="/painel/login">
     ${erro ? `<p class="erro" role="alert">${esc(erro)}</p>` : ""}
     <label for="usuario">Usuário<input id="usuario" name="usuario" autocomplete="username" required autofocus></label>
@@ -96,14 +95,14 @@ export async function onRequest({ request, env, next }) {
   if (p.startsWith("/marca/")) return protegido(await next(), { cache: true });
 
   if (!ehPainel(p)) {
-    if (p.startsWith("/api/") && !env.ACESSOS_CHAVE) {
+    if (p.startsWith("/api/") && !env.DB) {
       return protegido(new Response(JSON.stringify({ erro: "Formulário em manutenção. Tente de novo mais tarde." }), { status: 503, headers: { "content-type": "application/json; charset=utf-8" } }));
     }
     return protegido(await next());
   }
 
   if (!env.PAINEL_USUARIO || !env.PAINEL_SENHA || !env.PAINEL_SEGREDO) {
-    return protegido(new Response("Painel ainda não configurado: falta definir o usuário e a senha.", { status: 503, headers: { "content-type": "text/plain; charset=utf-8" } }));
+    return protegido(new Response("Painel ainda não configurado: falta definir o usuário e a senha (node operacao/diagnostico/configurar.mjs).", { status: 503, headers: { "content-type": "text/plain; charset=utf-8" } }));
   }
 
   if (p === "/painel/login" && request.method === "POST") {

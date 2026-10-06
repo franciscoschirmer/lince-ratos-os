@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditoria dos Grupos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5EFE3; --card:#FFFDF8; --card2:#EDE4D3; --ink:#1F1712; --ink2:#5E5249; --muted:#8A7F75;
+  --line:#D6CBB6; --bronze:#9C8257; --bordo:#620D11;
+  --red:#A3261C; --red-bg:#F6DEDA; --amber:#9A6A00; --amber-bg:#F6EACB;
+  --green:#2F6B3A; --green-bg:#DCEBDD; --blue:#2E5476; --blue-bg:#DDE6EE; --gray-bg:#E9E3D8;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#110B08; --card:#1D1511; --card2:#261C17; --ink:#F1EDE5; --ink2:#C9BFB4; --muted:#988E84;
+    --line:#3A2E26; --bronze:#BAA079; --bordo:#C25A5F;
+    --red:#F08A80; --red-bg:#3D1A16; --amber:#E2B85C; --amber-bg:#3A2D12; --green:#8CC798; --green-bg:#1C3221;
+    --blue:#9DBEDC; --blue-bg:#1B2A38; --gray-bg:#2A211C;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 16px 80px}
+h1{font:600 34px/1.1 "Cormorant Garamond",serif;margin:0 0 4px}
+h2{font:600 24px/1.2 "Cormorant Garamond",serif;margin:36px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.sub{color:var(--ink2);margin:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{display:block;font-size:28px;line-height:1.1}
+.kpi span{color:var(--ink2);font-size:13px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--ink2);margin:10px 0 0}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.bar button{font:500 13px Inter,sans-serif;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.bar button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bar .sp{flex:1}
+.bar .act{background:var(--bordo);color:#fff;border-color:var(--bordo)}
+.client{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden}
+.client>header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;background:var(--card2)}
+.client>header h3{margin:0;font:600 20px "Cormorant Garamond",serif}
+.client>header small{color:var(--ink2)}
+.item{padding:14px 16px;border-top:1px solid var(--line);display:grid;grid-template-columns:76px 1fr;gap:4px 14px}
+.item:first-of-type{border-top:0}
+.id{font:600 12px ui-monospace,monospace;color:var(--muted);padding-top:3px}
+.ttl{font-weight:600}
+.det{color:var(--ink2);font-size:14px;margin:2px 0 6px}
+.ev{font-size:13px;color:var(--ink2);border-left:3px solid var(--line);padding:2px 0 2px 10px;margin:6px 0}
+.ev i{color:var(--ink)} .ev a{color:var(--bordo)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{font-size:12px;font-weight:500;border-radius:6px;padding:2px 8px;background:var(--gray-bg);color:var(--ink2)}
+.c-red{background:var(--red-bg);color:var(--red)} .c-amber{background:var(--amber-bg);color:var(--amber)}
+.c-green{background:var(--green-bg);color:var(--green)} .c-blue{background:var(--blue-bg);color:var(--blue)}
+.dec{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;align-items:center}
+.dec button{font:500 12px Inter,sans-serif;border:1px solid var(--line);background:transparent;color:var(--ink2);border-radius:6px;padding:4px 10px;cursor:pointer}
+.dec button.sel[data-v="criar"]{background:var(--bordo);border-color:var(--bordo);color:#fff}
+.dec button.sel[data-v="resolvido"]{background:var(--green);border-color:var(--green);color:#fff}
+.dec button.sel[data-v="descartar"]{background:var(--muted);border-color:var(--muted);color:#fff}
+.dec input{flex:1;min-width:180px;font:13px Inter,sans-serif;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:4px 8px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14px}
+th,td{text-align:left;padding:8px 12px;border-top:1px solid var(--line);vertical-align:top}
+th{background:var(--card2);font-weight:600;border-top:0}
+.note{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--bronze);border-radius:8px;padding:12px 16px;font-size:14px;color:var(--ink2)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px}
+details summary{cursor:pointer;font-weight:600}
+details li{color:var(--ink2);font-size:14px;margin:4px 0}
+.hide{display:none} details table{border:0} td.id{width:64px;white-space:nowrap}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.2s}
+.toast.on{opacity:1}
+@media (max-width:560px){.item{grid-template-columns:1fr}.id{padding:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Auditoria dos grupos · WhatsApp × ClickUp</h1>
+  <p class="sub">Semana de 28/09 a 01/10/2026 · 15 grupos lidos · reunião de quinta com o Henri</p>
+
+  <div class="note" id="veredito" style="border-left-color:var(--green);font-size:15px;color:var(--ink)"></div>
+  <div class="kpis" id="kpis"></div>
+  <div class="note"><b>Regra:</b> só vai para o ClickUp o que o <b>nosso time</b> precisa fazer. Pendência do lado do cliente (secretária, foto, aprovação) é acompanhamento. Os botões não mexem no ClickUp: só registram a decisão neste navegador. Nada é criado nem alterado até você colar as decisões no chat, e tarefa que já existe nunca muda de status por causa daqui.</div>
+
+  <h2>Atenção até segunda</h2>
+  <div id="risco"></div>
+
+  <h2>Furos · o que não chegou certo no ClickUp</h2>
+  <p class="sub" style="margin-bottom:6px"><span class="chip c-red">Crítico</span> cliente pediu, ninguém fez nem respondeu, afeta entrega ou relação · <span class="chip c-amber">Médio</span> entrega real sem tarefa, ou tarefa errada que pode atrasar · <span class="chip">Leve</span> ação pontual ou status desatualizado</p>
+  <p class="sub" style="margin-bottom:10px"><span class="chip c-red">✗ perdido</span> o time precisa fazer e não tem tarefa · <span class="chip c-amber">⚠ ruído</span> a tarefa existe, mas com status, prazo ou responsável errado</p>
+  <div class="bar" id="bar">
+    <button data-f="todos" class="on">Todos os furos</button>
+    <button data-f="medio">Médios</button>
+    <button data-f="leve">Leves</button>
+    <button data-f="perdido">✗ Sem tarefa</button>
+    <button data-f="ruido">⚠ Tarefa errada</button>
+    <button data-f="pendente">Sem decisão</button>
+    <span class="sp"></span>
+    <button class="act" id="copy">Copiar decisões</button>
+  </div>
+  <div id="saida" class="note" style="display:none;margin-top:12px"><b>Decisões prontas.</b> Se não copiou sozinho, clique no texto, Ctrl+A e Ctrl+C, e cole no chat.<textarea id="saida-txt" readonly style="width:100%;height:220px;margin-top:8px;font:13px ui-monospace,monospace;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px"></textarea></div>
+  <div id="list"></div>
+
+  <h2>Tudo certo · respondido e no ClickUp</h2>
+  <p class="sub" style="margin-bottom:10px" id="sum-ok"></p>
+  <div id="ok"></div>
+
+  <h2>Acompanhamento · depende do cliente</h2>
+  <details><summary id="sum-cli"></summary><div id="cli" style="margin-top:10px"></div></details>
+
+  <h2>Aprovações e envios da programação</h2>
+  <table id="aprov"><thead><tr><th>Cliente</th><th>Pendente de aprovação</th><th>Programado e sem envio visto no grupo</th></tr></thead><tbody></tbody></table>
+  <p class="sub" style="font-size:13px;margin-top:6px">Não vira tarefa nova: é cobrança da rotina de aprovação. O que aparece na terceira coluna pode ter ido pelo documento de conteúdos; vale confirmar.</p>
+
+  <h2>Lido e descartado (não é demanda)</h2>
+  <details>
+    <summary>O que ficou de fora e por quê</summary>
+    <ul>
+      <li><b>Sugestões de notícias para stories</b> (Júlia, 29/09, em vários grupos): é envio nosso, sem pedido do cliente.</li>
+      <li><b>Códigos PIX para recarga de anúncios</b> (Urocenter, Gabi Castello, Hospital Piltcher): é ação do cliente. Gabi já pagou (30/09).</li>
+      <li><b>Programação semanal e envios para validação</b>: rotina normal, está na tabela de aprovações.</li>
+      <li><b>Aniversário da Dra. Gabi e o presente</b>: relacionamento, sem ação pendente.</li>
+      <li><b>Eventos Fazenda, nome da fonte (Sloop)</b>: respondido na hora.</li>
+      <li><b>Pamela posta por conta própria</b> (Carrossel 03 e Vídeo 05): legenda e link foram resolvidos no dia 29/09.</li>
+      <li><b>Relatório de performance de setembro da Dra. Karinna</b> (01/10): entregue, sem ação pendente.</li>
+      <li><b>Mensagens de voz</b> (Karinna, Walter): não dá para ler o conteúdo pelo export. Se alguma tinha pedido, o Henri confirma.</li>
+    </ul>
+  </details>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// tipo: demanda | alteracao | processo | cliente (aguardando cliente) | avaliar
+// clickup: perdido | ruido | andamento | concluido | conferir
+const ITENS = [
+ {id:"WAL-1", cli:"Dr. Walter Pinto", tipo:"demanda", area:"Tráfego + perfil + LP", urg:true, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86akqp9yh' target='_blank'>Alteração do número do Dr. Walter</a>. Rituais, Francisco, prazo hoje (01/10). A descrição cobre Instagram, Facebook e secretária, mas não cita a LP, que está em implementação com o Cláudio.",
+  t:"Trocar o número de contato para 11 92662-7211 em todos os pontos de captação",
+  d:"Campanhas já trocadas pelo tráfego (30/09). Falta conferir o link e a bio do Instagram, o Facebook e a landing page. O Dr. disse que tentaria mudar a LP pela Doctoralia; confirmar se a LP é nossa.",
+  ev:"Dr. Walter, 29/09 10:09: pede para atualizar Instagram, Facebook e outros meios de captação. Henri: <i>vou passar a informação do número para o pessoal alterar</i>."},
+ {id:"WAL-2", cli:"Dr. Walter Pinto", tipo:"cliente", area:"Conteúdo", urg:false, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86akjxeup' target='_blank'>[CARD] 18/10 — Dia do Médico</a>. Em produção do cliente, Henri. Prazo de 30/09 já vencido: atualizar.",
+  t:"Fotos da trajetória para o post do Dia do Médico (18/10)",
+  d:"Material do cliente ainda incompleto. Orientado a mandar fotos da graduação, residência e bloco cirúrgico.",
+  ev:"Dr. Walter, 30/09: <i>vou procurar mais coisa</i>."},
+
+ {id:"URO-1", grau:"medio", cli:"Urocenter", tipo:"demanda", area:"Conteúdo", urg:false, retorno:true, clickup:"perdido", pre:"criar", cun:"Nenhuma pauta ou tarefa com o formato 'dúvidas sobre urologia'.",
+  t:"Pauta nova: vídeo no formato 'dúvidas sobre urologia'",
+  d:"Ideia da Victoria a partir de uma referência; Dr. Murilo topou. Precisa virar pauta ou roteiro no calendário.",
+  ev:"Dr. Murilo, 29/09: <i>Podemos bolar algo parecido sim</i>."},
+ {id:"URO-2", cli:"Urocenter", tipo:"demanda", area:"CS / setup de perfil", urg:false, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86ak7fvcf' target='_blank'>Mutirão com as secretarias: WhatsApp e endereço no Instagram</a>. Uma tarefa cobre Urocenter, Cristiano e Átria. Henri, em produção do cliente, prazo de 24/09 vencido.",
+  t:"Conectar WhatsApp Business ao Instagram com a secretária",
+  d:"O Dr. Murilo indicou que o WhatsApp Business fica com a secretária. Próximo passo: o Henri falar com ela.",
+  ev:"Dr. Murilo, 29/09: <i>A nossa secretária fica com o whats business</i>."},
+ {id:"URO-3", grau:"leve", cli:"Urocenter", tipo:"cliente", area:"Conteúdo", urg:false, retorno:true, clickup:"ruido", cun:"<a href='https://app.clickup.com/t/86akmdua6' target='_blank'>Planejamento - Novembro Azul e Fim de Ano</a> · <a href='https://app.clickup.com/t/86akpm59r' target='_blank'>Enviar roteiros de Novembro Azul e definir divisão das gravações</a>. O planejamento está como enviado para aprovação, certo. Mas a tarefa de enviar os roteiros segue pendente (prazo 28/09), embora o envio tenha sido feito em 30/09. Atualizar o status e deixar só a definição da gravação aberta.",
+  t:"Roteiros do Novembro Azul e formato da gravação",
+  d:"Roteiros enviados 30/09 com a pergunta: gravar presencial com a Vic, sozinhos ou online. Sem resposta. Novembro está perto: cobrar.",
+  ev:"Francisco, 30/09 9:32. Nenhuma resposta até 01/10."},
+ {id:"URO-4", cli:"Urocenter", tipo:"cliente", area:"Design", urg:false, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86akmejrm' target='_blank'>Carrossel apresentação Dr. Murilo</a> · <a href='https://app.clickup.com/t/86akmejtj' target='_blank'>Dr. William</a> · <a href='https://app.clickup.com/t/86akmejuf' target='_blank'>Dr. Ricardo</a>. Três tarefas em produção do cliente, Henri, prazo 06/10. Correto.",
+  t:"Carrossel de apresentação de cada médico: falta foto pessoal (3º card)",
+  d:"Pedido de foto de hobby ou paixão fora da medicina. Sem resposta.",
+  ev:"Henri, 30/09 9:52. Nenhuma resposta até 01/10."},
+
+ {id:"CRI-1", cli:"Dr. Cristiano Cruz", tipo:"cliente", area:"CS / setup de perfil", urg:false, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86ak7fvcf' target='_blank'>Mutirão com as secretarias</a>. Coberto pela tarefa do mutirão (Henri).",
+  t:"Conectar WhatsApp Business ao Instagram com a Majo (gestão do consultório)",
+  d:"O Dr. delegou para a Majo. Ninguém confirmou que foi feito.",
+  ev:"Consultório, 29/09 9:43: <i>Majo veja se consegue por favor</i>."},
+
+ {id:"FAZ-1", grau:"medio", cli:"Eventos Fazenda (Allan)", tipo:"demanda", area:"Conteúdo + edição", urg:false, retorno:true, clickup:"perdido", pre:"criar", cun:"<a href='https://app.clickup.com/t/86akpm4h7' target='_blank'>Solicitar fotos e materiais do último casamento</a>. A tarefa de pedir o material foi concluída, mas não existe tarefa para produzir posts com o material da Uli e do Daniel (Drive e cobertura da Kauanna).", fr:"Francisco: respondido no grupo, mas a produção dos posts precisa ir para o ClickUp.",
+  t:"Criar posts com o material bruto do casamento Uli e Daniel",
+  d:"Duas entregas de material: Drive com fotos e vídeos brutos (30/09) e a cobertura da Kauanna (01/10). Respondido, segundo o Francisco.",
+  ev:"Allan, 30/09 12:41 e 01/10 8:47: <i>podemos criar bons materiais com o que ela captou</i>."},
+ {id:"FAZ-2", cli:"Eventos Fazenda (Allan)", tipo:"avaliar", area:"Estratégia de conteúdo", urg:false, retorno:true, clickup:"andamento", cun:"Há cerca de 10 carrosséis de casamento em design (véu, bolos, paleta, anéis, noiva depois dos 40...). O compromisso já está sendo cumprido na prática.",
+  t:"Concorrência com a Fazenda Verde no nicho de casamentos",
+  d:"Respondemos que vamos reforçar a produção de material para casamentos. É compromisso genérico: decidir se vira pauta concreta (casa com o FAZ-1).",
+  ev:"Francisco, 30/09: <i>estamos fomentando ainda mais a produção de materiais direcionados a este serviço</i>."},
+
+ {id:"GAB-1", grau:"medio", cli:"Gabriel Parede", tipo:"processo", area:"Conteúdo + edição", urg:false, retorno:true, clickup:"ruido", cun:"<a href='https://app.clickup.com/t/86ajjm33d' target='_blank'>Direção de gravação remota ao vivo (Ciclo 1)</a> · <a href='https://app.clickup.com/t/86akpm5ar' target='_blank'>Cobrar e organizar arquivos brutos</a>. Nenhuma tarefa reflete o novo formato (ele grava os 12 sozinho e manda o bruto). O ClickUp ainda trata a gravação como ao vivo. Criar o recebimento do bruto e a edição da sessão 2.",
+  t:"Mudança de formato: ele grava os 12 vídeos sozinho e manda o material bruto",
+  d:"Aceito pelo Francisco. Ajustar o planejamento: data de recebimento do bruto, edição dos 12 vídeos, e a orientação de variar cenário e roupa. A gravação das 17h de 30/09 caiu.",
+  ev:"Gabriel, 30/09 15:50: <i>pensei em gravar os 12 vídeos e enviar o material bruto</i>."},
+ {id:"GAB-2", grau:"leve", cli:"Gabriel Parede", tipo:"alteracao", area:"Edição", urg:false, retorno:true, clickup:"ruido", cun:"<a href='https://app.clickup.com/t/86akpm5hp' target='_blank'>Formalizar brief de edição com zoom e espelhamento</a> · <a href='https://app.clickup.com/t/86akqdjrz' target='_blank'>P02 — Infância</a>. Existe a tarefa do brief de edição, mas está pendente com prazo vencido (28/09), e o P02 já foi enviado para aprovação. Confirmar se o zoom foi aplicado e fechar.",
+  t:"Mais zoom no vídeo P02 (Infância)",
+  d:"Combinado na gravação. O Francisco já avisou o editor; conferir se virou alteração na tarefa.",
+  ev:"Francisco, 30/09 16:18: <i>já sinalizei para o editor</i>."},
+ {id:"GAB-3", cli:"Gabriel Parede", tipo:"cliente", area:"Design", urg:false, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86akqdjrz' target='_blank'>P02 — Infância</a>. Enviado para aprovação. Aguardando o cliente.",
+  t:"Headline clean ou com fundo vermelho: aguardando a escolha dele",
+  d:"Pergunta enviada junto com o P02 para validação. Define o padrão dos outros vídeos (abertura, fechamento, música, legenda).",
+  ev:"Francisco, 30/09 16:18. Sem resposta."},
+ {id:"GAB-4", cli:"Gabriel Parede", tipo:"cliente", area:"Conteúdo", urg:false, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86akpm5b4' target='_blank'>Acompanhar pedidos de depoimento</a>. Em produção do cliente, Henri. Correto.",
+  t:"Depoimentos da Consuelo e do João Pedro",
+  d:"Ele vai cobrar os clientes dele.",
+  ev:"Gabriel, 29/09: <i>Ainda não tive retorno, vou movimentar aqui</i>."},
+
+ {id:"PIL-1", cli:"Hospital Piltcher", tipo:"demanda", area:"Design", urg:false, retorno:true, clickup:"concluido", cun:"<a href='https://app.clickup.com/t/86akqxtg9' target='_blank'>CARROSSEL - Outubro Rosa</a>. Postagem cadastrada.", pre:"resolvido", fr:"Francisco: o carrossel substituto foi o de Outubro Rosa, já feito e postado.",
+  t:"Carrossel substituto: a Dra. Maira não gravou os vídeos de outubro",
+  d:"Ela volta no domingo (04/10). Prometemos um carrossel enquanto isso. O VÍDEO 01 da programação (quinta, hoje) está como aguardando gravação.",
+  ev:"Equipe, 29/09 14:45: <i>Farei um carrossel para postarmos então enquanto aguardamos a sua gravação</i>."},
+ {id:"PIL-2", cli:"Hospital Piltcher", tipo:"alteracao", area:"Design", urg:false, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86akpedr6' target='_blank'>[Hospital Piltcher] 200 cirurgias paciente</a>. Peças de Design, em revisão de social media (Marina), atualizada hoje. Conferir se a foto do robô já foi trocada.",
+  t:"200 cirurgias (paciente): trocar a foto pela do robô do próprio hospital",
+  d:"A foto usada é da Scolla, de Curitiba. O Francisco disse que vai direcionar à designer.",
+  ev:"Hospital, 01/10 10:05: <i>A foto tem que ser do nosso robô</i>."},
+ {id:"PIL-3", cli:"Hospital Piltcher", tipo:"alteracao", area:"Design", urg:false, retorno:true, clickup:"concluido", cun:"<a href='https://app.clickup.com/t/86akqxtg9' target='_blank'>CARROSSEL - Outubro Rosa</a>. Postagem cadastrada em 01/10.",
+  t:"Carrossel Outubro Rosa: corrigir a palavra 'Problema' no card 3",
+  d:"O Francisco diz que alterou e mandou para agendamento. Conferir se a tarefa está como agendada.",
+  ev:"Francisco, 01/10 10:11: <i>Conteúdo alterado</i>."},
+ {id:"PIL-4", cli:"Hospital Piltcher", tipo:"cliente", area:"CS", urg:false, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86akrapxx' target='_blank'>Agendar reunião com o cliente</a>. Júlia, pendente, prazo 02/10 (captura-ia).",
+  t:"Reunião da semana: o Eduardo não respondeu a disponibilidade",
+  d:"A Júlia perguntou no dia 29/09. O Eduardo também não respondeu as aprovações do documento (cobradas em 28 e 29/09).",
+  ev:"Júlia, 29/09 9:17."},
+
+ {id:"KAR-1", cli:"Dra. Karinna", tipo:"alteracao", area:"Edição", urg:true, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86akju4dg' target='_blank'>Roteiro 4 — Coroa antiga</a> · <a href='https://app.clickup.com/t/86akraq2v' target='_blank'>Aplicar as alterações de fotos e redação</a>. Roteiro 4 em revisão de social media (Marina). A tarefa de aplicar as alterações segue pendente (Francisco, 02/10): fechar quando o editor entregar.", fr:"Francisco: já repassado ao editor. Falta conferir se a alteração está registrada na tarefa e se sai até sexta.",
+  t:"Roteiro 4 (Coroa antiga): trocar imagens pelas fotos reais que ela mandou",
+  d:"Três trocas: foto no começo ('sabe aquela sua coroa antiga'), foto na parte do fio dental e foto da diferença entre coroa e gengiva. Está programado para sexta.",
+  ev:"Dra. Karinna, 30/09 21:38. Francisco, 01/10 11:03: <i>já encaminhamos todas alterações para o editor</i>."},
+ {id:"KAR-2", grau:"medio", cli:"Dra. Karinna", tipo:"demanda", area:"Tráfego / GMN", urg:false, retorno:true, clickup:"perdido", pre:"criar", cun:"Nada sobre o Google Meu Negócio da Karinna em Campanhas nem em outra lista. A Jenifer confirmou no grupo, mas não tem tarefa. Destino: Gestão de Campanhas, com a Jenifer.",
+  t:"Publicar carrosséis no Google Meu Negócio",
+  d:"Pedido direto à Jenifer, que confirmou. Vale definir se é recorrente.",
+  ev:"Dra. Karinna, 30/09 7:49. Tráfego: <i>vou atualizar lá sim</i>."},
+ {id:"KAR-3", cli:"Dra. Karinna", tipo:"demanda", area:"CS", urg:false, retorno:true, clickup:"concluido", cun:"Data combinada com a cliente (Francisco). Não tem tarefa, e não precisa.", pre:"resolvido", fr:"Francisco: data combinada com ela, antes da viagem.",
+  t:"Marcar a reunião para a semana que vem, antes das férias",
+  d:"Ela viaja de 08 a 18/10, então a reunião precisa ser entre 05 e 07/10. Antecipar também as aprovações do período.",
+  ev:"Dra. Karinna, 30/09: <i>Estarei de férias de 08-18/10</i>. Equipe: <i>Isso dra!!</i> (semana que vem)."},
+ {id:"KAR-4", grau:"leve", cli:"Dra. Karinna", tipo:"demanda", area:"Conteúdo", urg:false, retorno:true, clickup:"perdido", cun:"Sem tarefa. Se as fotos já estão salvas no Drive, marcar como resolvido.",
+  t:"Salvar as fotos clínicas no banco de imagens dela",
+  d:"Fotos de amálgama antes e depois, gengivite com placa e um vídeo. O Francisco respondeu que o banco é para produções futuras. Conferir se foram salvas no Drive.",
+  ev:"Dra. Karinna, 29 e 30/09: <i>Acima, salvar</i>."},
+ {id:"KAR-5", cli:"Dra. Karinna", tipo:"alteracao", area:"Design", urg:false, retorno:true, clickup:"concluido", cun:"<a href='https://app.clickup.com/t/86akmvyck' target='_blank'>Carrossel amálgama</a>. Postagem cadastrada.",
+  t:"Carrossel do amálgama: alterações feitas e aprovado",
+  d:"Aprovado em 30/09 15:43 com a legenda dela. O Francisco disse que já está cadastrado para postagem.",
+  ev:"Francisco, 30/09 18:00: <i>Conteúdo já esta cadastradinho para postagem</i>."},
+
+ {id:"SIM-1", grau:"leve", cli:"Dra. Simone", tipo:"processo", area:"CS / aprovação", urg:false, retorno:true, clickup:"perdido", cun:"A mudança no jeito de aprovar (um por um no grupo) não está registrada em lugar nenhum. Vale anotar no cadastro da cliente e na rotina de aprovação.",
+  t:"Novo jeito de aprovar: enviar os conteúdos um por um no grupo",
+  d:"Ela se perde no documento com tudo junto. Registrar como padrão dessa cliente (rotina de aprovação e fila).",
+  ev:"Dra. Simone, 29/09: <i>Aquele esquema de tudo junto me deixa perdida</i>."},
+ {id:"SIM-2", grau:"leve", cli:"Dra. Simone", tipo:"demanda", area:"Social media", urg:false, retorno:true, clickup:"perdido", pre:"resolvido", fr:"Francisco: feito. Ação pontual, não precisou de tarefa.", cun:"Sem tarefa do repost nos stories, e ninguém confirmou no grupo.",
+  t:"Repostar um reel nos stories dela",
+  d:"Ela pediu o repost e confirmou que é só no story. Ninguém confirmou que foi feito.",
+  ev:"Dra. Simone, 29/09 12:32 e 14:25: <i>Story só</i>."},
+ {id:"SIM-3", grau:"medio", cli:"Dra. Simone", tipo:"alteracao", area:"Edição", urg:true, retorno:true, clickup:"ruido", cun:"<a href='https://app.clickup.com/t/86agw7x7e' target='_blank'>P13 — Por quanto tempo pode fazer reposição hormonal?</a>. Está em alteração interna, mas com prazo de 24/08, sem editor responsável (só Francisco). A troca da imagem do comprimido pelo creme não aparece. Prazo e responsável precisam ser atualizados.",
+  t:"Reposição hormonal: trocar a imagem do comprimido por aplicação de creme",
+  d:"Estava programado para segunda (28/09) e já atrasou. Prometemos postar nesta semana.",
+  ev:"Francisco, 29/09: <i>Nossa equipe já esta revisando o conteúdo e vamos posta-lo esta semana</i>."},
+ {id:"SIM-4", cli:"Dra. Simone", tipo:"demanda", area:"Design", urg:false, retorno:true, clickup:"concluido", cun:"<a href='https://app.clickup.com/t/86akq9b1a' target='_blank'>LOGOTIPO SIMONE - Vetor transparente</a>. Concluída.",
+  t:"Logos com fundo transparente",
+  d:"Entregue em SVG no mesmo dia. Ela confirmou.",
+  ev:"Dra. Simone: <i>Perfeito! Obrigada!</i>"},
+
+ {id:"ATR-1", cli:"Átria", tipo:"cliente", area:"CS / setup de perfil", urg:false, retorno:true, clickup:"andamento", cun:"<a href='https://app.clickup.com/t/86ak7fvcf' target='_blank'>Mutirão com as secretarias</a>. Coberto pela tarefa do mutirão (Henri).",
+  t:"Conectar WhatsApp Business ao Instagram no celular da Rose",
+  d:"A Victoria indicou que precisa ser no celular da Rose. Combinar o horário com ela.",
+  ev:"Victoria, 29/09 12:16: <i>Rose, precisa ser no teu cel!</i>"}
+];
+
+const APROV = [
+ ["Dr. Luis Henrique","Roteiro 'Se você é Urologista' (29/09) · Reels 'Perder 16 kg' (30/09)","Carrossel 'Saúde sexual a cada década' (quinta)"],
+ ["Dr. Walter Pinto","","Carrossel 'Barriga escondendo parte do pênis' (quinta)"],
+ ["Urocenter","Vídeo 19 William (28/09)",""],
+ ["Dr. Cristiano Cruz","Caixinha 'Pouco peso pra perder' (28/09)","Roteiro 'Retatrutida' (quinta)"],
+ ["Aragão Law","Erros na transferência de patrimônio · Qual visto · Processo interno L1-A","Estrutura societária e bitributação (quinta)"],
+ ["Hospital Piltcher","Conteúdos do documento · 200 cirurgias paciente (com alteração) · Outubro Rosa (corrigido)","VÍDEO 01 (quinta, aguardando gravação)"],
+ ["Dra. Karinna","Conteúdos do documento (cobrado 30/09) · Roteiro 4 em alteração","Atenção: férias de 08 a 18/10"],
+ ["Dra. Simone","7 conteúdos reenviados um por um em 29/09, sem resposta",""],
+ ["Dra. Pamela","Carrossel 05 (precisa subir até 30/09 ou sai o card de setembro) · Carrossel 06 · Vídeo 06","Ela mesma posta"],
+ ["Gabi Castello","","Carrossel cardiovascular (sexta) · Reels extração (sábado)"],
+ ["Gabriel Parede","P02 Infância editado e a escolha da headline",""],
+ ["Átria","","Carrossel Outubro Rosa (quinta)"],
+ ["Maysa, Otorrinos","Tudo aprovado",""]
+];
+
+const KEY="auditoria-grupos-2026-10-01-v3";
+let dec={}; try{dec=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(dec))}catch(e){}}
+
+const CLIENTE=["WAL-2","URO-4","CRI-1","ATR-1","GAB-3","GAB-4","PIL-4"];
+const grupo=i=>["perdido","ruido"].includes(i.clickup)?"furo":CLIENTE.includes(i.id)?"cli":"ok";
+const CU={perdido:["✗ perdido","c-red"],ruido:["⚠ ruído","c-amber"],andamento:["↻ em andamento","c-blue"],concluido:["✓ concluído","c-green"]};
+const BTN={perdido:[["criar","Criar tarefa"],["resolvido","Já resolvido"],["descartar","Descartar"]],
+           ruido:[["corrigir","Corrigir a tarefa existente"],["resolvido","Já está certo"],["descartar","Descartar"]]};
+let filtro="todos";
+const GR={critico:["Crítico","c-red"],medio:["Médio","c-amber"],leve:["Leve",""]};
+const decOf=i=>dec[i.id]||(i.pre?{v:i.pre}:{});
+function passa(i){
+  if(filtro==="medio"||filtro==="leve")return i.grau===filtro;
+  if(filtro==="perdido")return i.clickup==="perdido";
+  if(filtro==="ruido")return i.clickup==="ruido";
+  if(filtro==="pendente")return !decOf(i).v;
+  return true;
+}
+const linha=i=>`<tr><td class="id">${i.id}</td><td><b>${i.cli}</b> · ${i.t}<div class="det" style="margin:4px 0 0">${i.cun||""}${i.fr?" <i>"+i.fr+"</i>":""}</div></td><td><span class="chip ${CU[i.clickup][1]}">${CU[i.clickup][0]}</span></td></tr>`;
+function render(){
+  const furos=ITENS.filter(i=>grupo(i)==="furo");
+  const grupos={};
+  const ORD={critico:0,medio:1,leve:2};furos.sort((a,b)=>ORD[a.grau]-ORD[b.grau]).filter(passa).forEach(i=>{const g=GR[i.grau][0];(grupos[g]=grupos[g]||[]).push(i)});
+  const L=document.getElementById("list"); L.innerHTML="";
+  Object.keys(grupos).forEach(c=>{
+    const s=document.createElement("section");s.className="client";
+    s.innerHTML=`<header><h3>${c}</h3><small>${grupos[c].length} furo(s)</small></header>`;
+    grupos[c].forEach(i=>{
+      const d=decOf(i),cu=CU[i.clickup];
+      const el=document.createElement("div");el.className="item";
+      el.innerHTML=`<div class="id">${i.id}</div><div>
+        <div class="ttl"><span style="color:var(--bronze)">${i.cli}</span> · ${i.t}</div><div class="det">${i.d}</div>
+        <div class="ev">${i.ev}</div>${i.cun?`<div class="ev" style="border-color:var(--bronze)"><b>ClickUp:</b> ${i.cun}</div>`:""}${i.fr?`<div class="ev" style="border-color:var(--green)"><b>Atualização:</b> ${i.fr}</div>`:""}
+        <div class="chips"><span class="chip ${GR[i.grau][1]}" style="font-weight:600">${GR[i.grau][0]}</span><span class="chip ${cu[1]}">${cu[0]}</span><span class="chip">${i.area}</span>${i.urg?'<span class="chip c-red">risco até segunda</span>':''}</div>
+        <div class="dec" data-id="${i.id}">
+          ${BTN[i.clickup].map(([v,l])=>`<button data-v="${v}" class="${d.v===v?'sel':''}">${l}</button>`).join("")}
+          <input placeholder="${i.clickup==='ruido'?'o que corrigir: status, prazo, responsável':'lista, responsável, prazo'}" value="${(d.n||'').replace(/"/g,'&quot;')}">
+        </div></div>`;
+      s.appendChild(el);
+    });
+    L.appendChild(s);
+  });
+  if(!L.innerHTML)L.innerHTML='<p class="sub">Nada neste filtro.</p>';
+  const ok=ITENS.filter(i=>grupo(i)==="ok"),cli=ITENS.filter(i=>grupo(i)==="cli");
+  document.getElementById("ok").innerHTML=`<table><thead><tr><th>Cliente</th><th>Solicitação</th><th>Onde está</th></tr></thead>${ok.map(i=>`<tr><td><b>${i.cli}</b></td><td>${i.t}</td><td>${(i.cun||i.fr||"").replace(/\. .*/,"")} <span class="chip ${CU[i.clickup][1]}">${CU[i.clickup][0]}</span></td></tr>`).join("")}</table>`;
+  document.getElementById("cli").innerHTML=`<table>${cli.map(linha).join("")}</table>`;
+  document.getElementById("sum-ok").textContent=`${ok.length} solicitações com resposta no grupo e tarefa certa no ClickUp (ou já concluídas). Nada a fazer aqui.`;
+  document.getElementById("sum-cli").textContent=`${cli.length} itens aguardando o cliente (o Henri acompanha pelo ClickUp)`;
+  document.getElementById("risco").innerHTML=`<table>${ITENS.filter(i=>i.urg).map(linha).join("")}</table>`;
+  const decid=furos.filter(i=>decOf(i).v).length;
+  const nG=g=>furos.filter(i=>i.grau===g).length;
+  document.getElementById("veredito").innerHTML=`<b>Veredito da semana:</b> ${ITENS.length} solicitações e combinados nos 15 grupos. <b>Todas tiveram resposta nossa no grupo.</b> ${ok.length} já estão certas no ClickUp, ${cli.length} dependem do cliente e estão sendo acompanhadas. Furos: <b>${nG("critico")} crítico</b>, ${nG("medio")} médios e ${nG("leve")} leves. Nenhuma demanda ficou sem resposta e sem tarefa ao mesmo tempo. A operação está passando bem do grupo para o ClickUp; o que escapa são entregas novas combinadas de passagem (pauta, material bruto, GMN) e tarefas com prazo ou status desatualizado.`;
+  const k=[[nG("critico"),"furos críticos"],[nG("medio"),"furos médios"],[nG("leve"),"furos leves"],[ITENS.filter(i=>i.urg).length,"com risco até segunda"],[ok.length,"já certos no ClickUp"],[decid+"/"+furos.length,"decididos na reunião"]];
+  document.getElementById("kpis").innerHTML=k.map(x=>`<div class="kpi"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+}
+document.getElementById("list").addEventListener("click",e=>{
+  const b=e.target.closest(".dec button"); if(!b)return;
+  const id=b.parentElement.dataset.id; const it=ITENS.find(x=>x.id===id); dec[id]=decOf(it);
+  dec[id].v = dec[id].v===b.dataset.v ? "" : b.dataset.v; save(); render();
+});
+document.getElementById("list").addEventListener("input",e=>{
+  if(!e.target.matches(".dec input"))return;
+  const id=e.target.parentElement.dataset.id; const it=ITENS.find(x=>x.id===id); dec[id]=decOf(it); dec[id].n=e.target.value; save();
+});
+document.getElementById("bar").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-f]"); if(!b)return;
+  filtro=b.dataset.f; document.querySelectorAll("#bar button[data-f]").forEach(x=>x.classList.toggle("on",x===b)); render();
+});
+document.getElementById("copy").addEventListener("click",()=>{
+  const lab={criar:"CRIAR TAREFA NOVA",corrigir:"CORRIGIR TAREFA EXISTENTE",resolvido:"JÁ RESOLVIDO",descartar:"DESCARTAR"};
+  const linhas=ITENS.filter(i=>grupo(i)==="furo").map(i=>{const d=decOf(i);const tk=(i.cun||"").match(/t\/(\w+)/g);return `${i.id} | ${(GR[i.grau]||[""])[0]} | ${lab[d.v]||"SEM DECISÃO"} | ${i.cli} | ${i.t}${tk?" | tarefa: "+tk.map(x=>x.slice(2)).join(","):""}${d.n?" | obs: "+d.n:""}`});
+  const txt="Decisões da auditoria dos grupos (28/09 a 01/10/2026)\n"+linhas.join("\n");
+  const ok=()=>{const t=document.getElementById("toast");t.textContent="Decisões copiadas. Cole no chat do Claude.";t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2500)};
+  const box=document.getElementById("saida"),ta=document.getElementById("saida-txt");
+  ta.value=txt; box.style.display="block"; box.scrollIntoView({behavior:"smooth",block:"center"}); ta.focus(); ta.select();
+  let copiou=false; try{copiou=document.execCommand("copy")}catch(e){}
+  if(copiou){ok()} else if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(ok,()=>{})}
+});
+document.querySelector("#aprov tbody").innerHTML=APROV.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]||"—"}</td><td>${r[2]||"—"}</td></tr>`).join("");
+render();
+</script>
+</body>
+</html>

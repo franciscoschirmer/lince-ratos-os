@@ -1,0 +1,9 @@
+# Projeto Cloudflare Pages `diagnostico-lince` (publicado com `npx wrangler pages deploy`, a partir desta pasta).
+name = "diagnostico-lince"
+pages_build_output_dir = "public"
+compatibility_date = "2026-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "diagnostico-lince"
+database_id = "3ebc0431-d9b0-44c7-8ffa-498d451110b3"

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditoria dos Grupos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5EFE3; --card:#FFFDF8; --card2:#EDE4D3; --ink:#1F1712; --ink2:#5E5249; --muted:#8A7F75;
+  --line:#D6CBB6; --bronze:#9C8257; --bordo:#620D11;
+  --red:#A3261C; --red-bg:#F6DEDA; --amber:#9A6A00; --amber-bg:#F6EACB;
+  --green:#2F6B3A; --green-bg:#DCEBDD; --blue:#2E5476; --blue-bg:#DDE6EE; --gray-bg:#E9E3D8;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#110B08; --card:#1D1511; --card2:#261C17; --ink:#F1EDE5; --ink2:#C9BFB4; --muted:#988E84;
+    --line:#3A2E26; --bronze:#BAA079; --bordo:#C25A5F;
+    --red:#F08A80; --red-bg:#3D1A16; --amber:#E2B85C; --amber-bg:#3A2D12; --green:#8CC798; --green-bg:#1C3221;
+    --blue:#9DBEDC; --blue-bg:#1B2A38; --gray-bg:#2A211C;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 16px 80px}
+h1{font:600 34px/1.1 "Cormorant Garamond",serif;margin:0 0 4px}
+h2{font:600 24px/1.2 "Cormorant Garamond",serif;margin:36px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.sub{color:var(--ink2);margin:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{display:block;font-size:28px;line-height:1.1}
+.kpi span{color:var(--ink2);font-size:13px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--ink2);margin:10px 0 0}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.bar button{font:500 13px Inter,sans-serif;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.bar button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bar .sp{flex:1}
+.bar .act{background:var(--bordo);color:#fff;border-color:var(--bordo)}
+.client{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden}
+.client>header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;background:var(--card2)}
+.client>header h3{margin:0;font:600 20px "Cormorant Garamond",serif}
+.client>header small{color:var(--ink2)}
+.item{padding:14px 16px;border-top:1px solid var(--line);display:grid;grid-template-columns:76px 1fr;gap:4px 14px}
+.item:first-of-type{border-top:0}
+.id{font:600 12px ui-monospace,monospace;color:var(--muted);padding-top:3px}
+.ttl{font-weight:600}
+.det{color:var(--ink2);font-size:14px;margin:2px 0 6px}
+.ev{font-size:13px;color:var(--ink2);border-left:3px solid var(--line);padding:2px 0 2px 10px;margin:6px 0}
+.ev i{color:var(--ink)} .ev a{color:var(--bordo)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{font-size:12px;font-weight:500;border-radius:6px;padding:2px 8px;background:var(--gray-bg);color:var(--ink2)}
+.c-red{background:var(--red-bg);color:var(--red)} .c-amber{background:var(--amber-bg);color:var(--amber)}
+.c-green{background:var(--green-bg);color:var(--green)} .c-blue{background:var(--blue-bg);color:var(--blue)}
+.dec{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;align-items:center}
+.dec button{font:500 12px Inter,sans-serif;border:1px solid var(--line);background:transparent;color:var(--ink2);border-radius:6px;padding:4px 10px;cursor:pointer}
+.dec button.sel[data-v="criar"]{background:var(--bordo);border-color:var(--bordo);color:#fff}
+.dec button.sel[data-v="resolvido"]{background:var(--green);border-color:var(--green);color:#fff}
+.dec button.sel[data-v="descartar"]{background:var(--muted);border-color:var(--muted);color:#fff}
+.dec input{flex:1;min-width:180px;font:13px Inter,sans-serif;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:4px 8px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14px}
+th,td{text-align:left;padding:8px 12px;border-top:1px solid var(--line);vertical-align:top}
+th{background:var(--card2);font-weight:600;border-top:0}
+.note{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--bronze);border-radius:8px;padding:12px 16px;font-size:14px;color:var(--ink2)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px}
+details summary{cursor:pointer;font-weight:600}
+details li{color:var(--ink2);font-size:14px;margin:4px 0}
+.hide{display:none} details table{border:0} td.id{width:64px;white-space:nowrap}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.2s}
+.toast.on{opacity:1}
+@media (max-width:560px){.item{grid-template-columns:1fr}.id{padding:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Auditoria dos grupos · WhatsApp × ClickUp</h1>
+  <p class="sub">Semana de {{INICIO}} a {{FIM}} · {{N_GRUPOS}} grupos lidos · reunião de quinta com o Henri</p>
+
+  <div class="note" id="veredito" style="border-left-color:var(--green);font-size:15px;color:var(--ink)"></div>
+  <div class="kpis" id="kpis"></div>
+  <div class="note"><b>Regra:</b> só vai para o ClickUp o que o <b>nosso time</b> precisa fazer. Pendência do lado do cliente (secretária, foto, aprovação) é acompanhamento. Os botões não mexem no ClickUp: só registram a decisão neste navegador. Nada é criado nem alterado até você colar as decisões no chat, e tarefa que já existe nunca muda de status por causa daqui.</div>
+
+  <p class="sub" style="font-size:13px;margin-top:8px">Cruzamento com o ClickUp em {{DATA_CRUZAMENTO}} pela API (token pessoal): {{N_TAREFAS}} tarefas atualizadas desde {{DESDE}} em Calendário Editorial, Peças de Design, Campanhas, Demandas Comerciais, Landing Pages, Onboarding e Rituais &amp; Recorrentes.</p>
+
+  <h2>Atenção até segunda</h2>
+  <div id="risco"></div>
+
+  <h2>Furos · o que não chegou certo no ClickUp</h2>
+  <p class="sub" style="margin-bottom:6px"><span class="chip c-red">Crítico</span> cliente pediu, ninguém fez nem respondeu, afeta entrega ou relação · <span class="chip c-amber">Médio</span> entrega real sem tarefa, ou tarefa errada que pode atrasar · <span class="chip">Leve</span> ação pontual ou status desatualizado</p>
+  <p class="sub" style="margin-bottom:10px"><span class="chip c-red">✗ perdido</span> o time precisa fazer e não tem tarefa · <span class="chip c-amber">⚠ ruído</span> a tarefa existe, mas com status, prazo ou responsável errado</p>
+  <div class="bar" id="bar">
+    <button data-f="todos" class="on">Todos os furos</button>
+    <button data-f="medio">Médios</button>
+    <button data-f="leve">Leves</button>
+    <button data-f="perdido">✗ Sem tarefa</button>
+    <button data-f="ruido">⚠ Tarefa errada</button>
+    <button data-f="pendente">Sem decisão</button>
+    <span class="sp"></span>
+    <button class="act" id="copy">Copiar decisões</button>
+  </div>
+  <div id="saida" class="note" style="display:none;margin-top:12px"><b>Decisões prontas.</b> Se não copiou sozinho, clique no texto, Ctrl+A e Ctrl+C, e cole no chat.<textarea id="saida-txt" readonly style="width:100%;height:220px;margin-top:8px;font:13px ui-monospace,monospace;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px"></textarea></div>
+  <div id="list"></div>
+
+  <h2>Tudo certo · respondido e no ClickUp</h2>
+  <p class="sub" style="margin-bottom:10px" id="sum-ok"></p>
+  <div id="ok"></div>
+
+  <h2>Acompanhamento · depende do cliente</h2>
+  <details><summary id="sum-cli"></summary><div id="cli" style="margin-top:10px"></div></details>
+
+  <h2>Aprovações e envios da programação</h2>
+  <table id="aprov"><thead><tr><th>Cliente</th><th>Pendente de aprovação</th><th>Programado e sem envio visto no grupo</th></tr></thead><tbody></tbody></table>
+  <p class="sub" style="font-size:13px;margin-top:6px">Não vira tarefa nova: é cobrança da rotina de aprovação. O que aparece na terceira coluna pode ter ido pelo documento de conteúdos; vale confirmar.</p>
+
+  <h2>Lido e descartado (não é demanda)</h2>
+  <details>
+    <summary>O que ficou de fora e por quê</summary>
+    <ul>
+{{DESCARTADOS}}
+    </ul>
+  </details>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// tipo: demanda | alteracao | processo | cliente (aguardando cliente) | avaliar
+// clickup: perdido | ruido | andamento | concluido | conferir
+// ITENS: um objeto por solicitação acionável. Campos:
+// id (CLI-n), cli, tipo (demanda|alteracao|processo|cliente|avaliar), grau (critico|medio|leve, só nos furos),
+// area, urg (risco até segunda), retorno (tivemos resposta no grupo), clickup (perdido|ruido|andamento|concluido),
+// t (título), d (detalhe), ev (evidência do grupo, com <i>trecho</i>), cun (o que achou no ClickUp, com <a href> da tarefa),
+// fr (atualização dita pelo Francisco), pre (decisão pré-marcada: criar|corrigir|resolvido|descartar)
+const ITENS = [
+{{ITENS}}
+];
+
+// APROV: [cliente, pendente de aprovação, programado e sem envio visto no grupo]
+const APROV = [
+{{APROV}}
+];
+
+const KEY="auditoria-grupos-{{FIM_ISO}}";
+let dec={}; try{dec=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(dec))}catch(e){}}
+
+const grupo=i=>["perdido","ruido"].includes(i.clickup)?"furo":i.tipo==="cliente"?"cli":"ok";
+const CU={perdido:["✗ perdido","c-red"],ruido:["⚠ ruído","c-amber"],andamento:["↻ em andamento","c-blue"],concluido:["✓ concluído","c-green"]};
+const BTN={perdido:[["criar","Criar tarefa"],["resolvido","Já resolvido"],["descartar","Descartar"]],
+           ruido:[["corrigir","Corrigir a tarefa existente"],["resolvido","Já está certo"],["descartar","Descartar"]]};
+let filtro="todos";
+const GR={critico:["Crítico","c-red"],medio:["Médio","c-amber"],leve:["Leve",""]};
+const decOf=i=>dec[i.id]||(i.pre?{v:i.pre}:{});
+function passa(i){
+  if(filtro==="medio"||filtro==="leve")return i.grau===filtro;
+  if(filtro==="perdido")return i.clickup==="perdido";
+  if(filtro==="ruido")return i.clickup==="ruido";
+  if(filtro==="pendente")return !decOf(i).v;
+  return true;
+}
+const linha=i=>`<tr><td class="id">${i.id}</td><td><b>${i.cli}</b> · ${i.t}<div class="det" style="margin:4px 0 0">${i.cun||""}${i.fr?" <i>"+i.fr+"</i>":""}</div></td><td><span class="chip ${CU[i.clickup][1]}">${CU[i.clickup][0]}</span></td></tr>`;
+function render(){
+  const furos=ITENS.filter(i=>grupo(i)==="furo");
+  const grupos={};
+  const ORD={critico:0,medio:1,leve:2};furos.sort((a,b)=>ORD[a.grau]-ORD[b.grau]).filter(passa).forEach(i=>{const g=GR[i.grau][0];(grupos[g]=grupos[g]||[]).push(i)});
+  const L=document.getElementById("list"); L.innerHTML="";
+  Object.keys(grupos).forEach(c=>{
+    const s=document.createElement("section");s.className="client";
+    s.innerHTML=`<header><h3>${c}</h3><small>${grupos[c].length} furo(s)</small></header>`;
+    grupos[c].forEach(i=>{
+      const d=decOf(i),cu=CU[i.clickup];
+      const el=document.createElement("div");el.className="item";
+      el.innerHTML=`<div class="id">${i.id}</div><div>
+        <div class="ttl"><span style="color:var(--bronze)">${i.cli}</span> · ${i.t}</div><div class="det">${i.d}</div>
+        <div class="ev">${i.ev}</div>${i.cun?`<div class="ev" style="border-color:var(--bronze)"><b>ClickUp:</b> ${i.cun}</div>`:""}${i.fr?`<div class="ev" style="border-color:var(--green)"><b>Atualização:</b> ${i.fr}</div>`:""}
+        <div class="chips"><span class="chip ${GR[i.grau][1]}" style="font-weight:600">${GR[i.grau][0]}</span><span class="chip ${cu[1]}">${cu[0]}</span><span class="chip">${i.area}</span>${i.urg?'<span class="chip c-red">risco até segunda</span>':''}</div>
+        <div class="dec" data-id="${i.id}">
+          ${BTN[i.clickup].map(([v,l])=>`<button data-v="${v}" class="${d.v===v?'sel':''}">${l}</button>`).join("")}
+          <input placeholder="${i.clickup==='ruido'?'o que corrigir: status, prazo, responsável':'lista, responsável, prazo'}" value="${(d.n||'').replace(/"/g,'&quot;')}">
+        </div></div>`;
+      s.appendChild(el);
+    });
+    L.appendChild(s);
+  });
+  if(!L.innerHTML)L.innerHTML='<p class="sub">Nada neste filtro.</p>';
+  const ok=ITENS.filter(i=>grupo(i)==="ok"),cli=ITENS.filter(i=>grupo(i)==="cli");
+  document.getElementById("ok").innerHTML=`<table><thead><tr><th>Cliente</th><th>Solicitação</th><th>Onde está</th></tr></thead>${ok.map(i=>`<tr><td><b>${i.cli}</b></td><td>${i.t}</td><td>${(i.cun||i.fr||"").replace(/\. .*/,"")} <span class="chip ${CU[i.clickup][1]}">${CU[i.clickup][0]}</span></td></tr>`).join("")}</table>`;
+  document.getElementById("cli").innerHTML=`<table>${cli.map(linha).join("")}</table>`;
+  document.getElementById("sum-ok").textContent=`${ok.length} solicitações com resposta no grupo e tarefa certa no ClickUp (ou já concluídas). Nada a fazer aqui.`;
+  document.getElementById("sum-cli").textContent=`${cli.length} itens aguardando o cliente (o Henri acompanha pelo ClickUp)`;
+  document.getElementById("risco").innerHTML=`<table>${ITENS.filter(i=>i.urg).map(linha).join("")}</table>`;
+  const decid=furos.filter(i=>decOf(i).v).length;
+  const nG=g=>furos.filter(i=>i.grau===g).length;
+  document.getElementById("veredito").innerHTML=`<b>Veredito da semana:</b> ${ITENS.length} solicitações e combinados nos {{N_GRUPOS}} grupos. {{FRASE_RETORNO}} ${ok.length} já estão certas no ClickUp, ${cli.length} dependem do cliente e estão sendo acompanhadas. Furos: <b>${nG("critico")} crítico</b>, ${nG("medio")} médios e ${nG("leve")} leves. {{LEITURA_DA_SEMANA}}`;
+  const k=[[nG("critico"),"furos críticos"],[nG("medio"),"furos médios"],[nG("leve"),"furos leves"],[ITENS.filter(i=>i.urg).length,"com risco até segunda"],[ok.length,"já certos no ClickUp"],[decid+"/"+furos.length,"decididos na reunião"]];
+  document.getElementById("kpis").innerHTML=k.map(x=>`<div class="kpi"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+}
+document.getElementById("list").addEventListener("click",e=>{
+  const b=e.target.closest(".dec button"); if(!b)return;
+  const id=b.parentElement.dataset.id; const it=ITENS.find(x=>x.id===id); dec[id]=decOf(it);
+  dec[id].v = dec[id].v===b.dataset.v ? "" : b.dataset.v; save(); render();
+});
+document.getElementById("list").addEventListener("input",e=>{
+  if(!e.target.matches(".dec input"))return;
+  const id=e.target.parentElement.dataset.id; const it=ITENS.find(x=>x.id===id); dec[id]=decOf(it); dec[id].n=e.target.value; save();
+});
+document.getElementById("bar").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-f]"); if(!b)return;
+  filtro=b.dataset.f; document.querySelectorAll("#bar button[data-f]").forEach(x=>x.classList.toggle("on",x===b)); render();
+});
+document.getElementById("copy").addEventListener("click",()=>{
+  const lab={criar:"CRIAR TAREFA NOVA",corrigir:"CORRIGIR TAREFA EXISTENTE",resolvido:"JÁ RESOLVIDO",descartar:"DESCARTAR"};
+  const linhas=ITENS.filter(i=>grupo(i)==="furo").map(i=>{const d=decOf(i);const tk=(i.cun||"").match(/t\/(\w+)/g);return `${i.id} | ${(GR[i.grau]||[""])[0]} | ${lab[d.v]||"SEM DECISÃO"} | ${i.cli} | ${i.t}${tk?" | tarefa: "+tk.map(x=>x.slice(2)).join(","):""}${d.n?" | obs: "+d.n:""}`});
+  const txt="Decisões da auditoria dos grupos (28/09 a 01/10/2026)\n"+linhas.join("\n");
+  const ok=()=>{const t=document.getElementById("toast");t.textContent="Decisões copiadas. Cole no chat do Claude.";t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2500)};
+  const box=document.getElementById("saida"),ta=document.getElementById("saida-txt");
+  ta.value=txt; box.style.display="block"; box.scrollIntoView({behavior:"smooth",block:"center"}); ta.focus(); ta.select();
+  let copiou=false; try{copiou=document.execCommand("copy")}catch(e){}
+  if(copiou){ok()} else if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(ok,()=>{})}
+});
+document.querySelector("#aprov tbody").innerHTML=APROV.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]||"—"}</td><td>${r[2]||"—"}</td></tr>`).join("");
+render();
+</script>
+</body>
+</html>

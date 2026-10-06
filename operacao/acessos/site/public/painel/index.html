@@ -23,8 +23,12 @@ header h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-si
 .btn-cheio:hover{background:var(--ouro);border-color:var(--ouro)}
 .btn-linha{color:var(--bronze);background:transparent;border:1px solid rgba(186,160,121,.45)}
 .btn-linha:hover{border-color:var(--bronze);color:var(--ouro)}
-.btn-perigo{color:var(--erro);background:transparent;border:1px solid rgba(224,163,166,.35)}
-.btn-perigo:hover{border-color:var(--erro)}
+.btn:disabled{opacity:.5;cursor:wait}
+.alterna{display:inline-flex;align-items:center;gap:8px;color:var(--ink-2);font-size:.85rem;cursor:pointer;user-select:none}
+.alterna input{accent-color:var(--bronze);margin:0}
+.envio.arquivado{opacity:.6}
+.chip.alerta{color:var(--erro);border-color:rgba(224,163,166,.4)}
+.chip.neutro{color:var(--ink-2);border-color:var(--linha);text-decoration:none}
 .barra{display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
 .barra input{flex:1;min-width:200px;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--linha);border-radius:2px;padding:10px 12px}
 .barra input:focus{outline:none;border-color:var(--bronze)}
@@ -74,6 +78,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 
   <div class="barra">
     <input type="search" id="busca" placeholder="Buscar por nome do cliente" autocomplete="off">
+    <label class="alterna"><input type="checkbox" id="ver-arquivados">Mostrar arquivados</label>
     <span class="conta" id="conta"></span>
   </div>
 
@@ -116,20 +121,24 @@ function itemHtml(i, eid, idx) {
 
 function render() {
   const q = document.getElementById("busca").value.trim().toLowerCase();
-  const lista = envios.filter((e) => !q || e.nome.toLowerCase().includes(q));
-  document.getElementById("conta").textContent = `${lista.length} envio${lista.length === 1 ? "" : "s"}`;
+  const verArq = document.getElementById("ver-arquivados").checked;
+  const lista = envios.filter((e) => (verArq || !e.arquivado_em) && (!q || e.nome.toLowerCase().includes(q)));
+  const arq = envios.filter((e) => e.arquivado_em).length;
+  document.getElementById("conta").textContent = `${lista.length} envio${lista.length === 1 ? "" : "s"}${arq && !verArq ? ` · ${arq} arquivado${arq === 1 ? "" : "s"}` : ""}`;
   const el = document.getElementById("lista");
   if (!envios.length) { el.innerHTML = `<div class="vazio">Nenhum envio ainda. Mande o link do formulário pro cliente.</div>`; return; }
-  if (!lista.length) { el.innerHTML = `<div class="vazio">Nenhum cliente com esse nome.</div>`; return; }
+  if (!lista.length) { el.innerHTML = `<div class="vazio">Nada com esse filtro.</div>`; return; }
   el.innerHTML = lista.map((e) => {
-    const chips = e.itens.filter((i) => !i.geral).map((i) => `<span class="chip ${i.nao_tem ? "nao" : ""}">${esc(i.plataforma)}</span>`).join("");
+    const chips = e.itens.filter((i) => !i.geral).map((i) => `<span class="chip ${i.nao_tem ? "nao" : ""}">${esc(i.plataforma)}</span>`).join("")
+      + (e.suspeito ? `<span class="chip alerta" title="O campo escondido contra robô veio preenchido. Confira se é um cliente de verdade.">Conferir: possível robô</span>` : "")
+      + (e.arquivado_em ? `<span class="chip neutro">Arquivado em ${quando(e.arquivado_em)}</span>` : "");
     const corpo = e.erro ? `<p class="erro">${esc(e.erro)}</p>` : e.itens.map((i, idx) => itemHtml(i, e.id, idx)).join("");
-    return `<details class="envio" data-id="${e.id}">
+    return `<details class="envio ${e.arquivado_em ? "arquivado" : ""}" data-id="${e.id}">
       <summary><span class="quem">${esc(e.nome)}</span><span class="quando">${quando(e.criado_em)}</span><span class="chips">${chips}</span></summary>
       <div class="corpo">${corpo}
         <div class="rodape-envio">
           <a class="btn btn-linha" href="/api/painel/exportar?id=${e.id}">Exportar este</a>
-          <button class="btn btn-perigo" data-apagar="${e.id}">Apagar</button>
+          <button class="btn btn-linha" data-arquivar="${e.id}">${e.arquivado_em ? "Desarquivar" : "Arquivar"}</button>
         </div>
       </div>
     </details>`;
@@ -171,18 +180,21 @@ document.addEventListener("click", async (ev) => {
     b.textContent = mostrar ? "Ocultar" : "Mostrar";
     return;
   }
-  if (b.dataset.apagar) {
-    const id = Number(b.dataset.apagar);
+  if (b.dataset.arquivar) {
+    const id = Number(b.dataset.arquivar);
     const e = envios.find((x) => x.id === id);
-    if (!confirm(`Apagar de vez o envio de ${e.nome} (${quando(e.criado_em)})?\n\nNão tem como desfazer. Se ainda não passou os acessos pro lugar definitivo, exporte antes.`)) return;
+    const arquivar = !e.arquivado_em;
+    if (arquivar && !confirm(`Arquivar o envio de ${e.nome} (${quando(e.criado_em)})?\n\nEle sai da lista, mas continua guardado: dá pra ver em "Mostrar arquivados" e desarquivar quando quiser.`)) return;
     b.disabled = true;
-    const r = await fetch("/api/painel/apagar", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ id }) });
-    if (r.ok) { envios = envios.filter((x) => x.id !== id); render(); toast("Envio apagado"); }
-    else { b.disabled = false; toast("Não consegui apagar; tente de novo"); }
+    const r = await fetch("/api/painel/arquivar", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ id, arquivar }) });
+    const d = await r.json().catch(() => ({}));
+    if (r.ok) { e.arquivado_em = d.arquivado_em; render(); toast(arquivar ? "Arquivado" : "Desarquivado"); }
+    else { b.disabled = false; toast("Não consegui; tente de novo"); }
   }
 });
 
 document.getElementById("busca").addEventListener("input", render);
+document.getElementById("ver-arquivados").addEventListener("change", render);
 carregar();
 </script>
 </body>

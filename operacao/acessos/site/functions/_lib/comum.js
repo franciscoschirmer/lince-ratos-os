@@ -63,5 +63,5 @@ export async function abrir(env, linha) {
   } catch {
     erro = "Não foi possível abrir este envio (chave diferente da que gravou).";
   }
-  return { id: linha.id, criado_em: linha.criado_em, nome: linha.nome, itens, erro };
+  return { id: linha.id, criado_em: linha.criado_em, nome: linha.nome, suspeito: !!linha.suspeito, arquivado_em: linha.arquivado_em || null, itens, erro };
 }

@@ -1,4 +1,4 @@
-// Segunda trava: toda rota desta pasta (lista, exportar, arquivar) confere a sessão sozinha,
+// Segunda trava: toda rota desta pasta (lista, exportar, backup, arquivar, copiar) confere a sessão sozinha,
 // mesmo que a porta de entrada deixe passar por algum caminho escrito de outro jeito.
 
 import { sessaoValida } from "../../_lib/sessao.js";
