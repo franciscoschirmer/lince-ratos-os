@@ -57,14 +57,17 @@ async function montar(env, nome) {
   const hojeStr = new Date().toLocaleDateString('en-CA', { timeZone: tz });
   const hoje0 = new Date(hojeStr + 'T00:00:00-03:00').getTime();
   const pecas = tasks.map(t => {
-    const fc = (t.custom_fields || []).find(f => f.id === F_CLIENTE), fp = (t.custom_fields || []).find(f => f.id === F_POST);
+    const fc = (t.custom_fields || []).find(f => f.id === F_CLIENTE);
+    const fp = (t.custom_fields || []).find(f => f.id === F_POST && f.value) || (t.custom_fields || []).find(f => /^data d[ea] postagem$/.test(norm(f.name || '').trim()) && f.value);
     let cliente = fc && fc.value != null ? (fc.type_config.options.find(o => o.orderindex == fc.value) || {}).name : null;
     if (!cliente) { const m = t.name.match(/^\s*\[([^\]]+)\]/); cliente = m ? m[1] : 'Sem cliente'; }
     if (!fc) avisos.push(`sem campo cliente: ${t.name.trim().slice(0, 60)}`);
     const extra = LISTAS.includes(t.list.id) ? '' : ` (lista: ${t.list.name})`;
-    const ms = fp && fp.value ? fp.value : t.due_date, tipo = fp && fp.value ? 'posta' : (t.due_date ? 'prazo' : null);
+    const ms = fp ? Number(fp.value) : null;
+    const dias = ms ? Math.round((new Date(new Date(ms).toLocaleDateString('en-CA', { timeZone: tz }) + 'T00:00:00-03:00').getTime() - hoje0) / 864e5) : null;
+    const quando = dias == null ? '' : dias < 0 ? ` · venceu há ${-dias} ${-dias === 1 ? 'dia' : 'dias'}` : dias === 0 ? ' · hoje' : dias === 1 ? ' · amanhã' : ` · em ${dias} dias`;
     const urg = ms && Number(ms) < hoje0 + 3 * 864e5;
-    return { cliente, nome: t.name.trim(), url: t.url, ms: ms ? Number(ms) : null, rot: (tipo ? `${tipo} ${dia(ms)}` : 'sem data') + extra, urg };
+    return { cliente, nome: t.name.replace(/\s+/g, ' ').trim(), url: t.url, ms, rot: (ms ? `posta ${dia(ms)}${quando}` : '⚠️ sem data de postagem') + extra, urg };
   });
 
   const ord = (a, b) => (a.ms ?? 9e15) - (b.ms ?? 9e15);

@@ -34,7 +34,7 @@ todo mundo menos o criador).
 |---|---|
 | Listas de conteúdo | Calendário Editorial `901325858184` · Lince & Co. (Cliente 00) `901325858587` · Peças de Design `901325858360` |
 | Campo cliente | 👔 Clientes `35443fa6-1e27-466f-9a6b-a2d132237079` (dropdown; o valor vem como orderindex, traduzir pelas opções do próprio campo) |
-| Campo data | Data de Postagem `d4806a40-74c1-45fb-9c36-972aca497d00` (sem valor: usar o `due_date` da tarefa) |
+| Campo data | Data de Postagem `d4806a40-74c1-45fb-9c36-972aca497d00` ou outro campo chamado "Data da Postagem" (há em outra lista). **Nunca o vencimento (`due_date`)** |
 
 O conector posta como Admin Lince & Co, por isso a mensagem notifica quem está no assignee.
 
@@ -69,7 +69,7 @@ node .claude/skills/fila-aprovacao/fila.mjs revisao postar
 2. Ignorar as tarefas-mãe "[Cliente] Calendário Editorial" (são contêineres). **Só no modo aprovação:** descartar toda tarefa cujo nome, sem acento e em minúsculo, contém `capa` (pega "CAPA - ...", "[CAPA DE REELS] ...").
 3. Para cada peça restante, `clickup_get_task` com `include: ["custom_fields"]`. Se a leitura falhar (sem acesso, erro), a peça **continua na lista** com o que a busca trouxe (nome, link, `due_date`) e vai também pro bloco de avisos:
    - cliente = nome da opção do 👔 Clientes cujo `orderindex` é o valor. Sem valor: tirar do nome da tarefa-mãe (o que está entre colchetes) ou de um `[Nome]` no início do nome da peça. Sem nada disso: "Sem cliente".
-   - data = Data de Postagem, ou `due_date`. Converter de ms para data em America/Sao_Paulo.
+   - data = só a Data de Postagem (campo personalizado). Vazio = "⚠️ sem data de postagem"; nunca usar o vencimento. Converter de ms para data em America/Sao_Paulo.
 4. Montar a mensagem (formato abaixo). Ordem: primeiro o bloco de urgentes, depois os clientes em ordem alfabética e, dentro de cada cliente, as peças por data (sem data por último).
    - **Urgente** = data de postagem já passou ou cai em até 2 dias. A peça aparece só no bloco de urgentes, não se repete no cliente.
 5. Postar com `clickup_send_chat_message` no canal do modo, `content_format: "text/md"`, `assignee` do modo. Uma mensagem só, nunca uma por peça.
@@ -92,7 +92,7 @@ node .claude/skills/fila-aprovacao/fila.mjs revisao postar
 ```
 
 - Nome da peça como está no ClickUp, sem cortar. Link sempre no nome.
-- "posta DD/MM" quando a data vem da Data de Postagem; "prazo DD/MM" quando vem do `due_date`; "sem data" quando não há nenhuma.
+- "posta DD/MM · em N dias" (ou "hoje", "amanhã", "venceu há N dias"), sempre pela Data de Postagem, pra mostrar o intervalo até a postagem; "⚠️ sem data de postagem" quando o campo está vazio. Urgente = postagem vencida ou em até 2 dias. Nome da peça sempre numa linha só.
 - Fila vazia: só o título com "nada pra enviar/revisar agora." (posta mesmo assim, é o sinal de que a rotina rodou)
 - **Avisos no fim, sempre que houver:** qualquer coisa que impediu ver tudo vai num bloco `**⚠️ Não consegui ler**` com o que falhou e o erro em poucas palavras (peça sem acesso, página da busca que deu erro, campo de cliente que não veio). Nunca esconder falha: fila "vazia" porque a busca deu erro **não** é "nada pra enviar". Nesse caso o título diz `· ⚠️ busca falhou, a lista pode estar incompleta`.
 - Conector inteiro fora ou no limite: não dá pra postar. A rotina para, manda notificação pro celular com o motivo, e o plano B é rodar à mão aqui.
