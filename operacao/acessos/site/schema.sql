@@ -22,3 +22,11 @@ END;
 -- banco que já existia antes de 2026-10-06 (rodar uma vez só; o CREATE TABLE acima já traz as colunas):
 --   ALTER TABLE envios ADD COLUMN suspeito INTEGER NOT NULL DEFAULT 0;
 --   ALTER TABLE envios ADD COLUMN arquivado_em TEXT;
+
+-- contagem contra abuso (login do painel e envios por IP); linhas com mais de 24 horas são apagadas sozinhas
+CREATE TABLE IF NOT EXISTS tentativas (
+  tipo TEXT NOT NULL,
+  chave TEXT NOT NULL,
+  em INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS tentativas_busca ON tentativas (tipo, chave, em);

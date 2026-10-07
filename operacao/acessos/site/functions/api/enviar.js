@@ -1,12 +1,17 @@
 // Recebe o formulário do cliente (público, sem login) e grava no banco criptografado.
-// Sem trava de quantidade de envios. O campo-isca contra robô não descarta: grava e marca como suspeito
+// Limite só contra robô (20 por IP por hora, 50 por dia; cliente manda 1): ver _lib/limite.js. O campo-isca contra robô não descarta: grava e marca como suspeito
 // (o preenchimento automático do navegador pode cair nele, e envio de cliente nunca se perde).
 
 import { PLATAFORMAS, MAX_OUTROS, json, texto, cifrar } from "../_lib/comum.js";
+import { envioBloqueado, registrar } from "../_lib/limite.js";
 
 const MAX_BYTES = 40_000;
 
 export async function onRequestPost({ request, env }) {
+  const ip = request.headers.get("cf-connecting-ip") || "desconhecido";
+  if (await envioBloqueado(env, ip)) return json({ erro: "Recebemos muitos envios deste endereço em pouco tempo. Tente de novo mais tarde." }, 429);
+  await registrar(env, "envio", ip);
+
   if (Number(request.headers.get("content-length") || 0) > MAX_BYTES) return json({ erro: "Envio grande demais." }, 413);
   const bruto = await request.text();
   if (bruto.length > MAX_BYTES) return json({ erro: "Envio grande demais." }, 413);

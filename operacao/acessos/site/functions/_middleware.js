@@ -2,15 +2,14 @@
 // - O formulário (/) e o envio (/api/enviar) são abertos: o cliente não faz login.
 // - O formulário não tem trava de quantidade de envios; a trava abaixo é só do login do painel.
 // - O painel (/painel) e a API dele (/api/painel/*) exigem a sessão (cookie assinado), com um login só pra equipe.
-// - Bloqueia 15 min depois de 5 senhas erradas seguidas do mesmo IP.
+// - Login do painel: limite de erros por IP e no total, contado no banco (ver functions/_lib/limite.js).
 // - Põe cabeçalhos de proteção em todas as respostas.
 // Segredos: ver functions/_lib/comum.js.
 
 import { COOKIE, assinar, iguais, sessaoValida, caminho } from "./_lib/sessao.js";
+import { loginBloqueado, registrar, errosRestantes, zerarLogin } from "./_lib/limite.js";
 
 const DIAS = 30;
-const MAX_ERROS = 5;
-const BLOQUEIO_SEG = 15 * 60;
 
 const CSP = [
   "default-src 'self'",
@@ -37,17 +36,6 @@ function protegido(resp, { cache = false } = {}) {
   if (!cache) r.headers.set("Cache-Control", "no-store");
   return r;
 }
-
-// contador de erros por IP no cache da borda da Cloudflare (gratuito, sem banco)
-const chaveErros = (ip) => new Request(`https://bloqueio.acessos.interno/${encodeURIComponent(ip)}`);
-async function lerErros(ip) {
-  const r = await caches.default.match(chaveErros(ip));
-  return r ? Number(await r.text()) || 0 : 0;
-}
-async function gravarErros(ip, n) {
-  await caches.default.put(chaveErros(ip), new Response(String(n), { headers: { "Cache-Control": `max-age=${BLOQUEIO_SEG}` } }));
-}
-async function zerarErros(ip) { await caches.default.delete(chaveErros(ip)); }
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
@@ -108,20 +96,18 @@ export async function onRequest({ request, env, next }) {
 
   if (p === "/painel/login" && request.method === "POST") {
     const ip = request.headers.get("cf-connecting-ip") || "desconhecido";
-    if ((await lerErros(ip)) >= MAX_ERROS) {
-      return telaLogin("Muitas tentativas erradas. Aguarde 15 minutos e tente de novo.", 429);
-    }
+    const bloqueio = await loginBloqueado(env, ip);
+    if (bloqueio) return telaLogin(bloqueio, 429);
     const form = await request.formData();
     const okUsuario = iguais(form.get("usuario") || "", env.PAINEL_USUARIO);
     const okSenha = iguais(form.get("senha") || "", env.PAINEL_SENHA);
     if (!(okUsuario && okSenha)) {
-      const n = (await lerErros(ip)) + 1;
-      await gravarErros(ip, n);
+      await registrar(env, "login", ip);
       await new Promise((r) => setTimeout(r, 800));
-      const resta = MAX_ERROS - n;
+      const resta = await errosRestantes(env, ip);
       return telaLogin(resta > 0 ? `Usuário ou senha incorretos. Restam ${resta} tentativa${resta > 1 ? "s" : ""}.` : "Muitas tentativas erradas. Aguarde 15 minutos e tente de novo.", 401);
     }
-    await zerarErros(ip);
+    await zerarLogin(env, ip);
     const exp = String(Date.now() + DIAS * 864e5);
     const valor = `${exp}.${await assinar(env.PAINEL_SEGREDO, exp)}`;
     return protegido(new Response(null, {

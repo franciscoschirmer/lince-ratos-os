@@ -38,7 +38,12 @@ if (cmd === 'relatorios') {
   for (const c of j(`/task/${task}/comment`).comments.slice(0, 3))
     for (const x of c.comment.filter(x => x.type === 'attachment')) {
       const dest = `${pasta}/${c.id}-${x.attachment.title}`;
-      execFileSync('curl', ['-sS', '-L', '-o', dest, '-H', `Authorization: ${TOKEN}`, x.attachment.url]);
+      try {
+        execFileSync('curl', ['-sS', '-L', '-o', dest, '-H', `Authorization: ${TOKEN}`, x.attachment.url], { stdio: ['pipe', 'pipe', 'pipe'] });
+      } catch (e) {
+        console.log(`ERRO: não baixou ${x.attachment.title}: ${String(e.stderr || e.message).split(TOKEN).join('***').trim().slice(0, 200)}`);
+        process.exit(1);
+      }
       console.log(`baixado: ${dest} (comentário de ${new Date(Number(c.date)).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })}: "${c.comment_text.replace(/\s+/g, ' ').slice(0, 60)}")`);
     }
 } else if (cmd === 'linhas') {

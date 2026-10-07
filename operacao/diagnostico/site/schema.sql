@@ -21,3 +21,11 @@ BEFORE DELETE ON diagnosticos
 BEGIN
   SELECT RAISE(ABORT, 'diagnóstico não se apaga: use arquivar');
 END;
+
+-- contagem contra abuso (login do painel e envios por IP); linhas com mais de 24 horas são apagadas sozinhas
+CREATE TABLE IF NOT EXISTS tentativas (
+  tipo TEXT NOT NULL,
+  chave TEXT NOT NULL,
+  em INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS tentativas_busca ON tentativas (tipo, chave, em);

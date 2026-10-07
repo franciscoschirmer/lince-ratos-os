@@ -1,17 +1,23 @@
 // Recebe o diagnóstico do cliente (público, sem login) e grava no banco.
 // Regras pra nunca perder resposta:
-// - sem trava de quantidade de envios;
+// - limite só contra robô (20 por IP por hora, 50 por dia; cliente manda 1 ou 2): ver _lib/limite.js;
 // - o campo-isca não descarta: grava e marca como suspeito;
 // - o protocolo vem do navegador, então reenviar o mesmo diagnóstico nunca duplica;
 // - só responde "ok" depois de ler a linha de volta do banco;
 // - a cópia no ClickUp sai sempre; se o banco falhar, a cópia sai mesmo assim, avisando.
 
 import { json, codigo, montarRespostas, abrir, copiarClickUp, copiarEAnotar } from "../_lib/comum.js";
+import { envioBloqueado, registrar } from "../_lib/limite.js";
 
-const MAX_BYTES = 1_000_000;
+const MAX_BYTES = 1_000_000; // folga pro pior caso real (todas as respostas longas no limite, com acento)
 const PROTOCOLO = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export async function onRequestPost({ request, env, waitUntil }) {
+  const ip = request.headers.get("cf-connecting-ip") || "desconhecido";
+  if (await envioBloqueado(env, ip)) return json({ erro: "Recebemos muitos envios deste endereço em pouco tempo. Tente de novo mais tarde." }, 429);
+  await registrar(env, "envio", ip);
+
+  if (Number(request.headers.get("content-length") || 0) > MAX_BYTES) return json({ erro: "Envio grande demais." }, 413);
   const bruto = await request.text();
   if (bruto.length > MAX_BYTES) return json({ erro: "Envio grande demais." }, 413);
 
