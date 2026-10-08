@@ -37,7 +37,7 @@ naquele status. Cada `since` novo é uma passagem. A foto diária guarda cada `s
 | disponível para aprovação | `aprovado_sm` |
 | alteração interna | `alteracao_interna` |
 | enviado para aprovação | `enviado_cliente` |
-| alteração do cliente | `alteracao_cliente` |
+| alteração cliente (nome real no ClickUp; "alteração do cliente" também vale) | `alteracao_cliente` |
 | agendamento de postagem | `aprovado_cliente` |
 | alteração necessária (antigo, em desuso) | `alteracao_cliente` se a peça tem `enviado para aprovação` com `since` anterior ao da alteração; senão `alteracao_interna` |
 
@@ -52,10 +52,10 @@ Design = carrossel, card, capa, estatico, design. Vídeo = reels, corte, roteiro
 ## Quem produziu (ordem de decisão; guardar em `atribuicao` qual regra valeu)
 Olhar só Pâmela `284651027` e Mateus `118126212` nos watchers/responsáveis; qualquer outro watcher (Victoria, Henri,
 Admin, id `-1`, desconhecidos) é ignorado.
+0. **Comentário do Francisco com "repassado", "VH" ou "Victor"** (e sem citar Mateus ou Pâmela) em peça que não é design → `Victor` (`repassado`). Vale acima de quem acompanha a tarefa (decisão do Francisco, 2026-10-08).
 1. Só a Pâmela presente (sem Mateus) e a peça não é vídeo → `Pamela` (`watcher`)
 2. Só o Mateus presente, ou Mateus autor de comentário, e a peça não é design → `Mateus` (`watcher` / `comentario`)
 3. Os dois presentes: decide o tipo (design → Pamela, vídeo → Mateus, caixinha/outro → `outro`) (`tipo`)
-4. Nenhum dos dois, comentário do Francisco com "repassado" (palavra exata) ou "VH" → `Victor` (`repassado`)
 5. Nenhum dos dois, peça de vídeo que **não é roteiro**, cujo nome **não** tem "enviado/enviada", "bruto" ou
    "avaliar" (vídeo bruto mandado pelo cliente), e chegou em `revisão de social media` → `Victor` (`sem-mateus`).
    Com esses termos e sem "repassado" → `outro` (`video-cliente`). Decisão do Francisco, 2026-09-30.
@@ -66,25 +66,18 @@ Roteiro sem "repassado" não vira Victor: pode ser só texto. Dúvida vira `outr
 
 ## Modo foto
 
-1. Buscar peças atualizadas nos últimos 3 dias nas três listas: `clickup_filter_tasks` com `list_ids`,
-   `include_closed: true`, `subtasks: true`, `order_by: updated`, paginando até `date_updated` sair da janela.
-   Ignorar tarefas-mãe "[Cliente] Calendário Editorial" (são contêineres).
-2. `clickup_get_bulk_tasks_time_in_status` de 100 em 100.
-3. Para peça que ainda não está em `produtividade.pecas` (ou está com produtor `outro`): `clickup_get_task` com
-   `include: ["watchers","custom_fields"]` e, se for vídeo, `clickup_get_task_comments`, e aplicar a atribuição.
-4. Gravar com `execute_sql` (um lote por chamada):
-   ```sql
-   insert into produtividade.pecas (task_id,nome,lista,cliente,tipo,produtor,atribuicao,status_atual,url,atualizado_em)
-   values (...) on conflict (task_id) do update set nome=excluded.nome, status_atual=excluded.status_atual,
-     cliente=coalesce(excluded.cliente, produtividade.pecas.cliente),
-     produtor=case when produtividade.pecas.produtor in ('Pamela','Mateus','Victor') then produtividade.pecas.produtor else excluded.produtor end,
-     atribuicao=case when produtividade.pecas.produtor in ('Pamela','Mateus','Victor') then produtividade.pecas.atribuicao else excluded.atribuicao end,
-     atualizado_em=now();
-   insert into produtividade.eventos (task_id,evento,ocorrido_em,produtor,origem)
-   values (...) on conflict do nothing;
-   ```
-   `ocorrido_em` = `to_timestamp(since/1000.0)`. Escapar aspas simples nos nomes.
-5. Não comenta nada no ClickUp. Só registra.
+Tudo do ClickUp vem pelo coletor `pc.mjs` (API direta com o token `CLICKUP_API_TOKEN`), **nunca pelo conector**: o
+conector tem limite de 1.000 chamadas/dia para o workspace inteiro e já chega esgotado às 23h (decisão 2026-10-08).
+O coletor aplica as regras de tipo, atribuição e status → evento desta skill; não reimplementar à mão.
+
+1. `node .claude/skills/produtividade-conteudo/pc.mjs check`. Se falhar (token ausente, sem rede), parar e avisar.
+2. `node .claude/skills/produtividade-conteudo/pc.mjs coletar <data de 3 dias atrás, AAAA-MM-DD> > /tmp/coleta.json`
+   (segunda-feira: 4 dias, para cobrir o fim de semana).
+3. `node .claude/skills/produtividade-conteudo/pc.mjs sql < /tmp/coleta.json > /tmp/lote.sql`.
+4. Rodar cada bloco do `lote.sql` (separados pela linha `-- LOTE`) num `execute_sql` do Supabase. O upsert reaplica
+   a atribuição atual (a regra decide, não o valor antigo); eventos repetidos são ignorados pela chave única.
+5. Não comenta nada no ClickUp. Só registra. Resposta final: peças lidas, eventos novos por produtor, status sem mapa
+   (o `status_vistos` do JSON) se aparecer algum de alteração/aprovação que não está na tabela acima.
 
 ## Modo semana (quinta 18h)
 
@@ -96,7 +89,7 @@ produtor (Pamela, Mateus, Victor), a partir de `produtividade.eventos`:
 - **aprovação de primeira (cliente)**: das peças com `enviado_cliente`, % com `aprovado_cliente` sem `alteracao_cliente` no meio
 - **por cliente**: entregas e alterações internas por cliente
 
-Comentar em `86ahaqq7k` com `clickup_create_comment`:
+Comentar em `86ahaqq7k` pela API direta, com o texto no stdin: `node .claude/skills/captura-reunioes/cu.mjs comment 86ahaqq7k < texto.md` (a menção `[@Nome](#user_mention#ID)` vira menção de verdade). O conector só se a API falhar:
 ```
 [@Francisco Schirmer](#user_mention#158419961) 📊 Produção da semana DD/MM a DD/MM
 Pâmela · N entregas (X/dia) · aprovação de primeira Marina Y% · cliente Z% · N alterações internas
