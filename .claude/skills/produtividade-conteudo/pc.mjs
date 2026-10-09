@@ -55,7 +55,7 @@ const VIDEO = new Set(['reels', 'corte', 'roteiro']);
 
 // "repassado" do Francisco marca o Victor (decisão do Francisco, 2026-10-08), salvo se o mesmo comentário fala do Mateus ou da Pâmela
 const repassadoVictor = comentarios => comentarios.some(c => c.user === P.Francisco &&
-  (/\brepassad[oa]\b/.test(norm(c.texto)) || /\bvh\b/.test(norm(c.texto)) || /\bvictor\b/.test(norm(c.texto))) &&
+  (/\brepass?ad[oa]\b/.test(norm(c.texto)) || /\bvh\b/.test(norm(c.texto)) || /\bvi[ck]tor\b/.test(norm(c.texto))) && // aceita "repasado" (erro de digitação comum)
   !/\b(mateus|pamela)\b/.test(norm(c.texto)));
 
 function atribuir(t, tipo, comentarios, chegouRevisao) {
