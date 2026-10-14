@@ -6,10 +6,19 @@ import { abrir } from "../../_lib/comum.js";
 
 const COLUNAS = ["Data", "Cliente", "Plataforma", "Situação", "ID da conta", "Endereço", "Login", "Senha", "Observação"];
 
-// valor que começa com = + - @ vira fórmula no Excel; o apóstrofo neutraliza
-function celula(v) {
+// Excel lê "=1+1" e "@perfil" como fórmula e corta zero à esquerda de "0123". Esses valores saem
+// como ="valor": o Excel mostra o texto exato, sem apóstrofo, e não executa nada.
+// ID da conta, login e senha saem sempre assim (são as colunas que se copiam pra outro lugar).
+// O Excel só aceita esse formato até 255 caracteres e sem quebra de linha; fora disso, apóstrofo na frente.
+const TEXTO_FIXO = new Set([4, 6, 7]);
+
+function celula(v, col) {
   let s = String(v ?? "");
-  if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+  const perigoso = /^[=+\-@\t\r]/.test(s);
+  if (s && (TEXTO_FIXO.has(col) || perigoso || /^[\d\s.,\/()-]+$/.test(s))) {
+    if (s.length <= 255 && !/[\r\n]/.test(s)) s = `="${s.replace(/"/g, '""')}"`;
+    else if (perigoso) s = "'" + s;
+  }
   return /[";\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
@@ -32,8 +41,8 @@ export async function onRequestGet({ request, env }) {
     }
   }
 
-  const csv = "﻿" + linhas.map((r) => r.map(celula).join(";")).join("\r\n");
-  const slug = id && results[0] ? results[0].nome.normalize("NFD").replace(/[^\w]+/g, "-").replace(/^-|-$/g, "").toLowerCase() : "todos";
+  const csv = "﻿" + linhas.map((r, i) => r.map((v, c) => celula(v, i ? c : -1)).join(";")).join("\r\n");
+  const slug = id && results[0] ? results[0].nome.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^\w]+/g, "-").replace(/^-|-$/g, "").toLowerCase() : "todos";
   const dia = new Date().toISOString().slice(0, 10);
   return new Response(csv, {
     headers: {

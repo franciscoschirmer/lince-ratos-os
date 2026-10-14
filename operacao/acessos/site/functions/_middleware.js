@@ -1,6 +1,6 @@
 // Porta de entrada do site de acessos.
 // - O formulário (/) e o envio (/api/enviar) são abertos: o cliente não faz login.
-// - O formulário não tem trava de quantidade de envios; a trava abaixo é só do login do painel.
+// - O envio do formulário tem só o limite contra robô (ver functions/_lib/limite.js); o login do painel tem o limite de erros abaixo.
 // - O painel (/painel) e a API dele (/api/painel/*) exigem a sessão (cookie assinado), com um login só pra equipe.
 // - Login do painel: limite de erros por IP e no total, contado no banco (ver functions/_lib/limite.js).
 // - Põe cabeçalhos de proteção em todas as respostas.
