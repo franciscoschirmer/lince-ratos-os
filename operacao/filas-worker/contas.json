@@ -1,0 +1,17 @@
+{
+  "_": "Cliente do ClickUp (campo 👔 Clientes) -> contas. instagram: @ (ou lista: cada item com 'se' = trecho do nome da peça que escolhe a conta; o item sem 'se' é o padrão). gmn: location do Business Profile (preenche quando a API liberar). Sem token aqui: o token vem de contas-meta.json na hora de subir pro KV.",
+  "Barbearia Cavalheiros": { "instagram": "barbeariacavalheiros_matriz" },
+  "Aragao Law": { "instagram": "aragaolaw" },
+  "Cristiano Cruz": { "instagram": "drcristianocruz" },
+  "Fazenda do Rosa": { "instagram": "fazendadorosa" },
+  "Gabi Castello": { "instagram": "dragabicastello.medica" },
+  "Karinna Martoreli": { "instagram": "drakarinnamsamorim" },
+  "Luis Henrique Nunes": { "instagram": "drluishenriquenunes" },
+  "Maysa Penteado": { "instagram": "dramaysapg" },
+  "Pamela Dal Canton": { "instagram": "drapamdalcanton" },
+  "Hospital Piltcher": { "instagram": [ { "se": "cart[aã]o", "conta": "cartaosaudepiltcher" }, { "conta": "hospitalpiltcher" } ] },
+  "Gabriel Parede": { "instagram": "gabrielparedearquitetura" },
+  "Urocenter": { "instagram": "urocenter_passofundo" },
+  "RACLINIC": { "instagram": "raclinic__" },
+  "Lince & Co.": { "instagram": "francisco.schirmer", "_obs": "TESTE: trocar pelo @ da Lince quando a Página existir" }
+}

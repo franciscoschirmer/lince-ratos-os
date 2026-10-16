@@ -1,0 +1,16 @@
+{
+  "cliente": "Dra. Gabriela Castello",
+  "fonte_origem": "print do guia visual mandado pelo Francisco em 2026-10-14",
+  "cores": {
+    "claro": "#F2EFEC",
+    "amarelo": "#FFC857",
+    "vermelho": "#B3001B",
+    "vinho": "#5A0B16"
+  },
+  "fonte_titulo": "Playfair Display",
+  "fonte_titulo_obs": "medida nos vídeos editados pela equipe (2026-10-14): legenda em Montserrat, destaque em Playfair Display Italic, título em Playfair Display Black. O guia de marca cita Baskerville Display PT, mas os vídeos usam Playfair. As fontes estão instaladas neste PC e em .claude/skills/edicao-completa/fontes/",
+  "fonte_apoio": "Montserrat",
+  "design_system_video": "design-system-video.md",
+  "legenda": {"fundo": "claro", "texto": "vinho", "destaque": "vermelho"},
+  "cartao_final": {"titulo": "Dra. Gabriela Castello", "chamada": "Tem uma dúvida? Manda na caixinha dos stories"}
+}

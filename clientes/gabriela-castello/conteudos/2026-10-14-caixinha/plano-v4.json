@@ -1,0 +1,29 @@
+{
+  "estilo": "caixinha-casa",
+  "fonte": "bruto-limpo.mp4",
+  "transcricao": "transcricao.json",
+  "id": "../../marca/id-video.json",
+  "saida": "final-v4.mp4",
+  "velocidade": 1.04,
+  "trechos": [
+    {"ini": 0.00,  "fim": 3.75,  "obs": "pergunta lida"},
+    {"ini": 7.275, "fim": 11.72, "obs": "corta 'Gente, essa resposta é difícil de dar, né? Porque'"},
+    {"ini": 11.94, "fim": 25.88, "obs": "pausa aparada"},
+    {"ini": 25.88, "fim": 34.08, "obs": "contínuo"},
+    {"ini": 34.23, "fim": 40.69, "obs": "pausa aparada"},
+    {"ini": 40.89, "fim": 47.10, "obs": "pausa aparada"},
+    {"ini": 47.10, "fim": 53.30, "obs": "contínuo"},
+    {"ini": 55.20, "fim": 60.10, "obs": "corta 'Eu uso muito aqui, aqui'"}
+  ],
+  "zoom_centro": [0.5, 0.42],
+  "ritmo": {"intervalos": [3.4, 2.2, 4.2, 2.8], "tipos": ["push", 1.0, 1.09, 1.0, "push", 1.0, 1.12, 1.0], "push_por_seg": 0.045, "push_max": 1.15},
+  "flash_no_primeiro_corte": true,
+  "legenda": {"y": 1230, "max_palavras": 3, "max_caracteres": 14, "fonte_sans": "Montserrat", "fonte_italica": "Playfair Display", "tam_sans": 52, "tam_italica": 86},
+  "frases_chave": ["cansaço", "desidratação", "falta de proteína", "privação de sono", "falta de músculo", "falta de exercício", "ferro", "hormônio baixo", "grande fã", "NAD", "coenzima Q10", "mitocôndria"],
+  "manter_maiuscula": ["NAD", "Q10"],
+  "remover_da_legenda": ["né"],
+  "sons": "../../../../.claude/skills/edicao-completa/sons",
+  "som_corte": {"nome": "clique", "ganho_db": -18, "a_cada": 4},
+  "musica": {"arquivo": "../../../../.claude/skills/edicao-completa/sons/trilha.wav", "volume_db": -27},
+  "fontes": "../../../../.claude/skills/edicao-completa/fontes"
+}

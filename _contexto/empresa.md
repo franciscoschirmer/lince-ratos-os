@@ -32,7 +32,7 @@
 - Toda sexta sai o "🚀 AVANÇOS DA SEMANA" em cada grupo de cliente
 
 ## Clientes citados na memória (ago–set/2026, confirmar a carteira atual)
-Dr. Walter Pinto (urologista, SP, entrou em ago/2026) · Dr. Luis Henrique Nunes (Potência Médica; concentra a maior parte das oportunidades) · Clínica Urocenter · Dra. Maysa Penteado (renovação pendente) · Hospital Piltcher (Pelotas) · Gabriel Parede (arquiteto) · Aragão Law · Barbearia Cavalheiros. Saíram: Rafa Alias e Karina Miglioli
+Dr. Walter Pinto (urologista, SP, entrou em ago/2026) · Dr. Luis Henrique Nunes (Potência Médica; concentra a maior parte das oportunidades) · Clínica Urocenter · Dra. Maysa Penteado (renovação pendente) · Hospital Piltcher (Pelotas) · Gabriel Parede (arquiteto) · Aragão Law · Barbearia Cavalheiros · Dra. Simone do Valle Austgulen (menopausa e emagrecimento; mudança pra Portugal planejada, reunião de 09/09/2026). Saíram: Rafa Alias e Karina Miglioli
 RA Clinic saiu da carteira (2026-10-05). Lince & Co. e o perfil Victoria Clasen são marketing interno, fora da análise de cliente
 
 ## Contexto adicional

@@ -1,0 +1,75 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Base,Montserrat,52,&H00FFFFFF,&H00FFFFFF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 30,0:00:00.00,0:00:00.58,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}Doutora,
+Dialogue: 30,0:00:00.58,0:00:00.94,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}tem alguma
+Dialogue: 30,0:00:00.94,0:00:01.92,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}medicação que
+Dialogue: 30,0:00:01.92,0:00:02.44,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}ajude a ter
+Dialogue: 30,0:00:02.44,0:00:02.66,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}mais
+Dialogue: 30,0:00:02.66,0:00:03.46,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}disposição?
+Dialogue: 30,0:00:03.46,0:00:04.14,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}E tem tanta
+Dialogue: 30,0:00:04.14,0:00:05.06,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}coisa que pode
+Dialogue: 30,0:00:05.06,0:00:05.80,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}causar
+Dialogue: 30,0:00:05.80,0:00:07.50,Base,,0,0,0,,{\an5\pos(540,1230)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}cansaço
+Dialogue: 30,0:00:07.50,0:00:08.22,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}físico,
+Dialogue: 30,0:00:08.22,0:00:08.76,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}mental,
+Dialogue: 30,0:00:08.76,0:00:09.50,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}indisposição,
+Dialogue: 30,0:00:09.50,0:00:10.66,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}tanta coisa
+Dialogue: 30,0:00:10.92,0:00:11.50,Base,,0,0,0,,{\an5\pos(540,915)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}Desidratação
+Dialogue: 30,0:00:11.50,0:00:12.38,Base,,0,0,0,,{\an5\pos(540,915)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}falta de proteína
+Dialogue: 30,0:00:12.38,0:00:13.06,Base,,0,0,0,,{\an5\pos(540,915)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}na dieta,
+Dialogue: 30,0:00:13.06,0:00:13.96,Base,,0,0,0,,{\an5\pos(540,915)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}privação de sono
+Dialogue: 30,0:00:13.96,0:00:14.90,Base,,0,0,0,,{\an5\pos(540,915)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}falta de músculo
+Dialogue: 30,0:00:14.90,0:00:16.20,Base,,0,0,0,,{\an5\pos(540,915)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}falta de\Nexercício
+Dialogue: 30,0:00:16.20,0:00:17.62,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}níveis baixos
+Dialogue: 30,0:00:17.62,0:00:17.74,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}de
+Dialogue: 30,0:00:17.74,0:00:18.38,Base,,0,0,0,,{\an5\pos(540,915)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}ferro
+Dialogue: 30,0:00:18.38,0:00:19.32,Base,,0,0,0,,{\an5\pos(540,915)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}de vitaminas,
+Dialogue: 30,0:00:19.32,0:00:19.46,Base,,0,0,0,,{\an5\pos(540,915)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}de
+Dialogue: 30,0:00:19.46,0:00:20.50,Base,,0,0,0,,{\an5\pos(540,915)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}micronutrientes,
+Dialogue: 30,0:00:20.50,0:00:21.30,Base,,0,0,0,,{\an5\pos(540,915)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}tanta coisa
+Dialogue: 30,0:00:21.30,0:00:22.04,Base,,0,0,0,,{\an5\pos(540,915)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}Hormônio baixo
+Dialogue: 30,0:00:22.04,0:00:22.78,Base,,0,0,0,,{\an5\pos(540,915)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}também,
+Dialogue: 30,0:00:22.78,0:00:23.82,Base,,0,0,0,,{\an5\pos(540,915)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}dependendo da
+Dialogue: 30,0:00:23.82,0:00:24.40,Base,,0,0,0,,{\an5\pos(540,915)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}faixa etária
+Dialogue: 30,0:00:24.40,0:00:25.22,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}do paciente
+Dialogue: 30,0:00:25.22,0:00:26.36,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}Tanta coisa
+Dialogue: 30,0:00:26.36,0:00:27.12,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}pode causar
+Dialogue: 30,0:00:27.12,0:00:28.24,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}que dependendo
+Dialogue: 30,0:00:28.24,0:00:28.76,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}do que tiver
+Dialogue: 30,0:00:28.76,0:00:30.76,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}baixo ou que
+Dialogue: 30,0:00:30.76,0:00:32.02,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}tiver alterado
+Dialogue: 30,0:00:32.02,0:00:33.00,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}você precisa
+Dialogue: 30,0:00:33.00,0:00:33.98,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}melhorar para
+Dialogue: 30,0:00:33.98,0:00:34.34,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}melhorar a
+Dialogue: 30,0:00:34.34,0:00:35.48,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}disposição mas
+Dialogue: 30,0:00:35.48,0:00:36.72,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}fato é que
+Dialogue: 30,0:00:36.72,0:00:37.76,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}eu sou uma
+Dialogue: 30,0:00:37.76,0:00:39.10,Base,,0,0,0,,{\an5\pos(540,1230)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}grande fã
+Dialogue: 30,0:00:39.10,0:00:40.18,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}de dois
+Dialogue: 30,0:00:40.18,0:00:41.02,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}peptídeos que
+Dialogue: 30,0:00:41.02,0:00:41.78,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}ajudam demais
+Dialogue: 30,0:00:41.78,0:00:42.48,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}na disposição
+Dialogue: 30,0:00:42.48,0:00:42.84,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}e eu uso
+Dialogue: 30,0:00:42.84,0:00:43.64,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}muito aqui no
+Dialogue: 30,0:00:43.64,0:00:44.20,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}consultório
+Dialogue: 30,0:00:44.20,0:00:45.36,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}que são o
+Dialogue: 30,0:00:45.36,0:00:45.78,Base,,0,0,0,,{\an5\pos(540,1230)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}NAD
+Dialogue: 30,0:00:45.78,0:00:46.52,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}e a
+Dialogue: 30,0:00:46.52,0:00:47.22,Base,,0,0,0,,{\an5\pos(540,1230)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}coenzima Q10
+Dialogue: 30,0:00:47.22,0:00:47.88,Base,,0,0,0,,{\an5\pos(540,1230)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}com excelente
+Dialogue: 30,0:00:47.88,0:00:48.66,Base,,0,0,0,,{\an5\pos(540,915)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}resposta que
+Dialogue: 30,0:00:48.66,0:00:50.24,Base,,0,0,0,,{\an5\pos(540,915)\fnMontserrat\fs64\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}ajudam na
+Dialogue: 30,0:00:50.24,0:00:51.96,Base,,0,0,0,,{\an5\pos(540,915)\fnPlayfair Display\i1\fs104\1c&HFFFFFF&\bord0\shad3\4c&H000000&\4a&H60&\blur0\blur14\fscx96\fscy96\t(0,130,\blur0\fscx100\fscy100)\fad(40,60)}mitocôndria
+Dialogue: 60,0:00:03.44,0:00:03.61,Base,,0,0,0,,{\an7\pos(0,0)\p1\1c&HFFFFFF&\alpha&HFF&\t(0,167,\alpha&H00&)}m 0 0 l 1080 0 1080 1920 0 1920
+Dialogue: 60,0:00:03.61,0:00:03.81,Base,,0,0,0,,{\an7\pos(0,0)\p1\1c&HFFFFFF&\alpha&H40&\t(0,200,\alpha&HFF&)}m 0 0 l 1080 0 1080 1920 0 1920

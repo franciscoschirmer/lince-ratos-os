@@ -159,20 +159,22 @@ export const SECOES = [
 export const PERGUNTAS = SECOES.flatMap((s) => s.perguntas.map((q) => ({ ...q, secao: s.n, secaoTitulo: s.titulo })));
 
 // transforma o valor cru de uma pergunta (como o navegador manda) no texto que fica guardado
+const txt = (x) => (x == null ? "" : String(x)).trim();
+
 export function textoResposta(q, v) {
   if (v == null) return "";
   if (q.tipo === "escolha") {
     if (typeof v === "string") return v.trim();
-    const op = String(v.opcao ?? "").trim();
-    const outro = String(v.outro ?? "").trim();
+    const op = txt(v.opcao);
+    const outro = txt(v.outro);
     if (op === "Outro") return outro ? `Outro: ${outro}` : "Outro";
     return op;
   }
   if (q.tipo === "origem") {
     if (typeof v === "string") return v.trim();
-    const partes = ORIGENS.filter((o) => String(v[o.id] ?? "").trim()).map((o) => `${o.nome}: ${String(v[o.id]).trim()}%`);
-    const oq = String(v.outros_qual ?? "").trim();
-    const op = String(v.outros ?? "").trim();
+    const partes = ORIGENS.filter((o) => txt(v[o.id])).map((o) => `${o.nome}: ${String(v[o.id]).trim()}%`);
+    const oq = txt(v.outros_qual);
+    const op = txt(v.outros);
     if (oq || op) partes.push(`Outros${oq ? ` (${oq})` : ""}: ${op || "?"}%`);
     return partes.join(" · ");
   }

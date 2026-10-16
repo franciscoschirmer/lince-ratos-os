@@ -1,9 +1,12 @@
 // Filas de aprovação e revisão no chat do ClickUp (mesma lógica de .claude/skills/fila-aprovacao/fila.mjs).
 // Roda na Cloudflare por horário (wrangler.toml), seg-sex 10h e 16h30 de Brasília.
-// Também roda o Farol de Clientes todo dia às 7h (src/farol.js).
+// Também roda o Farol de Clientes (src/farol.js): todo dia às 7h e, em até 1 minuto, sempre que uma peça do Calendário
+// entra ou sai de "postado/subido" (webhook do ClickUp → marca no KV → cron de 1 min dispara a recontagem numa invocação própria).
+// E a postagem automática a cada 1 min (src/postar.js).
 // Segredos: CLICKUP_API_TOKEN (token do Francisco) e PREVIEW_CHAVE (só pra ver a prévia sem postar).
 
 import { farol } from './farol.js';
+import { cronPostar, webhookPostar, servirMidia, publicarUma } from './postar.js';
 
 const WS = '90132863446';
 const LISTAS = ['901325858184', '901325858587', '901325858360'];
@@ -104,8 +107,40 @@ async function rodar(env, nome) {
   }
 }
 
+// ---------- Farol em tempo quase real ----------
+const STATUS_POSTADO = 'postado/subido';
+// roda o Farol numa invocação própria (no plano grátis cada invocação tem 50 subrequisições, e o Farol pode usar até 45)
+async function dispararFarol(env) {
+  if (!env.WORKER_URL || !env.PREVIEW_CHAVE || !env.SELF) return farol(env, api);
+  const r = await env.SELF.fetch(`${env.WORKER_URL.replace(/\/$/, '')}/?farol=1`, { headers: { 'x-chave': env.PREVIEW_CHAVE } });
+  if (!r.ok) throw new Error(`farol: HTTP ${r.status}`);
+  return r.json();
+}
+// uma recontagem por vez: o lock dura 60 s; o que mudar enquanto ela roda fica marcado como pendente e o cron de 1 min repesca
+async function recontarFarol(env) {
+  await env.POSTAR.put('farol:lock', '1', { expirationTtl: 60 });
+  await env.POSTAR.delete('farol:pendente');
+  const avisos = await dispararFarol(env);
+  if (avisos && avisos.length) console.error(`farol (status): ${avisos.join(' · ')}`);
+}
+// chamado pelo webhook do ClickUp a cada mudança de status no Calendário Editorial
+async function pedirFarol(env, antes, depois) {
+  if (antes !== STATUS_POSTADO && depois !== STATUS_POSTADO) return;
+  await env.POSTAR.put('farol:pendente', '1', { expirationTtl: 3600 });
+  if (await env.POSTAR.get('farol:lock')) return;
+  await recontarFarol(env);
+}
+
 export default {
   async scheduled(evento, env, ctx) {
+    if (evento.cron === '* * * * *') {
+      ctx.waitUntil(cronPostar(env, api, texto => postar(env, 'aprovacao', texto)).catch(e => console.error(`postagem: ${e.message}`)));
+      // Farol pendente (status mudou e a recontagem não saiu na hora, ou mudou durante a anterior)
+      ctx.waitUntil((async () => {
+        if (await env.POSTAR.get('farol:pendente') && !(await env.POSTAR.get('farol:lock'))) await recontarFarol(env);
+      })().catch(e => console.error(`farol pendente: ${e.message}`)));
+      return;
+    }
     if (evento.cron === '0 10 * * *') {
       ctx.waitUntil((async () => {
         const avisos = await farol(env, api);
@@ -119,7 +154,13 @@ export default {
     ctx.waitUntil((async () => { await rodar(env, 'aprovacao'); await rodar(env, 'revisao'); })());
   },
   // prévia sem postar, só com a chave: GET /?modo=revisao  (cabeçalho x-chave)
-  async fetch(req, env) {
+  async fetch(req, env, ctx) {
+    // webhook do ClickUp (status -> "agendamento de postagem"): assinado com CLICKUP_WEBHOOK_SECRET
+    if (req.method === 'POST' && new URL(req.url).pathname === '/webhook/clickup') return webhookPostar(req, env, api, ctx, (antes, depois) => pedirFarol(env, antes, depois));
+    // arte da peça servida do Drive (URL secreta por peça, morre com o post)
+    if (req.method === 'GET' && new URL(req.url).pathname.startsWith('/midia/')) return servirMidia(req, env);
+    // publicação de uma peça (disparada pelo próprio cron, uma invocação por peça)
+    if (req.method === 'POST' && new URL(req.url).pathname === '/publicar') return publicarUma(req, env, api, texto => postar(env, 'aprovacao', texto), ctx);
     if (!env.PREVIEW_CHAVE || req.headers.get('x-chave') !== env.PREVIEW_CHAVE) return new Response('não encontrado', { status: 404 });
     const q = new URL(req.url).searchParams;
     const modo = q.get('modo') === 'revisao' ? 'revisao' : 'aprovacao';
@@ -129,6 +170,7 @@ export default {
         { method: 'POST', body: JSON.stringify({ type: 'message', content: '🧪 TESTE Cloudflare\n\n' + await montar(env, modo), content_format: 'text/md' }) });
       return new Response('postado no canal de teste: ' + ((r.data || r).id || 'sem id'));
     }
+    if (q.get('postar') === '1') { await cronPostar(env, api, null); return new Response('postagem: rodou'); }
     if (q.get('farol') === '1') return new Response(JSON.stringify(await farol(env, api)), { headers: { 'content-type': 'application/json' } });
     return new Response(await montar(env, modo), { headers: { 'content-type': 'text/plain; charset=utf-8' } });
   },

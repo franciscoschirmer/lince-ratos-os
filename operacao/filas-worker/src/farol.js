@@ -1,5 +1,6 @@
 // Farol de Clientes no ClickUp (lista 🚦 Farol de Clientes, uma tarefa por cliente por mês).
-// Roda todo dia às 7h de Brasília (cron "0 10 * * *" no wrangler.toml):
+// Roda todo dia às 7h de Brasília (cron "0 10 * * *" no wrangler.toml) e, desde 12/10/2026, em até 1 minuto depois de uma peça
+// do Calendário entrar ou sair de "postado/subido" (webhook do ClickUp, ver index.js). Mudança só na Data de Postagem espera as 7h.
 // 1. Virada de mês: cria a linha do mês novo para cada cliente ativo (copia o escopo da última linha)
 //    e passa as linhas antigas de "Mês atual" para "Histórico".
 // 2. Conta no Calendário Editorial os conteúdos "postado/subido" com Data de Postagem no mês

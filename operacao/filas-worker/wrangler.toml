@@ -4,9 +4,25 @@ compatibility_date = "2026-09-01"
 account_id = "dd1f6c7762790b4ae65f086e86ca8832"
 workers_dev = true
 
-# filas: seg-sex 10h00 e 16h30 de Brasília (UTC-3, sem horário de verão) · farol: todo dia 7h00
+# filas: seg-sex 10h00 e 16h30 de Brasília (UTC-3, sem horário de verão) · farol: todo dia 7h00 · postagem: a cada 1 min
 [triggers]
-crons = ["0 13 * * 1-5", "30 19 * * 1-5", "0 10 * * *"]
+crons = ["0 13 * * 1-5", "30 19 * * 1-5", "0 10 * * *", "* * * * *"]
 
 [observability]
 enabled = true
+
+# postagem automática (src/postar.js): memória das peças, tokens e URLs das artes (KV)
+[[kv_namespaces]]
+binding = "POSTAR"
+id = "a95ad6126cfb457082a87cbe9d405473"
+
+# ligação do Worker com ele mesmo: o cron dispara uma invocação por peça (POST /publicar) por aqui
+[[services]]
+binding = "SELF"
+service = "filas-lince"
+
+[vars]
+# endereço público deste Worker: é daqui que o Instagram e o GMN puxam a arte (GET /midia/...)
+WORKER_URL = "https://filas-lince.franciscoschirmer.workers.dev"
+# enquanto está em teste, só estes clientes passam no cadastro (separar por ";"). Apaga a linha pra liberar todos
+POSTAR_APENAS = "Lince & Co."

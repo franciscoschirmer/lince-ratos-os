@@ -4,10 +4,17 @@
 
 import { abrir } from "../../_lib/comum.js";
 
-// valor que começa com = + - @ vira fórmula no Excel; o apóstrofo neutraliza
+// Excel lê "=1+1", "-texto" e "@perfil" como fórmula e corta zero à esquerda de "0123". Valor curto de uma
+// linha nesses casos sai como ="valor": o Excel mostra o texto exato, sem apóstrofo, e não executa nada.
+// Texto longo ou com quebra de linha que começa com = + - @ leva apóstrofo (único jeito seguro no Excel);
+// o texto exato, sem nada na frente, está no painel (Copiar tudo), no backup e na cópia do ClickUp.
 function celula(v) {
-  let s = String(v ?? "");
-  if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+  let s = String(v == null ? "" : v);
+  const perigoso = /^[=+\-@\t\r]/.test(s);
+  if (s && (perigoso || /^[\d\s.,\/()-]+$/.test(s))) {
+    if (s.length <= 255 && !/[\r\n]/.test(s)) s = `="${s.replace(/"/g, '""')}"`;
+    else if (perigoso) s = "'" + s;
+  }
   return /[";\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
@@ -32,7 +39,7 @@ export async function onRequestGet({ request, env }) {
   }
 
   const csv = "﻿" + linhas.map((r) => r.map(celula).join(";")).join("\r\n");
-  const slug = id && ds[0] ? ds[0].nome.normalize("NFD").replace(/[^\w]+/g, "-").replace(/^-|-$/g, "").toLowerCase() : "todos";
+  const slug = id && ds[0] ? ds[0].nome.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^\w]+/g, "-").replace(/^-|-$/g, "").toLowerCase() : "todos";
   const dia = new Date().toISOString().slice(0, 10);
   return new Response(csv, {
     headers: { "content-type": "text/csv; charset=utf-8", "content-disposition": `attachment; filename="diagnostico-${slug}-${dia}.csv"` },

@@ -1,0 +1,28 @@
+{
+  "fonte": "bruto.mov",
+  "transcricao": "transcricao.json",
+  "id": "../../marca/id-video.json",
+  "saida": "final.mp4",
+  "trechos": [
+    {"ini": 0.00,  "fim": 3.75,  "zoom": 1.00, "obs": "pergunta lida"},
+    {"ini": 7.275, "fim": 11.72, "zoom": 1.06, "obs": "corta 'Gente, essa resposta é difícil de dar, né? Porque'"},
+    {"ini": 11.94, "fim": 25.88, "zoom": 1.00, "obs": "pausa de 0,34s aparada"},
+    {"ini": 25.88, "fim": 34.08, "zoom": 1.06, "obs": "punch-in sem corte, em 'Hormônio'"},
+    {"ini": 34.23, "fim": 40.69, "zoom": 1.00, "obs": "pausa aparada"},
+    {"ini": 40.89, "fim": 47.10, "zoom": 1.06, "obs": "pausa aparada"},
+    {"ini": 47.10, "fim": 53.30, "zoom": 1.00, "obs": "punch-out sem corte"},
+    {"ini": 55.20, "fim": 60.10, "zoom": 1.09, "obs": "corta 'Eu uso muito aqui, aqui'; segura até o fim do bruto pra etiqueta da mitocôndria ficar ~2s"}
+  ],
+  "zoom_centro": [0.5, 0.773],
+  "cobrir": {
+    "pergunta": {"caixa": [110, 14, 500, 222], "texto": "Doutora, tem alguma medicação que ajude a ter mais disposição?", "rotulo": "PERGUNTA DA CAIXINHA"},
+    "legenda": {"caixa": [6, 945, 708, 110]}
+  },
+  "destaques": ["medicação", "disposição", "cansaço", "físico", "mental", "desidratação", "proteína", "sono", "músculo", "exercício", "ferro", "vitaminas", "micronutrientes", "hormônio", "peptídeos", "nad", "q10", "mitocôndria"],
+  "chamadas": [
+    {"palavra": "mitocôndria", "texto": "a casinha de energia da célula", "ate_o_fim": true}
+  ],
+  "cartao_final_seg": 2.2,
+  "manter_maiuscula": ["NAD", "Q10"],
+  "obs_coord": "caixas em pixels do bruto (720x1280): [x, y, largura, altura]; o script escala pra 1080x1920"
+}

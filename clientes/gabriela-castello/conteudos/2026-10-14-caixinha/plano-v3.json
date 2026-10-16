@@ -1,0 +1,233 @@
+{
+  "fonte": "bruto.mov",
+  "transcricao": "transcricao.json",
+  "id": "../../marca/id-video.json",
+  "saida": "final-v3.mp4",
+  "velocidade": 1.08,
+  "trechos": [
+    {
+      "ini": 0.0,
+      "fim": 3.75,
+      "zoom": 1.0,
+      "obs": "pergunta lida (gancho)"
+    },
+    {
+      "ini": 7.275,
+      "fim": 11.72,
+      "zoom": 1.06,
+      "obs": "corta 'Gente, essa resposta é difícil de dar, né? Porque'"
+    },
+    {
+      "ini": 11.94,
+      "fim": 25.88,
+      "zoom": 1.0,
+      "obs": "pausa aparada"
+    },
+    {
+      "ini": 25.88,
+      "fim": 34.08,
+      "zoom": 1.06,
+      "obs": "punch-in sem corte"
+    },
+    {
+      "ini": 34.23,
+      "fim": 40.69,
+      "zoom": 1.0,
+      "obs": "pausa aparada"
+    },
+    {
+      "ini": 40.89,
+      "fim": 47.1,
+      "zoom": 1.05,
+      "obs": "pausa aparada"
+    },
+    {
+      "ini": 47.1,
+      "fim": 53.3,
+      "zoom": 1.0,
+      "obs": "punch-out sem corte"
+    },
+    {
+      "ini": 55.2,
+      "fim": 60.1,
+      "zoom": 1.08,
+      "obs": "corta 'Eu uso muito aqui, aqui'"
+    }
+  ],
+  "enquadramento": {
+    "cheia": {
+      "recorte": [
+        90,
+        0,
+        540,
+        960
+      ],
+      "centro_zoom": [
+        0.62,
+        0.16
+      ]
+    },
+    "dividida": {
+      "recorte": [
+        0,
+        240,
+        720,
+        693
+      ],
+      "altura_video": 1040
+    }
+  },
+  "cobrir": {
+    "pergunta": {
+      "caixa_bruto": [
+        196,
+        112,
+        328,
+        108
+      ],
+      "folga": 34,
+      "texto": "Doutora, tem alguma medicação que ajude a ter mais disposição?",
+      "rotulo": "PERGUNTA DA CAIXINHA"
+    }
+  },
+  "legenda": {
+    "y_cheia": 1420,
+    "y_grande": 1180,
+    "y_dividida": 812,
+    "max_caracteres": 14,
+    "max_palavras": 3,
+    "grandes": [
+      "cansaço",
+      "fã",
+      "mitocôndria"
+    ]
+  },
+  "insercoes": [
+    {
+      "tipo": "lista",
+      "de": "desidratação",
+      "ate": "também",
+      "titulo": "Por que falta disposição?",
+      "itens": [
+        [
+          "Desidratação",
+          "desidratação"
+        ],
+        [
+          "Pouca proteína",
+          "proteína"
+        ],
+        [
+          "Sono ruim",
+          "sono"
+        ],
+        [
+          "Pouco músculo",
+          "músculo"
+        ],
+        [
+          "Sedentarismo",
+          "exercício"
+        ],
+        [
+          "Ferro baixo",
+          "ferro"
+        ],
+        [
+          "Vitaminas",
+          "vitaminas"
+        ],
+        [
+          "Micronutrientes",
+          "micronutrientes"
+        ],
+        [
+          "Hormônios",
+          "hormônio"
+        ]
+      ]
+    },
+    {
+      "tipo": "cartoes",
+      "de": "nad",
+      "ate": "resposta",
+      "titulo": "Dois aliados da disposição",
+      "itens": [
+        [
+          "NAD",
+          "nad",
+          "nicotinamida adenina dinucleotídeo"
+        ],
+        [
+          "Q10",
+          "coenzima",
+          "coenzima Q10"
+        ]
+      ]
+    },
+    {
+      "tipo": "mitocondria",
+      "de": "ajudam",
+      "depois_de": "resposta",
+      "ate": "fim",
+      "titulo": "Mitocôndria",
+      "texto": "a casinha de energia da célula",
+      "gatilho": "mitocôndria"
+    }
+  ],
+  "enfase": [
+    {
+      "palavra": "fã",
+      "zoom": 1.22,
+      "dur": 0.8,
+      "som": "boom"
+    }
+  ],
+  "musica": {
+    "arquivo": "../../../../.claude/skills/edicao-completa/sons/trilha.wav",
+    "volume_db": -20
+  },
+  "sons": "../../../../.claude/skills/edicao-completa/sons",
+  "cartao_final_seg": 2.8,
+  "manter_maiuscula": [
+    "NAD",
+    "Q10"
+  ],
+  "remover_da_legenda": [
+    "né"
+  ],
+  "destaques": [
+    "medicação",
+    "disposição",
+    "cansaço",
+    "hormônio",
+    "peptídeos",
+    "nad",
+    "q10",
+    "mitocôndria",
+    "fã"
+  ],
+  "ritmo": {
+    "intervalo": [
+      2.4,
+      3.3
+    ],
+    "zooms": [
+      1.0,
+      1.12,
+      1.05,
+      1.18
+    ],
+    "som": "clique",
+    "ganho_db": -15
+  },
+  "transicao": {
+    "tipo": "flash",
+    "som": "flash"
+  },
+  "visual": {
+    "grao": 5,
+    "vinheta": 0.62,
+    "saturacao": 1.08
+  }
+}

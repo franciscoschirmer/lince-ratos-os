@@ -1,0 +1,898 @@
+{
+ "duracao": 60.022125,
+ "palavras": [
+  {
+   "i": 0,
+   "ini": 0.0,
+   "fim": 0.62,
+   "txt": "Doutora,"
+  },
+  {
+   "i": 1,
+   "ini": 0.62,
+   "fim": 0.78,
+   "txt": "tem"
+  },
+  {
+   "i": 2,
+   "ini": 0.78,
+   "fim": 1.02,
+   "txt": "alguma"
+  },
+  {
+   "i": 3,
+   "ini": 1.02,
+   "fim": 1.48,
+   "txt": "medicação"
+  },
+  {
+   "i": 4,
+   "ini": 1.48,
+   "fim": 2.0,
+   "txt": "que"
+  },
+  {
+   "i": 5,
+   "ini": 2.0,
+   "fim": 2.34,
+   "txt": "ajude"
+  },
+  {
+   "i": 6,
+   "ini": 2.34,
+   "fim": 2.46,
+   "txt": "a"
+  },
+  {
+   "i": 7,
+   "ini": 2.46,
+   "fim": 2.58,
+   "txt": "ter"
+  },
+  {
+   "i": 8,
+   "ini": 2.58,
+   "fim": 2.76,
+   "txt": "mais"
+  },
+  {
+   "i": 9,
+   "ini": 2.76,
+   "fim": 3.4,
+   "txt": "disposição?"
+  },
+  {
+   "i": 10,
+   "ini": 3.74,
+   "fim": 4.32,
+   "txt": "Gente,"
+  },
+  {
+   "i": 11,
+   "ini": 4.32,
+   "fim": 4.64,
+   "txt": "essa"
+  },
+  {
+   "i": 12,
+   "ini": 4.64,
+   "fim": 5.28,
+   "txt": "resposta"
+  },
+  {
+   "i": 13,
+   "ini": 5.28,
+   "fim": 5.58,
+   "txt": "é"
+  },
+  {
+   "i": 14,
+   "ini": 5.58,
+   "fim": 5.78,
+   "txt": "difícil"
+  },
+  {
+   "i": 15,
+   "ini": 5.78,
+   "fim": 6.2,
+   "txt": "de"
+  },
+  {
+   "i": 16,
+   "ini": 6.2,
+   "fim": 6.4,
+   "txt": "dar,"
+  },
+  {
+   "i": 17,
+   "ini": 6.5,
+   "fim": 6.62,
+   "txt": "né?"
+  },
+  {
+   "i": 18,
+   "ini": 6.72,
+   "fim": 7.2,
+   "txt": "Porque"
+  },
+  {
+   "i": 19,
+   "ini": 7.2,
+   "fim": 7.42,
+   "txt": "tem"
+  },
+  {
+   "i": 20,
+   "ini": 7.42,
+   "fim": 7.84,
+   "txt": "tanta"
+  },
+  {
+   "i": 21,
+   "ini": 7.84,
+   "fim": 8.28,
+   "txt": "coisa"
+  },
+  {
+   "i": 22,
+   "ini": 8.28,
+   "fim": 8.56,
+   "txt": "que"
+  },
+  {
+   "i": 23,
+   "ini": 8.56,
+   "fim": 8.78,
+   "txt": "pode"
+  },
+  {
+   "i": 24,
+   "ini": 8.78,
+   "fim": 9.56,
+   "txt": "causar"
+  },
+  {
+   "i": 25,
+   "ini": 9.56,
+   "fim": 11.36,
+   "txt": "cansaço"
+  },
+  {
+   "i": 26,
+   "ini": 11.36,
+   "fim": 12.3,
+   "txt": "físico,"
+  },
+  {
+   "i": 27,
+   "ini": 12.3,
+   "fim": 12.6,
+   "txt": "mental,"
+  },
+  {
+   "i": 28,
+   "ini": 12.84,
+   "fim": 13.6,
+   "txt": "indisposição,"
+  },
+  {
+   "i": 29,
+   "ini": 13.62,
+   "fim": 13.82,
+   "txt": "tanta"
+  },
+  {
+   "i": 30,
+   "ini": 13.82,
+   "fim": 14.28,
+   "txt": "coisa."
+  },
+  {
+   "i": 31,
+   "ini": 15.08,
+   "fim": 15.66,
+   "txt": "Desidratação,"
+  },
+  {
+   "i": 32,
+   "ini": 15.72,
+   "fim": 16.12,
+   "txt": "falta"
+  },
+  {
+   "i": 33,
+   "ini": 16.12,
+   "fim": 16.28,
+   "txt": "de"
+  },
+  {
+   "i": 34,
+   "ini": 16.28,
+   "fim": 16.64,
+   "txt": "proteína"
+  },
+  {
+   "i": 35,
+   "ini": 16.64,
+   "fim": 16.8,
+   "txt": "na"
+  },
+  {
+   "i": 36,
+   "ini": 16.8,
+   "fim": 17.04,
+   "txt": "dieta,"
+  },
+  {
+   "i": 37,
+   "ini": 17.34,
+   "fim": 17.74,
+   "txt": "privação"
+  },
+  {
+   "i": 38,
+   "ini": 17.74,
+   "fim": 17.86,
+   "txt": "de"
+  },
+  {
+   "i": 39,
+   "ini": 17.86,
+   "fim": 18.1,
+   "txt": "sono,"
+  },
+  {
+   "i": 40,
+   "ini": 18.26,
+   "fim": 18.48,
+   "txt": "falta"
+  },
+  {
+   "i": 41,
+   "ini": 18.48,
+   "fim": 18.7,
+   "txt": "de"
+  },
+  {
+   "i": 42,
+   "ini": 18.7,
+   "fim": 19.12,
+   "txt": "músculo,"
+  },
+  {
+   "i": 43,
+   "ini": 19.24,
+   "fim": 19.66,
+   "txt": "falta"
+  },
+  {
+   "i": 44,
+   "ini": 19.66,
+   "fim": 19.8,
+   "txt": "de"
+  },
+  {
+   "i": 45,
+   "ini": 19.8,
+   "fim": 20.54,
+   "txt": "exercício,"
+  },
+  {
+   "i": 46,
+   "ini": 20.58,
+   "fim": 21.1,
+   "txt": "níveis"
+  },
+  {
+   "i": 47,
+   "ini": 21.1,
+   "fim": 22.1,
+   "txt": "baixos"
+  },
+  {
+   "i": 48,
+   "ini": 22.1,
+   "fim": 22.22,
+   "txt": "de"
+  },
+  {
+   "i": 49,
+   "ini": 22.22,
+   "fim": 22.88,
+   "txt": "ferro,"
+  },
+  {
+   "i": 50,
+   "ini": 22.88,
+   "fim": 22.98,
+   "txt": "de"
+  },
+  {
+   "i": 51,
+   "ini": 22.98,
+   "fim": 23.84,
+   "txt": "vitaminas,"
+  },
+  {
+   "i": 52,
+   "ini": 23.84,
+   "fim": 24.0,
+   "txt": "de"
+  },
+  {
+   "i": 53,
+   "ini": 24.0,
+   "fim": 24.92,
+   "txt": "micronutrientes,"
+  },
+  {
+   "i": 54,
+   "ini": 25.04,
+   "fim": 25.54,
+   "txt": "tanta"
+  },
+  {
+   "i": 55,
+   "ini": 25.54,
+   "fim": 25.88,
+   "txt": "coisa."
+  },
+  {
+   "i": 56,
+   "ini": 25.88,
+   "fim": 26.42,
+   "txt": "Hormônio"
+  },
+  {
+   "i": 57,
+   "ini": 26.42,
+   "fim": 26.66,
+   "txt": "baixo"
+  },
+  {
+   "i": 58,
+   "ini": 26.66,
+   "fim": 27.08,
+   "txt": "também"
+  },
+  {
+   "i": 59,
+   "ini": 27.08,
+   "fim": 28.4,
+   "txt": "Dependendo"
+  },
+  {
+   "i": 60,
+   "ini": 28.4,
+   "fim": 28.52,
+   "txt": "da"
+  },
+  {
+   "i": 61,
+   "ini": 28.52,
+   "fim": 28.72,
+   "txt": "faixa"
+  },
+  {
+   "i": 62,
+   "ini": 28.72,
+   "fim": 29.12,
+   "txt": "etária"
+  },
+  {
+   "i": 63,
+   "ini": 29.12,
+   "fim": 29.36,
+   "txt": "do"
+  },
+  {
+   "i": 64,
+   "ini": 29.36,
+   "fim": 29.96,
+   "txt": "paciente"
+  },
+  {
+   "i": 65,
+   "ini": 29.96,
+   "fim": 30.96,
+   "txt": "Tanta"
+  },
+  {
+   "i": 66,
+   "ini": 30.96,
+   "fim": 31.16,
+   "txt": "coisa"
+  },
+  {
+   "i": 67,
+   "ini": 31.16,
+   "fim": 31.42,
+   "txt": "pode"
+  },
+  {
+   "i": 68,
+   "ini": 31.42,
+   "fim": 31.94,
+   "txt": "causar"
+  },
+  {
+   "i": 69,
+   "ini": 31.94,
+   "fim": 32.14,
+   "txt": "Que"
+  },
+  {
+   "i": 70,
+   "ini": 32.14,
+   "fim": 32.34,
+   "txt": "aí"
+  },
+  {
+   "i": 71,
+   "ini": 32.34,
+   "fim": 33.08,
+   "txt": "dependendo"
+  },
+  {
+   "i": 72,
+   "ini": 33.08,
+   "fim": 33.24,
+   "txt": "do"
+  },
+  {
+   "i": 73,
+   "ini": 33.24,
+   "fim": 33.36,
+   "txt": "que"
+  },
+  {
+   "i": 74,
+   "ini": 33.36,
+   "fim": 33.66,
+   "txt": "tiver"
+  },
+  {
+   "i": 75,
+   "ini": 33.66,
+   "fim": 34.96,
+   "txt": "Baixo"
+  },
+  {
+   "i": 76,
+   "ini": 34.96,
+   "fim": 35.48,
+   "txt": "Ou"
+  },
+  {
+   "i": 77,
+   "ini": 35.48,
+   "fim": 35.9,
+   "txt": "que"
+  },
+  {
+   "i": 78,
+   "ini": 35.9,
+   "fim": 36.24,
+   "txt": "tiver"
+  },
+  {
+   "i": 79,
+   "ini": 36.24,
+   "fim": 37.14,
+   "txt": "alterado"
+  },
+  {
+   "i": 80,
+   "ini": 37.14,
+   "fim": 37.74,
+   "txt": "Você"
+  },
+  {
+   "i": 81,
+   "ini": 37.74,
+   "fim": 38.24,
+   "txt": "precisa"
+  },
+  {
+   "i": 82,
+   "ini": 38.24,
+   "fim": 39.08,
+   "txt": "melhorar"
+  },
+  {
+   "i": 83,
+   "ini": 39.08,
+   "fim": 39.22,
+   "txt": "Para"
+  },
+  {
+   "i": 84,
+   "ini": 39.22,
+   "fim": 39.6,
+   "txt": "melhorar"
+  },
+  {
+   "i": 85,
+   "ini": 39.6,
+   "fim": 39.62,
+   "txt": "a"
+  },
+  {
+   "i": 86,
+   "ini": 39.62,
+   "fim": 40.12,
+   "txt": "disposição"
+  },
+  {
+   "i": 87,
+   "ini": 40.12,
+   "fim": 41.02,
+   "txt": "Mas"
+  },
+  {
+   "i": 88,
+   "ini": 41.02,
+   "fim": 41.52,
+   "txt": "fato"
+  },
+  {
+   "i": 89,
+   "ini": 41.52,
+   "fim": 41.88,
+   "txt": "é"
+  },
+  {
+   "i": 90,
+   "ini": 41.88,
+   "fim": 42.32,
+   "txt": "que"
+  },
+  {
+   "i": 91,
+   "ini": 42.32,
+   "fim": 42.8,
+   "txt": "eu"
+  },
+  {
+   "i": 92,
+   "ini": 42.8,
+   "fim": 43.12,
+   "txt": "sou"
+  },
+  {
+   "i": 93,
+   "ini": 43.12,
+   "fim": 43.34,
+   "txt": "Uma"
+  },
+  {
+   "i": 94,
+   "ini": 43.34,
+   "fim": 44.16,
+   "txt": "grande"
+  },
+  {
+   "i": 95,
+   "ini": 44.16,
+   "fim": 44.78,
+   "txt": "fã"
+  },
+  {
+   "i": 96,
+   "ini": 44.78,
+   "fim": 45.42,
+   "txt": "De"
+  },
+  {
+   "i": 97,
+   "ini": 45.42,
+   "fim": 45.92,
+   "txt": "dois"
+  },
+  {
+   "i": 98,
+   "ini": 45.92,
+   "fim": 46.62,
+   "txt": "peptídeos"
+  },
+  {
+   "i": 99,
+   "ini": 46.62,
+   "fim": 46.76,
+   "txt": "que"
+  },
+  {
+   "i": 100,
+   "ini": 46.76,
+   "fim": 47.1,
+   "txt": "ajudam"
+  },
+  {
+   "i": 101,
+   "ini": 47.1,
+   "fim": 47.66,
+   "txt": "Demais"
+  },
+  {
+   "i": 102,
+   "ini": 47.66,
+   "fim": 47.74,
+   "txt": "na"
+  },
+  {
+   "i": 103,
+   "ini": 47.74,
+   "fim": 48.26,
+   "txt": "disposição"
+  },
+  {
+   "i": 104,
+   "ini": 48.26,
+   "fim": 48.44,
+   "txt": "e"
+  },
+  {
+   "i": 105,
+   "ini": 48.44,
+   "fim": 48.48,
+   "txt": "eu"
+  },
+  {
+   "i": 106,
+   "ini": 48.48,
+   "fim": 48.66,
+   "txt": "uso"
+  },
+  {
+   "i": 107,
+   "ini": 48.66,
+   "fim": 49.0,
+   "txt": "muito"
+  },
+  {
+   "i": 108,
+   "ini": 49.0,
+   "fim": 49.3,
+   "txt": "Aqui"
+  },
+  {
+   "i": 109,
+   "ini": 49.3,
+   "fim": 49.5,
+   "txt": "no"
+  },
+  {
+   "i": 110,
+   "ini": 49.5,
+   "fim": 50.08,
+   "txt": "consultório"
+  },
+  {
+   "i": 111,
+   "ini": 50.08,
+   "fim": 50.6,
+   "txt": "Que"
+  },
+  {
+   "i": 112,
+   "ini": 50.6,
+   "fim": 50.88,
+   "txt": "são"
+  },
+  {
+   "i": 113,
+   "ini": 50.88,
+   "fim": 51.28,
+   "txt": "o"
+  },
+  {
+   "i": 114,
+   "ini": 51.28,
+   "fim": 51.72,
+   "txt": "NAD"
+  },
+  {
+   "i": 115,
+   "ini": 51.72,
+   "fim": 52.06,
+   "txt": "e"
+  },
+  {
+   "i": 116,
+   "ini": 52.06,
+   "fim": 52.48,
+   "txt": "a"
+  },
+  {
+   "i": 117,
+   "ini": 52.48,
+   "fim": 52.86,
+   "txt": "coenzima"
+  },
+  {
+   "i": 118,
+   "ini": 52.86,
+   "fim": 53.22,
+   "txt": "Q10"
+  },
+  {
+   "i": 119,
+   "ini": 53.22,
+   "fim": 53.82,
+   "txt": "Eu"
+  },
+  {
+   "i": 120,
+   "ini": 53.82,
+   "fim": 54.14,
+   "txt": "uso"
+  },
+  {
+   "i": 121,
+   "ini": 54.14,
+   "fim": 54.52,
+   "txt": "muito"
+  },
+  {
+   "i": 122,
+   "ini": 54.52,
+   "fim": 54.9,
+   "txt": "aqui"
+  },
+  {
+   "i": 123,
+   "ini": 54.9,
+   "fim": 55.02,
+   "txt": "aqui"
+  },
+  {
+   "i": 124,
+   "ini": 55.02,
+   "fim": 55.2,
+   "txt": "com"
+  },
+  {
+   "i": 125,
+   "ini": 55.2,
+   "fim": 55.8,
+   "txt": "excelentes"
+  },
+  {
+   "i": 126,
+   "ini": 55.8,
+   "fim": 56.44,
+   "txt": "respostas"
+  },
+  {
+   "i": 127,
+   "ini": 56.44,
+   "fim": 56.92,
+   "txt": "que"
+  },
+  {
+   "i": 128,
+   "ini": 56.92,
+   "fim": 57.8,
+   "txt": "ajudam"
+  },
+  {
+   "i": 129,
+   "ini": 57.8,
+   "fim": 58.24,
+   "txt": "na"
+  },
+  {
+   "i": 130,
+   "ini": 58.24,
+   "fim": 59.08,
+   "txt": "mitocôndria."
+  }
+ ],
+ "segmentos": [
+  {
+   "ini": 0.0,
+   "fim": 3.4,
+   "txt": "Doutora, tem alguma medicação que ajude a ter mais disposição?"
+  },
+  {
+   "ini": 3.74,
+   "fim": 6.62,
+   "txt": "Gente, essa resposta é difícil de dar, né?"
+  },
+  {
+   "ini": 6.72,
+   "fim": 14.28,
+   "txt": "Porque tem tanta coisa que pode causar cansaço físico, mental, indisposição, tanta coisa."
+  },
+  {
+   "ini": 15.08,
+   "fim": 20.54,
+   "txt": "Desidratação, falta de proteína na dieta, privação de sono, falta de músculo, falta de exercício,"
+  },
+  {
+   "ini": 20.58,
+   "fim": 25.88,
+   "txt": "níveis baixos de ferro, de vitaminas, de micronutrientes, tanta coisa."
+  },
+  {
+   "ini": 25.88,
+   "fim": 27.08,
+   "txt": "Hormônio baixo também"
+  },
+  {
+   "ini": 27.08,
+   "fim": 29.96,
+   "txt": "Dependendo da faixa etária do paciente"
+  },
+  {
+   "ini": 29.96,
+   "fim": 31.94,
+   "txt": "Tanta coisa pode causar"
+  },
+  {
+   "ini": 31.94,
+   "fim": 33.66,
+   "txt": "Que aí dependendo do que tiver"
+  },
+  {
+   "ini": 33.66,
+   "fim": 34.96,
+   "txt": "Baixo"
+  },
+  {
+   "ini": 34.96,
+   "fim": 37.14,
+   "txt": "Ou que tiver alterado"
+  },
+  {
+   "ini": 37.14,
+   "fim": 39.08,
+   "txt": "Você precisa melhorar"
+  },
+  {
+   "ini": 39.08,
+   "fim": 40.12,
+   "txt": "Para melhorar a disposição"
+  },
+  {
+   "ini": 40.12,
+   "fim": 43.12,
+   "txt": "Mas fato é que eu sou"
+  },
+  {
+   "ini": 43.12,
+   "fim": 44.78,
+   "txt": "Uma grande fã"
+  },
+  {
+   "ini": 44.78,
+   "fim": 47.1,
+   "txt": "De dois peptídeos que ajudam"
+  },
+  {
+   "ini": 47.1,
+   "fim": 49.0,
+   "txt": "Demais na disposição e eu uso muito"
+  },
+  {
+   "ini": 49.0,
+   "fim": 50.08,
+   "txt": "Aqui no consultório"
+  },
+  {
+   "ini": 50.08,
+   "fim": 53.22,
+   "txt": "Que são o NAD e a coenzima Q10"
+  },
+  {
+   "ini": 53.22,
+   "fim": 54.9,
+   "txt": "Eu uso muito aqui"
+  },
+  {
+   "ini": 54.9,
+   "fim": 59.08,
+   "txt": "aqui com excelentes respostas que ajudam na mitocôndria."
+  }
+ ]
+}

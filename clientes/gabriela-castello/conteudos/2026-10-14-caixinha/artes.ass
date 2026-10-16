@@ -1,0 +1,66 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Desenho,Segoe UI,20,&H00ECEFF2,&H00ECEFF2,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+Style: Legenda,Baskerville Old Face,64,&H00160B5A,&H00160B5A,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+Style: Rotulo,Segoe UI,28,&H001B00B3,&H001B00B3,&H00000000,&H00000000,-1,0,0,0,100,100,5,0,1,0,0,5,0,0,0,1
+Style: Pergunta,Baskerville Old Face,50,&H00160B5A,&H00160B5A,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+Style: Chamada,Segoe UI,44,&H00160B5A,&H00160B5A,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+Style: Titulo,Baskerville Old Face,92,&H001B00B3,&H001B00B3,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+Style: Apoio,Segoe UI,46,&H00160B5A,&H00160B5A,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:54.10,Desenho,,0,0,0,,{\an7\pos(0,0)\p1\1c&HECEFF2&}m 35 1418 l 1045 1418 b 1071 1418 1071 1418 1071 1444 l 1071 1557 b 1071 1583 1071 1583 1045 1583 l 35 1583 b 9 1583 9 1583 9 1557 l 9 1444 b 9 1418 9 1418 35 1418
+Dialogue: 0,0:00:00.00,0:00:54.10,Desenho,,0,0,0,,{\an7\pos(0,0)\p1\1c&HECEFF2&\fad(200,0)}m 195 21 l 885 21 b 915 21 915 21 915 51 l 915 324 b 915 354 915 354 885 354 l 195 354 b 165 354 165 354 165 324 l 165 51 b 165 21 165 21 195 21
+Dialogue: 1,0:00:00.00,0:00:54.10,Rotulo,,0,0,0,,{\an8\pos(540,51)\fad(200,0)}PERGUNTA DA CAIXINHA
+Dialogue: 1,0:00:00.00,0:00:54.10,Desenho,,0,0,0,,{\an7\pos(0,0)\p1\1c&H1B00B3&\fad(200,0)}m 502 99 l 578 99 b 580 99 580 99 580 101 l 580 101 b 580 103 580 103 578 103 l 502 103 b 500 103 500 103 500 101 l 500 101 b 500 99 500 99 502 99
+Dialogue: 1,0:00:00.00,0:00:54.10,Pergunta,,0,0,0,,{\an5\pos(540,228)\fad(200,0)}Doutora, tem alguma\Nmedicação que ajude a ter\Nmais disposição?
+Dialogue: 2,0:00:00.00,0:00:01.02,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}Doutora tem alguma
+Dialogue: 2,0:00:01.02,0:00:02.46,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}{\1c&H1B00B3&}medicação{\1c&H160B5A&} que ajude a
+Dialogue: 2,0:00:02.46,0:00:03.78,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}ter mais {\1c&H1B00B3&}disposição?{\1c&H160B5A&}
+Dialogue: 2,0:00:03.78,0:00:05.30,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}tem tanta coisa que pode
+Dialogue: 2,0:00:05.30,0:00:08.58,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}causar {\1c&H1B00B3&}cansaço{\1c&H160B5A&} {\1c&H1B00B3&}físico{\1c&H160B5A&}
+Dialogue: 2,0:00:08.58,0:00:09.90,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}{\1c&H1B00B3&}mental{\1c&H160B5A&} indisposição
+Dialogue: 2,0:00:09.90,0:00:11.38,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}tanta coisa
+Dialogue: 2,0:00:11.38,0:00:12.56,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}{\1c&H1B00B3&}Desidratação{\1c&H160B5A&} falta de
+Dialogue: 2,0:00:12.56,0:00:13.62,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}{\1c&H1B00B3&}proteína{\1c&H160B5A&} na dieta
+Dialogue: 2,0:00:13.62,0:00:14.58,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}privação de {\1c&H1B00B3&}sono{\1c&H160B5A&}
+Dialogue: 2,0:00:14.58,0:00:15.52,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}falta de {\1c&H1B00B3&}músculo{\1c&H160B5A&}
+Dialogue: 2,0:00:15.52,0:00:16.88,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}falta de {\1c&H1B00B3&}exercício{\1c&H160B5A&}
+Dialogue: 2,0:00:16.88,0:00:19.16,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}níveis baixos de {\1c&H1B00B3&}ferro{\1c&H160B5A&}
+Dialogue: 2,0:00:19.16,0:00:20.12,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}de {\1c&H1B00B3&}vitaminas{\1c&H160B5A&}
+Dialogue: 2,0:00:20.12,0:00:21.34,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}de {\1c&H1B00B3&}micronutrientes{\1c&H160B5A&}
+Dialogue: 2,0:00:21.34,0:00:22.24,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}tanta coisa
+Dialogue: 2,0:00:22.24,0:00:24.20,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}{\1c&H1B00B3&}hormônio{\1c&H160B5A&} baixo também
+Dialogue: 2,0:00:24.20,0:00:25.00,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}dependendo da faixa
+Dialogue: 2,0:00:25.00,0:00:27.12,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}etária do paciente tanta
+Dialogue: 2,0:00:27.12,0:00:28.60,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}coisa pode causar que aí
+Dialogue: 2,0:00:28.60,0:00:29.94,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}dependendo do que tiver
+Dialogue: 2,0:00:29.94,0:00:31.44,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}baixo
+Dialogue: 2,0:00:31.44,0:00:33.30,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}ou que tiver alterado
+Dialogue: 2,0:00:33.30,0:00:35.22,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}você precisa melhorar
+Dialogue: 2,0:00:35.22,0:00:35.76,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}para melhorar a
+Dialogue: 2,0:00:35.76,0:00:37.78,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}{\1c&H1B00B3&}disposição{\1c&H160B5A&} mas fato é
+Dialogue: 2,0:00:37.78,0:00:40.70,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}que eu sou uma grande fã
+Dialogue: 2,0:00:40.70,0:00:42.70,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}de dois {\1c&H1B00B3&}peptídeos{\1c&H160B5A&} que
+Dialogue: 2,0:00:42.70,0:00:43.64,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}ajudam demais na
+Dialogue: 2,0:00:43.64,0:00:44.58,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}{\1c&H1B00B3&}disposição{\1c&H160B5A&} e eu uso
+Dialogue: 2,0:00:44.58,0:00:45.42,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}muito aqui no
+Dialogue: 2,0:00:45.42,0:00:47.22,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}consultório que são o
+Dialogue: 2,0:00:47.22,0:00:49.18,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}{\1c&H1B00B3&}NAD{\1c&H160B5A&} e a coenzima {\1c&H1B00B3&}Q10{\1c&H160B5A&}
+Dialogue: 2,0:00:49.18,0:00:50.26,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}com excelente resposta
+Dialogue: 2,0:00:50.26,0:00:52.28,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}que ajudam na
+Dialogue: 2,0:00:52.28,0:00:54.10,Legenda,,0,0,0,,{\an5\pos(540,1500)\fscx94\fscy94\t(0,90,\fscx100\fscy100)}{\1c&H1B00B3&}mitocôndria{\1c&H160B5A&}
+Dialogue: 3,0:00:52.28,0:00:54.10,Desenho,,0,0,0,,{\an7\pos(0,0)\p1\1c&H57C8FF&\fad(150,0)}m 56 1328 l 1024 1328 b 1062 1328 1062 1328 1062 1366 l 1062 1366 b 1062 1404 1062 1404 1024 1404 l 56 1404 b 18 1404 18 1404 18 1366 l 18 1366 b 18 1328 18 1328 56 1328
+Dialogue: 3,0:00:52.28,0:00:54.10,Chamada,,0,0,0,,{\an5\pos(540,1366)\fad(150,0)}Mitocôndria: a casinha de energia da célula
+Dialogue: 5,0:00:54.10,0:00:56.41,Desenho,,0,0,0,,{\an7\pos(0,0)\p1\1c&HECEFF2&\fad(250,0)}m 0 0 l 1080 0 b 1080 0 1080 0 1080 0 l 1080 1920 b 1080 1920 1080 1920 1080 1920 l 0 1920 b 0 1920 0 1920 0 1920 l 0 0 b 0 0 0 0 0 0
+Dialogue: 6,0:00:54.10,0:00:56.41,Titulo,,0,0,0,,{\an5\pos(540,864)\fad(350,0)}Dra. Gabriela Castello
+Dialogue: 6,0:00:54.10,0:00:56.41,Desenho,,0,0,0,,{\an7\pos(0,0)\p1\1c&H1B00B3&\fad(350,0)}m 482 944 l 598 944 b 600 944 600 944 600 946 l 600 946 b 600 948 600 948 598 948 l 482 948 b 480 948 480 948 480 946 l 480 946 b 480 944 480 944 482 944
+Dialogue: 6,0:00:54.10,0:00:56.41,Apoio,,0,0,0,,{\an5\pos(540,1024)\fad(450,0)}Tem uma dúvida? Manda na\Ncaixinha dos stories

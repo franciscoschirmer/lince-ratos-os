@@ -1,0 +1,42 @@
+{
+  "fonte": "bruto.mov",
+  "transcricao": "transcricao.json",
+  "id": "../../marca/id-video.json",
+  "saida": "final-v2.mp4",
+  "velocidade": 1.08,
+  "trechos": [
+    {"ini": 0.00,  "fim": 3.75,  "zoom": 1.00, "obs": "pergunta lida (gancho)"},
+    {"ini": 7.275, "fim": 11.72, "zoom": 1.06, "obs": "corta 'Gente, essa resposta é difícil de dar, né? Porque'"},
+    {"ini": 11.94, "fim": 25.88, "zoom": 1.00, "obs": "pausa aparada"},
+    {"ini": 25.88, "fim": 34.08, "zoom": 1.06, "obs": "punch-in sem corte"},
+    {"ini": 34.23, "fim": 40.69, "zoom": 1.00, "obs": "pausa aparada"},
+    {"ini": 40.89, "fim": 47.10, "zoom": 1.05, "obs": "pausa aparada"},
+    {"ini": 47.10, "fim": 53.30, "zoom": 1.00, "obs": "punch-out sem corte"},
+    {"ini": 55.20, "fim": 60.10, "zoom": 1.08, "obs": "corta 'Eu uso muito aqui, aqui'"}
+  ],
+  "enquadramento": {
+    "cheia": {"recorte": [90, 0, 540, 960], "centro_zoom": [0.5, 0.167], "empurrar": 0.035},
+    "dividida": {"recorte": [0, 240, 720, 693], "altura_video": 1040}
+  },
+  "cobrir": {
+    "pergunta": {"caixa_saida": [120, 150, 840, 340], "texto": "Doutora, tem alguma medicação que ajude a ter mais disposição?", "rotulo": "PERGUNTA DA CAIXINHA"}
+  },
+  "legenda": {"y_cheia": 1480, "y_dividida": 812, "max_caracteres": 16},
+  "insercoes": [
+    {"tipo": "lista", "de": "desidratação", "ate": "também", "titulo": "Por que falta disposição?",
+     "itens": [["Desidratação", "desidratação"], ["Pouca proteína", "proteína"], ["Sono ruim", "sono"],
+               ["Pouco músculo", "músculo"], ["Sedentarismo", "exercício"], ["Ferro baixo", "ferro"],
+               ["Vitaminas", "vitaminas"], ["Micronutrientes", "micronutrientes"], ["Hormônios", "hormônio"]]},
+    {"tipo": "cartoes", "de": "nad", "ate": "resposta", "titulo": "Dois aliados da disposição",
+     "itens": [["NAD", "nad", "nicotinamida adenina dinucleotídeo"], ["Q10", "coenzima", "coenzima Q10"]]},
+    {"tipo": "mitocondria", "de": "ajudam", "depois_de": "resposta", "ate": "fim",
+     "titulo": "Mitocôndria", "texto": "a casinha de energia da célula", "gatilho": "mitocôndria"}
+  ],
+  "enfase": [{"palavra": "fã", "zoom": 1.12, "som": "impacto"}],
+  "musica": {"arquivo": "../../../../.claude/skills/edicao-completa/sons/trilha.wav", "volume_db": -20},
+  "sons": "../../../../.claude/skills/edicao-completa/sons",
+  "cartao_final_seg": 2.8,
+  "manter_maiuscula": ["NAD", "Q10"],
+  "remover_da_legenda": ["né"],
+  "destaques": ["medicação", "disposição", "cansaço", "hormônio", "peptídeos", "nad", "q10", "mitocôndria", "fã"]
+}

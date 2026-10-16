@@ -6,6 +6,8 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
+2026-10-16: sessão de extração da Simone transcrita e minutada (20 vídeos, `clientes/simone-do-valle/extracao/2026-09-16-extracao/` + 2 Google Docs na pasta "Vídeos - 25-09") e cadastrada no ClickUp (tarefa-mãe 17trfwhndxr, 18 vídeos, Reels Dia do Médico movido pra dentro, 19 capas pra Pâmela). Dia do Médico: IMG_0486.MOV 7:07–9:05.
+2026-10-07 (noite): postagem automática no ar no Worker `filas-lince` (Instagram ligado pelo app Meta, 14 clientes mapeados, trava `POSTAR_APENAS` = só Lince & Co., que aponta pro @francisco.schirmer). Teste de carrossel marcado pra 07/10 20h00 na tarefa 17trfwhkv88. Falta o Google (Drive e GMN) e o TikTok. Plano: `operacao/postagem-automatica/plano.md`.
 2026-10-06 (noite): Farol de Clientes no ClickUp (`🚦 Farol de Clientes`, 901329216299) com histórico de mar a set/26 da planilha; postados e farol automáticos (Worker, 7h) e leads lidos dos relatórios da Jenifer (rotina diária 9h). Falta o dashboard, montado à mão pelo passo a passo.
 2026-10-06: captura de reuniões reescrita: a transcrição inteira é a fonte (o Gemini só confere), critério dos containers feitos à mão, conta fechando e lista "Pra você decidir". Planning de 05/10 refeita: 22 tarefas no lugar de 6.
 2026-10-05 (noite): análise de capacidade da semana (`operacao/capacidade/2026-10-05-capacidade-semana.md`) e datas redistribuídas no ClickUp: Fazenda até 31/10, Gabriel 2 por semana até 10/11, Cristiano 3 por semana até 19/11, Karinna 2 vídeos + 1 estático até 21/12.
@@ -15,6 +17,17 @@
 2026-10-01: produtividade migrada para o Supabase próprio do Francisco (projeto "Chico"). Formulário de acessos do cliente no ar (acessos-lince.pages.dev, painel em /painel).
 
 ## Pendências
+- Simone: Marina decide a V06 (17trfwhndy3, cita Veoza, preço e Mounjaro): versão curta sem nome (3:55–4:16 + 4:44–4:56) ou regravar (2026-10-16)
+- Simone: cadastrar o V20 (depoimento de dois anos, VIDEO PARA A LINCE.MOV) no Calendário Editorial da Lince & Co. quando achar a tarefa no ClickUp (2026-10-16)
+- Simone: confirmar quem entrevistou em 16/09 pela conta operacional@ (Marina?) e corrigir o falante na transcrição (2026-10-16)
+- Simone: colar a seção ClickUp da minutagem.md no Google Doc da minutagem, que ainda diz "não cadastrado" (2026-10-16)
+- Simone: criar a pasta do cliente com /novo-projeto; hoje `clientes/simone-do-valle/` só tem a subpasta de extração (2026-10-16)
+- Postagem automática: conferir o resultado do teste das 20h de 07/10 (tarefa 17trfwhkv88 deve virar "postado/subido" com o link) e apagar a tarefa de teste (2026-10-07)
+- Postagem automática: autorizar o Google com operacional@ (projeto no Cloud, Drive API, tela OAuth Interno, credencial de computador, `google-autorizar.mjs`); depois o Claude sobe GOOGLE_CLIENT_ID / SECRET / REFRESH_TOKEN pro Worker. Sem isso o Worker não lê a pasta do LINK DAS PEÇAS (2026-10-07)
+- Postagem automática: enviar o formulário "Application for Basic API Access" do Google Business Profile (demora dias a semanas) (2026-10-07)
+- Postagem automática: registrar o app no developers.tiktok.com e pedir a auditoria (sem ela, só posta em privado) (2026-10-07)
+- Postagem automática: contas sem Página alcançável no Meta: Walter Pinto, Otorrinos POA, Victoria Clasen, Lince & Co., Carlos Parra, Simone, Atria, Doctor Elite, HT Luis Henrique, Diprohl. Conferir no portfólio de cada um a tarefa Conteúdo na Página e o Instagram ligado à Página; depois rodar `meta-contas.mjs --kv` e `kv-contas.mjs --subir` (2026-10-07)
+- Postagem automática: depois do teste com um cliente real, tirar a var `POSTAR_APENAS` do wrangler.toml e publicar pra liberar todos; criar o campo LEGENDA no Calendário Editorial (ou manter o bloco "LEGENDA" na descrição) (2026-10-07)
 - Farol: montar o dashboard no ClickUp (passo a passo da conversa de 2026-10-06); encaminhar à Jenifer o pedido do bloco fixo no relatório; cobrar relatório de setembro do Piltcher, Aragão (Logan) e Otorrinos na tarefa [RELATÓRIO]; criar as opções Jan/27 em diante no campo Mês até dez/26 (2026-10-06)
 - Piltcher: passar pro ClickUp os conteúdos aprovados na reunião de 02/10 (Francisco faz em outra conversa); ver a alteração do CNPJ na Hotmart do Dr. Luis Henrique (tarefa 86akm4vqc, vencida desde 30/09) (2026-10-05)
 - Piltcher: decisão da Vic e da Marina sobre Saúde Bucal, Consciência Negra e Pessoas com Deficiência até 2026-10-09 (tarefa 86akt98hj); pautas novas do Cartão até 2026-11-13 (86akt9hkj); Curiosidades do robô (17/11) depende do OK do Dr. Rodrigo; Outubro Rosa espera gravações, sem data (2026-10-05)
@@ -49,6 +62,8 @@
 - Criar a pasta do Dr. Walter Pinto com /novo-projeto (2026-09-29)
 
 ## Quente agora
+- Simone: Reels Dia do Médico sai 18/10 (Mateus edita, prazo 16/10; capa da Pâmela 17/10)
+- Postagem automática: resultado do teste das 20h e autorização do Google
 - Farol de Clientes: conferir a 1ª execução do Worker (07/10 7h) e da rotina dos relatórios (07/10 9h)
 - Fechamento de setembro e Health Score de outubro
 - Piltcher: inauguração da casa do Cartão em 2026-10-08

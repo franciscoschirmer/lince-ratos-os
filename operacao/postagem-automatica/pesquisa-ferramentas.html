@@ -1,0 +1,188 @@
+<title>Agendamento de Postagens Lince</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Layout: memorando de uma coluna, leitura de cima pra baixo; decisão no topo, evidência embaixo */
+:root{
+  --bg:#F5EFE3; --surface:#EDE4D3; --fg:#2E211A; --muted:#6F6359; --accent:#8A6C3F; --seal:#620D11;
+  --line:rgba(46,33,26,.16); --good:#2F6B3A; --warn:#9A6210; --bad:#8E1F1F;
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --body:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#110B08; --surface:#1D1511; --fg:#F1EDE5; --muted:#A79B90; --accent:#BAA079; --seal:#C9666B;
+  --line:rgba(214,203,182,.18); --good:#7FBF8A; --warn:#E0B060; --bad:#E08A8A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#110B08; --surface:#1D1511; --fg:#F1EDE5; --muted:#A79B90; --accent:#BAA079; --seal:#C9666B;
+  --line:rgba(214,203,182,.18); --good:#7FBF8A; --warn:#E0B060; --bad:#E08A8A; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:20px;padding-block:40px 72px}
+main{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,6vw,3.2rem)}
+h2{font-size:1.9rem;border-top:1px solid var(--line);padding-top:28px}
+h3{font-size:1.35rem}
+p{margin:0;max-width:68ch}
+section{display:flex;flex-direction:column;gap:16px}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.meta{color:var(--muted);font-size:.92rem}
+.lead{font-size:1.12rem}
+.verdict{background:var(--surface);border-left:3px solid var(--seal);padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+.verdict strong{color:var(--seal)}
+ul,ol{margin:0;padding-left:1.25em;display:flex;flex-direction:column;gap:6px;max-width:72ch}
+.table-wrap{overflow-x:auto;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-weight:600;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td.num{white-space:nowrap;font-weight:500}
+tr.pick td{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.04em;padding:1px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.ok{color:var(--good)}.mid{color:var(--warn)}.no{color:var(--bad)}
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.path{border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.path .cost{font-family:var(--display);font-size:1.6rem;color:var(--accent)}
+.path.pick{border-color:var(--accent);border-width:2px}
+.note{font-size:.86rem;color:var(--muted)}
+a{color:var(--accent)}
+.steps li strong{font-weight:600}
+</style>
+
+<main>
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">Lince &amp; Co · operação · pesquisa de mercado</span>
+  <h1>Agendamento e postagem automática pra carteira de clientes</h1>
+  <p class="meta">Francisco Schirmer · 08/10/2026 · base: 25 clientes, cerca de 110 perfis (Instagram, Facebook, TikTok, YouTube e alguns LinkedIn), 2 a 3 pessoas operando</p>
+</header>
+
+<section class="verdict">
+  <span class="eyebrow">Recomendação</span>
+  <p class="lead"><strong>Caminho híbrido:</strong> o ClickUp continua sendo onde a peça é aprovada e agendada, o robô que já está no ar (Worker) dispara a postagem, e um serviço de publicação por API faz a entrega em todas as redes. O candidato é o <strong>Post for Me</strong>: US$ 10 por mês (cerca de R$ 55) até 1.000 postagens, com as aprovações da Meta, TikTok, YouTube e LinkedIn já resolvidas do lado deles.</p>
+  <p><strong>Plano B</strong>, se o teste falhar: <strong>Metricool Advanced</strong> (25 marcas, cerca de R$ 450 a 600 por mês). É a ferramenta pronta mais barata que atende tudo, tem aprovação do cliente e conecta com o Claude.</p>
+  <p class="note">O mLabs sai de R$ 750 a 1.250 por mês e não tem integração por API, então não automatiza a partir do ClickUp. Nenhuma ferramenta gratuita atende 25 clientes.</p>
+</section>
+
+<section>
+  <h2>O que a Vic precisa decidir</h2>
+  <ol>
+    <li>Aprovar o teste de 30 dias do Post for Me (US$ 10 no cartão da empresa).</li>
+    <li>Teto de gasto: se o custo real passar de R$ 600 por mês, ou o teste falhar, migramos pro Metricool Advanced.</li>
+    <li>Quem orienta os médicos a conectar TikTok, YouTube e LinkedIn (um clique de autorização por rede). Sugestão: Henri, no grupo de cada cliente.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Os cinco caminhos possíveis</h2>
+  <div class="paths">
+    <div class="path pick">
+      <span class="eyebrow">Recomendado</span>
+      <h3>ClickUp + robô + API de publicação</h3>
+      <span class="cost">R$ 55 a 550/mês</span>
+      <p>Aproveita o que já existe. A equipe não muda de ferramenta, e o Claude opera o fluxo inteiro.</p>
+    </div>
+    <div class="path">
+      <span class="eyebrow">Plano B</span>
+      <h3>Ferramenta pronta (SaaS)</h3>
+      <span class="cost">R$ 400 a 6.700/mês</span>
+      <p>Calendário visual e aprovação do cliente prontos. O ClickUp vira trabalho em dobro (cadastrar a peça nos dois lugares).</p>
+    </div>
+    <div class="path">
+      <span class="eyebrow">Descartado</span>
+      <h3>Tudo nosso, direto nas redes</h3>
+      <span class="cost">R$ 0/mês</span>
+      <p>Funciona no Instagram hoje. TikTok, YouTube e LinkedIn exigem auditorias de 1 a 3 meses, sem garantia de aprovação.</p>
+    </div>
+    <div class="path">
+      <span class="eyebrow">Descartado</span>
+      <h3>Código aberto no nosso servidor</h3>
+      <span class="cost">R$ 55 a 110/mês</span>
+      <p>Postiz ou Mixpost. Tira o custo do software, mas as aprovações de cada rede continuam com a gente.</p>
+    </div>
+    <div class="path">
+      <span class="eyebrow">Descartado</span>
+      <h3>Ferramentas nativas, à mão</h3>
+      <span class="cost">R$ 0/mês</span>
+      <p>Meta Business Suite, TikTok Studio, YouTube Studio. Conta por conta, sem calendário único. O TikTok só agenda 10 dias à frente.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Ferramentas prontas (SaaS)</h2>
+  <p>Custo estimado pra 25 clientes e cerca de 110 perfis, do mais barato pro mais caro. "Integra com o Claude" significa ter API ou MCP no plano indicado, o que permite automatizar a partir do ClickUp.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Ferramenta</th><th>Cobra por</th><th>Custo/mês</th><th>Aprovação do cliente</th><th>Integra com o Claude</th><th>Observação</th></tr></thead>
+    <tbody>
+      <tr><td>Hype Social (BR)</td><td>marca</td><td class="num">R$ 400–500</td><td><span class="tag no">não informa</span></td><td><span class="tag no">não</span></td><td>Barato, mas só YouTube Shorts e sem API</td></tr>
+      <tr class="pick"><td><strong>Metricool</strong> Advanced</td><td>faixa de 25 marcas</td><td class="num">R$ 450–600</td><td><span class="tag ok">sim</span></td><td><span class="tag ok">MCP oficial + API</span></td><td>Melhor custo-benefício entre as prontas. LinkedIn só no pago</td></tr>
+      <tr><td>Reportei Flux (BR)</td><td>cliente</td><td class="num">R$ 500–750</td><td><span class="tag ok">sim, por link</span></td><td><span class="tag no">não</span></td><td>Produto separado do Reportei de relatórios</td></tr>
+      <tr><td>mLabs (BR)</td><td>marca</td><td class="num">R$ 750–1.250</td><td><span class="tag ok">sim</span></td><td><span class="tag no">não</span></td><td>Desconto de agência sob consulta. TikTok pode ser só "notificado" (a pessoa publica no celular), confirmar</td></tr>
+      <tr><td>OneUp</td><td>contas</td><td class="num">R$ 1.500–1.800</td><td><span class="tag ok">sim</span></td><td><span class="tag ok">API + MCP</span></td><td>Bom pra automação, 3 vezes o Metricool</td></tr>
+      <tr><td>Later</td><td>grupo de perfis</td><td class="num">≈ R$ 1.630</td><td><span class="tag ok">sim</span></td><td><span class="tag no">não</span></td><td></td></tr>
+      <tr><td>SocialPilot</td><td>contas</td><td class="num">R$ 2.250–2.400</td><td><span class="tag ok">sim</span></td><td><span class="tag mid">só MCP</span></td><td>API só no plano Enterprise</td></tr>
+      <tr><td>Hootsuite</td><td>usuário</td><td class="num">R$ 3.300–6.600</td><td><span class="tag mid">plano Advanced</span></td><td><span class="tag mid">MCP anunciado</span></td><td></td></tr>
+      <tr><td>Sprout Social</td><td>usuário</td><td class="num">R$ 4.900–6.600</td><td><span class="tag mid">não confirmado</span></td><td><span class="tag mid">API no Advanced</span></td><td></td></tr>
+      <tr><td>Planable</td><td>cliente</td><td class="num">R$ 5.600–6.700</td><td><span class="tag ok">o forte dela</span></td><td><span class="tag ok">MCP + API</span></td><td></td></tr>
+      <tr><td>Buffer</td><td>perfil</td><td class="num">≈ R$ 6.050</td><td><span class="tag mid">só no Team</span></td><td><span class="tag ok">API + MCP</span></td><td>Barato pra poucos perfis, caro com 110</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Também pesquisados: Publer (R$ 3.000–3.800), Sendible (R$ 3.500–4.100), ContentStudio (≈ R$ 2.900), Pallyy (R$ 820–1.100), Agorapulse (acima de R$ 7.400). Vista Social, Loomly e Zoho caem em plano Enterprise sob consulta nessa escala. Postgrain só faz Instagram. Etus parece descontinuado.</p>
+</section>
+
+<section>
+  <h2>APIs de publicação (pra ligar no nosso robô)</h2>
+  <p>A peça continua no ClickUp. O robô entrega pra API, e ela publica em cada rede usando os apps que eles já aprovaram junto à Meta, TikTok, YouTube e LinkedIn. É isso que poupa a gente das auditorias.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Serviço</th><th>Cobra por</th><th>Custo/mês</th><th>Aprovações das redes</th><th>MCP (Claude)</th><th>Observação</th></tr></thead>
+    <tbody>
+      <tr class="pick"><td><strong>Post for Me</strong></td><td>postagens</td><td class="num">≈ R$ 55 até 1.000</td><td><span class="tag ok">deles (declarado)</span></td><td><span class="tag mid">local, simples</span></td><td>Acima de 1.000: preço sob consulta. Fornecedor pequeno</td></tr>
+      <tr><td>Bundle.social</td><td>postagens</td><td class="num">≈ R$ 550 até 10.000</td><td><span class="tag mid">não confirmado</span></td><td><span class="tag mid">tem link</span></td><td>Bom plano B se o Post for Me ficar curto</td></tr>
+      <tr><td>Upload-Post</td><td>perfil</td><td class="num">R$ 180–2.400</td><td><span class="tag mid">não está claro</span></td><td><span class="tag ok">oficial</span></td><td>Depende de "perfil" ser cliente ou rede, confirmar</td></tr>
+      <tr><td>Zernio (antigo Late)</td><td>conta conectada</td><td class="num">≈ R$ 1.800</td><td><span class="tag mid">"sem app seu"</span></td><td><span class="tag ok">oficial, hospedado</span></td><td>Avaliações isoladas de instabilidade</td></tr>
+      <tr><td>Ayrshare</td><td>cliente</td><td class="num">R$ 2.750–3.300</td><td><span class="tag ok">deles</span></td><td><span class="tag ok">plugin do Claude Code</span></td><td>A mais antiga e a mais cara</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Post for Me em detalhe</h2>
+  <ul>
+    <li><strong>Preço:</strong> US$ 10 por mês, contas e usuários ilimitados, até 1.000 postagens com sucesso. Se passar com frequência, eles entram em contato (não cobram excedente sozinhos).</li>
+    <li><strong>Nosso volume:</strong> 25 clientes × cerca de 12 peças por mês × 3 redes em média dá entre 750 e 1.050 publicações. Fica no limite: é a primeira coisa a confirmar com o suporte, junto com a forma de contar (Stories contam cada mídia como uma postagem).</li>
+    <li><strong>Redes e formatos:</strong> Instagram (feed, carrossel, Reels, Stories), Facebook, TikTok (vídeo e rascunho), YouTube (Shorts e vídeo longo), LinkedIn (perfil e página de empresa). Carrossel de foto no TikTok não está documentado.</li>
+    <li><strong>Aprovações:</strong> dizem ter acesso avançado na Meta, auditoria do TikTok aprovada, cota ampliada no YouTube e a API de páginas do LinkedIn. É afirmação deles: o teste confirma.</li>
+    <li><strong>Conexão dos clientes:</strong> o robô gera um link de autorização na hora, o médico clica e aprova. A tela mostra a marca "Post for Me", não a da Lince.</li>
+    <li><strong>Encaixe com o que já temos:</strong> agenda por data e hora, avisa o resultado de cada post (dá pra devolver o link na tarefa do ClickUp, como já fazemos), e o código deles é aberto.</li>
+    <li><strong>Custo real:</strong> US$ 10 por mês, cobrança mensal. Ainda não se sabe se 1 conteúdo em 3 redes conta como 1 ou 3 postagens. Pelo pior caso (3), o nosso volume fica perto de 1.000; acima disso as faixas seriam US$ 25 (2.500) e US$ 50 (5.000), dado de concorrente, a confirmar com o suporte.</li>
+    <li><strong>Portfólios dos clientes:</strong> funciona do jeito que estamos hoje (cada cliente com o seu portfólio, o Francisco convidado em todos). Nada a configurar pro Post for Me; só precisa do Francisco com permissão de conteúdo na Página e do Instagram vinculado à Página.</li>
+    <li><strong>Segurança:</strong> um cliente não vê nada do outro, e o Post for Me não recebe conta de anúncios nem direct. A chave de acesso fica só no nosso robô, com verificação em duas etapas nas contas. Não citam LGPD, mas o que passa por eles é conteúdo que vai ser público. Ponto fraco: tudo depende do Facebook do Francisco; colocar uma segunda pessoa (Júlia) nos portfólios como reserva.</li>
+    <li><strong>Riscos:</strong> empresa pequena, sem garantia de disponibilidade publicada, aprovações autodeclaradas. Mitigação: manter a publicação direta no Instagram que já funciona como reserva. Trocar de fornecedor depois só muda uma peça do robô.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Por que não fazer tudo nosso</h2>
+  <p>O Instagram já sai pelo nosso app da Meta, e isso fica como reserva. O resto da conta muda:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Rede</th><th>O que exige pra postar em conta de cliente</th><th>Prazo</th><th>Risco</th></tr></thead>
+    <tbody>
+      <tr><td>Instagram e Facebook</td><td>Revisão do app pela Meta e verificação da empresa, pra não depender do acesso pessoal do Francisco</td><td class="num">2 a 6 semanas</td><td><span class="tag mid">médio</span></td></tr>
+      <tr><td>TikTok</td><td>Auditoria com uma lista longa de exigências de tela. Sem ela, só posta em modo privado</td><td class="num">semanas a meses</td><td><span class="tag no">alto</span></td></tr>
+      <tr><td>YouTube</td><td>Auditoria do Google. Sem ela, o vídeo sobe travado como privado</td><td class="num">semanas</td><td><span class="tag mid">médio</span></td></tr>
+      <tr><td>LinkedIn (página)</td><td>Aprovação a critério do LinkedIn, recusa é comum</td><td class="num">incerto</td><td><span class="tag no">alto</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Próximos passos</h2>
+  <ol class="steps">
+    <li><strong>Até 10/10 · Francisco:</strong> escrever ao suporte do Post for Me e pedir por escrito a regra de contagem, o preço acima de 1.000, se o TikTok publica em público e se o YouTube sobe público.</li>
+    <li><strong>Semana de 13/10 · Francisco + Claude:</strong> criar a conta, conectar as contas de teste da Lince (Instagram, TikTok, YouTube) e ligar o robô ao Post for Me.</li>
+    <li><strong>Semana de 20/10:</strong> primeiro cliente real (Potência Médica), Instagram e Facebook, depois TikTok.</li>
+    <li><strong>Até 31/10 · Vic:</strong> seguir com o Post for Me ou migrar pro Metricool, com base no teste.</li>
+  </ol>
+</section>
+
+<section>
+  <p class="note">Preços conferidos nas páginas oficiais em 08/10/2026, convertidos a US$ 1 = R$ 5,50 e € 1 = R$ 6,30, sem IOF nem impostos. Não deu pra confirmar e deve ser checado antes de contratar: tabela de agência do mLabs, regra de contagem e preço acima de 1.000 do Post for Me, aprovações da Zernio e da Bundle.social, e TikTok automático no mLabs.</p>
+</section>
+</main>

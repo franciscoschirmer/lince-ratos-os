@@ -85,6 +85,10 @@ body.enviado form,body.enviado .progresso,body.enviado .recuperado,body.enviado 
 body.enviado .fim{display:block}
 .rodape{text-align:center;margin-top:40px;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;color:var(--ink-2)}
 .sem-js{color:var(--erro);text-align:center}
+.carregando{color:var(--ink-2);text-align:center;padding:24px 0}
+.ja-enviado{background:var(--card-2);border:1px solid rgba(186,160,121,.4);border-radius:4px;padding:16px;margin-bottom:16px;font-size:.92rem;display:grid;gap:10px}
+.ja-enviado[hidden]{display:none}
+.ja-enviado b{color:var(--ouro);font-weight:500}
 </style>
 </head>
 <body>
@@ -112,13 +116,18 @@ body.enviado .fim{display:block}
     <div class="trilho"><span id="barra"></span></div>
   </div>
 
+  <div class="ja-enviado" id="ja-enviado" hidden>
+    <span id="ja-enviado-txt"></span>
+    <span>Não precisa preencher de novo. Se quiser mandar uma versão nova, é só preencher abaixo e enviar: as duas ficam guardadas.</span>
+  </div>
+
   <div class="recuperado" id="recuperado" hidden>
     <span>Recuperamos o que você já tinha preenchido neste aparelho. Pode continuar de onde parou.</span>
     <button type="button" class="btn btn-linha btn-mini" id="limpar">Começar do zero</button>
   </div>
 
   <form id="form" novalidate autocomplete="off">
-    <div id="secoes"></div>
+    <div id="secoes"><p class="carregando">Carregando o formulário. Se esta mensagem não sumir em alguns segundos, abra este link no Google Chrome ou no Safari atualizado.</p></div>
 
     <div class="isca" aria-hidden="true"><label>Não preencha<input type="text" id="site_empresa" tabindex="-1" autocomplete="off"></label></div>
 
@@ -145,8 +154,9 @@ body.enviado .fim{display:block}
 import { SECOES, PERGUNTAS, ORIGENS, textoResposta } from "/perguntas.js";
 
 const CHAVE = "lince-diagnostico-rascunho-v1";
-const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const MAX = 12000;
+const CHAVE_ENVIADO = "lince-diagnostico-enviado-v1";
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const MAX_ENVIO = 900000; // o servidor aceita até 1 MB; acima disso avisa antes de tentar
 
 // ---------- desenho ----------
 function perguntaHtml(q) {
@@ -155,9 +165,9 @@ function perguntaHtml(q) {
   const falta = `<span class="msg-falta">Esta pergunta é obrigatória.</span>`;
   let campo = "";
   if (q.tipo === "curta") {
-    campo = `<input type="text" name="${q.id}" maxlength="${q.id === "nome" ? 160 : 2000}" aria-labelledby="e-${q.id}" ${q.obrig ? 'aria-required="true"' : ""} ${q.id === "nome" ? 'autocomplete="name"' : ""}>`;
+    campo = `<input type="text" name="${q.id}" ${q.id === "nome" ? 'maxlength="160"' : ""}aria-labelledby="e-${q.id}" ${q.obrig ? 'aria-required="true"' : ""} ${q.id === "nome" ? 'autocomplete="name"' : ""}>`;
   } else if (q.tipo === "longa") {
-    campo = `<textarea name="${q.id}" maxlength="${MAX}" aria-labelledby="e-${q.id}" ${q.obrig ? 'aria-required="true"' : ""}></textarea>`;
+    campo = `<textarea name="${q.id}" aria-labelledby="e-${q.id}" ${q.obrig ? 'aria-required="true"' : ""}></textarea>`;
   } else if (q.tipo === "escolha") {
     campo = `<div class="opcoes" role="radiogroup" aria-labelledby="e-${q.id}">
       ${q.opcoes.map((o) => `<label class="opcao"><input type="radio" name="${q.id}" value="${esc(o)}"><span>${esc(o)}</span></label>`).join("")}
@@ -166,9 +176,9 @@ function perguntaHtml(q) {
     </div>`;
   } else if (q.tipo === "origem") {
     campo = `<div class="origem">
-      ${ORIGENS.map((o) => `<label>${esc(o.nome)}<span class="pct"><input type="text" inputmode="decimal" name="${q.id}__${o.id}" maxlength="6"></span></label>`).join("")}
+      ${ORIGENS.map((o) => `<label>${esc(o.nome)}<span class="pct"><input type="text" inputmode="decimal" name="${q.id}__${o.id}" maxlength="20"></span></label>`).join("")}
       <label class="outros-qual">Outros: qual?<input type="text" name="${q.id}__outros_qual" maxlength="200" placeholder="Ex.: Doctoralia, convênio"></label>
-      <label>Outros<span class="pct"><input type="text" inputmode="decimal" name="${q.id}__outros" maxlength="6"></span></label>
+      <label>Outros<span class="pct"><input type="text" inputmode="decimal" name="${q.id}__outros" maxlength="20"></span></label>
     </div><div class="soma" id="soma-${q.id}"></div>`;
   }
   return `<div class="q" data-q="${q.id}">${enun}${ajuda}${campo}${falta}</div>`;
@@ -240,6 +250,14 @@ function aplicarRascunho(r) {
   }
 }
 
+try {
+  const env = JSON.parse(localStorage.getItem(CHAVE_ENVIADO) || "null");
+  if (env && env.codigo) {
+    document.getElementById("ja-enviado-txt").innerHTML = `Recebemos o seu diagnóstico em <b>${esc(new Date(env.em).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }))}</b>, protocolo <b>${esc(env.codigo)}</b>.`;
+    document.getElementById("ja-enviado").hidden = false;
+  }
+} catch {}
+
 const salvo = lerRascunho();
 if (salvo) {
   rascunho = salvo;
@@ -290,6 +308,15 @@ form.addEventListener("input", (e) => {
 });
 form.addEventListener("change", () => { atualizar(); gravarRascunho(); });
 window.addEventListener("pagehide", gravarRascunho);
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") gravarRascunho(); });
+// Enter num campo de uma linha não envia o formulário (só o botão envia): pula pro próximo campo
+form.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter" || e.target.tagName !== "INPUT" || e.target.type === "submit") return;
+  e.preventDefault();
+  const campos = [...form.querySelectorAll("input[type=text]:not(#site_empresa), textarea")];
+  const prox = campos[campos.indexOf(e.target) + 1];
+  if (prox) prox.focus();
+});
 atualizar();
 
 // ---------- envio ----------
@@ -324,6 +351,11 @@ form.addEventListener("submit", async (e) => {
   }
 
   gravarRascunho();
+  const corpo0 = { protocolo: rascunho.protocolo, respostas: coletar() };
+  if (new Blob([JSON.stringify(corpo0)]).size > MAX_ENVIO) {
+    erro.textContent = "As respostas ficaram grandes demais para um envio só. Encurte a resposta mais longa (elas continuam salvas neste aparelho) ou fale com a gente pelo grupo.";
+    return;
+  }
   const corpo = { protocolo: rascunho.protocolo, respostas: coletar(), site_empresa: document.getElementById("site_empresa").value };
   const copia = textoCopia(rascunho.protocolo);
 
@@ -345,7 +377,8 @@ form.addEventListener("submit", async (e) => {
     if (!r.ok || !d.ok) throw new Error(d.erro || "Não conseguimos registrar agora.");
     concluido = true;
     clearTimeout(tempo);
-    try { localStorage.removeItem(CHAVE); } catch {}
+    try { localStorage.removeItem(CHAVE); localStorage.setItem(CHAVE_ENVIADO, JSON.stringify({ codigo: d.codigo, em: new Date().toISOString() })); } catch {}
+    document.getElementById("ja-enviado").hidden = true;
     document.getElementById("protocolo").textContent = `Protocolo ${d.codigo}`;
     document.getElementById("baixar").onclick = () => {
       const a = document.createElement("a");
