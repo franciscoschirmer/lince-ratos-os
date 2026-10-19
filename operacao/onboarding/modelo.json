@@ -1,0 +1,406 @@
+{
+  "_leia": "Onboarding completo da Lince. Cada tarefa tem um módulo; o spec do cliente diz quais módulos o contrato tem e o gerador tira o resto. 'dias' = dias úteis depois do D0 (dia da reunião de onboarding), pulando fim de semana e feriado nacional. 'diaLivre: true' empurra a data pro dia livre da cliente, se o spec tiver um. Item de checklist com 'm' só entra se o módulo estiver no contrato. Placeholders: {cliente} {conteudos}.",
+  "modulos": {
+    "base": "sempre: insumos, Opus, reunião de aprovação, Go Live e passagem pra rotina mensal",
+    "conteudo": "conteúdos mensais: calendário, roteiros, gravação, perfil",
+    "trafego": "tráfego pago (Meta): setup, campanhas, relatório",
+    "google": "Google Ads além do Meta (só acrescenta itens no tráfego)",
+    "lp": "landing page",
+    "comercial": "setup comercial e processo comercial (Ivan), social selling"
+  },
+  "tarefas": [
+    {
+      "chave": "insumos",
+      "modulo": "base",
+      "fase": 1,
+      "dias": 5,
+      "dono": 164678340,
+      "name": "F1 · Insumos da cliente recebidos (formulários, acessos, marca, fotos)",
+      "description": "**Pronto quando:** tudo que a cliente precisa mandar na semana 1 está no Drive e conferido.\n**Trava:** o Opus (F3) depende dos formulários; setup, perfil e LP dependem dos acessos, da marca e das fotos.\nHenri cobra no grupo até fechar.",
+      "checklist": [
+        {
+          "t": "Contrato assinado (Júlia)"
+        },
+        {
+          "t": "Grupo do projeto + mensagens padrão (Júlia)"
+        },
+        {
+          "t": "Formulários de investigação e de acessos enviados (Francisco)"
+        },
+        {
+          "t": "Formulário de investigação respondido"
+        },
+        {
+          "t": "Formulário de acessos respondido"
+        },
+        {
+          "t": "Logo e cores no Drive"
+        },
+        {
+          "t": "Fotos e vídeos da rotina no Drive"
+        },
+        {
+          "t": "Sugestão de equipamentos de gravação enviada (Francisco)",
+          "m": "conteudo"
+        },
+        {
+          "t": "Contato de quem atende os pacientes (secretária) no grupo",
+          "m": "comercial"
+        }
+      ],
+      "status": "em andamento"
+    },
+    {
+      "chave": "setup-trafego",
+      "modulo": "trafego",
+      "fase": 2,
+      "dias": 7,
+      "dono": 49036032,
+      "name": "F2 · Setup técnico de tráfego (contas, pixel, rastreio)",
+      "description": "**Pronto quando:** a Lince tem acesso de anunciante a tudo e a conta está pronta pra subir campanha.\n**Trava:** sem isso as campanhas da F5 não sobem.",
+      "checklist": [
+        {
+          "t": "Acessos testados: Instagram, Página do Facebook, Portfólio (Business Manager)"
+        },
+        {
+          "t": "Conta de anúncios com forma de pagamento"
+        },
+        {
+          "t": "Pixel / conjunto de dados criado"
+        },
+        {
+          "t": "Rastreio de conversa no WhatsApp definido"
+        },
+        {
+          "t": "Instagram ligado à Página (pra postagem automática)"
+        },
+        {
+          "t": "Google Meu Negócio criado ou otimizado (endereço definido)"
+        },
+        {
+          "t": "Google Ads: acesso pela conta de gestão, faturamento e saldo conferidos",
+          "m": "google"
+        },
+        {
+          "t": "Google Ads: conversões e tag do Google configuradas",
+          "m": "google"
+        }
+      ]
+    },
+    {
+      "chave": "setup-comercial",
+      "modulo": "comercial",
+      "fase": 2,
+      "dias": 7,
+      "dono": 112000442,
+      "name": "F2 · Setup comercial: Ivan no grupo + diagnóstico do atendimento atual",
+      "description": "**Pronto quando:** o Ivan conhece como o paciente chega e é atendido hoje e o fluxo está mapeado, base pros scripts da F4.\nPosição sobre IA no atendimento: humano no controle, nada sem teste.",
+      "checklist": [
+        {
+          "t": "Ivan se apresenta no grupo"
+        },
+        {
+          "t": "Diagnóstico: como o paciente chega e é atendido hoje"
+        },
+        {
+          "t": "Fluxo de agendamento e de WhatsApp mapeado"
+        },
+        {
+          "t": "CRM / etiquetas do WhatsApp definidos"
+        },
+        {
+          "t": "UTMs e rastreio de origem do lead combinados com a Jenifer",
+          "m": "trafego"
+        }
+      ]
+    },
+    {
+      "chave": "opus",
+      "modulo": "base",
+      "fase": 3,
+      "dias": 9,
+      "dono": 81994084,
+      "name": "F3 · Opus: Direção e Estratégia de Marca pronta pra apresentar",
+      "description": "**Pronto quando:** Opus em design, revisado pela Marina, pronto pra reunião de aprovação.\n**Insumos:** formulário de investigação + transcrição da reunião de onboarding + marca enviada.\n**Trava:** sem Opus aprovado não começa roteiro, perfil, LP nem script comercial.",
+      "checklist": [
+        {
+          "t": "Estratégia gerada pela Victoria (formulário + reunião de onboarding)"
+        },
+        {
+          "t": "Avaliação da marca atual: manter ou revigorar logo e cores"
+        },
+        {
+          "t": "Direção visual / moodboard"
+        },
+        {
+          "t": "Opus em design"
+        },
+        {
+          "t": "Revisão da Marina (CFM / OAB / CFO incluso)"
+        }
+      ]
+    },
+    {
+      "chave": "reuniao",
+      "modulo": "base",
+      "fase": 3,
+      "dias": 10,
+      "diaLivre": true,
+      "dono": 158419961,
+      "name": "F3 · Reunião de apresentação do Opus + aprovação da cliente",
+      "description": "**Pronto quando:** cliente aprovou o Opus e a equipe foi avisada.\nAjustes pedidos na reunião entram no checklist com prazo de 2 dias úteis.",
+      "checklist": [
+        {
+          "t": "Reunião marcada"
+        },
+        {
+          "t": "Opus apresentado"
+        },
+        {
+          "t": "Ajustes registrados e feitos"
+        },
+        {
+          "t": "Aprovação da cliente no grupo"
+        },
+        {
+          "t": "Equipe avisada (conteúdo, design, tráfego, comercial)"
+        }
+      ]
+    },
+    {
+      "chave": "calendario",
+      "modulo": "conteudo",
+      "fase": 4,
+      "dias": 13,
+      "dono": 81994084,
+      "name": "F4 · Calendário + {conteudos} roteiros do 1º ciclo aprovados e cadastrados",
+      "description": "**Pronto quando:** calendário do 1º ciclo aprovado pela cliente e as {conteudos} peças cadastradas no Calendário Editorial com roteiro e data de postagem.\nAprovação de calendário: 2 dias úteis (manual).",
+      "checklist": [
+        {
+          "t": "Calendário do 1º ciclo enviado à cliente"
+        },
+        {
+          "t": "Calendário aprovado"
+        },
+        {
+          "t": "{conteudos} roteiros escritos (compliance do conselho)"
+        },
+        {
+          "t": "{conteudos} peças cadastradas no Calendário Editorial com data de postagem"
+        }
+      ]
+    },
+    {
+      "chave": "gravacao",
+      "modulo": "conteudo",
+      "fase": 4,
+      "dias": 14,
+      "diaLivre": true,
+      "dono": 81994084,
+      "name": "F4 · Gravação dirigida do 1º ciclo",
+      "description": "**Pronto quando:** brutos dos roteiros no Drive.\nDirigida ao vivo (online ou presencial). Prazo do manual pra insumo: até 10 dias.",
+      "checklist": [
+        {
+          "t": "Gravação marcada"
+        },
+        {
+          "t": "Roteiros e orientações de gravação enviados antes"
+        },
+        {
+          "t": "Gravação feita"
+        },
+        {
+          "t": "Brutos no Drive e repassados pra edição (Francisco divide a edição)"
+        }
+      ]
+    },
+    {
+      "chave": "perfil",
+      "modulo": "conteudo",
+      "fase": 4,
+      "dias": 16,
+      "dono": 81994084,
+      "name": "F4 · Perfil ativado (bio, destaques, fixados, templates)",
+      "description": "**Pronto quando:** perfil novo aprovado pela cliente e aplicado no Instagram, e os templates visuais prontos pra produção.\nDepende do Opus aprovado.",
+      "checklist": [
+        {
+          "t": "Bio reescrita"
+        },
+        {
+          "t": "Foto de perfil"
+        },
+        {
+          "t": "Capas de destaques"
+        },
+        {
+          "t": "Posts fixados definidos"
+        },
+        {
+          "t": "Templates visuais com a Pâmela (carrossel, estático, capa de reels)"
+        },
+        {
+          "t": "Link na bio apontando pra LP",
+          "m": "lp"
+        },
+        {
+          "t": "Aprovação da cliente"
+        },
+        {
+          "t": "Aplicado no Instagram"
+        }
+      ]
+    },
+    {
+      "chave": "processo-comercial",
+      "modulo": "comercial",
+      "fase": 4,
+      "dias": 16,
+      "dono": 112000442,
+      "name": "F4 · Processo comercial pronto: scripts e treinamento de atendimento",
+      "description": "**Pronto quando:** quem atende tem script aprovado, foi treinado e o caminho do lead até o agendamento está rastreado.\nDepende do Opus aprovado (linguagem e posicionamento).",
+      "checklist": [
+        {
+          "t": "Scripts de atendimento escritos (compliance do conselho)"
+        },
+        {
+          "t": "Scripts aprovados pela cliente"
+        },
+        {
+          "t": "Treinamento com quem atende"
+        },
+        {
+          "t": "Rastreio do lead até o agendamento (CRM ou planilha)"
+        }
+      ]
+    },
+    {
+      "chave": "lp",
+      "modulo": "lp",
+      "fase": 4,
+      "dias": 19,
+      "dono": 158419961,
+      "name": "F4 · Landing page no ar",
+      "description": "**Pronto quando:** LP publicada, com WhatsApp e pixel funcionando, aprovada pela cliente.\nCopy a partir do Opus, design na identidade aprovada, compliance do conselho (sem promessa, sem preço, sem antes/depois).",
+      "checklist": [
+        {
+          "t": "Copy a partir do Opus"
+        },
+        {
+          "t": "Design na identidade aprovada"
+        },
+        {
+          "t": "Domínio / endereço definido"
+        },
+        {
+          "t": "Botão de WhatsApp + pixel instalados e testados"
+        },
+        {
+          "t": "Aprovação da cliente (até 2 rodadas)"
+        },
+        {
+          "t": "Publicada"
+        }
+      ]
+    },
+    {
+      "chave": "campanhas",
+      "modulo": "trafego",
+      "fase": 5,
+      "dias": 24,
+      "dono": 49036032,
+      "name": "F5 · Campanhas no ar",
+      "description": "**Pronto quando:** campanhas rodando e o primeiro relatório no grupo.",
+      "checklist": [
+        {
+          "t": "Estrutura e verba combinadas com a cliente"
+        },
+        {
+          "t": "Criativos aprovados"
+        },
+        {
+          "t": "Destino na LP com pixel testado",
+          "m": "lp"
+        },
+        {
+          "t": "Campanhas Meta no ar"
+        },
+        {
+          "t": "Campanhas Google no ar",
+          "m": "google"
+        },
+        {
+          "t": "Primeiro relatório de tráfego no grupo"
+        }
+      ]
+    },
+    {
+      "chave": "comercial-ativo",
+      "modulo": "comercial",
+      "fase": 5,
+      "dias": 24,
+      "dono": 112000442,
+      "name": "F5 · Processo comercial ativo + social selling",
+      "description": "**Pronto quando:** atendimento rodando no script, social selling ativo e o primeiro relatório comercial no grupo.",
+      "checklist": [
+        {
+          "t": "Social selling ativo (Henri)"
+        },
+        {
+          "t": "Acompanhamento dos leads da semana"
+        },
+        {
+          "t": "Primeiro relatório comercial no grupo"
+        },
+        {
+          "t": "Decisão sobre SDR ou automação de atendimento (humano no controle)"
+        }
+      ]
+    },
+    {
+      "chave": "golive",
+      "modulo": "base",
+      "fase": 5,
+      "dias": 24,
+      "dono": 158419961,
+      "name": "F5 · Go Live + passagem pra rotina mensal",
+      "description": "**Pronto quando:** a marca está no ar e a conta entrou na rotina mensal com os rituais marcados.\nA produção das peças anda no Calendário Editorial; aqui só o marco.",
+      "checklist": [
+        {
+          "t": "Primeiras peças editadas e com design (crivo interno)",
+          "m": "conteudo"
+        },
+        {
+          "t": "Aprovação da cliente (até 2 rodadas por peça)",
+          "m": "conteudo"
+        },
+        {
+          "t": "Peças agendadas",
+          "m": "conteudo"
+        },
+        {
+          "t": "Primeira peça publicada",
+          "m": "conteudo"
+        },
+        {
+          "t": "Campanhas no ar (subtarefa da Jenifer)",
+          "m": "trafego"
+        },
+        {
+          "t": "Processo comercial ativo (subtarefa do Ivan)",
+          "m": "comercial"
+        },
+        {
+          "t": "Rituais marcados: reunião quinzenal e apresentação trimestral"
+        },
+        {
+          "t": "Relatório de tráfego recorrente marcado (Jenifer)",
+          "m": "trafego"
+        },
+        {
+          "t": "Calendário do mês seguinte aprovado e agendado até o dia 25",
+          "m": "conteudo"
+        }
+      ]
+    }
+  ]
+}

@@ -24,21 +24,29 @@ Lido em 2026-10-19 nos onboardings do Walter (25 subtarefas), Urocenter (25), Ga
 - **Datas na ordem das dependências**: insumos, setup, Opus, reunião de aprovação, calendário e roteiros, gravação, perfil, LP, Go Live. Reunião e gravação caem no dia livre da cliente.
 - **O que já foi feito na Planning entra como item marcado** na F1, pra não duplicar tarefa.
 
-| Fase | Subtarefa | Dono padrão | Prazo a partir do D1 |
-| --- | --- | --- | --- |
-| F1 | Insumos da cliente recebidos | Henri | semana 1 |
-| F2 | Setup técnico de tráfego | Jenifer | semana 2 |
-| F3 | Opus pronto pra apresentar | Marina (Victoria gera) | semana 3, véspera da reunião |
-| F3 | Reunião de apresentação + aprovação | Francisco | semana 3 |
-| F4 | Calendário + roteiros do 1º ciclo | Marina | até 4 dias úteis depois da aprovação |
-| F4 | Gravação dirigida | Marina | dia seguinte aos roteiros |
-| F4 | Perfil ativado | Marina (Pâmela nos templates) | semana 4 |
-| F4 | Landing page no ar (se no escopo) | Francisco | antes da campanha |
-| F5 | Go Live | Francisco (Jenifer na campanha) | semana 5 a 6 |
+## Onboarding completo e módulos (2026-10-19)
+O modelo completo mora em `modelo.json` e cada cliente recebe só os módulos do contrato. Quem cadastra é a skill `/onboarding`.
 
-Cliente com comercial no escopo ganha uma subtarefa F5 de comercial (Ivan). Cliente sem tráfego perde a F2 e os itens de campanha.
+- **D0 = dia da reunião de onboarding**, conferido no registro da reunião (Gemini ou agenda). Todo prazo conta em dias úteis a partir dele, sem fim de semana e feriado nacional.
+- **O contrato decide os módulos.** Base sempre; conteúdo, tráfego, Google, LP e comercial só quando contratados. Pedido do Francisco ("esse não tem tráfego") tira o módulo.
+
+| Tarefa | Módulo | Dono padrão | Dias úteis após o D0 |
+| --- | --- | --- | --- |
+| F1 · Insumos da cliente | base | Henri | 5 |
+| F2 · Setup técnico de tráfego | trafego (+google) | Jenifer | 7 |
+| F2 · Setup comercial e diagnóstico | comercial | Ivan | 7 |
+| F3 · Opus pronto | base | Marina (Victoria gera) | 9 |
+| F3 · Reunião de aprovação do Opus | base | Francisco | 10, no dia livre do cliente |
+| F4 · Calendário + roteiros | conteudo | Marina | 13 |
+| F4 · Gravação dirigida | conteudo | Marina | 14, no dia livre do cliente |
+| F4 · Perfil ativado | conteudo | Marina | 16 |
+| F4 · Scripts e treinamento de atendimento | comercial | Ivan | 16 |
+| F4 · Landing page no ar | lp | Francisco | 19 |
+| F5 · Campanhas no ar | trafego | Jenifer | 24 |
+| F5 · Comercial ativo + social selling | comercial | Ivan | 24 |
+| F5 · Go Live + rotina mensal | base | Francisco | 24 |
+
+Os prazos reproduzem o manual (semana 1 ativos, semana 2 setup, semana 3 estratégia, depois ativação e Go Live) e batem com o onboarding da Mariana Fontana (D0 14/10, Go Live 18/11).
 
 ## Como criar o próximo
-1. Copiar `specs/mariana-fontana.json` pra `specs/<cliente>.json` e trocar nome, datas, donos, escopo e especificidades.
-2. Conferir: `node operacao/onboarding/criar-onboarding.mjs operacao/onboarding/specs/<cliente>.json --seco`
-3. Criar: o mesmo comando sem `--seco`. Se parar no meio, pôr `"id"` da mãe em `mae` e rodar de novo: o script pula o que já existe.
+Chamar `/onboarding` com o nome do cliente. A skill acha o D0, lê o contrato e a reunião, escreve `specs/<cliente>.json`, simula com `--seco` e cria.
