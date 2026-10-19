@@ -34,6 +34,7 @@
 ## Clientes citados na memória (ago–set/2026, confirmar a carteira atual)
 Dr. Walter Pinto (urologista, SP, entrou em ago/2026) · Dr. Luis Henrique Nunes (Potência Médica; concentra a maior parte das oportunidades) · Clínica Urocenter · Dra. Maysa Penteado (renovação pendente) · Hospital Piltcher (Pelotas) · Gabriel Parede (arquiteto) · Aragão Law · Barbearia Cavalheiros · Dra. Simone do Valle Austgulen (menopausa e emagrecimento; mudança pra Portugal planejada, reunião de 09/09/2026). Saíram: Rafa Alias e Karina Miglioli
 RA Clinic saiu da carteira (2026-10-05). Lince & Co. e o perfil Victoria Clasen são marketing interno, fora da análise de cliente
+Dra. Mariana Fontana entrou em out/2026 (D1 2026-10-14): Boutique com 6 conteúdos/mês, LP e tráfego, sem comercial. Consultório próprio abre entre a metade e o fim de nov/2026. Só tem quarta livre e pediu cobrança
 
 ## Contexto adicional
 - Regulado: toda peça de médico segue CFM (Res. 2.336/2023): sem promessa de resultado, sem antes/depois, sem preço, sem superlativo. Advogado segue OAB 205/2021, dentista segue CFO

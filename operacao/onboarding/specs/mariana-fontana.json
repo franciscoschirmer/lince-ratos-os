@@ -1,0 +1,185 @@
+{
+  "mae": {
+    "name": "Onboarding · Dra. Mariana Fontana | Boutique (6 conteúdos + LP + tráfego)",
+    "assignees": [
+      158419961
+    ],
+    "due": "2026-11-18",
+    "status": "em andamento",
+    "description": "Tarefa-mãe do onboarding da **Dra. Mariana Fontana**. Modelo enxuto (2026-10-19): uma subtarefa por entregável, com dono, prazo e \"pronto quando\". Os passos pequenos ficam no checklist de cada uma. As peças de conteúdo andam no Calendário Editorial, não aqui.\n\n**Escopo:** Boutique · 6 conteúdos/mês · 1 landing page · tráfego pago. **Sem comercial** (sem social selling, sem diagnóstico comercial, sem Ivan).\n**D1:** 14/10/2026 (quarta), reunião de onboarding. Ata: Anotações do Gemini \"[Lince& Co] Dra Mariana Fontana - Onboarding - 2026/10/14\" no Drive operacional@.\n\n**Jornada (manual do cliente, lince.company/?s=welcome):**\n\n| Fase | O que fecha | Prazo |\n| --- | --- | --- |\n| F1 · Boas-vindas e ativos | grupo, formulários, marca, fotos | 21/10 |\n| F2 · Setup técnico | Meta, pixel, conta de anúncios | 23/10 |\n| F3 · Direção e Estratégia (Opus) | Opus pronto 27/10, apresentado e aprovado 28/10 (qua) | 28/10 |\n| F4 · Ativação | calendário + roteiros 03/11, gravação 04/11 (qua), perfil 06/11, LP 11/11 | 11/11 |\n| F5 · Go Live | primeiros conteúdos e campanha no ar | 18/11 |\n| Rotina mensal | calendário de dezembro aprovado e agendado até 25/11 | 25/11 |\n\n**Especificidades desta conta:**\n* Consultório próprio (dividido com outra médica) abre entre a metade e o fim de novembro. Funil adaptado: captação e convencimento a partir de 18/11, conversão pra atendimento só na inauguração.\n* Objetivo é autoridade e conversão de paciente. Não quer virar influenciadora, resiste a caixinha de perguntas.\n* Não tem site. A LP é a página de entrada da marca e o destino da campanha.\n* Já tem logo e cores (chegaram no Drive em 19/10). A equipe avalia se mantém ou revigora, dentro do Opus.\n* Pouco hábito de gravar: gravação dirigida online, ela só tem a **quarta-feira livre**. Toda reunião e gravação cai em quarta.\n* Pediu cobrança: Henri acompanha prazos e insumos.\n* Compliance CFM em todas as peças e na LP.\n\n**Já feito antes deste quadro (Planning de 12/10):** contrato (Júlia, 16/10), grupo e mensagens padrão (Júlia, 15/10), formulários enviados (Francisco, 15/10), cobrança da 1ª semana (Henri).",
+    "id": "17trfwhnu88"
+  },
+  "subtarefas": [
+    {
+      "name": "F1 · Insumos da cliente recebidos (formulários, marca, fotos)",
+      "assignees": [
+        164678340
+      ],
+      "due": "2026-10-21",
+      "status": "em andamento",
+      "fase": 1,
+      "description": "**Pronto quando:** tudo que a cliente precisa mandar na semana 1 está no Drive e conferido.\n**Trava:** o Opus (F3) depende dos formulários; a LP e o perfil dependem da marca e das fotos.\nHenri cobra no grupo (a cliente pediu cobrança). Francisco manda a sugestão de equipamentos.",
+      "checklist": [
+        [
+          "Contrato assinado (Júlia, 16/10)",
+          true
+        ],
+        [
+          "Grupo do projeto + mensagens padrão (Júlia, 15/10)",
+          true
+        ],
+        [
+          "Formulários de investigação e de acessos enviados (Francisco, 15/10)",
+          true
+        ],
+        [
+          "Formulário de investigação respondido",
+          true
+        ],
+        [
+          "Formulário de acessos respondido",
+          true
+        ],
+        [
+          "Logo e cores no Drive (chegaram em 19/10)",
+          true
+        ],
+        "Fotos do consultório e da rotina no Drive",
+        "Sugestão de equipamentos de gravação enviada (Francisco)"
+      ]
+    },
+    {
+      "name": "F2 · Setup técnico de tráfego (Meta, pixel, conta de anúncios)",
+      "assignees": [
+        49036032
+      ],
+      "due": "2026-10-23",
+      "fase": 2,
+      "description": "**Pronto quando:** a Lince tem acesso de anunciante a tudo e a conta está pronta pra subir campanha quando a LP e os criativos existirem.\nNão tem site. Google Meu Negócio só depois que o endereço do consultório novo estiver definido.",
+      "checklist": [
+        "Acessos testados: Instagram, Página do Facebook, Portfólio (Business Manager)",
+        "Conta de anúncios com forma de pagamento",
+        "Pixel / conjunto de dados criado (instalar na LP na F4)",
+        "Rastreio de conversa no WhatsApp definido",
+        "Instagram ligado à Página (pra postagem automática)",
+        "Google Meu Negócio: criar quando o endereço do consultório estiver definido"
+      ]
+    },
+    {
+      "name": "F3 · Opus: Direção e Estratégia de Marca pronta pra apresentar",
+      "assignees": [
+        81994084
+      ],
+      "due": "2026-10-27",
+      "fase": 3,
+      "description": "**Pronto quando:** Opus em design, revisado pela Marina, pronto pra reunião de 28/10.\n**Insumos:** formulário de investigação + transcrição da reunião de 14/10 + marca enviada em 19/10.\n**Trava:** sem Opus aprovado não começa roteiro, perfil nem LP.",
+      "checklist": [
+        "Estratégia gerada pela Victoria (formulário + reunião de 14/10)",
+        "Avaliação da marca atual: manter ou revigorar logo e cores",
+        "Direção visual / moodboard",
+        "Opus em design",
+        "Revisão da Marina (CFM incluso)"
+      ]
+    },
+    {
+      "name": "F3 · Reunião de apresentação do Opus + aprovação da cliente (qua 28/10)",
+      "assignees": [
+        158419961
+      ],
+      "due": "2026-10-28",
+      "fase": 3,
+      "description": "**Pronto quando:** cliente aprovou o Opus e a equipe foi avisada.\nReunião na quarta (único dia livre da cliente). Ajustes pedidos na reunião entram no checklist com prazo de 2 dias úteis.",
+      "checklist": [
+        "Reunião marcada pra quarta 28/10",
+        "Opus apresentado",
+        "Ajustes registrados e feitos",
+        "Aprovação da cliente no grupo",
+        "Equipe avisada (conteúdo, design, tráfego)"
+      ]
+    },
+    {
+      "name": "F4 · Calendário + 6 roteiros do 1º ciclo aprovados e cadastrados",
+      "assignees": [
+        81994084
+      ],
+      "due": "2026-11-03",
+      "fase": 4,
+      "description": "**Pronto quando:** calendário do 1º ciclo (6 conteúdos, a partir de 18/11) aprovado pela cliente e as 6 peças cadastradas no Calendário Editorial com roteiro.\nAprovação de calendário: 2 dias úteis (02/11 é feriado). Foco do 1º ciclo: captação e convencimento; conversão só na inauguração do consultório.",
+      "checklist": [
+        "Calendário do 1º ciclo enviado à cliente (até 29/10)",
+        "Calendário aprovado",
+        "6 roteiros escritos (CFM)",
+        "6 peças cadastradas no Calendário Editorial com data de postagem"
+      ]
+    },
+    {
+      "name": "F4 · Gravação dirigida online do 1º ciclo (qua 04/11)",
+      "assignees": [
+        81994084
+      ],
+      "due": "2026-11-04",
+      "fase": 4,
+      "description": "**Pronto quando:** brutos dos roteiros no Drive.\nDirigida ao vivo, online, na quarta. Reserva: quarta 11/11, mas aí o Go Live passa de 18/11. Prazo do manual pra insumo: até 10 dias.",
+      "checklist": [
+        "Gravação marcada pra quarta 04/11",
+        "Roteiros e orientações de gravação enviados antes",
+        "Gravação feita",
+        "Brutos no Drive e repassados pra edição (Francisco divide a edição)"
+      ]
+    },
+    {
+      "name": "F4 · Perfil ativado (bio, destaques, fixados, templates)",
+      "assignees": [
+        81994084
+      ],
+      "due": "2026-11-06",
+      "fase": 4,
+      "description": "**Pronto quando:** perfil novo aprovado pela cliente e aplicado no Instagram, e os templates visuais prontos pra produção.\nDepende do Opus aprovado (28/10). Link na bio aponta pra LP quando ela entrar no ar.",
+      "checklist": [
+        "Bio reescrita",
+        "Foto de perfil",
+        "Capas de destaques",
+        "Posts fixados definidos",
+        "Templates visuais com a Pâmela (carrossel, estático, capa de reels)",
+        "Aprovação da cliente",
+        "Aplicado no Instagram"
+      ]
+    },
+    {
+      "name": "F4 · Landing page no ar",
+      "assignees": [
+        158419961
+      ],
+      "due": "2026-11-11",
+      "fase": 4,
+      "description": "**Pronto quando:** LP publicada, com WhatsApp e pixel funcionando, aprovada pela cliente e no link da bio.\nÉ o destino da campanha (F5) e substitui o site que ela não tem. Copy a partir do Opus, design na identidade aprovada, CFM (sem promessa, sem preço, sem antes/depois).",
+      "checklist": [
+        "Copy a partir do Opus",
+        "Design na identidade aprovada",
+        "Domínio / endereço definido",
+        "Botão de WhatsApp + pixel instalados e testados",
+        "Aprovação da cliente (até 2 rodadas)",
+        "Publicada e no link da bio"
+      ]
+    },
+    {
+      "name": "F5 · Go Live: primeiros conteúdos e campanha no ar",
+      "assignees": [
+        158419961
+      ],
+      "due": "2026-11-18",
+      "fase": 5,
+      "description": "**Pronto quando:** primeiros conteúdos publicados, campanha de captação rodando e a conta entregue pra rotina mensal.\nA produção das peças anda no Calendário Editorial; aqui só o marco. Campanha de conversão entra quando o consultório inaugurar.",
+      "checklist": [
+        "Primeiras peças editadas e com design (crivo interno)",
+        "Aprovação da cliente (até 2 rodadas por peça)",
+        "Peças agendadas",
+        "Primeira peça publicada",
+        "Campanha de captação no ar (Jenifer)",
+        "Campanha de conversão no ar na inauguração do consultório (Jenifer)",
+        "Primeiro relatório quinzenal de tráfego no grupo (Jenifer)",
+        "Calendário de dezembro aprovado e agendado até 25/11 (rotina mensal)"
+      ]
+    }
+  ]
+}
