@@ -6,6 +6,7 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
+2026-10-19 (tarde): Lince mídia própria com Data de Postagem lançada de 20/10 a 01/12 (terça 12h denso, quinta 18h30 leve). Urocenter novembro no ClickUp: 10 vídeos (Murilo, William, Ricardo) com prazo 5 dias úteis antes, Mateus nos vídeos e capas "CAPA: <nome>" pra Pâmela; outubro intocado.
 2026-10-19: skill /onboarding criada (onboarding completo em módulos, contrato decide o que entra, prazos em dias úteis desde o D0 = reunião de onboarding). Onboarding da Dra. Mariana Fontana no ClickUp (tarefa-mãe 17trfwhnu88, 10 subtarefas, Go Live 18/11). Tudo em `operacao/onboarding/`.
 2026-10-16: sessão de extração da Simone transcrita e minutada (20 vídeos, `clientes/simone-do-valle/extracao/2026-09-16-extracao/` + 2 Google Docs na pasta "Vídeos - 25-09") e cadastrada no ClickUp (tarefa-mãe 17trfwhndxr, 18 vídeos, Reels Dia do Médico movido pra dentro, 19 capas pra Pâmela). Dia do Médico: IMG_0486.MOV 7:07–9:05.
 2026-10-07 (noite): postagem automática no ar no Worker `filas-lince` (Instagram ligado pelo app Meta, 14 clientes mapeados, trava `POSTAR_APENAS` = só Lince & Co., que aponta pro @francisco.schirmer). Teste de carrossel marcado pra 07/10 20h00 na tarefa 17trfwhkv88. Falta o Google (Drive e GMN) e o TikTok. Plano: `operacao/postagem-automatica/plano.md`.
@@ -18,12 +19,15 @@
 2026-10-01: produtividade migrada para o Supabase próprio do Francisco (projeto "Chico"). Formulário de acessos do cliente no ar (acessos-lince.pages.dev, painel em /painel).
 
 ## Pendências
+- Urocenter: 3 carrosséis de novembro sem conteúdo (07, 14 e 21/11); sugestão: perguntas 05, 13 e 15 do Novembro Azul (2026-10-19)
+- Urocenter: carrossel "Coisas que os homens fazem" (86ak7m6z5) em aprovação com data 15/10 vencida (2026-10-19)
+- Urocenter: sobram 9 vídeos de Novembro Azul + a reserva; decidir se vão pra dezembro sem o selo (2026-10-19)
+- Lince: vídeos acabam em 03/12, gravar pauta de vídeo leve (22, 32, 36 ou 42); 6 carrosséis leves sem data; tema "Não gosto de produzir conteúdo" repete no VGC da Vic (2026-10-19)
 - Mariana: criar a opção "Mariana Fontana" no campo 👔 Clientes do ClickUp, à mão (a API não cria opção de lista) (2026-10-19)
 - Mariana: mandar as respostas dos formulários de investigação e de acessos pro Opus, que vence em 27/10 (2026-10-19)
 - Mariana: criar a pasta da cliente com /novo-projeto (2026-10-19)
 - Onboarding: confirmar com a Júlia onde ficam os contratos assinados (não estão no Drive operacional), pra skill /onboarding ler direto (2026-10-19)
 - Simone: Marina decide a V06 (17trfwhndy3, cita Veoza, preço e Mounjaro): versão curta sem nome (3:55–4:16 + 4:44–4:56) ou regravar (2026-10-16)
-- Simone: cadastrar o V20 (depoimento de dois anos, VIDEO PARA A LINCE.MOV) no Calendário Editorial da Lince & Co. quando achar a tarefa no ClickUp (2026-10-16)
 - Simone: confirmar quem entrevistou em 16/09 pela conta operacional@ (Marina?) e corrigir o falante na transcrição (2026-10-16)
 - Simone: colar a seção ClickUp da minutagem.md no Google Doc da minutagem, que ainda diz "não cadastrado" (2026-10-16)
 - Simone: criar a pasta do cliente com /novo-projeto; hoje `clientes/simone-do-valle/` só tem a subpasta de extração (2026-10-16)
