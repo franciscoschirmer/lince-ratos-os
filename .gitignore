@@ -40,3 +40,8 @@ operacao/filas-worker/.tmp/
 **/conteudos/*/banco/*.mp4
 **/conteudos/*/*.wav
 .claude/skills/edicao-completa/sons/*.wav
+
+# folhas de contato e testes de inspeção (o look.py da ffmpeg-skill regenera em segundos)
+folhas/
+*_sheet.png
+ffmpeg-skill-teste/
