@@ -1,0 +1,284 @@
+{
+ "saida": "BF07-tudo-isso-50off-v1.mp4",
+ "fps": 30,
+ "w": 1080,
+ "h": 1920,
+ "audio": {
+  "arquivo": "trilha-faltam.wav",
+  "ganho_db": 0
+ },
+ "timeline": [
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0866.MP4",
+   "in": 1.0,
+   "out": 1.67,
+   "dur": 0.67,
+   "zoom": [
+    1.0,
+    1.05
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0175.MP4",
+   "in": 3.0,
+   "out": 3.5,
+   "dur": 0.5,
+   "zoom": [
+    1.06,
+    1.0
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0438.MP4",
+   "in": 2.0,
+   "out": 2.4,
+   "dur": 0.4,
+   "grade": "forte"
+  },
+  {
+   "tipo": "cartao",
+   "dur": 1.03,
+   "texto": [
+    {
+     "fonte": "script",
+     "txt": "tudo isso",
+     "tam": 200,
+     "cor": "sage",
+     "y": 940,
+     "x": 470
+    },
+    {
+     "fonte": "bold",
+     "txt": "COM 50% OFF?",
+     "tam": 130,
+     "cor": "cream",
+     "y": 1085,
+     "atraso": 0.08
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0171.MP4",
+   "in": 1.0,
+   "out": 1.4,
+   "dur": 0.4,
+   "grade": "leve",
+   "zoom": [
+    1.0,
+    1.04
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0418.MP4",
+   "in": 8.0,
+   "out": 8.37,
+   "dur": 0.37,
+   "grade": "forte"
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0440.MP4",
+   "in": 3.0,
+   "out": 3.36,
+   "dur": 0.36,
+   "grade": "forte",
+   "zoom": [
+    1.0,
+    1.04
+   ]
+  },
+  {
+   "tipo": "cartao",
+   "dur": 0.87,
+   "texto": [
+    {
+     "tam": 100,
+     "cor": "cream",
+     "y": 935,
+     "partes": [
+      [
+       "na ",
+       "regular"
+      ],
+      [
+       "Black Friday",
+       "bold"
+      ]
+     ]
+    },
+    {
+     "tam": 100,
+     "cor": "cream",
+     "y": 1050,
+     "partes": [
+      [
+       "da Fazenda do Rosa,",
+       "regular"
+      ]
+     ],
+     "atraso": 0.05
+    }
+   ]
+  },
+  {
+   "tipo": "cartao",
+   "dur": 1.2,
+   "texto": [
+    {
+     "fonte": "bold",
+     "txt": "SIM!",
+     "tam": 260,
+     "cor": "cream",
+     "y": 1055
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0175.MP4",
+   "in": 8.0,
+   "out": 8.43,
+   "dur": 0.43,
+   "zoom": [
+    1.0,
+    1.04
+   ],
+   "texto": [
+    {
+     "fonte": "bold",
+     "txt": "50% OFF",
+     "tam": 235,
+     "cor": "white",
+     "y": 1040,
+     "contorno": 4,
+     "entra": 0.0
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0866.MP4",
+   "in": 5.0,
+   "out": 5.42,
+   "dur": 0.42,
+   "texto": [
+    {
+     "fonte": "bold",
+     "txt": "50% OFF",
+     "tam": 235,
+     "cor": "white",
+     "y": 1040,
+     "contorno": 4,
+     "entra": 0.0
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0440.MP4",
+   "in": 10.0,
+   "out": 10.42,
+   "dur": 0.42,
+   "grade": "forte",
+   "texto": [
+    {
+     "fonte": "bold",
+     "txt": "50% OFF",
+     "tam": 235,
+     "cor": "white",
+     "y": 1040,
+     "contorno": 4,
+     "entra": 0.0
+    }
+   ]
+  },
+  {
+   "tipo": "cartao",
+   "dur": 0.4
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0438.MP4",
+   "in": 6.0,
+   "out": 6.26,
+   "dur": 0.26,
+   "grade": "forte"
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0175.MP4",
+   "in": 11.0,
+   "out": 11.2,
+   "dur": 0.2
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0418.MP4",
+   "in": 12.0,
+   "out": 12.17,
+   "dur": 0.17,
+   "grade": "forte"
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0171.MP4",
+   "in": 3.0,
+   "out": 3.2,
+   "dur": 0.2,
+   "grade": "leve"
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0866.MP4",
+   "in": 7.5,
+   "out": 7.77,
+   "dur": 0.27
+  },
+  {
+   "tipo": "cartao",
+   "dur": 1.86,
+   "drift": [
+    1.0,
+    0.97
+   ],
+   "texto": [
+    {
+     "fonte": "script",
+     "txt": "chegou a hora",
+     "tam": 150,
+     "cor": "sage",
+     "y": 860
+    },
+    {
+     "fonte": "bold",
+     "txt": "50% OFF",
+     "tam": 170,
+     "cor": "cream",
+     "y": 1020,
+     "atraso": 0.06
+    },
+    {
+     "tam": 96,
+     "cor": "cream",
+     "y": 1130,
+     "partes": [
+      [
+       "dia ",
+       "script"
+      ],
+      [
+       "11/11/2026",
+       "bold"
+      ]
+     ],
+     "atraso": 0.12
+    }
+   ]
+  }
+ ]
+}

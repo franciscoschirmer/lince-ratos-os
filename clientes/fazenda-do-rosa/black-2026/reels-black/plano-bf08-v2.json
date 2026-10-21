@@ -1,0 +1,435 @@
+{
+ "saida": "BF08-fim-de-semana-romantico-v2.mp4",
+ "fps": 30,
+ "w": 1080,
+ "h": 1920,
+ "audio": {
+  "arquivo": "plates/trilha-cada-onda.wav",
+  "ganho_db": 0
+ },
+ "_nota": "v2 (2026-10-21): texto sempre sobre vídeo, sem cartão preto; a frase fica na tela enquanto o take corta na batida (0,74 s). The Seasons só no 'quem tu ama'. Fecho e data em Neue Montreal. Sem os brutos da Eco suíte (pastas vazias), placas da v1.",
+ "timeline": [
+  {
+   "tipo": "take",
+   "src": "plates/frase07-sem-texto.mp4",
+   "in": 0.3,
+   "out": 1.04,
+   "dur": 0.74,
+   "zoom": [
+    1.0,
+    1.06
+   ],
+   "escurecer": 0.38,
+   "texto": [
+    {
+     "fonte": "regular",
+     "txt": "Já pensou em surpreender",
+     "tam": 78,
+     "cor": "cream",
+     "y": 930,
+     "sombra": 5,
+     "entra": 0.14
+    },
+    {
+     "fonte": "script",
+     "txt": "quem tu ama",
+     "tam": 150,
+     "cor": "sage",
+     "y": 1090,
+     "sombra": 5,
+     "entra": 0.14,
+     "atraso": 0.1
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0418.MP4",
+   "in": 1.0,
+   "out": 1.74,
+   "dur": 0.74,
+   "grade": "leve",
+   "escurecer": 0.3,
+   "texto": [
+    {
+     "fonte": "regular",
+     "txt": "Já pensou em surpreender",
+     "tam": 78,
+     "cor": "cream",
+     "y": 930,
+     "sombra": 5,
+     "entra": 0.0
+    },
+    {
+     "fonte": "script",
+     "txt": "quem tu ama",
+     "tam": 150,
+     "cor": "sage",
+     "y": 1090,
+     "sombra": 5,
+     "entra": 0.0
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "plates/jacuzzi-por-do-sol.mp4",
+   "in": 0.4,
+   "out": 1.14,
+   "dur": 0.74,
+   "zoom": [
+    1.0,
+    1.04
+   ],
+   "escurecer": 0.34,
+   "texto": [
+    {
+     "fonte": "regular",
+     "txt": "com um fim de semana",
+     "tam": 92,
+     "cor": "cream",
+     "y": 945,
+     "sombra": 5,
+     "entra": 0.14
+    },
+    {
+     "tam": 100,
+     "cor": "cream",
+     "y": 1065,
+     "sombra": 5,
+     "entra": 0.14,
+     "atraso": 0.06,
+     "partes": [
+      [
+       "na ",
+       "regular"
+      ],
+      [
+       "Praia do Rosa?",
+       "bold"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "../videos-ajuste/originais/Vídeo Cada onda que quebra carrega um convite.mp4",
+   "in": 12.6,
+   "out": 13.34,
+   "dur": 0.74,
+   "escurecer": 0.25,
+   "texto": [
+    {
+     "fonte": "regular",
+     "txt": "com um fim de semana",
+     "tam": 92,
+     "cor": "cream",
+     "y": 945,
+     "sombra": 5,
+     "entra": 0.0
+    },
+    {
+     "tam": 100,
+     "cor": "cream",
+     "y": 1065,
+     "sombra": 5,
+     "entra": 0.0,
+     "partes": [
+      [
+       "na ",
+       "regular"
+      ],
+      [
+       "Praia do Rosa?",
+       "bold"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0171.MP4",
+   "in": 1.0,
+   "out": 1.74,
+   "dur": 0.74,
+   "grade": "leve",
+   "zoom": [
+    1.0,
+    1.05
+   ],
+   "escurecer": 0.34,
+   "texto": [
+    {
+     "fonte": "regular",
+     "txt": "e com",
+     "tam": 84,
+     "cor": "cream",
+     "y": 930,
+     "sombra": 5,
+     "entra": 0.12
+    },
+    {
+     "fonte": "bold",
+     "txt": "50% OFF?",
+     "tam": 200,
+     "cor": "cream",
+     "y": 1125,
+     "sombra": 6,
+     "entra": 0.12,
+     "atraso": 0.08
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "plates/frase07-sem-texto.mp4",
+   "in": 7.0,
+   "out": 7.74,
+   "dur": 0.74,
+   "escurecer": 0.3,
+   "texto": [
+    {
+     "fonte": "regular",
+     "txt": "e com",
+     "tam": 84,
+     "cor": "cream",
+     "y": 930,
+     "sombra": 5,
+     "entra": 0.0
+    },
+    {
+     "fonte": "bold",
+     "txt": "50% OFF?",
+     "tam": 200,
+     "cor": "cream",
+     "y": 1125,
+     "sombra": 6,
+     "entra": 0.0
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0219.MP4",
+   "in": 10.0,
+   "out": 10.74,
+   "dur": 0.74,
+   "grade": "leve",
+   "zoom": [
+    1.0,
+    1.04
+   ],
+   "texto": [
+    {
+     "fonte": "bold",
+     "txt": "50% OFF",
+     "tam": 235,
+     "cor": "white",
+     "y": 1040,
+     "contorno": 4,
+     "entra": 0.0
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0866.MP4",
+   "in": 5.0,
+   "out": 5.74,
+   "dur": 0.74,
+   "zoom": [
+    1.0,
+    1.04
+   ],
+   "texto": [
+    {
+     "fonte": "bold",
+     "txt": "50% OFF",
+     "tam": 235,
+     "cor": "white",
+     "y": 1040,
+     "contorno": 4,
+     "entra": 0.0
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "plates/jacuzzi-por-do-sol.mp4",
+   "in": 2.5,
+   "out": 3.98,
+   "dur": 1.48,
+   "zoom": [
+    1.0,
+    1.05
+   ],
+   "escurecer": 0.36,
+   "texto": [
+    {
+     "fonte": "regular",
+     "txt": "esse desconto",
+     "tam": 84,
+     "cor": "cream",
+     "y": 945,
+     "sombra": 5,
+     "entra": 0.14
+    },
+    {
+     "tam": 78,
+     "cor": "cream",
+     "y": 1060,
+     "sombra": 5,
+     "entra": 0.14,
+     "atraso": 0.08,
+     "partes": [
+      [
+       "ela nem precisa saber ",
+       "bold"
+      ],
+      [
+       "🤫",
+       "emoji"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "plates/frase07-sem-texto.mp4",
+   "in": 2.0,
+   "out": 2.74,
+   "dur": 0.74,
+   "zoom": [
+    1.0,
+    1.04
+   ],
+   "escurecer": 0.36,
+   "texto": [
+    {
+     "fonte": "regular",
+     "txt": "esse desconto",
+     "tam": 84,
+     "cor": "cream",
+     "y": 945,
+     "sombra": 5,
+     "entra": 0.0
+    },
+    {
+     "tam": 78,
+     "cor": "cream",
+     "y": 1060,
+     "sombra": 5,
+     "entra": 0.0,
+     "partes": [
+      [
+       "ela nem precisa saber ",
+       "bold"
+      ],
+      [
+       "🤫",
+       "emoji"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "plates/frase07-sem-texto.mp4",
+   "in": 9.0,
+   "out": 10.48,
+   "dur": 1.48,
+   "zoom": [
+    1.0,
+    1.04
+   ],
+   "escurecer": 0.3,
+   "texto": [
+    {
+     "tam": 128,
+     "cor": "cream",
+     "y": 1040,
+     "sombra": 6,
+     "entra": 0.14,
+     "partes": [
+      [
+       "dia ",
+       "regular"
+      ],
+      [
+       "11/11/2026",
+       "bold"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0171.MP4",
+   "in": 2.6,
+   "out": 4.08,
+   "dur": 1.48,
+   "grade": "leve",
+   "zoom": [
+    1.05,
+    1.0
+   ],
+   "escurecer": 0.34,
+   "texto": [
+    {
+     "tam": 128,
+     "cor": "cream",
+     "y": 1040,
+     "sombra": 6,
+     "entra": 0.0,
+     "partes": [
+      [
+       "dia ",
+       "regular"
+      ],
+      [
+       "11/11/2026",
+       "bold"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "tipo": "take",
+   "src": "takes/DJI_0418.MP4",
+   "in": 8.0,
+   "out": 9.48,
+   "dur": 1.48,
+   "grade": "leve",
+   "zoom": [
+    1.0,
+    1.03
+   ],
+   "escurecer": 0.3,
+   "texto": [
+    {
+     "tam": 128,
+     "cor": "cream",
+     "y": 1040,
+     "sombra": 6,
+     "entra": 0.0,
+     "partes": [
+      [
+       "dia ",
+       "regular"
+      ],
+      [
+       "11/11/2026",
+       "bold"
+      ]
+     ]
+    }
+   ]
+  }
+ ]
+}

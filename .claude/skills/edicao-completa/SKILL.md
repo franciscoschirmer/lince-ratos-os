@@ -20,12 +20,22 @@ Os scripts ficam em `scripts/` desta skill:
 | `apagar_texto.py` | apaga texto queimado e parado (legenda do story) por inpainting, só nos traços das letras. Gera o `bruto-limpo.mp4` que vira a fonte |
 | `gerar_sons.py` | sintetiza os efeitos (clique, flash de câmera, boom, ding, pop, sino, subida, impacto, whoosh) e uma trilha de teste com pulso em `sons/`. Roda uma vez por máquina, porque os `.wav` ficam fora do git |
 | `montar_v1.py` | a versão antiga, com tarja de legenda e sem tela dividida. Só pra referência |
+| `palavras_para_words.py` | converte o JSON do `transcrever.py` pro formato `--words` da ffmpeg-skill (ver "A conferência usa a ffmpeg-skill", abaixo) |
 
 Precisa de ffmpeg, Python com `faster-whisper` e numpy, e os modelos em
 `~/.cache/huggingface`. Nesta máquina tudo isso já está instalado. O Whisper roda na CPU,
 porque a GPU não tem as DLLs do CUDA: o large-v3 leva uns 2 minutos e meio por minuto de
 vídeo, sempre em segundo plano. Se `sons/` estiver vazia, roda o
 `gerar_sons.py <skill>/sons` antes.
+
+**A conferência usa a ffmpeg-skill** (`~/.claude/skills/ffmpeg-skill`, instalada em
+2026-10-21 com `npx ffmpeg-skill`; `npx ffmpeg-skill doctor` confere a máquina). Ela só mede e
+corrige formato: `check.py`, `look.py`, `loudness.py`, `audio.py`. Quem decide o corte e a
+edição continua sendo esta skill. Se a pasta não existir, instala com o mesmo comando; se
+faltar, a conferência volta a ser à mão (`ffprobe`, `ebur128`, folha com ffmpeg). Dois
+cuidados: nesta máquina o Python é `python`, não `python3`, e o `--transcribe` embutido dela
+quebra com o `huggingface_hub` 1.33 (`metadata_errors`). Transcrição é sempre do
+`transcrever.py`; pra ela ler, passa pelo `palavras_para_words.py` e `--words`.
 
 **Antes de qualquer edição, ler `historico/licoes.md`**: é a lista do que o Francisco já
 reprovou. O histórico de cada vídeo fica em `historico/<data>-<cliente>-<assunto>.md`, versão
@@ -214,12 +224,39 @@ final some.
 
 ## 5. Conferir (sempre, antes de entregar)
 
-- **Duração**: o vídeo e o áudio têm a mesma duração (`ffprobe` por stream).
+Os três comandos abaixo são da ffmpeg-skill (`F=~/.claude/skills/ffmpeg-skill/scripts`).
+Nenhum deles reescreve o final; o único que grava é o `loudness.py`, num arquivo novo.
+
+1. **Especificação do Reels**: `python $F/check.py <final>.mp4 --platform reels`. Tem que
+   dar 0 falhas. As linhas de formato (codec, pixel format, tamanho, cor, VFR) se corrigem
+   sem perguntar; as de julgamento (duração, proporção, fps) mudam conteúdo, então é
+   dizer o que foi e por quê. O aviso "subtitles none" é esperado: a legenda da casa é
+   queimada, não muxada. Confere também, no `--json`, que vídeo e áudio têm a mesma
+   duração.
+2. **Folha de contato com a zona segura**: `python $F/look.py <final>.mp4 --tiles 3x3
+   --safe reels -o <pasta>/<final>_sheet.png` e **olhar o PNG**. A `--safe reels` sombreia
+   o que a interface do Instagram cobre. O que se procura: legenda da tela cheia no peito,
+   não no rosto, e fora da faixa sombreada; cartão e lista dentro da área útil; adesivo
+   nativo íntegro (fica na faixa de cima, que é dele mesmo); nenhum frame com zoom
+   mostrando o texto apagado. Pra um momento específico, `--at <segundos>`. Pra comparar
+   duas versões no mesmo instante, `look.py v5.mp4 --compare v6.mp4 --at <segundos>`.
+3. **Loudness**: o `check.py` já mede. Se der fora de -14 ± 2 LUFS ou pico acima de
+   -1 dBTP, não remonta: `python $F/loudness.py <final>.mp4 -I -14 --tp -1.5 -o
+   <final>-loud.mp4`. É o loudnorm em duas passagens, o vídeo sai copiado sem reencode e
+   o arquivo é medido de novo até bater o alvo. Roda o `check.py` de novo no resultado e
+   entrega esse. (O montador já faz uma passagem de loudnorm; esta é a correção, não a
+   regra.)
+
+Depois disso, o que a ferramenta não vê:
+
 - **Transcrição do corte**: lê inteira. Toda emenda soa como frase?
-- **Frames**: uma folha com uns 8 a 10 momentos (gancho, cada troca de tela, cada inserção, a
-  ênfase, o cartão). A legenda da tela cheia cai no peito, não no rosto? O adesivo queimado
-  aparece em algum frame com zoom?
-- **Áudio**: `ebur128` dá -14 LUFS no total.
+- **Palavra de preenchimento**: opcional, só se sobrou "é, é", "hum" que o corte não pegou.
+  `python scripts/palavras_para_words.py <pasta>/transcricao.json -o <pasta>/words.json`,
+  depois `python $F/silence.py <final>.mp4 --filler --filler-lang pt --words
+  <pasta>/words.json --filler-list`. A lista de português dela tem só "hum" e "é", e "é"
+  costuma ser palavra de verdade: a lista é pra olhar, e o corte continua sendo do plano.
+- **Voz ecoada ou com ruído** que o tratamento do montador não resolveu: `python
+  $F/audio.py <final>.mp4 --voice medium -o <final>-voz.mp4` antes do loudness, e ouvir.
 
 ## 6. Entregar
 

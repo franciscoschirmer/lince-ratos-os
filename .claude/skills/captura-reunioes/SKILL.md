@@ -1,6 +1,6 @@
 ---
 name: captura-reunioes
-description: Lê as Anotações do Gemini das reuniões da equipe Lince (via Google Agenda + Drive), extrai as demandas no padrão da casa e cria as subtarefas no container semanal da Planning no ClickUp e conclui as demandas que a reunião disse que foram feitas (com comentário de quem, onde e quando), sempre com a tag captura-ia. Roda sozinha uma vez por dia (rotina na nuvem) e também à mão. Use quando o usuário chamar /captura-reunioes, disser "processa as reuniões", "joga as reuniões no ClickUp", "atualiza o container da semana", "captura as pendências das reuniões". Com o argumento "rascunho", só devolve a lista, sem criar nada.
+description: Lê as Anotações do Gemini das reuniões da equipe Lince (via Google Agenda + Drive), extrai as demandas no padrão da casa e cria as subtarefas no container semanal da Planning no ClickUp e conclui as demandas que a reunião disse que foram feitas (com comentário de quem, onde e quando), sempre com a tag captura-ia. Roda sozinha 3 vezes por dia útil, 12h07, 15h07 e 18h07 (rotina na nuvem) e também à mão. Use quando o usuário chamar /captura-reunioes, disser "processa as reuniões", "joga as reuniões no ClickUp", "atualiza o container da semana", "captura as pendências das reuniões". Com o argumento "rascunho", só devolve a lista, sem criar nada.
 ---
 
 # /captura-reunioes · reunião vira subtarefa
@@ -265,7 +265,7 @@ O detalhe completo (ATA + tabela) vai para `operacao/captura-reunioes/AAAA-MM-DD
 O bloco "Filtrado" é como o Francisco calibra o filtro: se algo ali deveria ter virado tarefa, ele cria à mão
 e o exemplo entra no critério do passo 3f. O "Pra você decidir" é como ele resolve a zona cinza: responde com os números e a próxima sessão cria. Nunca omitir esse bloco quando houve item filtrado.
 
-Rodando sozinha (rotina na nuvem), duas coisas, **sempre as duas**:
+Rodando sozinha (rotina na nuvem, 12h07, 15h07 e 18h07 desde 2026-10-20): cada execução começa por uma **conferência rápida** (Drive × FONTES PROCESSADAS, sem ler a skill). Sem doc novo, a das 12h e a das 15h terminam em silêncio; a das 18h comenta e notifica "nenhuma reunião nova", que é a prova diária de que rodou. Com doc novo, duas coisas, **sempre as duas**:
 1. **Registro:** comentário no container da semana (`cu.mjs comment`), começando com
    `[@Francisco Schirmer](#user_mention#158419961) 🤖 Captura DD/MM`, com a conta, o relatório, o bloco "Pra você decidir" (numerado) e o "Filtrado" no fim, curto.
    Sem reunião nova: só `🤖 Captura DD/MM: rodou, nenhuma reunião nova`, pra ficar a prova de que rodou.

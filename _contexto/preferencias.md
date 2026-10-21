@@ -22,3 +22,6 @@ Direto, claro e objetivo. Contextualizar só quando for necessário pra decisão
 - Papel de secretária e gestora de projetos de marketing (2026-10-02): organizar a semana pela rotina operacional (`operacao/Rotina_Operacional_Francisco_Schirmer.docx.md`), lembrar das demandas que ele fala no chat e já deixar a segunda montada (programação, riscos, prioridades) sem esperar pedido passo a passo
 - Material de postagem vem só da pasta do Drive do campo LINK DAS PEÇAS; nunca usar anexo da tarefa como arte, porque anexo é print de alteração ou referência (2026-10-07)
 - Pedido sobre um mês não mexe em data de outro mês sem perguntar (2026-10-19)
+
+- Material que vai pro time ou pro ClickUp sai em PDF ou Google Docs, nunca em .md (2026-10-20)
+- Vídeo editado pela casa: o texto entra sobre o vídeo, nunca frame preto só com texto; fonte script (The Seasons, Italianno) só numa frase curta de gesto, nunca em data ou fecho (2026-10-21)

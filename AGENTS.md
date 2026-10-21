@@ -164,6 +164,7 @@ no fim", e a sessão nunca morre sem essa oferta. Não oferecer em sessão trivi
 - `.ratosos` · a versão do kit (uma linha). Não apague: é como a atualização sabe de onde você parte
 <!-- pastas de trabalho abaixo, criadas pelo /setup conforme o negócio -->
 - `clientes/` · uma pasta por médico/cliente (o `/novo-projeto` cria), com contexto, andamento, atas e pendências. Toda pasta de cliente leva a subpasta `conteudos/` pros conteúdos daquele médico
+  - `clientes/fazenda-do-rosa/` · Fazenda do Rosa (pousada e casamentos na Praia do Rosa): contexto, andamento, Black 2026, transcrições e extrações gravadas
 - `operacao/` · capacidade de produção, projeção de prazos, rituais internos (Planning, retro, MAP), processos e automações
 - `trafego/` · análises e criativos de Meta Ads que não são de um cliente só (benchmarks, modelos, testes)
 - `comercial/` · propostas, LPs e novos produtos da esteira (com a Victoria)

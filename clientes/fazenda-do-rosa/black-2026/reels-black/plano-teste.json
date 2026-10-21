@@ -1,0 +1,34 @@
+{
+  "saida": "teste.mp4", "fps": 30, "w": 1080, "h": 1920,
+  "audio": {"arquivo": "trilha-faltam.wav", "ganho_db": 0},
+  "timeline": [
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 0.0, "out": 0.67, "dur": 0.67, "zoom": [1.0, 1.04]},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 0.77, "out": 1.20, "dur": 0.5},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 1.20, "out": 1.57, "dur": 0.4},
+    {"tipo": "cartao", "dur": 1.03, "texto": [
+      {"fonte": "script", "txt": "imagina", "tam": 150, "cor": "sage", "y": 930, "x": 500},
+      {"fonte": "bold", "txt": "ACORDAR AQUI", "tam": 122, "cor": "cream", "y": 1075, "atraso": 0.08}]},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Cada onda que quebra carrega um convite.mp4", "in": 12.4, "out": 12.85, "dur": 0.4},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 2.87, "out": 3.30, "dur": 0.37},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 3.30, "out": 3.73, "dur": 0.36},
+    {"tipo": "cartao", "dur": 0.87, "texto": [
+      {"tam": 96, "cor": "cream", "y": 990, "partes": [["na ", "regular"], ["Black", "bold"], [" da Fazenda", "regular"]]}]},
+    {"tipo": "cartao", "dur": 1.2, "texto": [
+      {"fonte": "regular", "txt": "tudo com", "tam": 96, "cor": "cream", "y": 905},
+      {"fonte": "bold", "txt": "50% OFF", "tam": 185, "cor": "cream", "y": 1072, "atraso": 0.06}]},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Cada onda que quebra carrega um convite.mp4", "in": 12.85, "out": 13.3, "dur": 0.43,
+     "texto": [{"fonte": "bold", "txt": "50% OFF", "tam": 230, "cor": "white", "y": 1040, "contorno": 4, "entra": 0.0}]},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 8.30, "out": 8.57, "dur": 0.4,
+     "texto": [{"fonte": "bold", "txt": "50% OFF", "tam": 230, "cor": "white", "y": 1040, "contorno": 4, "entra": 0.0}]},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 7.47, "out": 7.73, "dur": 0.44,
+     "texto": [{"fonte": "bold", "txt": "50% OFF", "tam": 230, "cor": "white", "y": 1040, "contorno": 4, "entra": 0.0}]},
+    {"tipo": "cartao", "dur": 0.4},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 7.73, "out": 7.93, "dur": 0.27},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 7.93, "out": 8.10, "dur": 0.27},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 2.60, "out": 2.87, "dur": 0.28},
+    {"tipo": "take", "src": "../videos-ajuste/originais/Vídeo Faltam 02 dias.mp4", "in": 0.0, "out": 0.3, "dur": 0.28},
+    {"tipo": "cartao", "dur": 1.86, "drift": [1.0, 0.97], "texto": [
+      {"fonte": "bold", "txt": "50% OFF", "tam": 110, "cor": "cream", "y": 935},
+      {"tam": 92, "cor": "cream", "y": 1060, "partes": [["dia ", "script"], ["11/11/2026", "bold"]], "atraso": 0.1}]}
+  ]
+}
