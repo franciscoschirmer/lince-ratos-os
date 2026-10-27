@@ -6,6 +6,8 @@
 > Pendência que sai desta lista sai com motivo (feito, virou projeto, mandaram soltar), nunca em silêncio.
 
 ## Onde paramos
+2026-10-27: vídeos do Dr. Walter no Drive transcritos e cruzados com o documento de roteiros de testes de perfil; 4 roteiros gravados (fungo, ereção matinal, preenchimento, insulina), os takes curtos de 02/10 e os bastidores do evento de 09/10 cadastrados no Calendário Editorial dele (86akbndg2), em "disponível para edição", sem data de postagem nem editor.
+2026-10-23: fila da Pâmela redistribuída no ClickUp (210 prazos): datas de postagem primeiro, 4 carrosséis + 3 capas/cards por dia, sem feriado nem fim de semana, sem data de postagem a partir de 12/11. PDF de 23/10 desatualizado.
 2026-10-21: ffmpeg-skill instalada e plugada como camada de conferência da `edicao-completa` (check, look com zona segura, loudness). BF08 da Black da Fazenda montado em v2 (texto sobre vídeo, `black-2026/reels-black/plano-bf08-v2.json`), aguardando upload no Drive e comentário na subtarefa 5.3; BF07 v1 em revisão interna (comentário de 10h40 na 5.2). Brutos da Eco suíte e takes de casal ainda não chegaram.
 2026-10-20: Black da Fazenda estruturada no ClickUp (tarefa-mãe 17trfwhp3n3 em 🎯 Projetos Especiais, 11 subtarefas): 50% OFF, antecipação no ar em 28/10, carrinho em 11/11, debriefing em 19/11. Tarefas soltas da Planning fechadas. Criativos antigos triados em três camadas (`clientes/fazenda-do-rosa/black-2026/`), subtarefas 5.1, 12, 13 e 14 criadas, rotina de ajuste dos vídeos às 23h.
 2026-10-19 (tarde): Lince mídia própria com Data de Postagem lançada de 20/10 a 01/12 (terça 12h denso, quinta 18h30 leve). Urocenter novembro no ClickUp: 10 vídeos (Murilo, William, Ricardo) com prazo 5 dias úteis antes, Mateus nos vídeos e capas "CAPA: <nome>" pra Pâmela; outubro intocado.
@@ -22,6 +24,8 @@
 2026-10-01: produtividade migrada para o Supabase próprio do Francisco (projeto "Chico"). Formulário de acessos do cliente no ar (acessos-lince.pages.dev, painel em /painel).
 
 ## Pendências
+- Walter: dar data de postagem e editor às 6 tarefas novas de vídeo (17trfwhqtgk, tgm, tgp, tgt, tgx, th6); confirmar com ele que evento foi o de 09/10 e se os bastidores podem ir ao ar (aparecem outros médicos e paciente coberto) (2026-10-27)
+- Walter: cobrar a gravação dos roteiros 19 (disfunção erétil) e 41 (aumento peniano), os temas que ficaram sem vídeo (2026-10-27)
 - Fazenda Black: subir o BF08 v2 na pasta Black 2026 do Drive e comentar na subtarefa 5.3 (17trfwhp8r4) marcando Marina e Vic, no formato do BF07 (2026-10-21)
 - Fazenda Black: baixar a pasta Eco suíte do Drive (10 MOV, 229 MB) e os takes de casal pra `black-2026/reels-black/takes/eco-suite/` e `takes/casal/`; depois trocar as placas da jacuzzi e das cabanas no `plano-bf08-v2.json` (2026-10-21)
 - Fazenda Black: decidir "até 50% OFF" (briefing) ou "50% OFF" (áudio da Vic) nos criativos BF07 e BF08 (2026-10-21)
@@ -35,7 +39,9 @@
 - Fazenda Black: definir quem dispara os e-mails e em qual ferramenta (em 2024 era o RD Station, com o João Vitor) (2026-10-20)
 - Fazenda Black: o doc das mensagens do Grupo VIP 2025 (1oXfuWAw...) não abre pelo Drive; pedir acesso ou cópia (2026-10-20)
 - Urocenter: 3 carrosséis de novembro sem conteúdo (07, 14 e 21/11); sugestão: perguntas 05, 13 e 15 do Novembro Azul (2026-10-19)
-- Urocenter: carrossel "Coisas que os homens fazem" (86ak7m6z5) em aprovação com data 15/10 vencida (2026-10-19)
+- Urocenter: remarcar a postagem de "Coisas que os homens fazem" (86ak7m6z5, era 23/10) e "Coisas que parecem não ter nada a ver com a sua cirurgia" (86akkx6za, era 24/10); as duas em alteração interna com prazo 26/10 (2026-10-23)
+- Pâmela: fechar as capas de vídeos já postados (86akaapu6 Esvaziadores, 86akrev7j LH 25 kg, 17trfwhm9rc Maysa caixinha) e decidir se o Fixado 2 do Otorrinos (86aj5v8y6) refaz ou arquiva (2026-10-23)
+- Otorrinos: confirmar se a grade de 179 capas com postagem até maio/2028 é real (2026-10-23)
 - Urocenter: sobram 9 vídeos de Novembro Azul + a reserva; decidir se vão pra dezembro sem o selo (2026-10-19)
 - Lince: vídeos acabam em 03/12, gravar pauta de vídeo leve (22, 32, 36 ou 42); 6 carrosséis leves sem data; tema "Não gosto de produzir conteúdo" repete no VGC da Vic (2026-10-19)
 - Mariana: criar a opção "Mariana Fontana" no campo 👔 Clientes do ClickUp, à mão (a API não cria opção de lista) (2026-10-19)

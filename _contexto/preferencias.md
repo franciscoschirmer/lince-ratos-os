@@ -25,3 +25,4 @@ Direto, claro e objetivo. Contextualizar só quando for necessário pra decisão
 
 - Material que vai pro time ou pro ClickUp sai em PDF ou Google Docs, nunca em .md (2026-10-20)
 - Vídeo editado pela casa: o texto entra sobre o vídeo, nunca frame preto só com texto; fonte script (The Seasons, Italianno) só numa frase curta de gesto, nunca em data ou fecho (2026-10-21)
+- Ao redistribuir prazos de alguém no ClickUp, mexer na fila inteira da pessoa e depois conferir a carga por dia, inclusive feriado e fim de semana (2026-10-23)

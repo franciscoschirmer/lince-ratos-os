@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Plano de Growth · Fazenda do Rosa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap">
+</head><body>
+<style>
+/* Layout: relatório editorial de uma coluna, índice lateral fixo no desktop; tabelas e gráficos entre blocos de texto */
+:root{
+  --bg:#F5EFE3; --surface:#FBF7EF; --sunk:#EDE4D3;
+  --ink:#1F1712; --muted:#75685D; --line:#DCCFBA;
+  --rose:#620D11; --rose-soft:#F0E1DA;
+  --sea:#8C6A2F; --sea-soft:#EFE4CC;
+  --sand:#A08A6A; --sand-soft:#EFE8DC;
+  --neg:#A42A2F;
+  --tex:radial-gradient(140% 50% at 50% -10%, rgba(186,160,121,.18), transparent 60%);
+  --f-display:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --f-body:Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-data:Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#110B08; --surface:#1D1511; --sunk:#261C17;
+  --ink:#F1EDE5; --muted:#A89D92; --line:#3A2E26;
+  --rose:#D6C294; --rose-soft:#2E211A;
+  --sea:#BAA079; --sea-soft:#2A2018;
+  --sand:#8F8273; --sand-soft:#2B231D; --neg:#E58A8E;
+  --tex:radial-gradient(140% 50% at 50% -10%, rgba(98,13,17,.38), transparent 60%);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#110B08; --surface:#1D1511; --sunk:#261C17;
+  --ink:#F1EDE5; --muted:#A89D92; --line:#3A2E26;
+  --rose:#D6C294; --rose-soft:#2E211A;
+  --sea:#BAA079; --sea-soft:#2A2018;
+  --sand:#8F8273; --sand-soft:#2B231D; --neg:#E58A8E;
+  --tex:radial-gradient(140% 50% at 50% -10%, rgba(98,13,17,.38), transparent 60%);
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px;padding-block:48px 96px}
+@media (max-width:960px){.wrap{grid-template-columns:minmax(0,1fr);gap:24px;padding-block:28px 64px}.toc{display:none}}
+main{min-width:0;max-width:780px}
+
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 32px);align-self:start;font-size:13px}
+.toc b{display:block;font-family:var(--f-data);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.toc a{display:grid;grid-template-columns:22px 1fr;color:var(--muted);text-decoration:none;padding:5px 0;border-left:2px solid transparent;padding-left:10px;margin-left:-12px}
+.toc a:hover,.toc a:focus-visible{color:var(--ink);border-left-color:var(--rose);outline:none}
+.toc a span{font-family:var(--f-data);font-size:11px;padding-top:2px}
+
+h1,h2,h3{font-family:var(--f-display);font-weight:500;text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(34px,5.4vw,54px);letter-spacing:-.01em}
+h2{font-size:clamp(26px,3.4vw,34px);margin-bottom:18px;display:flex;gap:14px;align-items:baseline}
+h2 .n{font-family:var(--f-data);font-size:13px;color:var(--rose);font-weight:500;letter-spacing:.04em}
+h3{font-size:21px;margin:34px 0 10px}
+p{margin:0 0 14px}
+strong{font-weight:600}
+a{color:var(--sea)}
+.eyebrow{font-family:var(--f-data);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lede{font-family:var(--f-display);font-size:clamp(19px,2.3vw,22px);line-height:1.5;color:var(--ink);max-width:62ch}
+.muted{color:var(--muted)}
+.small{font-size:13.5px}
+section{padding-block:56px 8px;border-top:1px solid var(--line);margin-top:48px}
+section:first-of-type{border-top:0;margin-top:0;padding-top:0}
+
+header.cover{padding-block:8px 40px}
+header.cover .meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-size:13.5px;color:var(--muted)}
+.hib{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--rose);margin-right:8px;vertical-align:1px}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:28px 0 8px}
+@media (max-width:620px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:var(--surface);padding:18px 18px 16px}
+.kpi .v{font-family:var(--f-display);font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.kpi .v small{font-size:17px;color:var(--muted)}
+.kpi .l{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4}
+
+/* callouts */
+.note{background:var(--sunk);border-radius:8px;padding:16px 18px;font-size:14.5px;margin:18px 0}
+.note b{font-weight:600}
+.rec{border:1px solid var(--rose);background:var(--rose-soft);border-radius:8px;padding:18px 20px;margin:20px 0}
+.rec .eyebrow{color:var(--rose);margin-bottom:6px;display:block}
+
+/* tables */
+.tbl{overflow-x:auto;margin:16px 0 22px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.45}
+th{font-family:var(--f-data);font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--sunk);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td:first-child{font-weight:500}
+tr.hl td{background:var(--rose-soft)}
+.wide table{min-width:860px}
+.status{min-width:110px}
+.pill{display:inline-block;font-family:var(--f-data);font-size:11px;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.p-ok{background:var(--sea-soft);color:var(--sea)}
+.p-no{background:var(--rose-soft);color:var(--rose)}
+.p-wait{background:var(--sand-soft);color:var(--sand)}
+
+/* figures */
+figure{margin:24px 0 28px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 20px 16px}
+figcaption{font-size:13px;color:var(--muted);margin-top:14px;line-height:1.5}
+.fig-title{font-family:var(--f-display);font-size:18px;margin-bottom:4px}
+.fig-sub{font-size:13px;color:var(--muted);margin-bottom:18px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--muted);margin-top:12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+.stack{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px 14px;align-items:center}
+.stack .lab{font-size:13px;color:var(--muted)}
+.bar{display:flex;height:34px;border-radius:5px;overflow:hidden;background:var(--sunk)}
+.bar>div{display:flex;align-items:center;justify-content:center;font-family:var(--f-data);font-size:12px;color:#fff;white-space:nowrap;overflow:hidden}
+.c1{background:var(--muted)} .c2{background:var(--sea)} .c3{background:var(--rose)}
+
+.hbars{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 92px;gap:8px 12px;align-items:center;font-size:13.5px}
+@media (max-width:560px){.hbars{grid-template-columns:minmax(0,120px) minmax(0,1fr) 78px;font-size:12.5px}}
+.hbars .t{height:14px;background:var(--sunk);border-radius:3px;overflow:hidden}
+.hbars .t>div{height:100%;background:var(--sea);border-radius:3px}
+.hbars .t>div.warn{background:var(--sand)}
+.hbars .t>div.ota{background:var(--rose)}
+.hbars .v{font-family:var(--f-data);font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:720px){.duo{grid-template-columns:minmax(0,1fr)}}
+.duo figure{margin:0}
+
+.donut{display:flex;gap:20px;align-items:center}
+.donut svg{width:132px;height:132px;flex:none}
+.donut .big{font-family:var(--f-display);font-size:40px;line-height:1}
+
+.cols{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;height:170px;padding-top:18px;border-bottom:1px solid var(--line);position:relative}
+.cols .c{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
+.cols .c b{font-family:var(--f-data);font-weight:500;font-size:12px}
+.cols .c div{width:100%;max-width:38px;background:var(--sea);border-radius:4px 4px 0 0}
+.cols .c div.lo{background:var(--sand)}
+.cols-x{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;font-family:var(--f-data);font-size:11px;color:var(--muted);text-align:center;margin-top:6px}
+
+.div-rows{display:grid;gap:14px}
+.div-row .lbl{font-size:13.5px;margin-bottom:5px;display:flex;justify-content:space-between;gap:12px}
+.div-row .lbl b{font-family:var(--f-data);font-weight:500;font-variant-numeric:tabular-nums}
+.track{position:relative;height:22px;background:var(--sunk);border-radius:4px}
+.track .zero{position:absolute;left:17.5%;top:-4px;bottom:-4px;width:1px;background:var(--ink);opacity:.5}
+.track .fill{position:absolute;top:0;bottom:0;border-radius:3px}
+.fill.neg{background:var(--neg);right:82.5%}
+.fill.pos{background:var(--sea);left:17.5%}
+.fill.ref{background:var(--muted);left:17.5%}
+
+.cal{display:grid;grid-template-columns:34px minmax(0,1fr);gap:3px 8px;font-family:var(--f-data);font-size:11px;color:var(--muted);align-items:center}
+.cal .days{display:grid;grid-template-columns:repeat(31,minmax(0,1fr));gap:2px}
+.cal .d{aspect-ratio:1;border-radius:2px;max-width:100%}
+.d.baixa{background:var(--sea)} .d.fer{background:var(--sand)} .d.fora{background:var(--rose)} .d.nil{background:transparent}
+
+svg text{font-family:var(--f-data);font-size:11px;fill:var(--muted)}
+.chart-svg{width:100%;height:auto;display:block}
+
+/* timeline */
+.steps{display:grid;gap:0;margin:20px 0;counter-reset:s}
+.step{display:grid;grid-template-columns:132px minmax(0,1fr);gap:18px;padding:16px 0;border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+@media (max-width:560px){.step{grid-template-columns:minmax(0,1fr);gap:4px}}
+.step .when{font-family:var(--f-data);font-size:12px;color:var(--rose);padding-top:3px}
+.step h4{margin:0 0 4px;font-size:16px;font-weight:600}
+.step p{margin:0;font-size:14.5px;color:var(--muted)}
+.step p b{color:var(--ink);font-weight:500}
+
+.journey{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:18px 0}
+@media (max-width:720px){.journey{grid-template-columns:minmax(0,1fr)}}
+.journey div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 10px;font-size:13px;line-height:1.4}
+.journey div b{display:block;font-family:var(--f-data);font-weight:500;font-size:11px;color:var(--rose);margin-bottom:4px}
+
+.tiers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}
+@media (max-width:720px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tier{border-radius:10px;padding:16px;border:1px solid var(--line);background:var(--surface)}
+.tier h4{font-family:var(--f-display);font-weight:500;font-size:22px;margin:0 0 2px}
+.tier .crit{font-family:var(--f-data);font-size:11.5px;color:var(--muted);margin-bottom:10px}
+.tier p{font-size:13.5px;margin:0;line-height:1.45}
+.tier.bronze h4{color:#9A6A3A}.tier.prata h4{color:var(--muted)}.tier.ouro h4{color:var(--sand)}.tier.legado h4{color:var(--rose)}
+
+ul.clean{padding-left:18px;margin:8px 0 14px}
+ul.clean li{margin-bottom:6px}
+.check{list-style:none;padding:0;margin:12px 0;display:grid;gap:6px;font-size:14.5px}
+.check li{display:flex;gap:10px}
+.check li::before{content:"";flex:none;width:14px;height:14px;border:1.5px solid var(--muted);border-radius:3px;margin-top:4px}
+.check li.done::before{background:var(--sea);border-color:var(--sea)}
+.check li.done{color:var(--muted)}
+blockquote{margin:14px 0;padding:14px 18px;border-left:3px solid var(--sea);background:var(--surface);font-family:var(--f-display);font-style:italic;font-size:17px;line-height:1.5;border-radius:0 8px 8px 0}
+.refs{font-size:14px}
+.refs li{margin-bottom:10px}
+footer{margin-top:56px;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.toc a{transition:color .15s,border-color .15s}}
+
+/* Lince: tipografia editorial, cantos pequenos, barra da casa */
+body{background:var(--bg) var(--tex) no-repeat;font-size:15.5px}
+h1,h2,h3,.fig-title,.tier h4{font-weight:400;letter-spacing:0}
+h1{font-size:clamp(40px,6vw,62px);line-height:1.02}
+h1 em{color:var(--sea)}
+h2{font-size:clamp(30px,3.8vw,40px)}
+h3{font-size:25px}
+.fig-title{font-size:21px}
+.kpi .v{font-size:40px;font-weight:400}
+.donut .big{font-size:46px}
+.lede,blockquote{font-size:clamp(20px,2.4vw,23px)}
+blockquote{font-size:19px}
+.eyebrow,.toc b,th,h2 .n,.step .when,.journey div b{letter-spacing:.18em}
+.kpis,.tbl,figure,.tier{border-radius:4px}
+.note,.rec,.journey div{border-radius:3px}
+blockquote{border-radius:0 3px 3px 0}
+.pill{border-radius:2px;letter-spacing:.06em}
+.bar>div{color:#FBF7EF}
+.tier.bronze h4{color:#9A6A3A}
+.casa{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0 18px;border-bottom:1px solid var(--line)}
+.casa .marca{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+.casa img{width:50px;height:50px;object-fit:contain}
+.casa .nome{font-family:var(--f-display);font-size:17px;letter-spacing:.38em;text-transform:uppercase;color:var(--sea)}
+.casa .nome small{display:block;font-family:var(--f-body);font-size:10.5px;letter-spacing:.22em;color:var(--muted);margin-top:2px}
+.casa a.sair{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:9px 14px;border-radius:2px}
+.casa a.sair:hover{color:var(--ink);border-color:var(--sea)}
+.fecho{display:flex;align-items:center;gap:16px;margin-top:40px;padding-top:28px;border-top:1px solid var(--line)}
+.fecho img{width:78px;height:78px;object-fit:contain}
+.fecho p{margin:0;font-family:var(--f-display);font-style:italic;font-size:19px;color:var(--muted)}
+/* quadros sem rolagem lateral: coluna mais larga e texto quebrando nas células */
+.casa{max-width:1320px}
+main p,main ul,.lede{max-width:76ch}
+td p,.note p,.rec p{max-width:none}
+.tbl{overflow-x:visible}
+.wide table{min-width:0}
+th{white-space:normal}
+@media (min-width:961px){
+  .wrap{max-width:1320px;grid-template-columns:200px minmax(0,1fr);gap:48px}
+  main{max-width:1040px}
+}
+/* celular: tabela vira cartão (cada linha um bloco, o título da coluna em cima de cada valor) */
+@media (max-width:720px){
+  body{font-size:15px}
+  .casa{padding:14px 0 12px}
+  .casa img{width:40px;height:40px}
+  .casa .nome{font-size:15px;letter-spacing:.3em}
+  .casa a.sair{padding:7px 10px;font-size:10px}
+  h1{font-size:40px}
+  h2{font-size:29px;flex-wrap:wrap;gap:4px 10px}
+  h3{font-size:22px;margin-top:28px}
+  section{padding-block:40px 4px;margin-top:32px}
+  .lede{font-size:19px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpi{padding:14px 12px}
+  .kpi .v{font-size:32px}
+  figure{padding:16px 14px 12px}
+  .tbl{overflow:visible;border:0;background:transparent}
+  .tbl table,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+  .wide table{min-width:0}
+  .tbl thead,.tbl tr:has(>th){display:none}
+  .tbl tr{background:var(--surface);border:1px solid var(--line);border-radius:4px;margin-bottom:10px;padding:4px 0}
+  .tbl tr.hl{background:var(--rose-soft)}
+  .tbl td{border:0;padding:7px 14px;text-align:left}
+  .tbl td.num{text-align:left;white-space:normal}
+  .tbl td:first-child{font-family:var(--f-display);font-size:18px;line-height:1.25;padding-top:10px}
+  .tbl td[data-l]::before{content:attr(data-l);display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:2px;font-family:var(--f-body)}
+  .tbl td:first-child::before{display:none}
+  .tbl td:empty{display:none}
+  .stack{grid-template-columns:62px minmax(0,1fr)}
+  .step{padding:12px 0}
+  blockquote{font-size:17px;padding:12px 14px}
+  .fecho{margin-top:28px}
+}
+@media print{.casa a.sair,.toc{display:none}body{background:#fff}}
+</style>
+
+<header class="casa">
+  <a class="marca" href="#resumo"><img src="/marca/selo-lince.png" alt="Selo Lince &amp; Co."><span class="nome">Lince<small>Documento reservado</small></span></a>
+  <a class="sair" href="/sair">Sair</a>
+</header>
+<div class="wrap">
+<nav class="toc" aria-label="Índice">
+  <b>Índice</b>
+  <a href="#resumo"><span>01</span>Resumo executivo</a>
+  <a href="#dados"><span>02</span>O que os dados mostram</a>
+  <a href="#crescimento"><span>03</span>Como gera crescimento</a>
+  <a href="#escolhas"><span>04</span>Por que cada escolha</a>
+  <a href="#testes"><span>05</span>Como vamos testar</a>
+  <a href="#jornada"><span>06</span>Jornada e canais</a>
+  <a href="#mensagens"><span>07</span>Mensagens e reativação</a>
+  <a href="#clube"><span>08</span>Clube Família</a>
+  <a href="#indicacao"><span>09</span>Indicação, Linha, cortesia</a>
+  <a href="#base"><span>10</span>Dados da equipe</a>
+  <a href="#implantacao"><span>11</span>Implantação</a>
+  <a href="#medicao"><span>12</span>Como medir</a>
+  <a href="#aprovar"><span>13</span>O que aprovar</a>
+  <a href="#refs"><span>14</span>Referências</a>
+</nav>
+
+<main>
+<header class="cover">
+  <div class="eyebrow"><span class="hib"></span>Lince &amp; Co. · Proposta para os sócios · 20 de outubro de 2026</div>
+  <h1 style="margin-top:18px">Fazenda do Rosa<br><em>Plano de growth e relacionamento</em></h1>
+  <p class="lede" style="margin-top:22px">A fidelidade da Fazenda do Rosa já existe: famílias voltam há décadas e trazem outras famílias. Este plano organiza esse relacionamento para gerar mais retornos, novas famílias por indicação e receita adicional, com custo controlado e sem depender de uma única pessoa no atendimento.</p>
+  <div class="kpis" aria-label="Indicadores principais">
+    <div class="kpi"><div class="v">32,9<small>%</small></div><div class="l">da receita vem de 10,9% das famílias (2+ viagens)</div></div>
+    <div class="kpi"><div class="v">32<small>%</small></div><div class="l">de ocupação na baixa temporada desde 2021</div></div>
+    <div class="kpi"><div class="v">315 <small>dias</small></div><div class="l">entre uma viagem e a próxima (mediana)</div></div>
+    <div class="kpi"><div class="v">77</div><div class="l">NPS em 74 respostas desde abril</div></div>
+    <div class="kpi"><div class="v">67,8<small>%</small></div><div class="l">de reservas diretas entre as de canal conhecido</div></div>
+    <div class="kpi"><div class="v">45</div><div class="l">famílias que vieram por OTA e voltaram direto</div></div>
+  </div>
+  <p class="small muted">Fonte: painel do Arthur (cruzamento HMAX + AURA), captura de 20/10/2026. O painel é recalculado todos os dias.</p>
+</header>
+
+<!-- 01 -->
+<section id="resumo">
+<h2><span class="n">01</span>Resumo executivo</h2>
+<div class="rec"><span class="eyebrow">Recomendação da Lince</span>Implantar o <strong>Clube Família Fazenda do Rosa</strong> em formato híbrido: reconhecimento pela história da família e pontos por noites pagas e por indicações que viram hospedagem. Em paralelo, criar uma rotina de relacionamento entre estadias (grupo VIP, mensagens no privado, conteúdo) e desenvolver produtos e experiências com custo conhecido (Linha da Fazenda, Maram, parceiros).</div>
+
+<p><strong>Por que agora.</strong> Poucas famílias concentram uma parte grande da receita. Na régua de 2 ou mais viagens, são 10,9% das famílias e 32,9% da receita histórica; na régua de 3 ou mais, 3,7% e 18%. Uma família com 3 ou mais viagens deixou em média cerca de R$ 18 mil; uma família de uma viagem, cerca de R$ 3 mil. Isso justifica investigar o valor de quem retorna. Não prova que pontos geram vendas; por isso a proposta combina evidência externa, diagnóstico e testes locais antes de qualquer promessa aos hóspedes.</p>
+<p><strong>Há espaço para crescer sem disputar a alta temporada.</strong> Na baixa, a Fazenda vendeu 32% das cabana-noites disponíveis. Cerca de duas em cada três ficaram vazias. É nesse calendário que o programa pode oferecer benefícios sem trocar uma diária vendida por uma cortesia.</p>
+
+<h3>Três frentes, ritmos diferentes</h3>
+<div class="tbl"><table>
+<thead><tr><th>Frente</th><th>O que é</th><th>Pode começar quando</th></tr></thead>
+<tbody>
+<tr><td>A · Clube, retorno e indicação</td><td>Reconhecimento, pontos, régua de mensagens, reativação, indicação rastreável</td><td>Após conferência da base e aprovação das regras</td></tr>
+<tr><td>B · Linha da Fazenda</td><td>Peças de uso cotidiano (vela, caneca, canga) para venda e resgate</td><td>No ritmo de fornecedor e orçamento; não trava a frente A</td></tr>
+<tr><td>C · Canais e conteúdo</td><td>Grupo VIP (841 membros informados) e conteúdo da Fazenda</td><td>Imediato, após confirmar responsáveis</td></tr>
+</tbody></table></div>
+
+<p><strong>O que está em decisão.</strong> Aprovar a direção estratégica, escolher a régua de "família recorrente", indicar o ponto focal e autorizar a preparação de um piloto com público, responsáveis e teto de investimento. Regras, simulação econômica e capacidade de entrega serão fechadas antes de lançar pontos e benefícios.</p>
+<div class="note"><b>Sobre os números.</b> Pontos, faixas, equivalências e exemplos financeiros são ilustrativos, para tornar a proposta compreensível. Viram regulamento depois da simulação com os dados da Fazenda e da aprovação dos sócios. <b>Como ler:</b> Proposta Lince = caminho recomendado. Dados confirmados = informações recebidas e verificadas. Em validação = custos, prazos e regras que dependem de dados e aprovação.</div>
+<p><strong>Como o programa trata os hóspedes.</strong> A Fazenda é uma marca de hospitalidade íntima. Os pontos são regra operacional clara e auditável; a comunicação fala de pertencimento, memória e convite, nunca de urgência artificial ou oferta em massa.</p>
+</section>
+
+<!-- 02 -->
+<section id="dados">
+<h2><span class="n">02</span>O que os dados já mostram</h2>
+<p>A base começa em 02/01/2021: até 28/03/2026 vem do HMAX (8.222 estadias), dali em diante do AURA. São <strong>9.027 estadias</strong> (7.623 realizadas, 248 futuras e 1.156 canceladas) de <strong>6.215 famílias</strong>. O painel permite priorizar pilotos e fazer perguntas melhores; ainda não mede resultado incremental.</p>
+
+<figure>
+  <div class="fig-title">Poucas famílias, muita receita</div>
+  <div class="fig-sub">Participação no total de famílias e na receita histórica, por número de viagens</div>
+  <div class="stack">
+    <div class="lab">Famílias</div>
+    <div class="bar"><div class="c1" style="width:89.1%">1 viagem · 89%</div><div class="c2" style="width:7.2%" title="2 viagens: 7,2%"></div><div class="c3" style="width:3.7%" title="3 ou mais: 3,7%"></div></div>
+    <div class="lab">Receita</div>
+    <div class="bar"><div class="c1" style="width:67.2%">67%</div><div class="c2" style="width:14.8%">15%</div><div class="c3" style="width:18%">18%</div></div>
+  </div>
+  <div class="legend"><span><i class="c1"></i>1 viagem · 5.539 famílias</span><span><i class="c2"></i>2 viagens · 445 famílias</span><span><i class="c3"></i>3 ou mais · 231 famílias</span></div>
+  <figcaption>Receita total registrada: R$ 23,3 milhões. As famílias com 3+ viagens são 3,7% da base e 18% da receita; com as de 2 viagens, chegam a 10,9% e 32,9%. Calculado a partir das duas réguas do painel.</figcaption>
+</figure>
+
+<h3>A régua de "família recorrente" muda a leitura</h3>
+<p>O painel permite escolher a régua, e a direção ainda não a fixou. As duas leituras usam o mesmo histórico:</p>
+<div class="tbl"><table>
+<thead><tr><th>Régua</th><th class="num">Recorrentes</th><th class="num">Receita delas</th><th class="num">Reativação</th></tr></thead>
+<tbody>
+<tr><td>2+ viagens · parada após 18 meses</td><td class="num">676 · 10,9%</td><td class="num">32,9% · R$ 7,65 mi</td><td class="num">4,8% · 236 de 4.696</td></tr>
+<tr><td>3+ viagens · parada após 24 meses</td><td class="num">231 · 3,7%</td><td class="num">18% · R$ 4,19 mi</td><td class="num">3,8% · 168 de 4.198</td></tr>
+</tbody></table></div>
+<div class="rec"><span class="eyebrow">Recomendação</span>Usar 2 viagens para o Clube (entrada em Prata) e 3 viagens como indicador de "família da casa" nos relatórios. As <strong>445 famílias com exatamente duas viagens</strong> somam cerca de 15% da receita e estão a uma viagem de virar "da casa": são o público mais promissor para o primeiro piloto.</div>
+
+<div class="tbl"><table>
+<thead><tr><th>Informação</th><th>Número</th><th>Como interpretar</th></tr></thead>
+<tbody>
+<tr><td>Tempo entre viagens</td><td>315 dias (mediana); 380 (média)</td><td>1.160 intervalos. Estadias a menos de 7 dias contam como uma viagem.</td></tr>
+<tr><td>Receita por família</td><td>Média R$ 4.128; mediana R$ 2.092</td><td>5.638 famílias com valor. Não é LTV futuro nem lucro. O financeiro de referência é o HMAX.</td></tr>
+<tr><td>Novas famílias por indicação</td><td>3 de 61 · 4,9%</td><td>Primeiras visitas com canal no AURA desde set/2026. Não há registro de quem indicou.</td></tr>
+<tr><td>Receita de extras</td><td>0,7%</td><td>Fólio de 96 estadias do AURA. Não inclui o caixa do Maram.</td></tr>
+<tr><td>Reservas diretas</td><td>2.468 de 3.642 · 67,8%</td><td>Só canal registrado. Com as 3.621 lançadas à mão contadas como diretas seriam 83,8% (hipótese, não resultado).</td></tr>
+<tr><td>NPS</td><td>77 · 74 respostas em 520 estadias</td><td>Resposta de 14,2%: 63 promotores, 5 neutros, 6 detratores.</td></tr>
+</tbody></table></div>
+
+<div class="duo">
+<figure>
+  <div class="fig-title">Baixa temporada</div>
+  <div class="fig-sub">Cabana-noites vendidas desde 2021</div>
+  <div class="donut">
+    <svg viewBox="0 0 42 42" role="img" aria-label="32% de ocupação">
+      <circle cx="21" cy="21" r="15.915" fill="none" stroke="var(--sunk)" stroke-width="6"></circle>
+      <circle cx="21" cy="21" r="15.915" fill="none" stroke="var(--sea)" stroke-width="6" stroke-dasharray="32 68" stroke-dashoffset="25"></circle>
+    </svg>
+    <div><div class="big">32%</div><div class="small muted" style="margin-top:6px">1.394 de 4.356 cabana-noites<br>22 cabanas × 198 noites</div></div>
+  </div>
+  <figcaption>Feriados entram na conta e vendem mais; a ocupação dos dias comuns tende a ser menor. Casamento exclusivo conta como vendido.</figcaption>
+</figure>
+<figure>
+  <div class="fig-title">NPS mês a mês</div>
+  <div class="fig-sub">Respostas por mês entre parênteses</div>
+  <div class="cols" aria-label="NPS mensal">
+    <div class="c"><b>80</b><div style="height:80%"></div></div>
+    <div class="c"><b>82</b><div style="height:82%"></div></div>
+    <div class="c"><b>55</b><div class="lo" style="height:55%"></div></div>
+    <div class="c"><b>63</b><div class="lo" style="height:63%"></div></div>
+    <div class="c"><b>89</b><div style="height:89%"></div></div>
+    <div class="c"><b>67</b><div class="lo" style="height:67%"></div></div>
+    <div class="c"><b>100</b><div style="height:100%"></div></div>
+  </div>
+  <div class="cols-x"><span>abr (5)</span><span>mai (11)</span><span>jun (11)</span><span>jul (8)</span><span>ago (18)</span><span>set (12)</span><span>out (9)</span></div>
+  <figcaption>Com 5 a 18 respostas por mês, um mês isolado não diz nada; vale o acumulado (77). Seis detratores desde abril podem ser tratados um a um.</figcaption>
+</figure>
+</div>
+
+<figure>
+  <div class="fig-title">De onde vem a receita de hospedagem</div>
+  <div class="fig-sub">Receita registrada por canal, 2021 a 2026</div>
+  <div class="hbars">
+    <span>Lançada à mão no HMAX</span><div class="t"><div class="warn" style="width:100%"></div></div><span class="v">R$ 13,53 mi</span>
+    <span>Site</span><div class="t"><div style="width:49.4%"></div></div><span class="v">R$ 6,69 mi</span>
+    <span>Booking</span><div class="t"><div class="ota" style="width:17.5%"></div></div><span class="v">R$ 2,36 mi</span>
+    <span>Sem canal registrado</span><div class="t"><div class="warn" style="width:10.9%"></div></div><span class="v">R$ 1,48 mi</span>
+    <span>Hotéis.com</span><div class="t"><div class="ota" style="width:3.5%"></div></div><span class="v">R$ 467 mil</span>
+    <span>WhatsApp</span><div class="t"><div style="width:2.1%"></div></div><span class="v">R$ 281 mil</span>
+    <span>Expedia</span><div class="t"><div class="ota" style="width:1.4%"></div></div><span class="v">R$ 187 mil</span>
+    <span>Evento/Casamento</span><div class="t"><div style="width:0.8%"></div></div><span class="v">R$ 107 mil</span>
+    <span>Indicação</span><div class="t"><div style="width:0.3%"></div></div><span class="v">R$ 34 mil</span>
+  </div>
+  <div class="legend"><span><i style="background:var(--sea)"></i>Direto</span><span><i style="background:var(--rose)"></i>OTA</span><span><i style="background:var(--sand)"></i>Canal desconhecido</span></div>
+  <figcaption>As reservas lançadas à mão (telefone, WhatsApp, balcão, casamentos e OTAs digitadas) são cerca de 58% da receita e não podem ser tratadas como diretas. As OTAs somam cerca de R$ 3 milhões; o Financeiro calculará a comissão real.</figcaption>
+</figure>
+
+<h3>Inventário</h3>
+<p>22 cabanas vendáveis em 8 categorias, 104 pessoas de capacidade. Os tamanhos diferentes importam para pontos e cortesias.</p>
+<div class="tbl"><table>
+<thead><tr><th>Categoria</th><th>Cabanas</th><th class="num">Pessoas</th></tr></thead>
+<tbody>
+<tr><td>Praia · 2 dormitórios</td><td>01, 02, 03, 04</td><td class="num">6</td></tr>
+<tr><td>Praia · 1 dormitório</td><td>05, 06</td><td class="num">4</td></tr>
+<tr><td>Jardim · 2 dormitórios</td><td>07, 08, 13, 14</td><td class="num">6</td></tr>
+<tr><td>Mar · 2 suítes</td><td>09, 10</td><td class="num">5</td></tr>
+<tr><td>Bem-estar · 1 dormitório</td><td>11, 12</td><td class="num">4</td></tr>
+<tr><td>Bem-estar · 2 suítes</td><td>15, 16</td><td class="num">5</td></tr>
+<tr><td>Hibisco</td><td>21</td><td class="num">5</td></tr>
+<tr><td>Eco Suíte</td><td>22, 23, 24, 25, 26</td><td class="num">3</td></tr>
+</tbody></table></div>
+
+<figure>
+  <div class="fig-title">Calendário 2027</div>
+  <div class="fig-sub">Cada quadrado é um dia. A cortesia por pontos só vale nos dias comuns da baixa.</div>
+  <div class="cal" id="cal2027"></div>
+  <div class="legend"><span><i style="background:var(--sea)"></i>Baixa temporada · mínimo 1 noite</span><span><i style="background:var(--sand)"></i>Feriado na baixa · mínimo 3</span><span><i style="background:var(--rose)"></i>Verão, festas e dezembro · mínimo 2 a 7</span></div>
+  <figcaption>Fonte: calendário de temporadas do portal. Tiradentes 2027 não está cadastrado e aparece como baixa; a confirmar com o Arthur.</figcaption>
+</figure>
+
+<div class="note"><b>Limites das fontes.</b> O H-book é só o motor de reservas do site; o HMAX é o PMS histórico; o AURA tem reservas desde 29/03/2026 e canal detalhado desde set/2026. Não existe campo histórico "indicado por". O Maram é operado pela Altamare, com caixa próprio. Não há registro de no-show: no histórico ele aparece como cancelamento.</div>
+
+<div class="duo" style="margin:24px 0">
+  <figure>
+    <div class="fig-title">Querem voltar. Poucos voltam.</div>
+    <div class="fig-sub">Pesquisa de jornada da Fazenda</div>
+    <div class="hbars" style="grid-template-columns:minmax(0,120px) minmax(0,1fr) 44px">
+      <span>Intenção de voltar</span><div class="t"><div style="width:93%"></div></div><span class="v">93%</span>
+      <span>Voltam de fato</span><div class="t"><div class="warn" style="width:27%"></div></div><span class="v">27%</span>
+    </div>
+    <figcaption>A distância entre querer e voltar é o espaço do programa. O painel, com outra base e outro critério, mostra 10,9%.</figcaption>
+  </figure>
+  <figure>
+    <div class="fig-title">Indicação existe. Registro, não.</div>
+    <div class="fig-sub">Como os hóspedes descobrem a Fazenda</div>
+    <div class="hbars" style="grid-template-columns:minmax(0,120px) minmax(0,1fr) 44px">
+      <span>Instagram</span><div class="t"><div style="width:39%"></div></div><span class="v">39%</span>
+      <span>Indicação</span><div class="t"><div class="ota" style="width:27%"></div></div><span class="v">27%</span>
+      <span>Busca orgânica</span><div class="t"><div style="width:21%"></div></div><span class="v">21%</span>
+    </div>
+    <figcaption>27% dizem ter chegado por indicação; no sistema, só 6 estadias têm esse canal.</figcaption>
+  </figure>
+</div>
+<h3>Perguntas abertas ao Arthur</h3>
+<ul class="clean">
+<li>Reativação: 236 ÷ 4.696 dá 5,0%, e o painel mostra 4,8%. Qual é o denominador e a janela?</li>
+<li>Ocupação da baixa temporada sem os feriados.</li>
+<li>É possível separar as 3.621 reservas lançadas à mão por origem?</li>
+<li>O período "FIDELIDADE" (03/01 a 04/02/2027, mínimo de 2 noites) já é uma tarifa ou ação de fidelidade?</li>
+<li>O perfil institucional fala em 21 unidades; o inventário do sistema tem 22 cabanas vendáveis. Qual número vale?</li>
+<li>Calendário: falta Tiradentes 2027, e 2028 começa em 17/04, sem verão, Carnaval e Páscoa.</li>
+<li>Como o ID_Titular liga integrantes do mesmo núcleo sem juntar famílias diferentes; se o AURA registra pontos e indicações.</li>
+</ul>
+</section>
+
+<!-- 03 -->
+<section id="crescimento">
+<h2><span class="n">03</span>Como a estratégia gera crescimento</h2>
+<p>Growth aqui significa testar ações para aumentar reservas, retorno e indicação, acompanhando quanto custam e o que geram. O programa de pontos é uma ferramenta dentro desse sistema, não o sistema.</p>
+<div class="tbl"><table>
+<thead><tr><th>Mecanismo</th><th>Mudança procurada</th><th>Resultado a observar</th></tr></thead>
+<tbody>
+<tr><td>Recorrência</td><td>Uma família volta ou compra mais noites</td><td>Retorno, noites pagas, contribuição por família</td></tr>
+<tr><td>Reativação</td><td>Uma família afastada retoma a relação</td><td>Retornos recuperados, custo, contribuição</td></tr>
+<tr><td>Indicação</td><td>Uma recomendação leva uma nova família à primeira estadia</td><td>Novas famílias, conversão, custo de aquisição</td></tr>
+<tr><td>Compras adicionais</td><td>Produtos ou experiências coerentes com a viagem</td><td>Receita e margem que pertençam à Fazenda</td></tr>
+</tbody></table></div>
+<blockquote>Hospedagem memorável → satisfação registrada → vínculo entre viagens → retorno direto ou indicação → nova hospedagem que atualiza a memória da família → novo ciclo.</blockquote>
+<p>Um grupo de WhatsApp, sozinho, não produz esse efeito: é preciso facilitar a recomendação, identificar a origem e entregar uma experiência que mereça ser indicada. A aquisição de novos públicos continua necessária; uma mesma reserva pode envolver conteúdo, conversa e benefício, mas a receita é contada uma vez.</p>
+
+<h3>As onze ações e por que cada uma existe</h3>
+<div class="tbl wide"><table>
+<thead><tr><th>Ação</th><th>Por que</th><th>Como saberemos</th><th>Risco e mitigação</th></tr></thead>
+<tbody>
+<tr><td>1 · Clube com pontos e reconhecimento</td><td>Razão para voltar sem reduzir tarifa; pertencimento e objetivo tangível</td><td>Retorno, intervalo, margem incremental, custo</td><td>Presentear quem já voltaria · limites, calendário restrito, piloto</td></tr>
+<tr><td>2 · Convite antes da época habitual</td><td>Viagem se planeja com antecedência</td><td>Resposta, retorno, diretas, margem</td><td>Excesso de disparo · limite de frequência</td></tr>
+<tr><td>3 · Aniversário com voucher para a baixa</td><td>Data pessoal como convite; preencher período vazio</td><td>Vouchers, reservas, receita líquida, custo</td><td>Desconto a quem viria · datas restritas, prazo curto, teto</td></tr>
+<tr><td>4 · Indicação com pontos</td><td>Novas famílias pela confiança; sem registro não há medida</td><td>Conversão em estadia paga, custo por família</td><td>Indicação fictícia · regras e validação</td></tr>
+<tr><td>5 · Reativação por motivo</td><td>O motivo do afastamento define a abordagem</td><td>Reativação, valor recuperado, custo</td><td>Confundir sazonalidade com abandono</td></tr>
+<tr><td>6 · Personalização e Linha</td><td>Cuidado contextualizado; marca presente na rotina</td><td>NPS, retorno, unidades, margem</td><td>Estoque parado · lote e custo antes</td></tr>
+<tr><td>7 · Hospedagem coberta por pontos</td><td>Duas em cada três noites da baixa ficam vazias</td><td>Ocupação incremental, RevPAR, margem</td><td>Canibalização · só após simulação</td></tr>
+<tr><td>8 · Reserva direta na recompra</td><td>Comissão evitada; 45 famílias já migraram sozinhas</td><td>Diretas, OTA → direto, margem por canal</td><td>Prometer economia sem conferir contratos</td></tr>
+<tr><td>9 · Maram e parceiros</td><td>Benefício vivido combina com hospitalidade</td><td>Resgates, custo, reservas de parceiros</td><td>Maram tem caixa próprio · depende de acordo</td></tr>
+<tr><td>10 · Comunidade VIP e conteúdo</td><td>Manter a Fazenda presente entre viagens</td><td>Conversas originadas, reservas rastreadas</td><td>Grupo virar lista de ofertas</td></tr>
+<tr><td>11 · Legado e novas gerações</td><td>História de décadas gera vínculo e ocasiões novas</td><td>Participações, indicações verificadas</td><td>Fotos sem autorização · convite voluntário</td></tr>
+</tbody></table></div>
+<p><strong>O que melhora primeiro.</strong> Nas primeiras semanas: cadastros confiáveis, respostas, entrega sem erro. Nas próximas janelas de viagem: reservas, retornos, primeiras indicações, custo real. Em ciclos sucessivos: se as famílias continuam voltando e se novas gerações entram na relação.</p>
+</section>
+
+<!-- 04 -->
+<section id="escolhas">
+<h2><span class="n">04</span>Por que cada escolha foi feita</h2>
+<p>As referências fundamentam mecanismos; resultados de outras empresas não viram meta da Fazenda.</p>
+<p><strong>Reconhecimento + pontos.</strong> Voorhees, McCall e Carroll (2014) encontraram aumento médio de cerca de 50% na receita anual de participantes de programas em hotéis independentes, sobretudo por mais noites [1]. McCall et al. (2010) mostram que não há fórmula universal [2]. Kivetz et al. (2006) observaram aceleração quando a recompensa se aproxima [3].</p>
+<div class="tbl"><table>
+<thead><tr><th>Modelo</th><th>Vantagem</th><th>Limitação</th></tr></thead>
+<tbody>
+<tr><td>Só reconhecimento</td><td>Simples, tom íntimo</td><td>Critério subjetivo, difícil de medir</td></tr>
+<tr><td>Só pontos</td><td>Regra clara, progressão visível</td><td>Tom transacional, controle de saldo</td></tr>
+<tr class="hl"><td>Híbrido (recomendado)</td><td>História gera reconhecimento; saldo gera resgate</td><td>Separar categoria, Legado e saldo na operação</td></tr>
+</tbody></table></div>
+<p><strong>Manter a Fazenda presente.</strong> O Ehrenberg-Bass Institute descreve a disponibilidade mental: a marca que vem à lembrança na situação de compra [4]. Daí associar a Fazenda a ocasiões concretas (descanso, férias em família, dias a dois, natureza, encontros).</p>
+<p><strong>Indicação como aquisição.</strong> Schmitt et al. (2011) mostraram clientes indicados com valor pelo menos 16% superior, num banco alemão [5]. Pedir, facilitar e reconhecer são três tarefas distintas.</p>
+<p><strong>Cuidado e Legado.</strong> Yoon, Peck e Shu (2025) ligam envolvimento do hóspede com o espaço a apego e lealdade [6]. Saber a cabana preferida ajuda, mas é preciso perguntar se ela continua adequada.</p>
+<div class="tbl"><table>
+<thead><tr><th>Referência</th><th>O que faz</th><th>Na Fazenda</th></tr></thead>
+<tbody>
+<tr><td>Airbnb</td><td>Indicação vira crédito de viagem após a estadia do convidado (<a href="https://www.airbnb.com.br/help/article/3613" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener">termos</a>)</td><td>Indicação convertida gera pontos para a próxima visita</td></tr>
+<tr><td>Marriott Bonvoy</td><td>Pontos de estadias viram noites</td><td>Recompensas progressivas, até uma diária na baixa</td></tr>
+<tr><td>Spotify Wrapped</td><td>Retrospectiva pessoal compartilhável</td><td>Retrospectiva autorizada das visitas da família</td></tr>
+</tbody></table></div>
+<h3>Na prática: o que cada fundamento vira na Fazenda</h3>
+<div class="tbl wide"><table>
+<thead><tr><th>O que a pesquisa mostra</th><th>O que vamos fazer</th><th>Como a família percebe</th></tr></thead>
+<tbody>
+<tr><td>Quem participa de um programa compra mais noites [1]</td><td>Os pontos são por noite paga, não por reserva. Medimos noites por família contra um grupo comparável</td><td>"Cada noite aqui conta para a próxima visita"</td></tr>
+<tr><td>Não existe fórmula pronta [2]</td><td>Piloto pequeno, catálogo com só três opções, revisão das regras a cada trimestre</td><td>Regras simples, que cabem numa mensagem</td></tr>
+<tr><td>A recompensa próxima motiva [3]</td><td>Toda mensagem de saldo diz a próxima troca e quantos pontos faltam. O primeiro presente (5 pontos) cabe em uma ou duas viagens</td><td>"Faltam só 2 pontos para a nossa vela"</td></tr>
+<tr><td>A marca lembrada é a que aparece na ocasião certa [4]</td><td>Conteúdo organizado por ocasião (descanso, férias em família, a dois). Convite pessoal antes da época em que a família costuma viajar</td><td>A Fazenda aparece quando a família começa a planejar</td></tr>
+<tr><td>Indicados tendem a ficar e valer mais [5]</td><td>Reservas pergunta "como nos conheceu?" em todo primeiro contato e registra quem indicou. Pontos só depois da estadia paga</td><td>Quem indicou recebe um agradecimento e os pontos; quem chegou, um bilhete de boas-vindas</td></tr>
+<tr><td>Escolher e ser lembrado cria apego [6]</td><td>Registrar cabana preferida e ocasiões; perguntar antes de presumir; bilhete escrito à mão em retornos</td><td>"Eles lembraram da gente"</td></tr>
+<tr><td>Airbnb, Marriott, Spotify</td><td>Indicação vira pontos; pontos viram diária na baixa; retrospectiva anual das visitas da família</td><td>Um caminho claro do saldo até a próxima estadia</td></tr>
+</tbody></table></div>
+<div class="rec"><span class="eyebrow">Pergunta decisória central</span>A prioridade do Clube é reconhecer famílias que já voltariam ou incentivar um retorno que não aconteceria sem o benefício? As duas são legítimas, mas serão medidas separadamente, para a Fazenda não pagar por uma recorrência que já existia.</div>
+</section>
+
+<!-- 05 -->
+<section id="testes">
+<h2><span class="n">05</span>Como vamos testar antes de ampliar</h2>
+<p>Cada iniciativa começa com uma pergunta concreta: a mensagem antes da época habitual aumenta reservas? O convite de indicação gera hospedagens identificadas? O benefício estimula noites adicionais ou subsidia viagens que já ocorreriam?</p>
+<p><strong>Comparar famílias semelhantes.</strong> Comparar membros com toda a base favorece o programa, porque os mais fiéis participam mais. Sempre que viável, distribuímos famílias elegíveis aleatoriamente entre convite agora e convite depois.</p>
+<div class="note">Se 12 de 100 famílias convidadas retornam e 8 de 100 comparáveis também, a diferença é de 4 pontos: <b>quatro retornos adicionais, não doze</b>. Com grupos pequenos, uma diferença assim ainda pode ser acaso; o resultado é lido junto com tamanho, janela e diferenças entre grupos.</div>
+<div class="tbl"><table>
+<thead><tr><th>Horizonte</th><th>O que aprendemos</th><th>Decisão</th></tr></thead>
+<tbody>
+<tr><td>Primeiras semanas</td><td>Dados, resposta, entrega, esforço da equipe</td><td>Corrigir fluxo</td></tr>
+<tr><td>Próximas janelas de viagem</td><td>Reservas, retorno, indicação, custo, margem</td><td>Manter, ajustar ou ampliar</td></tr>
+<tr><td>Ciclos sucessivos</td><td>Persistência, valor por família, novas gerações</td><td>Rever orçamento permanente</td></tr>
+</tbody></table></div>
+<p><strong>Experimentos prioritários.</strong> E1 segmentar o histórico familiar · E2 simular a cortesia com ocupação, tarifas e calendário · E3 testar o pedido de indicação com registro de quem indicou · E4 piloto de conteúdo com Regina.</p>
+</section>
+
+<!-- 06 -->
+<section id="jornada">
+<h2><span class="n">06</span>A jornada de uma família e os canais</h2>
+<div class="journey">
+  <div><b>1 · Antes</b>Reservas confere histórico e preferências</div>
+  <div><b>2 · Durante</b>Reconhecer quem é da casa; registrar preferências</div>
+  <div><b>3 · Saída</b>Conferir noites pagas e lançar pontos</div>
+  <div><b>4 · 2 a 3 dias</b>Agradecer e ouvir; definir o caminho</div>
+  <div><b>5 · Entre viagens</b>Conteúdo, aniversário, convites pertinentes</div>
+  <div><b>6 · Interesse</b>Conversa vai a Reservas com contexto</div>
+  <div><b>7 · Volta ou indica</b>Histórico e pontos atualizados</div>
+</div>
+<div class="tbl"><table>
+<thead><tr><th>Canal</th><th>O que acontece ali</th></tr></thead>
+<tbody>
+<tr><td>Instagram</td><td>Apresentar a experiência e facilitar a descoberta</td></tr>
+<tr><td>Grupo VIP · 841 membros</td><td>Novidades, histórias, bastidores e convites. Não concede pontos. Nunca expõe saldo, aniversário ou histórico</td></tr>
+<tr><td>WhatsApp privado</td><td>Aniversário, retorno, saldo, benefício ou reserva, com o histórico da família</td></tr>
+<tr><td>Reservas</td><td>Transformar interesse em proposta e acompanhar o fechamento</td></tr>
+</tbody></table></div>
+<p><strong>O grupo é administrado pela Lince.</strong> Antes de usá-lo para convites, a Lince mapeia quem participa (hóspedes antigos, recentes, leads, parceiros) e cruza, com consentimento, os números com o cadastro de hóspedes. Os números do grupo não viram lista de disparo privado. O grupo segue como comunidade aberta; o Clube tem elegibilidade própria, e todo interesse que surgir no grupo vai para Reservas no privado.</p>
+<p><strong>Rotina editorial.</strong> Até duas publicações por semana: uma história ou cena da Fazenda e uma novidade quando houver. Primeiro ciclo de seis a oito conteúdos (natureza, cabanas, equipe, experiências locais, Maram, histórias autorizadas). Regina fala das memórias como fundadora e matriarca, sem qualificação clínica ou promessa de saúde; Júlia e Serginho trazem a perspectiva de convidados. O calendário não pode depender de uma pessoa.</p>
+<p><strong>Reputação.</strong> Uma família indicada consulta Instagram, avaliações e atendimento antes de reservar. Fotos atuais, ficha correta no Google e respostas às avaliações precisam confirmar a experiência. Nenhum benefício condicionado a elogio público.</p>
+</section>
+
+<!-- 07 -->
+<section id="mensagens">
+<h2><span class="n">07</span>Mensagens no privado e reativação</h2>
+<p>Uma rotina de contatos individuais, cada um com um motivo claro e uma ação seguinte. Não é disparo em massa: é a equipe sabendo quando falar com cada família e o que dizer.</p>
+<h3>Três caminhos depois da estadia</h3>
+<div class="tbl"><table>
+<thead><tr><th>Retorno da família</th><th>O que acontece</th></tr></thead>
+<tbody>
+<tr><td><span class="pill p-no">Insatisfeita</span></td><td>Recuperação primeiro: ouvir, resolver, confirmar. Nada de convite comercial ou de indicação até lá</td></tr>
+<tr><td><span class="pill p-wait">Satisfeita</span></td><td>Agradecimento, caminho para a próxima reserva direta, convites conforme o histórico</td></tr>
+<tr><td><span class="pill p-ok">Muito satisfeita</span></td><td>Convite para indicar amigos, com os pontos explicados</td></tr>
+</tbody></table></div>
+<div class="tbl"><table>
+<thead><tr><th>Momento</th><th>O que fazer</th></tr></thead>
+<tbody>
+<tr><td>2 a 3 dias após a saída</td><td>Agradecer, perguntar como foi, seguir um dos três caminhos</td></tr>
+<tr><td>Após confirmar satisfação</td><td>Pedir indicação com mensagem pronta para encaminhar</td></tr>
+<tr><td>Aniversário</td><td>Parabéns com voucher para a baixa (dia e mês já estão na base). Quem tem reserva futura recebe só os parabéns</td></tr>
+<tr class="hl"><td>Antes da época habitual</td><td>Gatilho prioritário: convite com saldo, datas e ajuda de Reservas</td></tr>
+<tr><td>Datas da família</td><td>Aniversário de casamento ou ocasião celebrada na Fazenda</td></tr>
+<tr><td>3, 6 ou 12 meses</td><td>Só se combinar com o perfil; nunca disparo obrigatório</td></tr>
+</tbody></table></div>
+<h3>Como soam as mensagens</h3>
+<div class="note"><b>Tom de voz da Fazenda.</b> A Fazenda fala como uma mulher que pratica yoga, se alimenta bem e ama estar em família: <b>acolhedora</b> (como quem recebe em casa depois de uma longa viagem), <b>serena</b> (nunca apressada para vender), <b>íntima</b> (compartilha, não anuncia), <b>sensorial</b> (o som do mar, a brisa, acordar sem relógio) e <b>profissional</b> (informação precisa).<br><br><b>Palavras da casa:</b> reconexão com o essencial · refúgio à beira-mar · pedaço de paraíso · momentos inesquecíveis · essência do Rosa.<br><b>Nunca:</b> urgência artificial, desconto como gancho, tom frio ou burocrático, excesso de emojis (no máximo um), prometer o que a operação não entrega.</div>
+<p class="eyebrow" style="margin-top:18px">Pós-estadia</p>
+<blockquote>"Oi, Carla. Por aqui o mar seguiu no mesmo ritmo, mas a casa ficou com saudade de vocês. Esperamos que um pouco dessa calma tenha ido junto na bagagem. Como foram os dias no Rosa? Queremos ouvir tudo, inclusive o que podemos cuidar ainda melhor na próxima vez."</blockquote>
+<p class="eyebrow">Antes da época habitual</p>
+<blockquote>"Oi, Carla. Janeiro está chegando e, com ele, a lembrança de vocês acordando cedo, sem relógio, com o som do mar. Já estão sentindo vontade de voltar ao refúgio? Vocês têm 7 pontos guardados no Clube, e vai ser um prazer escolher as datas junto com vocês, no tempo de vocês."</blockquote>
+<p><strong>Limite.</strong> No máximo um convite comercial por mês; sem resposta, um único retorno e pausa. Mensagens de serviço e de aniversário não contam nesse limite.</p>
+
+<p class="eyebrow">Convite para indicar</p>
+<blockquote>"Carla, que bom saber que vocês voltaram para casa mais leves. Se existe alguém querido que também está precisando dessa reconexão com o essencial, é só compartilhar nosso contato. Quando essa família viver os dias dela por aqui, vocês ganham pontos no Clube, como um agradecimento nosso por espalharem a essência do Rosa. Hoje vocês têm 12; com duas indicações, chegam aos 20 que viram uma diária na baixa temporada."</blockquote>
+<p class="eyebrow">Aniversário</p>
+<blockquote>"Feliz aniversário, Carla 🌺 Que o novo ano chegue no ritmo das ondas: com calma, presença e muitos momentos ao lado de quem você ama. Para celebrar, deixamos um presente: um voucher de R$ 200 para você voltar ao Rosa numa data tranquila da baixa temporada, quando o mar fica mais sereno e as baleias passam perto da praia. Ele vale para reservas feitas nos próximos 30 dias. Quer que eu te mostre as datas?"</blockquote>
+<p class="small muted">Valores ilustrativos, para simulação.</p>
+
+<h3>Trazer de volta quem se afastou</h3>
+<p>Duas listas: famílias atrasadas em relação ao próprio costume e famílias paradas há 18 ou 24 meses, conforme a régua escolhida. Hoje cerca de 4 a 5% das paradas voltam sozinhas: é o ponto de comparação. A mensagem pergunta antes de oferecer.</p>
+<div class="tbl"><table>
+<thead><tr><th>Situação</th><th>Abordagem</th></tr></thead>
+<tbody>
+<tr><td>Perdeu o hábito</td><td>Retomar uma lembrança real e perguntar pelos planos</td></tr>
+<tr><td>Filhos cresceram</td><td>Experiências da fase atual: a dois, descanso, celebração</td></tr>
+<tr><td>Preço ou orçamento</td><td>Períodos e acomodações compatíveis, sem desconto antes de entender</td></tr>
+<tr><td>Experiência ruim</td><td>Ouvir, resolver, confirmar. Convite comercial só depois</td></tr>
+<tr><td>Motivo desconhecido</td><td>Perguntar e registrar, sem presumir que é preço</td></tr>
+</tbody></table></div>
+<p class="eyebrow" style="margin-top:18px">Primeira mensagem · De Volta ao Rosa</p>
+<blockquote>"Oi, Marcos. Hoje, com o mar de inverno batendo manso na praia, lembramos de vocês e das crianças correndo descalças pelo gramado. Faz um tempo que não nos encontramos e ficamos com vontade de saber como estão. Como anda a vida por aí? Vai ser bom ter notícias de vocês."</blockquote>
+<p>A primeira mensagem não oferece nada: pergunta. A segunda depende da resposta.</p>
+<div class="tbl"><table>
+<thead><tr><th>Se a família responder…</th><th>A equipe responde</th></tr></thead>
+<tbody>
+<tr><td>"Os filhos cresceram, agora somos só nós dois"</td><td>"Que fase bonita. E se agora fosse um tempo só de vocês dois? No inverno o Rosa fica silencioso, as baleias aparecem da varanda e o Maram acende as velas à noite. Se quiserem, separo algumas datas com calma."</td></tr>
+<tr><td>"A rotina apertou, não tem dado"</td><td>"A gente entende, a vida às vezes acelera. Quando der vontade de desacelerar, nem que seja por duas noites no meio da semana, o refúgio está aqui. Posso te avisar das datas mais tranquilas?"</td></tr>
+<tr><td>"Ficou caro pra nós"</td><td>"Obrigado por compartilhar com a gente. Fora dos feriados, a baixa temporada tem datas e cabanas que costumam caber melhor, e é quando o Rosa fica mais sereno. Posso te mostrar algumas opções, sem compromisso?"</td></tr>
+<tr><td>"Tivemos um problema na última vez"</td><td>"Marcos, sentimos muito, e obrigado por nos contar. Não é assim que queremos que quem é da casa se sinta. Posso te ligar para ouvir com calma o que aconteceu?" Nenhum convite comercial até resolver</td></tr>
+<tr><td>Sem resposta</td><td>Um único retorno em algumas semanas, com uma foto da Fazenda naquela estação. Depois, pausa</td></tr>
+</tbody></table></div>
+<p><strong>Famílias antigas e novas gerações.</strong> Com Regina e a equipe antiga, localizar famílias que frequentavam a Fazenda desde os primeiros anos, a partir de 1985, inclusive antes da divisão da propriedade. Como a Fazenda Verde hoje é outra operação, a abordagem fala só da história da família com o Rosa. Como a base digital começa em 2021, histórias anteriores são confirmadas antes de aparecer em mensagens. Uma filha que se casa no ano que vem vai ao Alan, do time de casamentos.</p>
+</section>
+
+<!-- 08 -->
+<section id="clube">
+<h2><span class="n">08</span>Clube Família Fazenda do Rosa</h2>
+<p>A família acompanha duas coisas: a categoria, que sobe com as viagens, e o saldo de pontos, que vem de noites pagas e indicações convertidas. Usar pontos reduz o saldo, mas não a categoria.</p>
+<div class="tbl"><table>
+<thead><tr><th>Parte do Clube</th><th>O que é</th><th>Exemplo</th></tr></thead>
+<tbody>
+<tr><td>Todo membro recebe</td><td>Cadastro reconhecido, saldo após cada estadia, catálogo</td><td>Reservas sabe a cabana preferida</td></tr>
+<tr><td>Muda com a categoria</td><td>Convites antecipados e prioridades</td><td>Prata recebe a Virada Mágica antes</td></tr>
+<tr><td>Troca com pontos</td><td>Catálogo com custo aprovado</td><td>Vela, canga, Maram, diária na baixa</td></tr>
+<tr><td>Histórias antigas</td><td>Legado, com orçamento próprio</td><td>Retrospectiva nos dez anos</td></tr>
+</tbody></table></div>
+
+<h3>Categorias</h3>
+<p>Definidas pelas viagens concluídas nos últimos 36 meses. Quem já se hospedou entra no lançamento com a categoria que o histórico justifica.</p>
+<div class="tiers">
+  <div class="tier bronze"><h4>Bronze</h4><div class="crit">1 viagem</div><p>Entra no Clube, acumula pontos, atendimento com histórico.</p></div>
+  <div class="tier prata"><h4>Prata</h4><div class="crit">2 a 3 viagens</div><p>Acesso antecipado à Virada Mágica e à temporada de baleias; novidade do Maram, se houver acordo.</p></div>
+  <div class="tier ouro"><h4>Ouro</h4><div class="crit">4 ou mais</div><p>Prioridade na cabana preferida; presente da Linha em marcos; experiências só para quem é da casa.</p></div>
+  <div class="tier legado"><h4>Legado</h4><div class="crit">história antiga</div><p>Homenagem com orçamento próprio, coexistindo com qualquer categoria.</p></div>
+</div>
+<p class="small muted">No histórico desde 2021, 676 famílias têm 2+ viagens e 231 têm 3+. A maioria começará como Bronze e Ouro será um grupo pequeno, o que mantém o custo dos benefícios controlado. Categoria não garante cabana, upgrade ou diária.</p>
+
+<h3>Quem está começando a se relacionar com a Fazenda</h3>
+<p>A família nova já ganha pontos na primeira hospedagem paga. Não existe período de espera.</p>
+<div class="tbl"><table>
+<thead><tr><th>Momento</th><th>O que acontece</th></tr></thead>
+<tbody>
+<tr><td>Primeira reserva</td><td>Reservas registra como a família conheceu a Fazenda (e quem indicou, se houver)</td></tr>
+<tr><td>Check-out da primeira estadia</td><td>A família entra no Clube como Bronze e recebe os pontos das noites pagas. Três noites = 3 pontos</td></tr>
+<tr><td>2 a 3 dias depois</td><td>Mensagem de boas-vindas ao Clube, com o saldo e a primeira troca possível</td></tr>
+<tr><td>Segunda viagem</td><td>Sobe para Prata e normalmente alcança o primeiro presente</td></tr>
+</tbody></table></div>
+<blockquote>"Carla, foi muito bom receber vocês pela primeira vez. A partir de agora vocês fazem parte do Clube Família Fazenda do Rosa, e a casa passa a guardar um pouco da história de vocês. As três noites viraram 3 pontos; com mais 2, vocês levam uma vela da Fazenda para acender em casa e lembrar do cheiro do mar. Que esta seja a primeira de muitas voltas."</blockquote>
+<p class="small muted">Quem chega no verão, com mínimo de 7 noites, já sai da primeira estadia com 7 pontos e pode trocar pelo primeiro presente na hora. Quem chega na baixa, com 1 ou 2 noites, alcança o presente na segunda visita. Pela pesquisa da Fazenda, casais ficam em média 3,5 noites e famílias 5,2: uma família costuma sair da primeira estadia já com 5 pontos. A simulação vai confirmar esse ritmo com a base.</p>
+
+<h3>Como se ganha pontos</h3>
+<div class="tbl"><table>
+<thead><tr><th>Situação</th><th>Tratamento proposto</th></tr></thead>
+<tbody>
+<tr><td>Uma cabana, três noites pagas</td><td>3 pontos (pessoas não multiplicam)</td></tr>
+<tr><td>Duas cabanas, três noites</td><td>6 pontos se do mesmo núcleo confirmado</td></tr>
+<tr><td>Indicação convertida</td><td>Proporcional à estadia da família nova: 2 pontos se ela fechar 1 noite, 4 pontos se fechar 2 ou mais (seção 9). Liberados após a estadia paga; vínculo de 12 meses</td></tr>
+<tr><td>Noite gratuita ou paga com pontos</td><td>Não pontua</td></tr>
+<tr><td>Cancelamento ou ausência</td><td>Não pontua; no histórico, no-show aparece como cancelamento</td></tr>
+<tr><td>Extras e produtos</td><td>Não pontuam no primeiro piloto</td></tr>
+<tr><td>Casamentos, grupos, empresas</td><td>Fora do primeiro piloto</td></tr>
+</tbody></table></div>
+<p>As categorias vão de Eco Suíte (3 pessoas) a Praia 2 dormitórios (6): uma noite em cada uma não vale o mesmo. Se a simulação mostrar distorção, a Lince propõe pontos por valor líquido pago. Validade de 24 meses por crédito, mais antigos primeiro, sem transferência entre famílias.</p>
+<p><strong>Custo da indicação.</strong> Os 4 pontos de quem indicou entram inteiros no custo de aquisição. Os 3 pontos da família nova são o custo normal de qualquer membro; o Financeiro decide se entram nessa conta e registra o critério.</p>
+
+<h3>Catálogo de trocas</h3>
+<div class="tbl"><table>
+<thead><tr><th>Opção</th><th class="num">Pontos (simulação)</th><th>O que é</th></tr></thead>
+<tbody>
+<tr><td>Presente de vínculo</td><td class="num">5</td><td>Vela, caneca ou marcador da Linha</td></tr>
+<tr><td>Experiência especial</td><td class="num">10</td><td>Canga ou convite gastronômico no Maram</td></tr>
+<tr><td>Estadia na baixa temporada</td><td class="num">20</td><td>Diária coberta por pontos em dia comum da baixa</td></tr>
+</tbody></table></div>
+<div class="note"><b>Ficha de cada benefício.</b> Nada entra no catálogo sem: público elegível · pontos · limite por família · custo unitário e incremental · estoque ou capacidade · temporada · regra de cancelamento · responsável pela entrega · indicador · validação da direção.</div>
+
+<figure>
+  <div class="fig-title">Uma família no programa</div>
+  <div class="fig-sub">Saldo de pontos de jan/2026 a jun/2028, valores ilustrativos</div>
+  <svg class="chart-svg" viewBox="0 0 660 250" role="img" aria-label="Evolução do saldo de pontos de uma família">
+    <line x1="40" y1="190" x2="620" y2="190" stroke="var(--line)"></line>
+    <line x1="40" y1="30" x2="620" y2="30" stroke="var(--rose)" stroke-dasharray="4 4"></line>
+    <text x="36" y="34" text-anchor="end">20</text>
+    <text x="36" y="114" text-anchor="end">10</text>
+    <text x="36" y="194" text-anchor="end">0</text>
+    <line x1="40" y1="110" x2="620" y2="110" stroke="var(--line)" stroke-dasharray="2 4"></line>
+    <text x="616" y="24" text-anchor="end" style="fill:var(--rose)">diária na baixa · 20 pts</text>
+    <path d="M40,166 H160 V134 H180 V174 H280 V134 H320 V102 H380 V70 H520 V30 H620 V190" fill="none" stroke="var(--sea)" stroke-width="2.5" stroke-linejoin="round"></path>
+    <g style="fill:var(--sea)">
+      <circle cx="40" cy="166" r="4"></circle><circle cx="160" cy="134" r="4"></circle><circle cx="180" cy="174" r="4"></circle>
+      <circle cx="280" cy="134" r="4"></circle><circle cx="320" cy="102" r="4"></circle><circle cx="380" cy="70" r="4"></circle>
+      <circle cx="520" cy="30" r="4"></circle>
+    </g>
+    <circle cx="620" cy="190" r="4" style="fill:var(--rose)"></circle>
+    <text x="40" y="212" text-anchor="middle">jan/26</text>
+    <text x="170" y="212" text-anchor="middle">jul/26</text>
+    <text x="280" y="212" text-anchor="middle">jan/27</text>
+    <text x="380" y="212" text-anchor="middle">jun/27</text>
+    <text x="520" y="212" text-anchor="middle">jan/28</text>
+    <text x="620" y="212" text-anchor="middle">jun/28</text>
+    <text x="40" y="232" text-anchor="start">Bronze</text>
+    <text x="160" y="232" text-anchor="start">Prata</text>
+    <text x="520" y="232" text-anchor="start">Ouro</text>
+    <text x="180" y="190" dy="-24" text-anchor="middle">troca −5</text>
+    <text x="350" y="92" text-anchor="middle">indicações +4 +4</text>
+  </svg>
+  <figcaption>Viagens em jan/26 (3 noites), jul/26 (4), jan/27 (5) e jan/28 (5); troca por um presente em ago/26; duas famílias indicadas em 2027; diária coberta em jun/28. Nenhum crédito venceu. A Fazenda recebeu quatro estadias pagas, duas famílias novas e uma visita na baixa.</figcaption>
+</figure>
+<div class="note"><b>As três regras precisam fechar juntas.</b> Uma família que passa quatro noites por ano acumula 8 pontos em duas visitas e veria os primeiros vencerem antes da diária. Como a maioria viajou uma única vez, a simulação vai medir quanto tempo leva para chegar a cada recompensa e ajustar faixa, validade ou pontos por indicação.</div>
+</section>
+
+<!-- 09 -->
+<section id="indicacao">
+<h2><span class="n">09</span>Indicação, Linha da Fazenda, cortesia e parceiros</h2>
+<h3>Indicação: pedir, facilitar, reconhecer</h3>
+<p>Na pesquisa da Fazenda, 27% dos hóspedes contam que descobriram o Rosa por indicação. No sistema, o canal "Indicação" aparece em apenas 6 estadias, porque ninguém pergunta nem registra. A recomendação já acontece; falta registrá-la e agradecer. A família recebe uma mensagem pronta, um link ou um cartão com QR; quando os amigos chegam, Reservas pergunta como conheceram e registra quem indicou. Depois da hospedagem paga, a família ganha os pontos e um agradecimento; os amigos recebem um bilhete de boas-vindas.</p>
+<p class="small"><strong>Regras.</strong> Uma família indicadora por família nova · origem registrada no primeiro contato · 12 meses para converter · fora: clientes existentes, autoindicação e duplicidades · pontos uma única vez.</p>
+<h4 style="margin:22px 0 6px;font-size:16px">E se a família indicada fechar só 1 ou 2 noites?</h4>
+<p>Pagar 4 pontos (um quinto de uma diária) por uma reserva de uma noite pode custar mais do que a reserva deixa. Por isso propomos pontos proporcionais à estadia que a indicação gerou:</p>
+<div class="tbl"><table>
+<thead><tr><th>A família indicada fecha</th><th class="num">Quem indicou ganha</th><th class="num">A família nova ganha</th><th>Quando acontece</th></tr></thead>
+<tbody>
+<tr><td>1 noite paga</td><td class="num">2 pontos</td><td class="num">1 ponto</td><td>Só em dias comuns da baixa, onde o mínimo é 1 noite</td></tr>
+<tr><td>2 noites pagas</td><td class="num">4 pontos</td><td class="num">2 pontos</td><td>Baixa temporada e pós-Carnaval</td></tr>
+<tr><td>3 noites ou mais</td><td class="num">4 pontos</td><td class="num">1 por noite</td><td>Feriados (mínimo 3), Carnaval, Páscoa, verão (mínimo 7)</td></tr>
+</tbody></table></div>
+<p class="small muted">A indicação de uma noite ainda vale a pena para a Fazenda, porque cai nos dias de menor ocupação, mas com recompensa menor. Na simulação, a Lince compara essa escala com a alternativa de exigir mínimo de 2 noites para a indicação contar. Os 4 pontos de quem indicou entram inteiros no custo de aquisição.</p>
+
+<h3>Linha da Fazenda</h3>
+<p>Peças de uso cotidiano com três usos: venda a qualquer hóspede, presente em marcos e troca por pontos. Os extras hoje são 0,7% da receita registrada. A pasta da Linha já tem conceitos visuais de sete tipos de peça. <strong>Nenhuma está produzida ainda</strong>: a Fazenda precisa decidir quais serão fabricadas, com fornecedor e custo.</p>
+<div class="tbl wide"><table>
+<thead><tr><th>Peça</th><th>Conceitos na pasta</th><th>Uso sugerido no programa</th><th>Prioridade</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Velas</td><td>3 conceitos (vidro âmbar, branco, verde)</td><td>Troca por 5 pontos, venda na recepção, bilhete de retorno</td><td>1º lote</td><td><span class="pill p-wait">conceito</span></td></tr>
+<tr><td>Marcadores de livro</td><td>1 conceito (6 artes da Fazenda)</td><td>Boas-vindas do Clube, troca por 5 pontos, venda</td><td>1º lote · baixo custo</td><td><span class="pill p-wait">conceito</span></td></tr>
+<tr><td>Toalha / canga</td><td>4 conceitos (verde, listrada, botânica)</td><td>Troca por 10 pontos, venda</td><td>2º lote</td><td><span class="pill p-wait">conceito</span></td></tr>
+<tr><td>Produtos de banho</td><td>1 conceito (frascos e sabonete)</td><td>Amenities da hospedagem e venda; não é prêmio</td><td>Avaliar com operação</td><td><span class="pill p-wait">conceito</span></td></tr>
+<tr><td>Canudos</td><td>1 conceito ("o canudo amolece")</td><td>Bar e Maram; peça de marca e sustentabilidade, não prêmio</td><td>Avaliar com Maram</td><td><span class="pill p-wait">conceito</span></td></tr>
+<tr><td>Roupão</td><td>4 conceitos</td><td>Presente em marcos (dez anos, Legado), venda</td><td>Fase 2 · custo alto</td><td><span class="pill p-wait">conceito</span></td></tr>
+<tr><td>Kit hóspede</td><td>1 conceito (roupão, almofada, máscara, chinelo)</td><td>Só Legado e marcos especiais</td><td>Fase 2 · custo alto</td><td><span class="pill p-wait">conceito</span></td></tr>
+</tbody></table></div>
+<p class="small">Para cada peça escolhida, a Fazenda traz: fornecedor, protótipo, custo em três quantidades, lote mínimo, embalagem, prazo e onde fica o estoque. Com isso a Lince fecha quantos pontos cada uma vale.</p>
+<div class="tbl"><table>
+<thead><tr><th>Momento</th><th>O que a família recebe</th></tr></thead>
+<tbody>
+<tr><td>Toda hospedagem</td><td>Amenities e atendimento; não são prêmio</td></tr>
+<tr><td>Retorno</td><td>Bilhete; peça por resgate ou em marco</td></tr>
+<tr><td>Legado</td><td>Homenagem; kit, canga ou roupão em marco aprovado</td></tr>
+<tr><td>Em risco de não voltar</td><td>Contato pessoal; nenhum presente ou diária automática</td></tr>
+<tr><td>Compra voluntária</td><td>Itens à venda na recepção, sem ser membro</td></tr>
+</tbody></table></div>
+<p class="small muted">Nenhum resgate físico é anunciado antes de produto e data de entrega confirmados. O Clube pode começar sem a Linha. <a href="https://drive.google.com/drive/folders/1CB99kbzlLQhDZRZNjasVWvopsYkyA2gy?usp=drive_link" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener">Referências visuais</a>.</p>
+
+<h3>Cortesia de baixa temporada</h3>
+<p>Com saldo suficiente, a família resgata uma hospedagem coberta por pontos, sem compra obrigatória de noites extras. O catálogo diz quantas noites, qual cabana, quais hóspedes e serviços. Pode começar restrita a algumas categorias (Eco Suíte, Bem-estar) para controlar o custo.</p>
+<div class="tbl"><table>
+<thead><tr><th>Período</th><th class="num">Mínimo</th><th>Cortesia</th></tr></thead>
+<tbody>
+<tr><td>Dias comuns da baixa (05/04 a 30/11)</td><td class="num">1 noite</td><td><span class="pill p-ok">Elegível</span></td></tr>
+<tr><td>Feriados dentro da baixa</td><td class="num">3 noites</td><td><span class="pill p-no">Fora</span></td></tr>
+<tr><td>Verão, Carnaval, Páscoa, dezembro, festas</td><td class="num">2 a 7</td><td><span class="pill p-no">Fora</span></td></tr>
+<tr><td>Bloqueios de casamento</td><td class="num">—</td><td><span class="pill p-no">Fora</span></td></tr>
+</tbody></table></div>
+<p><strong>Uma diária não custa zero:</strong> limpeza, lavanderia, café, amenities, energia e água, horas da equipe e eventual comissão.</p>
+<figure>
+  <div class="fig-title">A mesma cabana em três situações</div>
+  <div class="fig-sub">Contribuição da visita antes dos custos fixos. Diária R$ 800, custo variável R$ 250 por noite, execução R$ 100. Valores fictícios.</div>
+  <div class="div-rows">
+    <div class="div-row"><div class="lbl"><span>Só a noite coberta, nada comprado</span><b style="color:var(--neg)">−R$ 350</b></div><div class="track"><div class="fill neg" style="width:17.5%"></div><div class="zero"></div></div></div>
+    <div class="div-row"><div class="lbl"><span>Noite coberta + 2 noites pagas</span><b>R$ 750</b></div><div class="track"><div class="fill pos" style="width:37.5%"></div><div class="zero"></div></div></div>
+    <div class="div-row"><div class="lbl"><span>Sem cortesia: 3 noites vendidas</span><b>R$ 1.650</b></div><div class="track"><div class="fill ref" style="width:82.5%"></div><div class="zero"></div></div></div>
+  </div>
+  <figcaption>Se a cabana ficaria vazia, a visita com noites pagas acrescenta R$ 750. Se seria vendida, a cortesia reduz a contribuição em R$ 900. Receita positiva não prova que a cortesia valeu a pena; por isso só entram dias com baixa chance de venda. Lince e Financeiro simulam uso baixo, esperado e alto; os sócios aprovam teto anual e custo máximo por família.</figcaption>
+</figure>
+
+<h3>Casais que disseram sim no Rosa</h3>
+<p>Os noivos que casaram na Fazenda são convidados a voltar, por exemplo no primeiro aniversário de casamento, com uma hospedagem de cortesia. Em troca, gravam um depoimento sobre o casamento e a volta, para a Fazenda usar no marketing de casamentos e hospedagem.</p>
+<div class="tbl"><table>
+<thead><tr><th>Ponto</th><th>Proposta</th></tr></thead>
+<tbody>
+<tr><td>Quem é convidado</td><td>Casais que casaram no Rosa desde 2023 (a Fazenda tem os bloqueios de casamento registrados)</td></tr>
+<tr><td>O que recebem</td><td>Hospedagem de cortesia em dias comuns da baixa temporada (quantas noites, a definir)</td></tr>
+<tr><td>O que entregam</td><td>Depoimento em vídeo ou texto e fotos da volta, com termo de autorização de uso de imagem por escrito (canais e prazo)</td></tr>
+<tr><td>Transparência</td><td>O depoimento é sobre a experiência real, sem roteiro de elogio. Quando publicado, informa que o casal foi convidado pela Fazenda, como pedem as regras de publicidade testemunhal</td></tr>
+<tr><td>Quem conduz</td><td>Alan (casamentos) faz o convite; Lince grava e edita o conteúdo</td></tr>
+<tr><td>Onde entra o custo</td><td>Verba de marketing, não do Clube. Os noivos não pontuam no piloto</td></tr>
+<tr><td>Como medimos</td><td>Depoimentos produzidos, uso em campanhas, pedidos de orçamento de casamento e reservas vindas desse conteúdo</td></tr>
+</tbody></table></div>
+<blockquote>"Ana e Pedro, faz quase um ano que vocês disseram sim aqui, entre o mar e o gramado do Maram, e aquele fim de tarde ainda vive na nossa memória. Queremos receber vocês de novo, agora só para descansar, como presente da casa. E, se fizer sentido para vocês, adoraríamos ouvir como foi viver esse dia no Rosa. Podemos conversar?"</blockquote>
+
+<h3>Maram e parceiros</h3>
+<p>Começar com uma sobremesa de cortesia por família elegível, com autorização de Reservas e registro no caixa do Maram, depois de acordo com a Altamare sobre quem paga e como comprovar o uso. Só então dois ou três parceiros externos (a escola de surf, experiências locais, fornecedores de casamento), também como origem de reservas, com código próprio.</p>
+
+<h3>Próxima reserva direta</h3>
+<p>As OTAs somam cerca de R$ 3 milhões em hospedagem. Quarenta e cinco famílias já fizeram o caminho OTA → direto sozinhas; a meta é aumentar esse número de forma intencional. Na mensagem pós-estadia vai o contato de Reservas e o link do site; na próxima conversa a equipe já sabe quem é a família. A comparação usa os custos reais do canal próprio.</p>
+</section>
+
+<!-- 10 -->
+<section id="base">
+<h2><span class="n">10</span>Os dados que a equipe precisa ter</h2>
+<p>O primeiro passo não é contratar um CRM. A base já está disponível no portal do Arthur, uma linha por estadia, com registro de quem baixou. O trabalho agora é auditar IDs, contatos e o que os sistemas permitem acionar.</p>
+<div class="tbl"><table>
+<thead><tr><th>A base já tem</th><th>Não tem</th></tr></thead>
+<tbody>
+<tr><td>ID fixo do titular</td><td>CPF ou documento</td></tr>
+<tr><td>Nome, WhatsApp e e-mail</td><td>Ano de nascimento</td></tr>
+<tr><td>Dia e mês do aniversário</td><td>Restrição alimentar e preferências</td></tr>
+<tr><td>Datas, noites, cabana, pessoas, status</td><td>No-show (aparece como cancelada)</td></tr>
+<tr><td>Valor da hospedagem; fólio do AURA</td><td>Consumo no Maram</td></tr>
+<tr><td><strong>Desconto ou cortesia concedidos</strong></td><td>Campo "indicado por"</td></tr>
+<tr><td>Canal (detalhado desde set/2026)</td><td>Canal das 3.621 lançadas à mão</td></tr>
+</tbody></table></div>
+<div class="note">A coluna de <b>desconto e cortesia</b> mostra quanto a Fazenda já concede hoje, antes do programa. É a linha de base de custo para a simulação.</div>
+<p><strong>Família como unidade.</strong> Um casal que alterna quem reserva aparece como duas famílias de uma viagem, em vez de uma família de duas. A equipe confirma com a família antes de unir os cadastros.</p>
+<p><strong>Segmentação interna.</strong> Recência, frequência e valor; época habitual; estágio (Legado, recorrente ativa, com duas viagens, perto da janela de retorno, em risco, inativa, primeira estadia). São nomes internos, nunca mostrados aos hóspedes. Se o sistema não tiver os campos, o piloto usa uma planilha controlada, com acesso restrito e conferência semanal.</p>
+</section>
+
+<!-- 11 -->
+<section id="implantacao">
+<h2><span class="n">11</span>Implantação, responsáveis e governança</h2>
+<div class="steps">
+  <div class="step"><div class="when">Semana 1</div><div><h4>Alinhamento</h4><p>Ponto focal, responsáveis, acessos, régua escolhida. <b>Avança quando</b> a direção confirma pessoas e acesso.</p></div></div>
+  <div class="step"><div class="when">Semanas 1–2</div><div><h4>Diagnóstico</h4><p>Cadastros conferidos, grupos de famílias, linha de base de custo, parceiros, grupo VIP. <b>Avança quando</b> Arthur, Reservas e Lince validam a qualidade.</p></div></div>
+  <div class="step"><div class="when">Semanas 3–4</div><div><h4>Viabilidade</h4><p>Categorias simuladas, pontos, catálogo, cenários de cortesia com o calendário real. <b>Avança quando</b> os sócios aprovam o que será oferecido.</p></div></div>
+  <div class="step"><div class="when">Semanas 4–5</div><div><h4>Preparação</h4><p>Mensagens, controle de saldo, equipe treinada, testes com casos fictícios. <b>Avança quando</b> os fluxos funcionam.</p></div></div>
+  <div class="step"><div class="when">Mês 2</div><div><h4>Pilotos</h4><p>Legado e Clube; retorno e reativação; indicação; conteúdo; Maram se houver acordo. <b>Avança quando</b> custos e reservas estão registrados.</p></div></div>
+  <div class="step"><div class="when">Após a janela</div><div><h4>Avaliação e operação contínua</h4><p>Manter, ajustar ou ampliar cada ação; painel mensal e revisão trimestral.</p></div></div>
+</div>
+<p><strong>Tamanho dos pilotos.</strong> O AURA encerra cerca de 80 estadias por mês: pós-estadia e indicação podem começar com todas. Reativação e Clube começam com um grupo pequeno, de preferência com grupo de comparação.</p>
+<div class="tbl"><table>
+<thead><tr><th>Função</th><th>No dia a dia</th><th>Sugestão</th></tr></thead>
+<tbody>
+<tr><td>Direção</td><td>Regras, orçamento, expansão, exceções</td><td>Pedro, Paulo, Marília</td></tr>
+<tr><td>Dados</td><td>Histórico, IDs, exportações</td><td>Arthur</td></tr>
+<tr><td>Reservas e relacionamento</td><td>Mensagens, propostas, pontos, indicações</td><td>Alan</td></tr>
+<tr><td>Recepção e operação</td><td>Acolhimento, preferências, entrega de benefícios</td><td>A definir</td></tr>
+<tr><td>Grupo VIP</td><td>Publicar, moderar, encaminhar interesse a Reservas</td><td>Lince</td></tr>
+<tr><td>Financeiro</td><td>Custos, simulação, teto, conciliação</td><td>Lucas Sacks</td></tr>
+<tr><td>Produção e estoque</td><td>Cotar, comprar, controlar peças</td><td>A definir</td></tr>
+<tr><td>Maram</td><td>Executar e comprovar o benefício</td><td>Altamare</td></tr>
+<tr><td>Lince</td><td>Estratégia, mensagens, cenários, análise</td><td>Lince</td></tr>
+</tbody></table></div>
+<p class="small muted">Nomes a confirmar na reunião de implantação, com titular e substituto por função. Rotina: diária (respostas e contatos), semanal (pendências e conciliação), mensal (resultados com a direção), trimestral (regras).</p>
+</section>
+
+<!-- 12 -->
+<section id="medicao">
+<h2><span class="n">12</span>Como saber se estamos crescendo</h2>
+<div class="rec"><span class="eyebrow">Métrica-norte</span><strong style="font-family:var(--f-display);font-size:20px;font-weight:500">Margem incremental das famílias que voltam, recuperadas e indicadas.</strong><br>Quanto as ações acrescentaram em hospedagens e compras, depois de comissões, custos variáveis, recompensas (inclusive pontos ainda não usados) e execução.</div>
+<p>Membros, mensagens, pontos e presentes são indicadores de atividade: mostram que a equipe trabalhou, não que a Fazenda cresceu.</p>
+<h3>Linha de base em 20/10/2026</h3>
+<div class="tbl"><table>
+<thead><tr><th>Indicador</th><th class="num">Hoje</th></tr></thead>
+<tbody>
+<tr><td>Famílias com 2+ viagens</td><td class="num">10,9%</td></tr>
+<tr><td>Receita das recorrentes</td><td class="num">32,9%</td></tr>
+<tr><td>Intervalo mediano</td><td class="num">315 dias</td></tr>
+<tr><td>Reativação</td><td class="num">4,8%</td></tr>
+<tr><td>Reservas diretas</td><td class="num">67,8%</td></tr>
+<tr><td>Famílias OTA → direto</td><td class="num">45</td></tr>
+<tr><td>Ocupação na baixa</td><td class="num">32%</td></tr>
+<tr><td>NPS</td><td class="num">77</td></tr>
+<tr><td>Receita vinda do Clube</td><td class="num"><span class="pill p-wait">sem dado</span></td></tr>
+</tbody></table></div>
+<div class="tbl"><table>
+<thead><tr><th>Resultado</th><th>Como calcular</th></tr></thead>
+<tbody>
+<tr><td>Retorno</td><td>Famílias que voltaram ÷ acompanhadas com tempo para voltar</td></tr>
+<tr><td>Reativação</td><td>Inativas que voltaram ÷ inativas elegíveis</td></tr>
+<tr><td>Indicações convertidas</td><td>Novas famílias com estadia paga ÷ indicados qualificados</td></tr>
+<tr><td>Custo por família indicada</td><td>Benefícios, materiais e trabalho ÷ novas famílias</td></tr>
+<tr><td>Diretas e comissão evitada</td><td>Participação do canal próprio; OTA → direto; comissão menos custo próprio</td></tr>
+<tr><td>Ocupação, ADR, RevPAR</td><td>RevPAR = ADR × ocupação. Separar noites pagas de cortesias, e dias comuns de feriados</td></tr>
+<tr><td>Pontos e resgates</td><td>Saldo pendente é obrigação potencial</td></tr>
+</tbody></table></div>
+<p><strong>Como ler.</strong> Se 20 famílias reservam depois de uma mensagem, houve 20 reservas associadas, não 20 geradas. Para estimar o efeito, compara-se com um grupo semelhante não contatado. <strong>Regras:</strong> manter quando funciona e compensa; ajustar quando há procura mas custa demais; pausar quando a promessa não pode ser entregue.</p>
+<div class="tbl"><table>
+<thead><tr><th>Termo</th><th>Significado</th></tr></thead>
+<tbody>
+<tr><td>Linha de base</td><td>Situação antes da ação</td></tr>
+<tr><td>Coorte</td><td>Grupo de famílias comparáveis</td></tr>
+<tr><td>Incrementalidade</td><td>O que aconteceu por causa da ação, além do que aconteceria sem ela</td></tr>
+<tr><td>Atividade × resultado</td><td>Mensagens mostram trabalho; reservas e margem mostram crescimento</td></tr>
+<tr><td>Margem incremental</td><td>Resultado adicional após os custos da ação</td></tr>
+<tr><td>RFM</td><td>Última visita, frequência e valor</td></tr>
+<tr><td>CAC</td><td>Custo de conquistar um novo cliente</td></tr>
+<tr><td>ADR · RevPAR</td><td>Diária média · receita por cabana disponível</td></tr>
+</tbody></table></div>
+</section>
+
+<!-- 13 -->
+<section id="aprovar">
+<h2><span class="n">13</span>O que a direção precisa aprovar</h2>
+<p>Pauta única. A coluna Status é preenchida na reunião: aprovado, ajustar ou depende de dados.</p>
+<div class="tbl"><table>
+<thead><tr><th>Aprovar agora</th><th>Aprovar após a simulação</th></tr></thead>
+<tbody>
+<tr><td>Direção da estratégia e modelo híbrido</td><td>Pontos por noite e por indicação, equivalências</td></tr>
+<tr><td>Régua de recorrência e de família parada</td><td>Validade, limites por família, catálogo</td></tr>
+<tr><td>Princípio de pontos por estadia e indicação</td><td>Orçamento, teto por família, tamanho do piloto</td></tr>
+<tr><td>Preparação do piloto e ponto focal</td><td>Datas, cotas de cortesia, lançamento</td></tr>
+</tbody></table></div>
+<div class="tbl wide"><table>
+<thead><tr><th>Decisão</th><th>Recomendação da Lince</th><th>Quem</th><th class="status">Status</th></tr></thead>
+<tbody>
+<tr><td>Modelo e nome</td><td>Clube Família Fazenda do Rosa, híbrido</td><td>Direção + Lince</td><td></td></tr>
+<tr><td>Régua de recorrência</td><td>2 viagens para Prata; 3 como "da casa"; parada após 18 ou 24 meses</td><td>Direção + Arthur</td><td></td></tr>
+<tr><td>Grupo fundador</td><td>Famílias com 2+ viagens e Legado confirmadas</td><td>Direção</td><td></td></tr>
+<tr><td>Categorias</td><td>Bronze, Prata, Ouro e Legado em 36 meses</td><td>Direção</td><td></td></tr>
+<tr><td>Pontos e validade</td><td>1 por noite paga, após a saída, 24 meses</td><td>Direção + Reservas</td><td></td></tr>
+<tr><td>Catálogo</td><td>Fichas de benefício com custo e limites</td><td>Direção + Financeiro</td><td></td></tr>
+<tr><td>Legado</td><td>Marcos, orçamento, eventual crédito inaugural</td><td>Direção</td><td></td></tr>
+<tr><td>Indicação</td><td>2 pontos se a família nova fechar 1 noite, 4 se fechar 2 ou mais; após estadia paga; 12 meses</td><td>Direção</td><td></td></tr>
+<tr><td>Casais do Rosa</td><td>Hospedagem de cortesia na baixa em troca de depoimento autorizado e sinalizado</td><td>Direção + Alan</td><td></td></tr>
+<tr><td>Peças da Linha</td><td>Quais dos sete conceitos serão produzidos; 1º lote velas e marcadores</td><td>Direção</td><td></td></tr>
+<tr><td>Cortesia</td><td>Só dias comuns da baixa; categorias, cotas, custo máximo</td><td>Direção + Financeiro</td><td></td></tr>
+<tr><td>Voucher de aniversário</td><td>Valor, prazo, datas na baixa; só parabéns se já houver reserva</td><td>Direção + Financeiro</td><td></td></tr>
+<tr><td>Orçamento</td><td>Teto anual, teto por família, verba do piloto</td><td>Pedro</td><td></td></tr>
+<tr><td>Linha da Fazenda</td><td>Venda + resgate; primeiro lote vela e caneca</td><td>Direção</td><td></td></tr>
+<tr><td>Maram</td><td>Sobremesa-piloto e comprovação de uso</td><td>Direção + Altamare</td><td></td></tr>
+<tr><td>Comunicação</td><td>Grupo como comunidade, mensagens privadas, permissões</td><td>Direção + Comercial</td><td></td></tr>
+<tr><td>Sistema e equipe</td><td>Planilha controlada ou ferramenta; responsáveis</td><td>Direção + Reservas</td><td></td></tr>
+<tr><td>Ponto focal e início</td><td>Quem a Lince aciona; público, data, metas</td><td>Pedro, Paulo, Marília</td><td></td></tr>
+</tbody></table></div>
+
+<h3>O que a Fazenda precisa enviar</h3>
+<ul class="check">
+<li class="done">Base de reservas HMAX/AURA por estadia</li>
+<li class="done">Ocupação da baixa, calendário e inventário</li>
+<li>Ocupação da baixa sem feriados e calendário completo de 2027 e 2028</li>
+<li>Explicação do período "FIDELIDADE" de janeiro de 2027</li>
+<li>Custos variáveis por categoria e comissões por canal</li>
+<li>Origem das reservas lançadas à mão, se possível</li>
+<li>Quais peças da Linha serão produzidas de fato, com cotações</li>
+<li>Lista de casais que casaram no Rosa desde 2023, com contato</li>
+<li>Capacidade do sistema para pontos e indicações</li>
+<li>Mapa de parceiros ativos</li>
+<li>Disponibilidade das pessoas que executarão o plano</li>
+</ul>
+
+<h3>As 14 oportunidades</h3>
+<div class="tbl"><table>
+<thead><tr><th>Oportunidade</th><th class="num">Seção</th><th>Entrega</th></tr></thead>
+<tbody>
+<tr><td>1. Organizar o histórico por família</td><td class="num">2, 10</td><td>Base única e segmentação</td></tr>
+<tr><td>2. Memória de preferências</td><td class="num">6, 10</td><td>Campos mínimos padronizados</td></tr>
+<tr><td>3. Jornada entre hospedagens</td><td class="num">6, 7</td><td>Régua com momento, canal e responsável</td></tr>
+<tr><td>4. Antecipar a janela de retorno</td><td class="num">7</td><td>Previsão da próxima viagem</td></tr>
+<tr><td>5. Reserva direta</td><td class="num">9</td><td>Diretas entre recorrentes; migração das OTAs</td></tr>
+<tr><td>6. Indicação rastreável</td><td class="num">9</td><td>Registro, conversão, recompensa</td></tr>
+<tr><td>7. Benefício previsto × surpresa</td><td class="num">8, 9</td><td>Fichas e verba para gestos</td></tr>
+<tr><td>8. Reativar por motivo</td><td class="num">7</td><td>Listas e abordagens</td></tr>
+<tr><td>9. Feedback e recuperação</td><td class="num">6, 7, 12</td><td>Três caminhos pós-estadia</td></tr>
+<tr><td>10. Valor além da diária</td><td class="num">9</td><td>Mapa de produtos e experiências</td></tr>
+<tr><td>11. Acesso exclusivo</td><td class="num">8, 9</td><td>Calendário em datas de baixa ocupação</td></tr>
+<tr><td>12. Famílias da história</td><td class="num">7, 8</td><td>Critério Legado e lista inicial</td></tr>
+<tr><td>13. Família como unidade</td><td class="num">8, 10</td><td>Regra para unir titulares</td></tr>
+<tr><td>14. Indicadores antes do lançamento</td><td class="num">5, 11, 12</td><td>Linha de base e painel mensal</td></tr>
+</tbody></table></div>
+<div class="rec"><span class="eyebrow">Encaminhamento</span>Aprovar a direção estratégica, escolher a régua de recorrência, indicar o ponto focal e autorizar a preparação do piloto. A Lince consolida os dados e apresenta cenários; os sócios aprovam orçamento, benefícios e capacidade antes de qualquer comunicação aos hóspedes.</div>
+</section>
+
+<!-- 14 -->
+<section id="refs">
+<h2><span class="n">14</span>Referências e premissas</h2>
+<p class="small">Dados reproduzidos do portal do Arthur na captura de 20/10/2026. Os parâmetros (36 meses, 1 ponto por noite, 24 meses de validade, 12 meses para indicação, faixas de 5, 10 e 20 pontos) são propostas para simulação, não regulamento. Os exemplos de cortesia e comparação são didáticos.</p>
+<ol class="refs">
+<li>Voorhees, McCall e Carroll · <a href="https://ecommons.cornell.edu/entities/publication/56f4f7a2-fda4-425d-ba1c-b0c98d3cd015" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener">Assessing the Benefits of Reward Programs</a> · Cornell CHR, 2014</li>
+<li>McCall, Voorhees e Calantone · <a href="https://ecommons.cornell.edu/entities/publication/64e29784-eded-4e4e-b3e8-c17c4e8b2777" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener">Building Customer Loyalty</a> · Cornell CHR, 2010</li>
+<li>Kivetz, Urminsky e Zheng · The Goal Gradient Hypothesis Resurrected · Journal of Marketing Research, 2006</li>
+<li>Ehrenberg-Bass Institute · Identifying and Prioritising Category Entry Points</li>
+<li>Schmitt, Skiera e Van den Bulte · Referral Programs and Customer Value · Journal of Marketing, 2011</li>
+<li>Yoon, Peck e Shu · Increasing Hotel Loyalty Through Psychological Ownership · Cornell Hospitality Quarterly, 2025 · <a href="https://business.cornell.edu/news/2025/03/05/enabling-hotel-guests-customize-their-rooms-fosters-customer-loyalty/" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener">síntese</a></li>
+</ol>
+<p class="small muted">Complementares: Reichheld et al. · <a href="https://hbr.org/2026/09/dont-underestimate-the-power-of-customer-referrals" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener">Don't Underestimate the Power of Customer Referrals</a> · HBR, 2026; Matthews Hotel Markets · <a href="https://matthewshotelmarkets.com/glossary/revpar" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener">Glossário de RevPAR</a>.</p>
+<div class="fecho"><img src="/marca/selo-lince.png" alt=""><p>For those who see further</p></div>
+<footer>Lince &amp; Co. · Fazenda do Rosa · versão final · outubro de 2026 · Documento interno, não compartilhar.</footer>
+</section>
+</main>
+</div>
+
+<script>
+document.querySelectorAll(".tbl table").forEach(function(t){
+  var h=[].map.call(t.querySelectorAll("tr:first-child th"),function(th){return th.textContent.trim()});
+  [].forEach.call(t.querySelectorAll("tr"),function(tr){[].forEach.call(tr.children,function(td,i){if(td.tagName==="TD"&&h[i])td.setAttribute("data-l",h[i])})});
+});
+(function(){
+  // Calendário 2027 a partir das temporadas cadastradas (grupo: b = baixa, f = feriado na baixa, o = fora da baixa)
+  var P=[["2026-12-27","2027-01-02","o"],["2027-01-03","2027-02-04","o"],["2027-02-05","2027-02-09","o"],["2027-02-10","2027-03-18","o"],["2027-03-19","2027-03-28","o"],
+  ["2027-03-29","2027-04-29","b"],["2027-04-30","2027-05-02","f"],["2027-05-03","2027-05-25","b"],["2027-05-26","2027-05-30","f"],["2027-05-31","2027-09-02","b"],
+  ["2027-09-03","2027-09-07","f"],["2027-09-08","2027-10-07","b"],["2027-10-08","2027-10-12","f"],["2027-10-13","2027-10-28","b"],["2027-10-29","2027-11-02","f"],
+  ["2027-11-03","2027-11-11","b"],["2027-11-12","2027-11-15","f"],["2027-11-16","2027-11-18","b"],["2027-11-19","2027-11-20","f"],["2027-11-21","2027-11-30","b"]];
+  function grp(iso){for(var i=0;i<P.length;i++){if(iso>=P[i][0]&&iso<=P[i][1])return P[i][2]}return null}
+  var M=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"],cls={b:"baixa",f:"fer",o:"fora"};
+  var el=document.getElementById("cal2027"),h="";
+  for(var m=0;m<12;m++){
+    h+='<span>'+M[m]+'</span><div class="days">';
+    var n=new Date(2027,m+1,0).getDate();
+    for(var d=1;d<=31;d++){
+      if(d>n){h+='<i class="d nil"></i>';continue}
+      var iso="2027-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+      var g=grp(iso)||(m===11?"o":"b");
+      h+='<i class="d '+cls[g]+'" title="'+d+' '+M[m]+'"></i>';
+    }
+    h+='</div>';
+  }
+  el.innerHTML=h;
+})();
+</script>
+
+
+</body></html>
