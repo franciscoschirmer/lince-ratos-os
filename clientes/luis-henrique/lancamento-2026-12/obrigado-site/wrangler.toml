@@ -1,0 +1,8 @@
+name = "obrigado-potencia-medica"
+pages_build_output_dir = "."
+compatibility_date = "2026-11-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "potencia-obrigado"
+database_id = "95729886-59c9-40d3-9a00-ccbd3cac4fef"

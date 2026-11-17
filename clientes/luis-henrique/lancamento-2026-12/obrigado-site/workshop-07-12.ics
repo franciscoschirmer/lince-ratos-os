@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Potencia Medica//Workshop//PT
+BEGIN:VEVENT
+UID:workshop-potencia-medica-20261207@linceco.com.br
+DTSTAMP:20261117T000000Z
+DTSTART:20261207T230000Z
+DTEND:20261208T003000Z
+SUMMARY:Workshop Potência Médica (ao vivo)
+DESCRIPTION:Workshop ao vivo com Dr. Luis Henrique Nunes e Gabriel Almeida. O link do Zoom chega por e-mail e WhatsApp no dia.
+LOCATION:Zoom
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:Workshop Potência Médica em 1 hora
+END:VALARM
+END:VEVENT
+END:VCALENDAR

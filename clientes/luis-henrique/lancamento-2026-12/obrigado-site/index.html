@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ingresso confirmado · Workshop Potência Médica</title>
+<meta name="description" content="Seu ingresso para o Workshop Potência Médica de 07/12 às 20h está confirmado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#060b14; --bg2:#0a1120; --card:#0e1a2e; --line:#1c2a44;
+    --gold:#c9a84c; --gold-l:#e8d49a; --gold-dim:#c9a84c1f;
+    --text:#e8ecf0; --muted:#9aa6b8; --wa:#25d366;
+    --heading:"Playfair Display", Georgia, serif;
+    --body:"Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  header{padding:48px 0 32px;text-align:center;background:radial-gradient(ellipse at top,#0e1a2e 0%,var(--bg) 70%)}
+  .ok{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-dim);background:var(--gold-dim);padding:6px 14px;border-radius:999px}
+  h1{font-family:var(--heading);font-size:clamp(30px,6vw,44px);line-height:1.15;margin:20px 0 14px}
+  .when{font-size:18px;color:var(--gold-l);font-weight:500}
+  .when small{display:block;color:var(--muted);font-size:15px;font-weight:400;margin-top:4px}
+  section{padding:28px 0}
+  h2{font-family:var(--heading);font-size:26px;margin-bottom:6px}
+  .sub{color:var(--muted);margin-bottom:22px}
+  .video{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--card);aspect-ratio:16/9}
+  .video iframe,.video video{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video .placeholder{position:absolute;inset:0;display:flex;align-items:center;gap:22px;padding:24px}
+  .video .placeholder img{height:100%;max-height:220px;aspect-ratio:929/1024;object-fit:cover;border-radius:12px;border:1px solid var(--gold-dim)}
+  .video .placeholder p{font-family:var(--heading);font-size:clamp(18px,3.4vw,24px);line-height:1.35}
+  .video .placeholder p span{display:block;font-family:var(--body);font-size:14px;color:var(--muted);margin-top:8px}
+  .steps{display:grid;gap:14px;counter-reset:s}
+  .step{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .step:before{counter-increment:s;content:counter(s);flex:0 0 36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:var(--bg);background:var(--gold)}
+  .step h3{font-size:17px;margin-bottom:4px}
+  .step p{color:var(--muted);font-size:15px;margin-bottom:12px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 15px var(--body);text-decoration:none;border:0;cursor:pointer;border-radius:10px;padding:12px 20px;min-height:46px}
+  .btn-wa{background:var(--wa);color:#04210f}
+  .btn-gold{background:var(--gold);color:var(--bg)}
+  .btn-line{background:transparent;color:var(--gold-l);border:1px solid var(--gold-dim)}
+  .row{display:flex;flex-wrap:wrap;gap:10px}
+  form{display:grid;gap:12px;margin-top:4px}
+  label{font-size:14px;color:var(--text);display:grid;gap:6px}
+  input,select,textarea{font:15px var(--body);color:var(--text);background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+  textarea{min-height:84px;resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .msg{font-size:14px;margin-top:4px;min-height:20px}
+  .msg.ok-t{color:var(--wa)} .msg.err{color:#fca5a5}
+  .info{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .info ul{list-style:none;display:grid;gap:12px}
+  .info li{padding-left:22px;position:relative}
+  .info li:before{content:"";position:absolute;left:0;top:10px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+  .zoom{border-left:3px solid var(--gold);background:var(--gold-dim);padding:16px 18px;border-radius:0 12px 12px 0;margin-top:18px}
+  footer{padding:36px 0 48px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:20px}
+  footer .btn{margin-top:12px}
+  @media (max-width:560px){
+    .two{grid-template-columns:1fr}
+    .video{aspect-ratio:auto}
+    .video .placeholder{position:static;flex-direction:column;text-align:center;padding:24px 20px}
+    .video .placeholder img{height:auto;width:140px}
+    .step{padding:16px}
+    .btn{width:100%}
+  }
+</style>
+<!-- Meta Pixel (PageView; o Purchase é disparado pela integração da Hotmart) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1290074326568386');fbq('track','PageView');
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="ok">&#10003; Ingresso confirmado</span>
+    <h1>Seu lugar está garantido.</h1>
+    <p class="when">Workshop Potência Médica · segunda-feira, 07 de dezembro, às 20h
+      <small>Horário de Brasília · ao vivo pelo Zoom</small></p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section aria-label="Mensagem do Dr. Luis">
+    <div class="video" id="video">
+      <div class="placeholder">
+        <img src="dr-luis.jpg" alt="Dr. Luis Henrique Nunes">
+        <p>“A gente se encontra no dia 07, às 20h. Antes, faça os 3 passos abaixo.”
+          <span>Dr. Luis Henrique Nunes</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-passos">
+    <h2 id="t-passos">Agora, 3 passos rápidos</h2>
+    <p class="sub">Leva menos de um minuto.</p>
+    <div class="steps">
+
+      <div class="step">
+        <div>
+          <h3>Fale com a nossa equipe no WhatsApp</h3>
+          <p>É por lá que você recebe os avisos e o link da sala no dia do evento.</p>
+          <a class="btn btn-wa" id="btn-wa" href="#" target="_blank" rel="noopener">Abrir o WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div>
+          <h3>Coloque na sua agenda</h3>
+          <p>Segunda-feira, 07/12, das 20h às 21h30.</p>
+          <div class="row">
+            <a class="btn btn-gold" target="_blank" rel="noopener"
+               href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Workshop%20Pot%C3%AAncia%20M%C3%A9dica%20(ao%20vivo)&amp;dates=20261207T230000Z/20261208T003000Z&amp;details=Workshop%20ao%20vivo%20com%20Dr.%20Luis%20Henrique%20Nunes%20e%20Gabriel%20Almeida.%20O%20link%20do%20Zoom%20chega%20por%20e-mail%20e%20WhatsApp%20no%20dia.&amp;location=Zoom">Google Agenda</a>
+            <a class="btn btn-line" href="workshop-07-12.ics" download>Apple ou Outlook</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div style="width:100%">
+          <h3>Conte um pouco sobre você</h3>
+          <p>Assim a aula fica mais útil pro seu consultório.</p>
+          <form id="form" novalidate>
+            <div class="two">
+              <label>Nome<input name="nome" autocomplete="name" required></label>
+              <label>E-mail da compra<input name="email" type="email" autocomplete="email" required></label>
+            </div>
+            <div class="two">
+              <label>Especialidade<input name="especialidade" required></label>
+              <label>Cidade / UF<input name="cidade" required></label>
+            </div>
+            <label>Como está o seu consultório hoje?
+              <select name="consultorio" required>
+                <option value="">Escolha uma opção</option>
+                <option>Só convênio</option>
+                <option>Convênio e particular</option>
+                <option>Principalmente particular</option>
+                <option>Ainda não tenho consultório próprio</option>
+              </select>
+            </label>
+            <label>O que você mais quer resolver no consultório?
+              <textarea name="objetivo" maxlength="600"></textarea>
+            </label>
+            <input type="text" name="site" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+            <div><button class="btn btn-gold" type="submit" id="enviar">Enviar</button></div>
+            <p class="msg" id="msg" role="status"></p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section aria-labelledby="t-noite">
+    <h2 id="t-noite">Como vai ser a noite</h2>
+    <div class="info">
+      <ul>
+        <li>Uma noite só, cerca de 90 minutos, ao vivo pelo Zoom.</li>
+        <li>Com o Dr. Luis Henrique Nunes e participação ao vivo de Gabriel Almeida.</li>
+        <li>O mercado de procedimentos no consultório particular e por que ele está crescendo.</li>
+        <li>Como o Dr. Luis estruturou o próprio consultório e os resultados dos médicos que ele acompanha.</li>
+        <li>A mentalidade de quem deixou de ser só médico prescritor e passou a conduzir o consultório como empresa.</li>
+        <li>Recomendação: computador, fone de ouvido e um lugar tranquilo. Chegue 10 minutos antes.</li>
+      </ul>
+      <div class="zoom"><strong>O link da sala</strong><br>O link do Zoom chega no dia 07/12, por e-mail e pelo WhatsApp, antes de começar. Não precisa fazer mais nada agora.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Não recebeu o e-mail de confirmação? Confira o spam e a aba Promoções.</p>
+    <a class="btn btn-line" id="btn-wa-2" href="#" target="_blank" rel="noopener">Dúvidas? Fale com a equipe</a>
+    <p style="margin-top:22px">Workshop Potência Médica · Dr. Luis Henrique Nunes</p>
+  </div>
+</footer>
+
+<script>
+  /* ===== CONFIGURAR AQUI ===== */
+  var WHATSAPP_NUMERO = "";   // só dígitos, com 55 e DDD. Ex.: "5554999999999". Vazio = botão escondido.
+  var VIDEO_URL = "";         // link de incorporação (YouTube/Vimeo) ou .mp4. Vazio = mostra a foto.
+  /* =========================== */
+
+  var waTexto = encodeURIComponent("Oi! Comprei meu ingresso pro workshop do dia 07/12.");
+  ["btn-wa","btn-wa-2"].forEach(function(id){
+    var a = document.getElementById(id);
+    if (WHATSAPP_NUMERO) a.href = "https://wa.me/" + WHATSAPP_NUMERO + "?text=" + waTexto;
+    else a.style.display = "none";
+  });
+
+  if (VIDEO_URL) {
+    var v = document.getElementById("video");
+    v.innerHTML = /\.mp4($|\?)/.test(VIDEO_URL)
+      ? '<video src="'+VIDEO_URL+'" controls playsinline preload="metadata"></video>'
+      : '<iframe src="'+VIDEO_URL+'" title="Mensagem do Dr. Luis" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+  }
+
+  // Preenche nome e e-mail se vierem na URL (redirecionamento da Hotmart)
+  var q = new URLSearchParams(location.search), f = document.getElementById("form");
+  ["name","nome"].forEach(function(k){ if(q.get(k)) f.nome.value = q.get(k); });
+  ["email"].forEach(function(k){ if(q.get(k)) f.email.value = q.get(k); });
+
+  f.addEventListener("submit", function(e){
+    e.preventDefault();
+    var msg = document.getElementById("msg"), btn = document.getElementById("enviar");
+    if (!f.checkValidity()) { msg.className="msg err"; msg.textContent="Preencha nome, e-mail, especialidade, cidade e o consultório."; return; }
+    btn.disabled = true; btn.textContent = "Enviando...";
+    var dados = Object.fromEntries(new FormData(f).entries());
+    dados.origem = location.search.slice(0,300);
+    fetch("/api/respostas", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(dados)})
+      .then(function(r){ if(!r.ok) throw 0; msg.className="msg ok-t"; msg.textContent="Recebido, obrigado! Nos vemos dia 07."; f.reset(); btn.textContent="Enviado"; })
+      .catch(function(){ msg.className="msg err"; msg.textContent="Não deu pra enviar agora. Tente de novo em instantes."; btn.disabled=false; btn.textContent="Enviar"; });
+  });
+</script>
+</body>
+</html>
